@@ -23,6 +23,10 @@ func TestStableVersion(t *testing.T) {
 			Filename: "debian.xml",
 			Version:  "9.2 (Stretch)",
 		},
+		{
+			Filename: "go.xml",
+			Version:  "1.9",
+		},
 	}
 
 	for _, c := range cases {

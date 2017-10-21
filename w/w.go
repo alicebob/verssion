@@ -30,7 +30,7 @@ func StableVersion(ts []Template) string {
 		switch t.Title {
 		case "Infobox software":
 			return t.NamedParts["latest release version"]
-		case "LSR":
+		case "LSR", "Infobox programming language":
 			return t.NamedParts["latest_release_version"]
 		}
 	}

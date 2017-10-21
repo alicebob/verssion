@@ -1,5 +1,10 @@
 Monitor software versions on Wikipedia
 
+Postgres
+========
+postgres@yourmachine:~$ createdb -O youruser w
+youruser@yourmachine:~/w/$ make db
+
 URLs
 ====
 

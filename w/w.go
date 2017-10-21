@@ -27,8 +27,11 @@ func GetPage(rev int) (Page, error) {
 
 func StableVersion(ts []Template) string {
 	for _, t := range ts {
-		if t.Title == "Infobox software" {
+		switch t.Title {
+		case "Infobox software":
 			return t.NamedParts["latest release version"]
+		case "LSR":
+			return t.NamedParts["latest_release_version"]
 		}
 	}
 	return ""

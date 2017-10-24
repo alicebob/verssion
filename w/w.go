@@ -1,7 +1,9 @@
 package w
 
 import (
-	"bytes"
+	"io"
+	"net/http"
+	"strings"
 )
 
 type Page struct {
@@ -9,30 +11,38 @@ type Page struct {
 }
 
 // GetPage downloads and parses given wikipage
-func GetPage(rev int) (Page, error) {
-	ptXML, err := GetParseTree(rev)
-	if err != nil {
-		return Page{}, nil
-	}
-
-	pt, err := Parse(bytes.NewBufferString(ptXML))
+func GetPage(title string) (Page, error) {
+	p, err := http.Get(wikiURL(title))
 	if err != nil {
 		return Page{}, err
 	}
+	defer p.Body.Close()
 
 	return Page{
-		StableVersion: StableVersion(pt),
+		StableVersion: StableVersion(p.Body),
 	}, nil
 }
 
-func StableVersion(ts []Template) string {
+func StableVersion(n io.Reader) string {
+	ts, err := FindTables(n)
+	if err != nil {
+		return ""
+	}
 	for _, t := range ts {
-		switch t.Title {
-		case "Infobox software":
-			return t.NamedParts["latest release version"]
-		case "LSR", "Infobox programming language":
-			return t.NamedParts["latest_release_version"]
+		for _, r := range t.Rows {
+			if len(r) < 2 {
+				continue
+			}
+			k, v := r[0], r[1]
+			switch k {
+			case "Stable release", "Latest release":
+				return strings.Split(v, ";")[0]
+			}
 		}
 	}
 	return ""
+}
+
+func wikiURL(page string) string {
+	return "https://en.wikipedia.org/wiki/" + page
 }

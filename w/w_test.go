@@ -12,20 +12,12 @@ func TestStableVersion(t *testing.T) {
 	}
 	cases := []cas{
 		{
-			Filename: "PostgreSQL.xml",
-			Version:  "10.0",
+			Filename: "git.html",
+			Version:  "2.14.2 / 22 September 2017",
 		},
 		{
-			Filename: "MySQL.xml",
-			Version:  "5.7.20",
-		},
-		{
-			Filename: "debian.xml",
+			Filename: "debian.html",
 			Version:  "9.2 (Stretch)",
-		},
-		{
-			Filename: "go.xml",
-			Version:  "1.9",
 		},
 	}
 
@@ -35,11 +27,7 @@ func TestStableVersion(t *testing.T) {
 			t.Fatal(err)
 		}
 		defer r.Close()
-		pt, err := Parse(r)
-		if err != nil {
-			t.Fatal(err)
-		}
-		version := StableVersion(pt)
+		version := StableVersion(r)
 		if have, want := version, c.Version; have != want {
 			t.Errorf("have %v, want %v", have, want)
 		}

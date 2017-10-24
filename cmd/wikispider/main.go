@@ -1,4 +1,4 @@
-// get latest versions from wikipedia
+// get latest versions from wikipedia, and store when changed
 
 package main
 
@@ -6,11 +6,15 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/alicebob/w/w"
 )
 
-var dburl = flag.String("db", "postgresql:///w", "postgres URL")
+var (
+	dburl = flag.String("db", "postgresql:///w", "postgres URL")
+	sleep = flag.Duration("sleep", 4*time.Second, "sleep between pages")
+)
 
 func main() {
 	flag.Parse()
@@ -28,42 +32,44 @@ func main() {
 		os.Exit(2)
 	}
 
-	revs, err := w.Revisions(pages)
+	for _, page := range pages {
+		if err := handlePage(db, page); err != nil {
+			fmt.Fprintf(os.Stderr, "%q: %s", page, err)
+			// TODO: retry?
+			time.Sleep(1 * time.Second)
+			continue
+		}
+		time.Sleep(*sleep)
+	}
+}
+
+func handlePage(db w.DB, page string) error {
+	old, err := db.Load(page)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "wikipedia revisions: %s\n", err)
-		os.Exit(2)
+		return err
+	}
+	new, err := w.GetPage(page)
+	if err != nil {
+		return err
 	}
 
-	for page, rev := range revs {
-		old, err := db.Load(page)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "db load %q: %s\n", page, err)
-			continue
-		}
-		if old != nil && rev.RevID == old.Revision {
-			fmt.Printf("%q: no update (%d/%s)\n", page, rev.RevID, rev.T)
-			continue
-		}
-		new, err := w.GetPage(rev.RevID)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "wikipedia %q (%d): %s\n", page, rev.RevID, err)
-			continue
-		}
-		e := w.Entry{
-			Page:          page,
-			Revision:      rev.RevID,
-			T:             rev.T,
-			StableVersion: new.StableVersion,
-		}
-		if err := db.Store(e); err != nil {
-			fmt.Fprintf(os.Stderr, "db store %q: %s\n", page, err)
-			continue
-		}
-		// Only a change in wikipedia change, might be no version update
-		sv := ""
-		if old != nil {
-			sv = old.StableVersion
-		}
-		fmt.Printf("stored %q: %s->%s\n", page, sv, new.StableVersion)
+	if old != nil && new.StableVersion == old.StableVersion {
+		fmt.Printf("no update: %q (%s)\n", page, new.StableVersion)
+		return nil
 	}
+	e := w.Entry{
+		Page:          page,
+		T:             time.Now().UTC(),
+		StableVersion: new.StableVersion,
+	}
+	if err := db.Store(e); err != nil {
+		return err
+	}
+	// Only a change in wikipedia change, might be no version update
+	sv := ""
+	if old != nil {
+		sv = old.StableVersion
+	}
+	fmt.Printf("stored %q: %s-> %s\n", page, sv, e.StableVersion)
+	return nil
 }

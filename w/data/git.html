@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Git - Wikipedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Git","wgTitle":"Git","wgCurRevisionId":806191967,"wgRevisionId":806191967,"wgArticleId":1771747,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Use dmy dates from March 2012","Pages using deprecated image syntax","All articles with unsourced statements","Articles with unsourced statements from April 2017","Articles with unsourced statements from February 2017","Articles with unsourced statements from September 2016","Wikipedia articles needing clarification from June 2014","Wikipedia articles with GND identifiers","2005 software","Concurrent Versions System","Distributed version control systems","Free version control software","Free software programmed in C","Free software programmed in Perl","Git (software)","Linux archivers and compression-related utilities","Self-hosting software","Linus Torvalds","Software using the GPL license"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Git","wgRelevantArticleId":1771747,"wgRequestId":"We9gqgpAEK0AAAu4P4kAAABF","wgIsProbablyEditable":true,"wgRelevantPageIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgFlaggedRevsParams":{"tags":{}},"wgStableRevisionId":null,"wgWikiEditorEnabledModules":{"toolbar":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":false,"wgPopupsShouldSendModuleToUser":true,"wgPopupsConflictsWithNavPopupGadget":false,"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","pageVariantFallbacks":"en","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"en","wgMFExpandAllSectionsUserOption":false,"wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":false},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"English","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q186055","wgCentralAuthMobileDomain":false,"wgCodeMirrorEnabled":false,"wgVisualEditorToolbarScrollOffset":0,"wgVisualEditorUnsupportedEditParams":["undo","undoafter","veswitched"],"wgEditSubmitButtonLabelPublish":false});mw.loader.state({"ext.gadget.charinsert-styles":"ready","ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"ready","user.tokens":"loading","ext.math.styles":"ready","ext.cite.styles":"ready","ext.pygments":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","skins.vector.styles.experimental.print":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/
+
+});mw.loader.load(["ext.math.scripts","ext.cite.a11y","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.toc","mediawiki.searchSuggest","ext.gadget.teahouse","ext.gadget.ReferenceTooltips","ext.gadget.watchlist-notice","ext.gadget.DRN-wizard","ext.gadget.charinsert","ext.gadget.refToolbar","ext.gadget.extra-toolbar-buttons","ext.gadget.switcher","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.popups","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.interface","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=en&amp;modules=ext.cite.styles%7Cext.math.styles%7Cext.pygments%2CwikimediaBadges%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cskins.vector.styles.experimental.print%7Cwikibase.client.init&amp;only=styles&amp;skin=vector"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=en&amp;modules=ext.gadget.charinsert-styles&amp;only=styles&amp;skin=vector"/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector"/>
+<meta name="generator" content="MediaWiki 1.31.0-wmf.4"/>
+<meta name="referrer" content="origin-when-cross-origin"/>
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/en/f/fc/Git_session.png"/>
+<link rel="alternate" href="android-app://org.wikipedia/http/en.m.wikipedia.org/wiki/Git"/>
+<link rel="alternate" type="application/x-wiki" title="Edit this page" href="/w/index.php?title=Git&amp;action=edit"/>
+<link rel="edit" title="Edit this page" href="/w/index.php?title=Git&amp;action=edit"/>
+<link rel="apple-touch-icon" href="/static/apple-touch/wikipedia.png"/>
+<link rel="shortcut icon" href="/static/favicon/wikipedia.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikipedia (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="//en.wikipedia.org/w/api.php?action=rsd"/>
+<link rel="license" href="//creativecommons.org/licenses/by-sa/3.0/"/>
+<link rel="canonical" href="https://en.wikipedia.org/wiki/Git"/>
+<link rel="dns-prefetch" href="//login.wikimedia.org"/>
+<link rel="dns-prefetch" href="//meta.wikimedia.org" />
+<!--[if lt IE 9]><script src="/w/load.php?debug=false&amp;lang=en&amp;modules=html5shiv&amp;only=scripts&amp;skin=vector&amp;sync=1"></script><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Git rootpage-Git vector-experimental-print-styles vector-nav-directionality skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+							<div id="siteNotice" class="mw-body-content"><!-- CentralNotice --></div>
+						<div class="mw-indicators mw-body-content">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Git</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub" class="noprint">From Wikipedia, the free encyclopedia</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div class="mw-parser-output"><div role="note" class="hatnote navigation-not-searchable">For other uses, see <a href="/wiki/Git_(disambiguation)" class="mw-disambig" title="Git (disambiguation)">Git (disambiguation)</a>.</div>
+<table class="infobox vevent" style="width:22em">
+<caption class="summary">Git</caption>
+<tr>
+<td colspan="2" style="text-align:center"><a href="/wiki/File:Git-logo.svg" class="image"><img alt="Git-logo.svg" src="//upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/150px-Git-logo.svg.png" width="150" height="63" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/225px-Git-logo.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/300px-Git-logo.svg.png 2x" data-file-width="512" data-file-height="214" /></a></td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center"><a href="/wiki/File:Git_session.png" class="image" title="A command-line session showing repository creation, addition of a file, and remote synchronization"><img alt="A command-line session showing repository creation, addition of a file, and remote synchronization" src="//upload.wikimedia.org/wikipedia/en/thumb/f/fc/Git_session.png/300px-Git_session.png" width="300" height="158" srcset="//upload.wikimedia.org/wikipedia/en/f/fc/Git_session.png 1.5x" data-file-width="380" data-file-height="200" /></a>
+<div>A command-line session showing repository creation, addition of a file, and remote synchronization</div>
+</td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Software_developer" title="Software developer">Original author(s)</a></th>
+<td><a href="/wiki/Linus_Torvalds" title="Linus Torvalds">Linus Torvalds</a><sup id="cite_ref-git-initial-commit_1-0" class="reference"><a href="#cite_note-git-initial-commit-1">[1]</a></sup></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Software_developer" title="Software developer">Developer(s)</a></th>
+<td><a href="/wiki/Junio_Hamano" title="Junio Hamano">Junio Hamano</a> and others<sup id="cite_ref-git-commits_2-0" class="reference"><a href="#cite_note-git-commits-2">[2]</a></sup></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Initial release</th>
+<td>7&#160;April 2005<span class="noprint">; 12 years ago</span><span style="display:none">&#160;(<span class="bday dtstart published updated">2005-04-07</span>)</span></td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center"></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Software_release_life_cycle" title="Software release life cycle">Stable release</a></th>
+<td>
+<div style="margin:0px;">2.14.2 / 22&#160;September 2017<span class="noprint">; 32 days ago</span><span style="display:none">&#160;(<span class="bday dtstart published updated">2017-09-22</span>)</span><sup id="cite_ref-3" class="reference"><a href="#cite_note-3">[3]</a></sup></div>
+</td>
+</tr>
+<tr style="display:none">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Repository_(version_control)" title="Repository (version control)">Repository</a></th>
+<td><span class="url"><a rel="nofollow" class="external text" href="https://git-scm.com/downloads">git-scm<wbr />.com<wbr />/downloads</a></span></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Development status</th>
+<td>Active</td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Written in</th>
+<td><a href="/wiki/C_(programming_language)" title="C (programming language)">C</a>, <a href="/wiki/Shell_(computing)" title="Shell (computing)">Shell</a>, <a href="/wiki/Perl" title="Perl">Perl</a>, <a href="/wiki/Tcl" title="Tcl">Tcl</a>, <a href="/wiki/Python_(programming_language)" title="Python (programming language)">Python</a><sup id="cite_ref-4" class="reference"><a href="#cite_note-4">[4]</a></sup></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Operating_system" title="Operating system">Operating system</a></th>
+<td><a href="/wiki/POSIX" title="POSIX">POSIX</a>: <a href="/wiki/Linux" title="Linux">Linux</a>, <a href="/wiki/Microsoft_Windows" title="Microsoft Windows">Windows</a>, <a href="/wiki/MacOS" title="MacOS">macOS</a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Computing_platform" title="Computing platform">Platform</a></th>
+<td><a href="/wiki/IA-32" title="IA-32">IA-32</a>, <a href="/wiki/X86-64" title="X86-64">x86-64</a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Available in</th>
+<td>English</td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Software_categories#Broad_categories" title="Software categories">Type</a></th>
+<td><a href="/wiki/Version_control" title="Version control">Version control</a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Software_license" title="Software license">License</a></th>
+<td><a href="/wiki/GNU_General_Public_License" title="GNU General Public License">GNU GPL</a> v2<sup id="cite_ref-license_gpl_5-0" class="reference"><a href="#cite_note-license_gpl-5">[5]</a></sup> and <a href="/wiki/GNU_LGPL" class="mw-redirect" title="GNU LGPL">GNU&#160;LGPL</a>&#160;v2.1<sup id="cite_ref-license_lgpl_6-0" class="reference"><a href="#cite_note-license_lgpl-6">[6]</a></sup></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Website</th>
+<td><span class="url"><a rel="nofollow" class="external text" href="https://git-scm.com">git-scm<wbr />.com</a></span></td>
+</tr>
+</table>
+<p><b>Git</b> (<span class="nowrap"><span class="IPA nopopups noexcerpt"><a href="/wiki/Help:IPA/English" title="Help:IPA/English">/<span style="border-bottom:1px dotted"><span title="/ɡ/: 'g' in 'guy'">ɡ</span><span title="/ɪ/: 'i' in 'kit'">ɪ</span><span title="'t' in 'tie'">t</span></span>/</a></span></span><sup id="cite_ref-:0_7-0" class="reference"><a href="#cite_note-:0-7">[7]</a></sup>) is a <a href="/wiki/Version_control_system" class="mw-redirect" title="Version control system">version control system</a> for tracking changes in <a href="/wiki/Computer_file" title="Computer file">computer files</a> and coordinating work on those files among multiple people. It is primarily used for <a href="/wiki/Source_code_management" class="mw-redirect" title="Source code management">source code management</a> in <a href="/wiki/Software_development" title="Software development">software development</a>,<sup id="cite_ref-effcomp_8-0" class="reference"><a href="#cite_note-effcomp-8">[8]</a></sup> but it can be used to keep track of changes in any set of files. As a <a href="/wiki/Distributed_revision_control" class="mw-redirect" title="Distributed revision control">distributed revision control</a> system it is aimed at speed,<sup id="cite_ref-kernel_SCM_saga_9-0" class="reference"><a href="#cite_note-kernel_SCM_saga-9">[9]</a></sup> data integrity,<sup id="cite_ref-integrity_goals_10-0" class="reference"><a href="#cite_note-integrity_goals-10">[10]</a></sup> and support for distributed, non-linear workflows.<sup id="cite_ref-linusGoogleTalk_11-0" class="reference"><a href="#cite_note-linusGoogleTalk-11">[11]</a></sup></p>
+<p>Git was created by <a href="/wiki/Linus_Torvalds" title="Linus Torvalds">Linus Torvalds</a> in 2005 for development of the <a href="/wiki/Linux_kernel" title="Linux kernel">Linux kernel</a>, with other kernel developers contributing to its initial development.<sup id="cite_ref-pro-git-1.2_12-0" class="reference"><a href="#cite_note-pro-git-1.2-12">[12]</a></sup> Its current maintainer since 2005 is <a href="/wiki/Junio_Hamano" title="Junio Hamano">Junio Hamano</a>.</p>
+<p>As with most other distributed version control systems, and unlike most <a href="/wiki/Client%E2%80%93server" class="mw-redirect" title="Client–server">client–server</a> systems, every Git <a href="/wiki/Directory_(computing)" title="Directory (computing)">directory</a> on every <a href="/wiki/Node_(networking)" title="Node (networking)">computer</a> is a full-fledged <a href="/wiki/Repository_(version_control)" title="Repository (version control)">repository</a> with complete history and full version tracking abilities, independent of network access or a central server.<sup id="cite_ref-13" class="reference"><a href="#cite_note-13">[13]</a></sup></p>
+<p>Git is <a href="/wiki/Free_software" title="Free software">free software</a> distributed under the terms of the <a href="/wiki/GNU_General_Public_License" title="GNU General Public License">GNU General Public License</a> version 2.</p>
+<p></p>
+<div id="toc" class="toc">
+<div class="toctitle">
+<h2>Contents</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#History"><span class="tocnumber">1</span> <span class="toctext">History</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Releases"><span class="tocnumber">1.1</span> <span class="toctext">Releases</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-3"><a href="#Design"><span class="tocnumber">2</span> <span class="toctext">Design</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Characteristics"><span class="tocnumber">2.1</span> <span class="toctext">Characteristics</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Data_structures"><span class="tocnumber">2.2</span> <span class="toctext">Data structures</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#References"><span class="tocnumber">2.3</span> <span class="toctext">References</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="#Implementations"><span class="tocnumber">3</span> <span class="toctext">Implementations</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Web_interfaces"><span class="tocnumber">4</span> <span class="toctext">Web interfaces</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#Git_server"><span class="tocnumber">5</span> <span class="toctext">Git server</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#Adoption"><span class="tocnumber">6</span> <span class="toctext">Adoption</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#Security"><span class="tocnumber">7</span> <span class="toctext">Security</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="#See_also"><span class="tocnumber">8</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="#References_2"><span class="tocnumber">9</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="#External_links"><span class="tocnumber">10</span> <span class="toctext">External links</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="History">History</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=1" title="Edit section: History">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Git development began in April 2005, after many developers of the <a href="/wiki/Linux_kernel" title="Linux kernel">Linux kernel</a> gave up access to <a href="/wiki/BitKeeper" title="BitKeeper">BitKeeper</a>, a proprietary <a href="/wiki/Source_control_management" class="mw-redirect" title="Source control management">source control management</a> (SCM) system that they had formerly used to maintain the project.<sup id="cite_ref-linux.com44147_14-0" class="reference"><a href="#cite_note-linux.com44147-14">[14]</a></sup> The copyright holder of BitKeeper, <a href="/wiki/Larry_McVoy" title="Larry McVoy">Larry McVoy</a>, had withdrawn free use of the product after claiming that <a href="/wiki/Andrew_Tridgell" title="Andrew Tridgell">Andrew Tridgell</a> had <a href="/wiki/Reverse_engineering" title="Reverse engineering">reverse-engineered</a> the BitKeeper protocols.<sup id="cite_ref-infoworld_bit_keeper_15-0" class="reference"><a href="#cite_note-infoworld_bit_keeper-15">[15]</a></sup> (The same incident would also spur the creation of another version control system, <a href="/wiki/Mercurial" title="Mercurial">Mercurial</a>.)</p>
+<p><a href="/wiki/Linus_Torvalds" title="Linus Torvalds">Linus Torvalds</a> wanted a distributed system that he could use like BitKeeper, but none of the available free systems met his needs, especially for performance. Torvalds cited an example of a source-control management system needing 30 seconds to apply a patch and update all associated metadata, and noted that this would not scale to the needs of Linux kernel development, where syncing with fellow maintainers could require 250 such actions at once. For his design criteria, he specified that patching should take no more than three seconds,<sup id="cite_ref-kernel_SCM_saga_9-1" class="reference"><a href="#cite_note-kernel_SCM_saga-9">[9]</a></sup> and added three more points:</p>
+<ul>
+<li>Take <a href="/wiki/Concurrent_Versions_System" title="Concurrent Versions System">Concurrent Versions System</a> (CVS) as an example of what <i>not</i> to do; if in doubt, make the exact opposite decision<sup id="cite_ref-linusGoogleTalk_11-1" class="reference"><a href="#cite_note-linusGoogleTalk-11">[11]</a></sup></li>
+<li>Support a distributed, BitKeeper-like workflow<sup id="cite_ref-linusGoogleTalk_11-2" class="reference"><a href="#cite_note-linusGoogleTalk-11">[11]</a></sup></li>
+<li>Include very strong safeguards against corruption, either accidental or malicious<sup id="cite_ref-integrity_goals_10-1" class="reference"><a href="#cite_note-integrity_goals-10">[10]</a></sup></li>
+</ul>
+<p>These criteria eliminated every then-extant <a href="/wiki/Version_control_system" class="mw-redirect" title="Version control system">version control system</a> except <a href="/wiki/Monotone_(software)" title="Monotone (software)">Monotone</a>. Performance considerations excluded it, too.<sup id="cite_ref-linusGoogleTalk_11-3" class="reference"><a href="#cite_note-linusGoogleTalk-11">[11]</a></sup> So immediately after the 2.6.12-rc2 Linux kernel development release, Torvalds set out to write his own system.<sup id="cite_ref-linusGoogleTalk_11-4" class="reference"><a href="#cite_note-linusGoogleTalk-11">[11]</a></sup></p>
+<p>Torvalds quipped about the name <i>git</i> (which means <i>unpleasant person</i> in <a href="/wiki/British_English" title="British English">British English</a> slang): "I'm an egotistical bastard, and I name all my projects after myself. First '<a href="/wiki/Linux_kernel" title="Linux kernel">Linux</a>', now 'git'."<sup id="cite_ref-whythegitname_16-0" class="reference"><a href="#cite_note-whythegitname-16">[16]</a></sup><sup id="cite_ref-17" class="reference"><a href="#cite_note-17">[17]</a></sup> The <a href="/wiki/Man_page" title="Man page">man page</a> describes Git as "the stupid content tracker".<sup id="cite_ref-18" class="reference"><a href="#cite_note-18">[18]</a></sup> The readme file of the source code elaborates further:<sup id="cite_ref-19" class="reference"><a href="#cite_note-19">[19]</a></sup></p>
+<div class="mw-highlight mw-content-ltr" dir="ltr">
+<pre>
+The name "git" was given by Linus Torvalds when he wrote the very
+first version. He described the tool as "the stupid content tracker"
+and the name as (depending on your way):
+
+ - random three-letter combination that is pronounceable, and not actually used by any common UNIX command. The fact that it is a mispronunciation of "get" may or may not be relevant.
+ - stupid. contemptible and despicable. simple. Take your pick from the dictionary of slang.
+ - "global information tracker": you're in a good mood, and it actually works for you. Angels sing, and a light suddenly fills the room.
+ - "g*dd*mn idiotic truckload of sh*t": when it breaks
+</pre></div>
+<p>The development of Git began on 3 April 2005.<sup id="cite_ref-selfhost_20-0" class="reference"><a href="#cite_note-selfhost-20">[20]</a></sup> Torvalds announced the project on 6 April;<sup id="cite_ref-21" class="reference"><a href="#cite_note-21">[21]</a></sup> it became <a href="/wiki/Self-hosting" title="Self-hosting">self-hosting</a> as of 7 April.<sup id="cite_ref-selfhost_20-1" class="reference"><a href="#cite_note-selfhost-20">[20]</a></sup> The first merge of multiple branches took place on 18 April.<sup id="cite_ref-22" class="reference"><a href="#cite_note-22">[22]</a></sup> Torvalds achieved his performance goals; on 29 April, the nascent Git was benchmarked recording patches to the Linux kernel tree at the rate of 6.7 patches per second.<sup id="cite_ref-23" class="reference"><a href="#cite_note-23">[23]</a></sup> On 16 June Git managed the kernel 2.6.12 release.<sup id="cite_ref-24" class="reference"><a href="#cite_note-24">[24]</a></sup></p>
+<p>Torvalds turned over <a href="/wiki/Software_maintenance" title="Software maintenance">maintenance</a> on 26 July 2005 to <a href="/wiki/Junio_Hamano" title="Junio Hamano">Junio Hamano</a>, a major contributor to the project.<sup id="cite_ref-25" class="reference"><a href="#cite_note-25">[25]</a></sup> Hamano was responsible for the 1.0 release on 21 December 2005, and remains the project's maintainer.<sup id="cite_ref-26" class="reference"><a href="#cite_note-26">[26]</a></sup></p>
+<h3><span class="mw-headline" id="Releases">Releases</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=2" title="Edit section: Releases">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<table class="wikitable">
+<tr>
+<th>Version</th>
+<th>Original release date<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">[<i><a href="/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources. (April 2017)">citation needed</span></a></i>]</sup></th>
+<th>Latest version</th>
+<th>Release date<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">[<i><a href="/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources. (April 2017)">citation needed</span></a></i>]</sup></th>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="0.99"><span style="display: none;">Old version, no longer supported:</span> 0.99</td>
+<td>2005-07-11</td>
+<td>0.99.9n</td>
+<td>2005-12-15</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="1.0"><span style="display: none;">Old version, no longer supported:</span> 1.0</td>
+<td>2005-12-21</td>
+<td>1.0.13</td>
+<td>2006-01-27</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="1.1"><span style="display: none;">Old version, no longer supported:</span> 1.1</td>
+<td>2006-01-08</td>
+<td>1.1.6</td>
+<td>2006-01-30</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="1.2"><span style="display: none;">Old version, no longer supported:</span> 1.2</td>
+<td>2006-02-12</td>
+<td>1.2.6</td>
+<td>2006-04-08</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="1.3"><span style="display: none;">Old version, no longer supported:</span> 1.3</td>
+<td>2006-04-18</td>
+<td>1.3.3</td>
+<td>2006-05-16</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="1.4"><span style="display: none;">Old version, no longer supported:</span> 1.4</td>
+<td>2006-06-10</td>
+<td>1.4.4.5</td>
+<td>2008-07-16</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="1.5"><span style="display: none;">Old version, no longer supported:</span> 1.5</td>
+<td>2007-02-14</td>
+<td>1.5.6.6</td>
+<td>2008-12-17</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="1.6"><span style="display: none;">Old version, no longer supported:</span> 1.6</td>
+<td>2008-08-17</td>
+<td>1.6.6.3</td>
+<td>2010-12-15</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="1.7"><span style="display: none;">Old version, no longer supported:</span> 1.7</td>
+<td>2010-02-13</td>
+<td>1.7.12.4</td>
+<td>2012-10-17</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="1.8"><span style="display: none;">Old version, no longer supported:</span> 1.8</td>
+<td>2012-10-21</td>
+<td>1.8.5.6</td>
+<td>2014-12-17</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="1.9"><span style="display: none;">Old version, no longer supported:</span> 1.9</td>
+<td>2014-02-14</td>
+<td>1.9.5</td>
+<td>2014-12-17</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="2.0"><span style="display: none;">Old version, no longer supported:</span> 2.0</td>
+<td>2014-05-28</td>
+<td>2.0.5</td>
+<td>2014-12-17</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="2.1"><span style="display: none;">Old version, no longer supported:</span> 2.1</td>
+<td>2014-08-16</td>
+<td>2.1.4</td>
+<td>2014-12-17</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="2.2"><span style="display: none;">Old version, no longer supported:</span> 2.2</td>
+<td>2014-11-26</td>
+<td>2.2.3</td>
+<td>2015-09-04</td>
+</tr>
+<tr>
+<td style="background-color: #FDB3AB;" title="Old version, no longer supported" data-sort-value="2.3"><span style="display: none;">Old version, no longer supported:</span> 2.3</td>
+<td>2015-02-05</td>
+<td>2.3.10</td>
+<td>2015-09-29</td>
+</tr>
+<tr>
+<td class="templateVersion co" style="background-color: #FEF8C6;" title="Older version, yet still supported" data-sort-value="2.4"><span style="display: none;">Older version, yet still supported:</span> 2.4</td>
+<td>2015-04-30</td>
+<td>2.4.12</td>
+<td>2017-05-05</td>
+</tr>
+<tr>
+<td class="templateVersion co" style="background-color: #FEF8C6;" title="Older version, yet still supported" data-sort-value="2.5"><span style="display: none;">Older version, yet still supported:</span> 2.5</td>
+<td>2015-07-27</td>
+<td>2.5.6</td>
+<td>2017-05-05</td>
+</tr>
+<tr>
+<td class="templateVersion co" style="background-color: #FEF8C6;" title="Older version, yet still supported" data-sort-value="2.6"><span style="display: none;">Older version, yet still supported:</span> 2.6</td>
+<td>2015-09-28</td>
+<td>2.6.7</td>
+<td>2017-05-05</td>
+</tr>
+<tr>
+<td class="templateVersion co" style="background-color: #FEF8C6;" title="Older version, yet still supported" data-sort-value="2.7"><span style="display: none;">Older version, yet still supported:</span> 2.7</td>
+<td>2015-10-04</td>
+<td>2.7.5</td>
+<td>2017-05-05</td>
+</tr>
+<tr>
+<td class="templateVersion co" style="background-color: #FEF8C6;" title="Older version, yet still supported" data-sort-value="2.8"><span style="display: none;">Older version, yet still supported:</span> 2.8</td>
+<td>2016-03-28</td>
+<td>2.8.5</td>
+<td>2017-05-05</td>
+</tr>
+<tr>
+<td class="templateVersion co" style="background-color: #FEF8C6;" title="Older version, yet still supported" data-sort-value="2.9"><span style="display: none;">Older version, yet still supported:</span> 2.9</td>
+<td>2016-06-13</td>
+<td>2.9.4</td>
+<td>2017-05-05</td>
+</tr>
+<tr>
+<td class="templateVersion co" style="background-color: #FEF8C6;" title="Older version, yet still supported" data-sort-value="2.10"><span style="display: none;">Older version, yet still supported:</span> 2.10</td>
+<td>2016-09-02</td>
+<td>2.10.3</td>
+<td>2017-05-05</td>
+</tr>
+<tr>
+<td class="templateVersion co" style="background-color: #FEF8C6;" title="Older version, yet still supported" data-sort-value="2.11"><span style="display: none;">Older version, yet still supported:</span> 2.11</td>
+<td>2016-11-29</td>
+<td>2.11.2</td>
+<td>2017-05-05</td>
+</tr>
+<tr>
+<td class="templateVersion co" style="background-color: #FEF8C6;" title="Older version, yet still supported" data-sort-value="2.12"><span style="display: none;">Older version, yet still supported:</span> 2.12</td>
+<td>2017-02-24</td>
+<td>2.12.3</td>
+<td>2017-05-05</td>
+</tr>
+<tr>
+<td class="templateVersion co" style="background-color: #FEF8C6;" title="Older version, yet still supported" data-sort-value="2.13"><span style="display: none;">Older version, yet still supported:</span> 2.13</td>
+<td>2017-05-10</td>
+<td>2.13.4</td>
+<td>2017-08-01</td>
+</tr>
+<tr>
+<td class="templateVersion c" style="background-color: #D4F4B4;" title="Current stable version" data-sort-value="2.14"><span style="display: none;">Current stable version:</span> <b>2.14</b></td>
+<td>2017-08-04</td>
+<td>2.14.2</td>
+<td>2017-09-22</td>
+</tr>
+<tr>
+<td colspan="4">
+<div class="templateVersion l" style="margin-left: -1em;">
+<div style="float: left; margin-left: 1em;"><small><span style="white-space: nowrap;"><b>Legend:</b></span></small></div>
+<div style="float: left; margin-left: 1em;"><small><span style="border-left: 1.2em solid #FDB3AB; padding-left: 0.3em; white-space: nowrap;" title="Old version, no longer supported">Old version</span></small></div>
+<div style="float: left; margin-left: 1em;"><small><span style="border-left: 1.2em solid #FEF8C6; padding-left: 0.3em; white-space: nowrap;" title="An older version, yet still supported">Older version, still supported</span></small></div>
+<div style="float: left; margin-left: 1em;"><small><span style="border-left: 1.2em solid #D4F4B4; padding-left: 0.3em; white-space: nowrap;" title="Latest stable version"><b>Latest version</b></span></small></div>
+<div style="float: left; margin-left: 1em;"><small><span style="border-left: 1.2em solid #FED1A0; padding-left: 0.3em; white-space: nowrap;" title="Latest preview of a future release">Latest preview version</span></small></div>
+<div style="float: left; margin-left: 1em; display: none;"><small><span style="border-left: 1.2em solid #C1E6F5; padding-left: 0.3em; white-space: nowrap;" title="A future release">Future release</span></small></div>
+<div style="clear: left;"></div>
+</div>
+</td>
+</tr>
+</table>
+<h2><span class="mw-headline" id="Design">Design</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=3" title="Edit section: Design">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Git's design was inspired by <a href="/wiki/BitKeeper" title="BitKeeper">BitKeeper</a> and <a href="/wiki/Monotone_(software)" title="Monotone (software)">Monotone</a>.<sup id="cite_ref-27" class="reference"><a href="#cite_note-27">[27]</a></sup><sup id="cite_ref-a_quick_challenge_28-0" class="reference"><a href="#cite_note-a_quick_challenge-28">[28]</a></sup> Git was originally designed as a low-level version control system engine on top of which others could write front ends, such as <a href="/wiki/Cogito_(software)" title="Cogito (software)">Cogito</a> or <a href="/w/index.php?title=StGIT&amp;action=edit&amp;redlink=1" class="new" title="StGIT (page does not exist)">StGIT</a>.<sup id="cite_ref-a_quick_challenge_28-1" class="reference"><a href="#cite_note-a_quick_challenge-28">[28]</a></sup> The core Git project has since become a complete version control system that is usable directly.<sup id="cite_ref-bare_url_29-0" class="reference"><a href="#cite_note-bare_url-29">[29]</a></sup> While strongly influenced by BitKeeper, Torvalds deliberately avoided conventional approaches, leading to a unique design.<sup id="cite_ref-30" class="reference"><a href="#cite_note-30">[30]</a></sup></p>
+<h3><span class="mw-headline" id="Characteristics">Characteristics</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=4" title="Edit section: Characteristics">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Git's design is a synthesis of Torvalds's experience with Linux in maintaining a large distributed development project, along with his intimate knowledge of file system performance gained from the same project and the urgent need to produce a working system in short order. These influences led to the following implementation choices<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">[<i><a href="/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="the content is highly questionable and hence proper citation is required (February 2017)">citation needed</span></a></i>]</sup>:</p>
+<dl>
+<dt>Strong support for non-linear development</dt>
+<dd>Git supports rapid branching and merging, and includes specific tools for visualizing and navigating a non-linear development history. In Git, a core assumption is that a change will be merged more often than it is written, as it is passed around to various reviewers. In Git, branches are very lightweight: a branch is only a reference to one commit. With its parental commits, the full branch structure can be constructed.</dd>
+<dt>Distributed development</dt>
+<dd>Like <a href="/wiki/Darcs" title="Darcs">Darcs</a>, <a href="/wiki/BitKeeper" title="BitKeeper">BitKeeper</a>, <a href="/wiki/Mercurial" title="Mercurial">Mercurial</a>, <a href="/wiki/SVK" title="SVK">SVK</a>, <a href="/wiki/Bazaar_(software)" class="mw-redirect" title="Bazaar (software)">Bazaar</a>, and <a href="/wiki/Monotone_(software)" title="Monotone (software)">Monotone</a>, Git gives each developer a local copy of the full development history, and changes are copied from one such repository to another. These changes are imported as added development branches, and can be merged in the same way as a locally developed branch.</dd>
+<dt>Compatibility with extant systems and protocols</dt>
+<dd>Repositories can be published via <a href="/wiki/Hypertext_Transfer_Protocol" title="Hypertext Transfer Protocol">Hypertext Transfer Protocol</a> (HTTP), <a href="/wiki/File_Transfer_Protocol" title="File Transfer Protocol">File Transfer Protocol</a> (FTP), <a href="/wiki/Rsync" title="Rsync">rsync</a> (removed in Git 2.8.0<sup id="cite_ref-31" class="reference"><a href="#cite_note-31">[31]</a></sup>), or a Git protocol over either a plain socket, or <a href="/wiki/Secure_Shell" title="Secure Shell">Secure Shell</a> (ssh). Git also has a CVS server emulation, which enables the use of extant CVS clients and IDE plugins to access Git repositories. <a href="/wiki/Apache_Subversion" title="Apache Subversion">Subversion</a> and <a href="/wiki/Svk" class="mw-redirect" title="Svk">svk</a> repositories can be used directly with git-svn.</dd>
+<dt>Efficient handling of large projects</dt>
+<dd>Torvalds has described Git as being very fast and scalable,<sup id="cite_ref-32" class="reference"><a href="#cite_note-32">[32]</a></sup> and performance tests done by Mozilla<sup id="cite_ref-33" class="reference"><a href="#cite_note-33">[33]</a></sup> showed it was an <a href="/wiki/Order_of_magnitude" title="Order of magnitude">order of magnitude</a> faster than some version control systems, and fetching version history from a locally stored repository can be one hundred times faster than fetching it from the remote server.<sup id="cite_ref-34" class="reference"><a href="#cite_note-34">[34]</a></sup></dd>
+<dt>Cryptographic authentication of history</dt>
+<dd>The Git history is stored in such a way that the ID of a particular version (a <i>commit</i> in Git terms) depends upon the complete development history leading up to that commit. Once it is published, it is not possible to change the old versions without it being noticed. The structure is similar to a <a href="/wiki/Merkle_tree" title="Merkle tree">Merkle tree</a>, but with added data at the nodes and leaves.<sup id="cite_ref-35" class="reference"><a href="#cite_note-35">[35]</a></sup> (<a href="/wiki/Mercurial" title="Mercurial">Mercurial</a> and <a href="/wiki/Monotone_(software)" title="Monotone (software)">Monotone</a> also have this property.)</dd>
+<dt>Toolkit-based design</dt>
+<dd>Git was designed as a set of programs written in <a href="/wiki/C_(programming_language)" title="C (programming language)">C</a>, and several shell scripts that provide wrappers around those programs.<sup id="cite_ref-36" class="reference"><a href="#cite_note-36">[36]</a></sup> Although most of those scripts have since been rewritten in C for speed and portability, the design remains, and it is easy to chain the components together.<sup id="cite_ref-37" class="reference"><a href="#cite_note-37">[37]</a></sup></dd>
+<dt>Pluggable merge strategies</dt>
+<dd>As part of its toolkit design, Git has a well-defined model of an incomplete merge, and it has multiple algorithms for completing it, culminating in telling the user that it is unable to complete the merge automatically and that manual editing is needed.</dd>
+<dt><a href="/wiki/Garbage_(computer_science)" title="Garbage (computer science)">Garbage</a> accumulates until collected</dt>
+<dd>Aborting operations or backing out changes will leave useless dangling objects in the database. These are generally a small fraction of the continuously growing history of wanted objects. Git will automatically perform <a href="/wiki/Garbage_collection_(computer_science)" title="Garbage collection (computer science)">garbage collection</a> when enough loose objects have been created in the repository. Garbage collection can be called explicitly using <code>git gc --prune</code>.<sup id="cite_ref-38" class="reference"><a href="#cite_note-38">[38]</a></sup></dd>
+<dt>Periodic explicit object packing</dt>
+<dd>Git stores each newly created object as a separate file. Although individually compressed, this takes a great deal of space and is inefficient. This is solved by the use of <i>packs</i> that store a large number of objects in one file (or network byte stream) called <i>packfile</i>, <a href="/wiki/Delta_encoding" title="Delta encoding">delta-compressed</a> among themselves. Packs are compressed using the <a href="/wiki/Heuristic_(computer_science)" title="Heuristic (computer science)">heuristic</a> that files with the same name are probably similar, but do not depend on it for correctness. A corresponding index file is created for each packfile, telling the offset of each object in the packfile. Newly created objects (newly added history) are still stored singly, and periodic repacking is needed to maintain space efficiency. The process of packing the repository can be very computationally costly. By allowing objects to exist in the repository in a loose, but quickly generated format, Git allows the costly pack operation to be deferred until later, when time matters less, e.g., the end of a work day. Git does periodic repacking automatically but manual repacking is also possible with the <tt>git gc</tt> command. For data integrity, both packfile and its index have <a href="/wiki/SHA-1" title="SHA-1">SHA-1</a> checksum inside, and also the file name of packfile contains a SHA-1 checksum. To check integrity, run the <tt>git fsck</tt> command.</dd>
+</dl>
+<p>Another property of Git is that it snapshots directory trees of files. The earliest systems for tracking versions of source code, <a href="/wiki/Source_Code_Control_System" title="Source Code Control System">Source Code Control System</a> (SCCS) and <a href="/wiki/Revision_Control_System" title="Revision Control System">Revision Control System</a> (RCS), worked on individual files and emphasized the space savings to be gained from <a href="/wiki/Interleaved_deltas" title="Interleaved deltas">interleaved deltas</a> (SCCS) or <a href="/wiki/Delta_encoding" title="Delta encoding">delta encoding</a> (RCS) the (mostly similar) versions. Later revision control systems maintained this notion of a file having an identity across multiple revisions of a project. However, Torvalds rejected this concept.<sup id="cite_ref-39" class="reference"><a href="#cite_note-39">[39]</a></sup> Consequently, Git does not explicitly record file revision relationships at any level below the source code tree.</p>
+<p>Implicit revision relationships have some significant consequences:</p>
+<ul>
+<li>It is slightly more costly to examine the change history of one file than the whole project.<sup id="cite_ref-40" class="reference"><a href="#cite_note-40">[40]</a></sup> To obtain a history of changes affecting a given file, Git must walk the global history and then determine whether each change modified that file. This method of examining history does, however, let Git produce with equal efficiency a single history showing the changes to an arbitrary set of files. For example, a subdirectory of the source tree plus an associated global header file is a very common case.</li>
+<li>Renames are handled implicitly rather than explicitly. A common complaint with <a href="/wiki/Concurrent_Versions_System" title="Concurrent Versions System">CVS</a> is that it uses the name of a file to identify its revision history, so moving or renaming a file is not possible without either interrupting its history, or renaming the history and thereby making the history inaccurate. Most post-CVS revision control systems solve this by giving a file a unique long-lived name (analogous to an <a href="/wiki/Inode" title="Inode">inode</a> number) that survives renaming. Git does not record such an identifier, and this is claimed as an advantage.<sup id="cite_ref-41" class="reference"><a href="#cite_note-41">[41]</a></sup><sup id="cite_ref-42" class="reference"><a href="#cite_note-42">[42]</a></sup> <a href="/wiki/Source_code" title="Source code">Source code</a> files are sometimes split or merged, or simply renamed,<sup id="cite_ref-43" class="reference"><a href="#cite_note-43">[43]</a></sup> and recording this as a simple rename would freeze an inaccurate description of what happened in the (immutable) history. Git addresses the issue by detecting renames while browsing the history of snapshots rather than recording it when making the snapshot.<sup id="cite_ref-44" class="reference"><a href="#cite_note-44">[44]</a></sup> (Briefly, given a file in revision <i>N,</i> a file of the same name in revision <i>N−1</i> is its default ancestor. However, when there is no like-named file in revision <i>N−1,</i> Git searches for a file that existed only in revision <i>N−1</i> and is very similar to the new file.) However, it does require more <a href="/wiki/Central_processing_unit" title="Central processing unit">CPU</a>-intensive work every time history is reviewed, and several options to adjust the heuristics. This mechanism does not always work; sometimes a file that is renamed with changes in the same commit is read as a deletion of the old file and the creation of a new file. Developers can work around this limitation by committing the rename and changes separately.<sup class="noprint Inline-Template Template-Fact" style="white-space:nowrap;">[<i><a href="/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed"><span title="This claim needs references to reliable sources. (September 2016)">citation needed</span></a></i>]</sup></li>
+</ul>
+<p>Git implements several merging strategies; a non-default can be selected at merge time:<sup id="cite_ref-45" class="reference"><a href="#cite_note-45">[45]</a></sup></p>
+<ul>
+<li><i>resolve</i>: the traditional <a href="/wiki/Three-way_merge" class="mw-redirect" title="Three-way merge">three-way merge</a> algorithm.</li>
+<li><i>recursive</i>: This is the default when pulling or merging one branch, and is a variant of the three-way merge algorithm.
+<blockquote class="templatequote">
+<p>When there are more than one common ancestors that can be used for three-way merge, it creates a merged tree of the common ancestors and uses that as the reference tree for the three-way merge. This has been reported to result in fewer merge conflicts without causing mis-merges by tests done on prior merge commits taken from Linux 2.6 kernel development history. Also, this can detect and handle merges involving renames.</p>
+<div class="templatequotecite">— <cite>Linus Torvalds<sup id="cite_ref-46" class="reference"><a href="#cite_note-46">[46]</a></sup></cite></div>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><i>octopus</i>: This is the default when merging more than two heads.</li>
+</ul>
+<h3><span class="mw-headline" id="Data_structures">Data structures</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=5" title="Edit section: Data structures">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Git's primitives are not inherently a <a href="/wiki/Source_control_management" class="mw-redirect" title="Source control management">source-code management</a> system. Torvalds explains,<sup id="cite_ref-47" class="reference"><a href="#cite_note-47">[47]</a></sup></p>
+<blockquote class="templatequote">
+<p>In many ways you can just see git as a filesystem&#160;–  it's <a href="/wiki/Content-addressable_storage" title="Content-addressable storage">content-addressable</a>, and it has a notion of versioning, but I really really designed it coming at the problem from the viewpoint of a <i>filesystem</i> person (hey, kernels is what I do), and I actually have absolutely <i>zero</i> interest in creating a traditional SCM system.</p>
+</blockquote>
+<p>From this initial design approach, Git has developed the full set of features expected of a traditional SCM,<sup id="cite_ref-bare_url_29-1" class="reference"><a href="#cite_note-bare_url-29">[29]</a></sup> with features mostly being created as needed, then refined and extended over time.</p>
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;"><a href="/wiki/File:Git_operations.svg" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Git_operations.svg/220px-Git_operations.svg.png" width="220" height="180" class="thumbimage" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Git_operations.svg/330px-Git_operations.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Git_operations.svg/440px-Git_operations.svg.png 2x" data-file-width="760" data-file-height="621" /></a>
+<div class="thumbcaption">
+<div class="magnify"><a href="/wiki/File:Git_operations.svg" class="internal" title="Enlarge"></a></div>
+Some data flows and storage levels in the Git revision control system.</div>
+</div>
+</div>
+<p>Git has two <a href="/wiki/Data_structure" title="Data structure">data structures</a>: a mutable <i>index</i> (also called <i>stage</i> or <i>cache</i>) that caches information about the working directory and the next revision to be committed; and an immutable, append-only <i>object database.</i></p>
+<p>The index serves as connection point between the object database and the working tree.</p>
+<p>The object database contains four types of objects:</p>
+<ul>
+<li>A <i>blob</i> (<a href="/wiki/Binary_large_object" title="Binary large object">binary large object</a>) is the content of a <a href="/wiki/Computer_file" title="Computer file">file</a>. Blobs have no proper file name, time stamps, or other metadata. (A blob's name internally is a hash of its content.)</li>
+<li>A <i>tree</i> object is the equivalent of a directory. It contains a list of file names, each with some type bits and a reference to a blob or tree object that is that file, symbolic link, or directory's contents. These objects are a snapshot of the source tree. (In whole, this comprises a <a href="/wiki/Merkle_Tree" class="mw-redirect" title="Merkle Tree">Merkle Tree</a>, meaning that only a single hash for the root tree is sufficient and actually used in commits to exactly pinpoint to the exact state of whole tree structures of any number of sub-directories and files.)</li>
+<li>A <i>commit</i> object links tree objects together into a history. It contains the name of a tree object (of the top-level source directory), a time stamp, a log message, and the names of zero or more parent commit objects.</li>
+<li>A <i>tag</i> object is a container that contains a reference to another object and can hold added meta-data related to another object. Most commonly, it is used to store a <a href="/wiki/Digital_signature" title="Digital signature">digital signature</a> of a commit object corresponding to a particular release of the data being tracked by Git.</li>
+</ul>
+<p>Each object is identified by a SHA-1 <a href="/wiki/Cryptographic_hash_function" title="Cryptographic hash function">hash</a> of its contents. Git computes the hash, and uses this value for the object's name. The object is put into a directory matching the first two characters of its hash. The rest of the hash is used as the file name for that object.</p>
+<p>Git stores each revision of a file as a unique blob. The relationships between the blobs can be found through examining the tree and commit objects. Newly added objects are stored in their entirety using <a href="/wiki/Zlib" title="Zlib">zlib</a> compression. This can consume a large amount of disk space quickly, so objects can be combined into <i>packs</i>, which use <a href="/wiki/Delta_encoding" title="Delta encoding">delta compression</a> to save space, storing blobs as their changes relative to other blobs.</p>
+<p>Git servers typically listen on <a href="/wiki/TCP_and_UDP_port" class="mw-redirect" title="TCP and UDP port">TCP port</a> 9418.<sup id="cite_ref-48" class="reference"><a href="#cite_note-48">[48]</a></sup></p>
+<h3><span class="mw-headline" id="References">References</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=6" title="Edit section: References">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Every object in the Git database which is not referred to may be cleaned up by using a garbage collection command, or automatically. An object may be referenced by another object, or an explicit reference. Git knows different types of references. The commands to create, move, and delete references vary. "git show-ref" lists all references. Some types are:</p>
+<ul>
+<li><i>heads</i>: refers to an object locally</li>
+<li><i>remotes</i>: refers to an object which exists in a remote repository</li>
+<li><i>stash</i>: refers to an object not yet committed</li>
+<li><i>meta</i>: e.g. a configuration in a bare repository, user rights; the refs/meta/config namespace was introduced resp gets used by <a href="/wiki/Gerrit_(software)" title="Gerrit (software)">Gerrit</a><sup class="noprint Inline-Template" style="margin-left:0.1em; white-space:nowrap;">[<i><a href="/wiki/Wikipedia:Please_clarify" title="Wikipedia:Please clarify"><span title="The text near this tag may need clarification or removal of jargon. (June 2014)">clarification needed</span></a></i>]</sup><sup id="cite_ref-49" class="reference"><a href="#cite_note-49">[49]</a></sup></li>
+<li><i>tags</i>: see above</li>
+</ul>
+<h2><span class="mw-headline" id="Implementations">Implementations</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=7" title="Edit section: Implementations">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;"><a href="/wiki/File:GNOME_gitg.png" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/93/GNOME_gitg.png/220px-GNOME_gitg.png" width="220" height="155" class="thumbimage" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/9/93/GNOME_gitg.png/330px-GNOME_gitg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/9/93/GNOME_gitg.png/440px-GNOME_gitg.png 2x" data-file-width="2002" data-file-height="1408" /></a>
+<div class="thumbcaption">
+<div class="magnify"><a href="/wiki/File:GNOME_gitg.png" class="internal" title="Enlarge"></a></div>
+<a href="/wiki/GNOME_Core_Applications" title="GNOME Core Applications">gitg</a> is a graphical front-end using <a href="/wiki/GTK%2B" title="GTK+">GTK+</a></div>
+</div>
+</div>
+<p>Git is primarily developed on <a href="/wiki/Linux" title="Linux">Linux</a>, although it also supports most major operating systems including <a href="/wiki/Berkeley_Software_Distribution" title="Berkeley Software Distribution">BSD</a>, <a href="/wiki/Solaris_(operating_system)" title="Solaris (operating system)">Solaris</a>, <a href="/wiki/MacOS" title="MacOS">macOS</a>, and <a href="/wiki/Microsoft_Windows" title="Microsoft Windows">Windows</a>.<sup id="cite_ref-50" class="reference"><a href="#cite_note-50">[50]</a></sup></p>
+<p>The first Microsoft Windows <a href="/wiki/Porting" title="Porting">port</a> of Git was primarily a Linux emulation framework that hosts the Linux version. Installing Git under Windows creates a similarly named Program Files directory containing the MinGW port of the GNU Compiler Collection, Perl 5, msys2.0 (itself a fork of Cygwin, a Unix-like emulation environment for Windows) and various other Windows ports or emulations of Linux utilities and libraries. Currently native Windows builds of Git are distributed as 32 and 64-bit installers.<sup id="cite_ref-51" class="reference"><a href="#cite_note-51">[51]</a></sup></p>
+<p>The JGit implementation of Git is a pure <a href="/wiki/Java_(software_platform)" title="Java (software platform)">Java</a> software library, designed to be embedded in any Java application. JGit is used in the <a href="/wiki/Gerrit_(software)" title="Gerrit (software)">Gerrit</a> code review tool and in EGit, a <a href="/w/index.php?title=Git_client&amp;action=edit&amp;redlink=1" class="new" title="Git client (page does not exist)">Git client</a> for the <a href="/wiki/Eclipse_(software)" title="Eclipse (software)">Eclipse</a> IDE.<sup id="cite_ref-52" class="reference"><a href="#cite_note-52">[52]</a></sup></p>
+<p>The Dulwich implementation of Git is a pure <a href="/wiki/Python_(programming_language)" title="Python (programming language)">Python</a> software component for Python 2.7, 3.4 and 3.5<sup id="cite_ref-53" class="reference"><a href="#cite_note-53">[53]</a></sup></p>
+<p>The libgit2 implementation of Git is an ANSI C software library with no other dependencies, which can be built on multiple platforms including Windows, Linux, macOS, and BSD.<sup id="cite_ref-54" class="reference"><a href="#cite_note-54">[54]</a></sup> It has bindings for many programming languages, including <a href="/wiki/Ruby_(programming_language)" title="Ruby (programming language)">Ruby</a>, Python, and <a href="/wiki/Haskell_(programming_language)" title="Haskell (programming language)">Haskell</a>.<sup id="cite_ref-55" class="reference"><a href="#cite_note-55">[55]</a></sup><sup id="cite_ref-56" class="reference"><a href="#cite_note-56">[56]</a></sup><sup id="cite_ref-57" class="reference"><a href="#cite_note-57">[57]</a></sup></p>
+<p>JS-Git is a <a href="/wiki/JavaScript" title="JavaScript">JavaScript</a> implementation of a subset of Git.<sup id="cite_ref-58" class="reference"><a href="#cite_note-58">[58]</a></sup></p>
+<h2><span class="mw-headline" id="Web_interfaces">Web interfaces</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=8" title="Edit section: Web interfaces">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="thumb tright">
+<div class="thumbinner" style="width:222px;"><a href="/wiki/File:Gitweb.png" class="image"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Gitweb.png/220px-Gitweb.png" width="220" height="142" class="thumbimage" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Gitweb.png/330px-Gitweb.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Gitweb.png/440px-Gitweb.png 2x" data-file-width="1134" data-file-height="732" /></a>
+<div class="thumbcaption">
+<div class="magnify"><a href="/wiki/File:Gitweb.png" class="internal" title="Enlarge"></a></div>
+Screenshot of Gitweb interface showing a commit <a href="/wiki/Diff" class="mw-redirect" title="Diff">diff</a>.</div>
+</div>
+</div>
+<p>There are various web interfaces available for Git.</p>
+<ul>
+<li><a rel="nofollow" class="external text" href="https://git.zx2c4.com/cgit/">Cgit</a>:A web frontend for git repositories written in C.</li>
+<li><a rel="nofollow" class="external text" href="https://git.wiki.kernel.org/index.php/Gitweb">Gitweb</a>: A git frontend written in <a href="/wiki/Perl" title="Perl">perl</a>.</li>
+<li><a rel="nofollow" class="external text" href="https://gogs.io/">Gogs</a>: A git frontend with built-in authentication, issue handling, fork and a lot of features, written in <a href="/wiki/Go_(programming_language)" title="Go (programming language)">go</a>.</li>
+<li><a rel="nofollow" class="external text" href="https://gitea.io">Gitea</a>: A fork of Gogs.</li>
+<li><a rel="nofollow" class="external text" href="https://github.com/klaussilveira/gitlist">Gitlist</a>: A git repository viewer using <a href="/wiki/Bootstrap_(front-end_framework)" title="Bootstrap (front-end framework)">Bootstrap Framework</a> written in <a href="/wiki/Php" class="mw-redirect" title="Php">Php</a>.</li>
+</ul>
+<h2><span class="mw-headline" id="Git_server">Git server</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=9" title="Edit section: Git server">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>As Git is a distributed version control system, it can be used as a server out of the box. Dedicated Git server software helps, amongst other features, to add access control, display the contents of a Git repository via the web, and help managing multiple repositories. Remote file store and shell access: A Git repository can be cloned to a shared file system, and accessed by other persons. It can also be accessed via remote shell just by having the Git software installed and allowing a user to log in.<sup id="cite_ref-59" class="reference"><a href="#cite_note-59">[59]</a></sup></p>
+<div role="note" class="hatnote navigation-not-searchable">See also: <a href="/wiki/Comparison_of_source_code_hosting_facilities" title="Comparison of source code hosting facilities">Comparison of source code hosting facilities</a></div>
+<h2><span class="mw-headline" id="Adoption">Adoption</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=10" title="Edit section: Adoption">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>The <a href="/wiki/Eclipse_Foundation" title="Eclipse Foundation">Eclipse Foundation</a> reported in its annual community survey that as of May 2014, Git is now the most widely used source-code management tool, with 42.9% of professional software developers reporting that they use Git as their primary source control system<sup id="cite_ref-ianskerrett.wordpress.com_60-0" class="reference"><a href="#cite_note-ianskerrett.wordpress.com-60">[60]</a></sup> compared with 36.3% in 2013, 32% in 2012; or for Git responses excluding use of <a href="/wiki/GitHub" title="GitHub">GitHub</a>: 33.3% in 2014, 30.3% in 2013, 27.6% in 2012 and 12.8% in 2011.<sup id="cite_ref-61" class="reference"><a href="#cite_note-61">[61]</a></sup> Open source directory <a href="/wiki/Black_Duck_Open_Hub" class="mw-redirect" title="Black Duck Open Hub">Black Duck Open Hub</a> reports a similar uptake among open source projects.<sup id="cite_ref-62" class="reference"><a href="#cite_note-62">[62]</a></sup> The Stack Overflow developer survey reported in 2015 that 69.3% of developers use Git; 36.9% use Subversion; 12.2% use TFS; and 7.9% use Mercurial.<sup id="cite_ref-63" class="reference"><a href="#cite_note-63">[63]</a></sup></p>
+<p>The UK IT jobs website itjobswatch.co.uk reports that as of late September 2016, 29.27% of UK permanent software development job openings have cited Git,<sup id="cite_ref-64" class="reference"><a href="#cite_note-64">[64]</a></sup> ahead of 12.17% for Microsoft <a href="/wiki/Team_Foundation_Server" title="Team Foundation Server">Team Foundation Server</a>,<sup id="cite_ref-65" class="reference"><a href="#cite_note-65">[65]</a></sup> 10.60% for <a href="/wiki/Apache_Subversion" title="Apache Subversion">Subversion</a>,<sup id="cite_ref-66" class="reference"><a href="#cite_note-66">[66]</a></sup> 1.30% for <a href="/wiki/Mercurial" title="Mercurial">Mercurial</a>,<sup id="cite_ref-67" class="reference"><a href="#cite_note-67">[67]</a></sup> and 0.48% for <a href="/wiki/Visual_SourceSafe" class="mw-redirect" title="Visual SourceSafe">Visual SourceSafe</a>.<sup id="cite_ref-68" class="reference"><a href="#cite_note-68">[68]</a></sup></p>
+<p>Since February 2017, <a href="/wiki/Microsoft" title="Microsoft">Microsoft</a> has been in the process of migrating <a href="/wiki/Microsoft_Windows" title="Microsoft Windows">Microsoft Windows</a> development to Git, migrating from <a href="/wiki/Perforce" class="mw-redirect" title="Perforce">Perforce</a>. In order to handle the size of the Windows source code tree, Microsoft was required to develop customizations to the software, including Git Virtual File System (GVFS), a system which allows cloned repositories to use placeholders whose contents are downloaded only once a file is accessed.<sup id="cite_ref-ars-windowsgit_69-0" class="reference"><a href="#cite_note-ars-windowsgit-69">[69]</a></sup></p>
+<h2><span class="mw-headline" id="Security">Security</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=11" title="Edit section: Security">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Git does not provide access control mechanisms, but was designed for operation with other tools that specialize in access control.<sup id="cite_ref-70" class="reference"><a href="#cite_note-70">[70]</a></sup></p>
+<p>On 17 December 2014, an exploit was found affecting the <a href="/wiki/Microsoft_Windows" title="Microsoft Windows">Windows</a> and <a href="/wiki/MacOS" title="MacOS">Mac</a> versions of the Git client. An attacker could perform <a href="/wiki/Arbitrary_code_execution" title="Arbitrary code execution">arbitrary code execution</a> on a target computer with Git installed by creating a malicious Git tree (directory) named <i>.git</i> (a directory in Git repositories that stores all the data of the repository) in a different case (such as .GIT or .Git, needed because Git doesn't allow the all-lowercase version of <i>.git</i> to be created manually) with malicious files in the <i>.git/hooks</i> subdirectory (a folder with executable files that Git runs) on a repository that the attacker made or on a repository that the attacker can modify. If a Windows or Mac user <i>pulls</i> (downloads) a version of the repository with the malicious directory, then switches to that directory, the .git directory will be overwritten (due to the case-insensitive trait of the Windows and Mac filesystems) and the malicious executable files in <i>.git/hooks</i> may be run, which results in the attacker's commands being executed. An attacker could also modify the <i>.git/config</i> configuration file, which allows the attacker to create malicious Git aliases (aliases for Git commands or external commands) or modify extant aliases to execute malicious commands when run. The vulnerability was patched in version 2.2.1 of Git, released on 17 December 2014, and announced on the next day.<sup id="cite_ref-71" class="reference"><a href="#cite_note-71">[71]</a></sup><sup id="cite_ref-72" class="reference"><a href="#cite_note-72">[72]</a></sup></p>
+<p>Git version 2.6.1, released on 29 September 2015, contained a patch for a security vulnerability (CVE-2015-7545)<sup id="cite_ref-73" class="reference"><a href="#cite_note-73">[73]</a></sup> which allowed arbitrary code execution.<sup id="cite_ref-git-v2.6.1-commit_74-0" class="reference"><a href="#cite_note-git-v2.6.1-commit-74">[74]</a></sup> The vulnerability was exploitable if an attacker could convince a victim to clone a specific URL, as the arbitrary commands were embedded in the URL itself.<sup id="cite_ref-seclists-CVE-2015-7545_75-0" class="reference"><a href="#cite_note-seclists-CVE-2015-7545-75">[75]</a></sup> An attacker could use the exploit via a <a href="/wiki/Man-in-the-middle_attack" title="Man-in-the-middle attack">man-in-the-middle attack</a> if the connection was unencrypted,<sup id="cite_ref-seclists-CVE-2015-7545_75-1" class="reference"><a href="#cite_note-seclists-CVE-2015-7545-75">[75]</a></sup> as they could redirect the user to a URL of their choice. Recursive clones were also vulnerable, since they allowed the controller of a repository to specify arbitrary URLs via the gitmodules file.<sup id="cite_ref-seclists-CVE-2015-7545_75-2" class="reference"><a href="#cite_note-seclists-CVE-2015-7545-75">[75]</a></sup></p>
+<p>Git uses <a href="/wiki/SHA-1" title="SHA-1">SHA-1</a> hashes internally. Linus Torvalds has responded that the hash was mostly to guard against accidental corruption, and the security a cryptographically secure hash gives was just an accidental side effect, with the main security being signing elsewhere.<sup id="cite_ref-76" class="reference"><a href="#cite_note-76">[76]</a></sup><sup id="cite_ref-77" class="reference"><a href="#cite_note-77">[77]</a></sup></p>
+<h2><span class="mw-headline" id="See_also">See also</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=12" title="Edit section: See also">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div role="navigation" aria-label="Portals" class="noprint portal plainlist tright" style="margin:0.5em 0 0.5em 1em;border:solid #aaa 1px">
+<ul style="display:table;box-sizing:border-box;padding:0.1em;max-width:175px;background:#f9f9f9;font-size:85%;line-height:110%;font-style:italic;font-weight:bold">
+<li style="display:table-row"><span style="display:table-cell;padding:0.2em;vertical-align:middle;text-align:center"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/31/Free_and_open-source_software_logo_%282009%29.svg/28px-Free_and_open-source_software_logo_%282009%29.svg.png" width="28" height="28" class="noviewer" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/31/Free_and_open-source_software_logo_%282009%29.svg/42px-Free_and_open-source_software_logo_%282009%29.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/3/31/Free_and_open-source_software_logo_%282009%29.svg/56px-Free_and_open-source_software_logo_%282009%29.svg.png 2x" data-file-width="512" data-file-height="512" /></span><span style="display:table-cell;padding:0.2em 0.2em 0.2em 0.3em;vertical-align:middle"><a href="/wiki/Portal:Free_software" class="mw-redirect" title="Portal:Free software">Free software portal</a></span></li>
+<li style="display:table-row"><span style="display:table-cell;padding:0.2em;vertical-align:middle;text-align:center"><a href="/wiki/File:NewTux.svg" class="image"><img alt="icon" src="//upload.wikimedia.org/wikipedia/commons/thumb/b/b0/NewTux.svg/23px-NewTux.svg.png" width="23" height="28" class="noviewer" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/b/b0/NewTux.svg/35px-NewTux.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/b/b0/NewTux.svg/47px-NewTux.svg.png 2x" data-file-width="625" data-file-height="750" /></a></span><span style="display:table-cell;padding:0.2em 0.2em 0.2em 0.3em;vertical-align:middle"><a href="/wiki/Portal:Linux" title="Portal:Linux">Linux portal</a></span></li>
+<li style="display:table-row"><span style="display:table-cell;padding:0.2em;vertical-align:middle;text-align:center"><a href="/wiki/File:Crystal_Clear_app_linneighborhood.svg" class="image"><img alt="icon" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Crystal_Clear_app_linneighborhood.svg/28px-Crystal_Clear_app_linneighborhood.svg.png" width="28" height="28" class="noviewer" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Crystal_Clear_app_linneighborhood.svg/42px-Crystal_Clear_app_linneighborhood.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Crystal_Clear_app_linneighborhood.svg/56px-Crystal_Clear_app_linneighborhood.svg.png 2x" data-file-width="407" data-file-height="407" /></a></span><span style="display:table-cell;padding:0.2em 0.2em 0.2em 0.3em;vertical-align:middle"><a href="/wiki/Portal:Internet" title="Portal:Internet">Internet portal</a></span></li>
+</ul>
+</div>
+<ul>
+<li><a href="/wiki/GitHub" title="GitHub">GitHub</a></li>
+<li><a href="/wiki/Comparison_of_version_control_software" title="Comparison of version control software">Comparison of version control software</a></li>
+<li><a href="/wiki/Comparison_of_source_code_hosting_facilities" title="Comparison of source code hosting facilities">Comparison of source code hosting facilities</a></li>
+<li><a href="/wiki/List_of_revision_control_software" class="mw-redirect" title="List of revision control software">List of revision control software</a></li>
+</ul>
+<h2><span class="mw-headline" id="References_2">References</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=13" title="Edit section: References">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="reflist columns references-column-width" style="-moz-column-width: 30em; -webkit-column-width: 30em; column-width: 30em; list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-git-initial-commit-1"><span class="mw-cite-backlink"><b><a href="#cite_ref-git-initial-commit_1-0">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/git/git/commit/e83c5163316f89bfbde7d9ab23ca2e25604af290">"Initial revision of "git", the information manager from hell"</a>. Github. 8 April 2005<span class="reference-accessdate">. Retrieved <span class="nowrap">20 December</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Initial+revision+of+%22git%22%2C+the+information+manager+from+hell&amp;rft.date=2005-04-08&amp;rft.genre=unknown&amp;rft.pub=Github&amp;rft_id=https%3A%2F%2Fgithub.com%2Fgit%2Fgit%2Fcommit%2Fe83c5163316f89bfbde7d9ab23ca2e25604af290&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-git-commits-2"><span class="mw-cite-backlink"><b><a href="#cite_ref-git-commits_2-0">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/git/git/graphs/contributors">"Commit Graph"</a>. Github. 8 June 2016<span class="reference-accessdate">. Retrieved <span class="nowrap">19 December</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Commit+Graph&amp;rft.date=2016-06-08&amp;rft.genre=unknown&amp;rft.pub=Github&amp;rft_id=https%3A%2F%2Fgithub.com%2Fgit%2Fgit%2Fgraphs%2Fcontributors&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-3"><span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/git/git/releases">"Releases - git/git"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">2 October</span> 2017</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Releases+-+git%2Fgit&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Fgit%2Fgit%2Freleases&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-4"><span class="mw-cite-backlink"><b><a href="#cite_ref-4">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/git/git">"Git Source Code Mirror"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">1 January</span> 2017</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Git+Source+Code+Mirror&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Fgit%2Fgit&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-license_gpl-5"><span class="mw-cite-backlink"><b><a href="#cite_ref-license_gpl_5-0">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/git/git/blob/master/COPYING">"Git's GPL license at github.com"</a>. <i>github.com</i>. 18 January 2010<span class="reference-accessdate">. Retrieved <span class="nowrap">12 October</span> 2014</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.atitle=Git%27s+GPL+license+at+github.com&amp;rft.date=2010-01-18&amp;rft.genre=unknown&amp;rft.jtitle=github.com&amp;rft_id=https%3A%2F%2Fgithub.com%2Fgit%2Fgit%2Fblob%2Fmaster%2FCOPYING&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-license_lgpl-6"><span class="mw-cite-backlink"><b><a href="#cite_ref-license_lgpl_6-0">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/git/git/blob/master/LGPL-2.1">"Git's LGPL license at github.com"</a>. <i>github.com</i>. 20 May 2011<span class="reference-accessdate">. Retrieved <span class="nowrap">12 October</span> 2014</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.atitle=Git%27s+LGPL+license+at+github.com&amp;rft.date=2011-05-20&amp;rft.genre=unknown&amp;rft.jtitle=github.com&amp;rft_id=https%3A%2F%2Fgithub.com%2Fgit%2Fgit%2Fblob%2Fmaster%2FLGPL-2.1&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-:0-7"><span class="mw-cite-backlink"><b><a href="#cite_ref-:0_7-0">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://www.youtube.com/watch?v=4XpnKHJAok8&amp;t=1m30s">"Tech Talk: Linus Torvalds on git (at 00:01:30)"</a>. YouTube<span class="reference-accessdate">. Retrieved <span class="nowrap">2014-07-20</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Tech+Talk%3A+Linus+Torvalds+on+git+%28at+00%3A01%3A30%29&amp;rft.genre=unknown&amp;rft.pub=YouTube&amp;rft_id=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D4XpnKHJAok8%26t%3D1m30s&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-effcomp-8"><span class="mw-cite-backlink"><b><a href="#cite_ref-effcomp_8-0">^</a></b></span> <span class="reference-text"><cite class="citation book">Scopatz, Anthony; Huff, Kathryn D. (2015). <a rel="nofollow" class="external text" href="https://books.google.de/books?id=DYoNCgAAQBAJ&amp;pg=PA351"><i>Effective Computation in Physics</i></a>. O'Reilly Media, Inc. p.&#160;351. <a href="/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&#160;<a href="/wiki/Special:BookSources/9781491901595" title="Special:BookSources/9781491901595">9781491901595</a><span class="reference-accessdate">. Retrieved <span class="nowrap">20 April</span> 2016</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.au=Huff%2C+Kathryn+D.&amp;rft.aufirst=Anthony&amp;rft.aulast=Scopatz&amp;rft.btitle=Effective+Computation+in+Physics&amp;rft.date=2015&amp;rft.genre=book&amp;rft.isbn=9781491901595&amp;rft.pages=351&amp;rft.pub=O%27Reilly+Media%2C+Inc.&amp;rft_id=https%3A%2F%2Fbooks.google.de%2Fbooks%3Fid%3DDYoNCgAAQBAJ%26pg%3DPA351&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-kernel_SCM_saga-9"><span class="mw-cite-backlink">^ <a href="#cite_ref-kernel_SCM_saga_9-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-kernel_SCM_saga_9-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2005-04-07). <a rel="nofollow" class="external text" href="https://marc.info/?l=linux-kernel&amp;m=111288700902396">"Re: Kernel SCM saga.."</a>. <i>linux-kernel</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+Kernel+SCM+saga..&amp;rft.date=2005-04-07&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dlinux-kernel%26m%3D111288700902396&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span> "So I'm writing some scripts to try to track things a whole lot faster."</span></li>
+<li id="cite_note-integrity_goals-10"><span class="mw-cite-backlink">^ <a href="#cite_ref-integrity_goals_10-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-integrity_goals_10-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation mailinglist"><a href="/wiki/Linus_Torvalds" title="Linus Torvalds">Torvalds, Linus</a> (2007-06-10). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=118143549107708">"Re: fatal: serious inflate inconsistency"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+fatal%3A+serious+inflate+inconsistency&amp;rft.date=2007-06-10&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D118143549107708&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-linusGoogleTalk-11"><span class="mw-cite-backlink">^ <a href="#cite_ref-linusGoogleTalk_11-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-linusGoogleTalk_11-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-linusGoogleTalk_11-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-linusGoogleTalk_11-3"><sup><i><b>d</b></i></sup></a> <a href="#cite_ref-linusGoogleTalk_11-4"><sup><i><b>e</b></i></sup></a></span> <span class="reference-text"><cite class="citation audio-visual">Linus Torvalds (2007-05-03). <a rel="nofollow" class="external text" href="https://www.youtube.com/watch?v=4XpnKHJAok8"><i>Google tech talk: Linus Torvalds on git</i></a>. Event occurs at 02:30<span class="reference-accessdate">. Retrieved <span class="nowrap">2007-05-16</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Google+tech+talk%3A+Linus+Torvalds+on+git&amp;rft.date=2007-05-03&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D4XpnKHJAok8&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-pro-git-1.2-12"><span class="mw-cite-backlink"><b><a href="#cite_ref-pro-git-1.2_12-0">^</a></b></span> <span class="reference-text"><cite class="citation book"><a rel="nofollow" class="external text" href="https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git">"A Short History of Git"</a>. <a rel="nofollow" class="external text" href="https://git-scm.com/book/en/v2"><i>Pro Git</i></a> (2nd ed.). Apress. 2014<span class="reference-accessdate">. Retrieved <span class="nowrap">26 December</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.atitle=A+Short+History+of+Git&amp;rft.btitle=Pro+Git&amp;rft.date=2014&amp;rft.edition=2nd&amp;rft.genre=bookitem&amp;rft.pub=Apress&amp;rft_id=https%3A%2F%2Fgit-scm.com%2Fbook%2Fen%2Fv2%2FGetting-Started-A-Short-History-of-Git&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-13"><span class="mw-cite-backlink"><b><a href="#cite_ref-13">^</a></b></span> <span class="reference-text"><cite class="citation book">Chacon, Scott (24 December 2014). <a rel="nofollow" class="external text" href="https://git-scm.com/book/en/v2"><i>Pro Git</i></a> (2nd ed.). New York, NY: <a href="/wiki/Apress" title="Apress">Apress</a>. pp.&#160;29–30. <a href="/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&#160;<a href="/wiki/Special:BookSources/978-1-4842-0077-3" title="Special:BookSources/978-1-4842-0077-3">978-1-4842-0077-3</a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Scott&amp;rft.aulast=Chacon&amp;rft.btitle=Pro+Git&amp;rft.date=2014-12-24&amp;rft.edition=2nd&amp;rft.genre=book&amp;rft.isbn=978-1-4842-0077-3&amp;rft.pages=29-30&amp;rft.place=New+York%2C+NY&amp;rft.pub=Apress&amp;rft_id=https%3A%2F%2Fgit-scm.com%2Fbook%2Fen%2Fv2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-linux.com44147-14"><span class="mw-cite-backlink"><b><a href="#cite_ref-linux.com44147_14-0">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="https://www.linux.com/news/bitkeeper-and-linux-end-road">BitKeeper and Linux: The end of the road? |linux.com</a></span></li>
+<li id="cite_note-infoworld_bit_keeper-15"><span class="mw-cite-backlink"><b><a href="#cite_ref-infoworld_bit_keeper_15-0">^</a></b></span> <span class="reference-text"><cite class="citation news">McAllister, Neil (2005-05-02). <a rel="nofollow" class="external text" href="http://www.infoworld.com/article/2670360/operating-systems/linus-torvalds--bitkeeper-blunder.html">"Linus Torvalds' BitKeeper blunder"</a>. <i>InfoWorld</i>. IDG<span class="reference-accessdate">. Retrieved <span class="nowrap">2015-09-08</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.atitle=Linus+Torvalds%27+BitKeeper+blunder&amp;rft.aufirst=Neil&amp;rft.aulast=McAllister&amp;rft.date=2005-05-02&amp;rft.genre=article&amp;rft.jtitle=InfoWorld&amp;rft_id=http%3A%2F%2Fwww.infoworld.com%2Farticle%2F2670360%2Foperating-systems%2Flinus-torvalds--bitkeeper-blunder.html&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-whythegitname-16"><span class="mw-cite-backlink"><b><a href="#cite_ref-whythegitname_16-0">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://git.wiki.kernel.org/index.php/GitFaq#Why_the_.27Git.27_name.3F">"GitFaq: Why the 'Git' name?"</a>. Git.or.cz<span class="reference-accessdate">. Retrieved <span class="nowrap">2012-07-14</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=GitFaq%3A+Why+the+%27Git%27+name%3F&amp;rft.genre=unknown&amp;rft.pub=Git.or.cz&amp;rft_id=https%3A%2F%2Fgit.wiki.kernel.org%2Findex.php%2FGitFaq%23Why_the_.27Git.27_name.3F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-17"><span class="mw-cite-backlink"><b><a href="#cite_ref-17">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="http://www.pcworld.idg.com.au/article/129776/after_controversy_torvalds_begins_work_git_/">"After controversy, Torvalds begins work on 'git<span style="padding-right:0.2em;">'</span>"</a>. PC World. 2012-07-14. <q><a href="/wiki/Torvalds" title="Torvalds">Torvalds</a> seemed aware that his decision to drop BitKeeper would also be controversial. When asked why he called the new software, "git", <a href="/wiki/British_English" title="British English">British</a> slang meaning "a rotten person", he said. "I'm an egotistical bastard, so I name all my projects after myself. First Linux, now git"</q></cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=After+controversy%2C+Torvalds+begins+work+on+%27git%27&amp;rft.date=2012-07-14&amp;rft.genre=unknown&amp;rft.pub=PC+World&amp;rft_id=http%3A%2F%2Fwww.pcworld.idg.com.au%2Farticle%2F129776%2Fafter_controversy_torvalds_begins_work_git_%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-18"><span class="mw-cite-backlink"><b><a href="#cite_ref-18">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://git-scm.com/docs/git.html">"git(1) Manual Page"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">2012-07-21</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=git%281%29+Manual+Page&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgit-scm.com%2Fdocs%2Fgit.html&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-19"><span class="mw-cite-backlink"><b><a href="#cite_ref-19">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/git/git/blob/e83c5163316f89bfbde7d9ab23ca2e25604af290/README">"Initial revision of "git", the information manager from hell · git/git@e83c516"</a>. <i>GitHub</i><span class="reference-accessdate">. Retrieved <span class="nowrap">2016-01-21</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.atitle=Initial+revision+of+%22git%22%2C+the+information+manager+from+hell+%C2%B7+git%2Fgit%40e83c516&amp;rft.genre=unknown&amp;rft.jtitle=GitHub&amp;rft_id=https%3A%2F%2Fgithub.com%2Fgit%2Fgit%2Fblob%2Fe83c5163316f89bfbde7d9ab23ca2e25604af290%2FREADME&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-selfhost-20"><span class="mw-cite-backlink">^ <a href="#cite_ref-selfhost_20-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-selfhost_20-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2007-02-27). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=117254154130732">"Re: Trivia: When did git self-host?"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+Trivia%3A+When+did+git+self-host%3F&amp;rft.date=2007-02-27&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D117254154130732&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-21"><span class="mw-cite-backlink"><b><a href="#cite_ref-21">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2005-04-06). <a rel="nofollow" class="external text" href="https://marc.info/?l=linux-kernel&amp;m=111280216717070">"Kernel SCM saga.."</a>. <i>linux-kernel</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Kernel+SCM+saga..&amp;rft.date=2005-04-06&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dlinux-kernel%26m%3D111280216717070&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-22"><span class="mw-cite-backlink"><b><a href="#cite_ref-22">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2005-04-17). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=111377572329534">"First ever real kernel git merge!"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=First+ever+real+kernel+git+merge%21&amp;rft.date=2005-04-17&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D111377572329534&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-23"><span class="mw-cite-backlink"><b><a href="#cite_ref-23">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Mackall, Matt (2005-04-29). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=111475459526688">"Mercurial 0.4b vs git patchbomb benchmark"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Matt&amp;rft.aulast=Mackall&amp;rft.btitle=Mercurial+0.4b+vs+git+patchbomb+benchmark&amp;rft.date=2005-04-29&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D111475459526688&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-24"><span class="mw-cite-backlink"><b><a href="#cite_ref-24">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2005-06-17). <a rel="nofollow" class="external text" href="https://marc.info/?l=git-commits-head&amp;m=111904216911731">"Linux 2.6.12"</a>. <i>git-commits-head</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Linux+2.6.12&amp;rft.date=2005-06-17&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit-commits-head%26m%3D111904216911731&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-25"><span class="mw-cite-backlink"><b><a href="#cite_ref-25">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2005-07-27). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=112243466603239">"Meet the new maintainer..."</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Meet+the+new+maintainer...&amp;rft.date=2005-07-27&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D112243466603239&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-26"><span class="mw-cite-backlink"><b><a href="#cite_ref-26">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Hamano, Junio C. (2005-12-21). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=113515203321888">"Announce: Git 1.0.0"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Junio+C.&amp;rft.aulast=Hamano&amp;rft.btitle=Announce%3A+Git+1.0.0&amp;rft.date=2005-12-21&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D113515203321888&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-27"><span class="mw-cite-backlink"><b><a href="#cite_ref-27">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2006-05-05). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=114685143200012">"Re: [ANNOUNCE] Git wiki"</a>. <i>linux-kernel</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+%26%2391%3BANNOUNCE%26%2393%3B+Git+wiki&amp;rft.date=2006-05-05&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D114685143200012&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span> "Some historical background" on Git's predecessors</span></li>
+<li id="cite_note-a_quick_challenge-28"><span class="mw-cite-backlink">^ <a href="#cite_ref-a_quick_challenge_28-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-a_quick_challenge_28-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2005-04-08). <a rel="nofollow" class="external text" href="https://marc.info/?l=linux-kernel&amp;m=111293537202443">"Re: Kernel SCM saga"</a>. <i>linux-kernel</i> (Mailing list)<span class="reference-accessdate">. Retrieved <span class="nowrap">2008-02-20</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+Kernel+SCM+saga&amp;rft.date=2005-04-08&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dlinux-kernel%26m%3D111293537202443&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-bare_url-29"><span class="mw-cite-backlink">^ <a href="#cite_ref-bare_url_29-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-bare_url_29-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2006-03-23). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=114314642000462">"Re: Errors GITtifying GCC and Binutils"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+Errors+GITtifying+GCC+and+Binutils&amp;rft.date=2006-03-23&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D114314642000462&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-30"><span class="mw-cite-backlink"><b><a href="#cite_ref-30">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2006-10-20). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=116129092117475">"Re: VCS comparison table"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+VCS+comparison+table&amp;rft.date=2006-10-20&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D116129092117475&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span> A discussion of Git vs. BitKeeper</span></li>
+<li id="cite_note-31"><span class="mw-cite-backlink"><b><a href="#cite_ref-31">^</a></b></span> <span class="reference-text">Git 2.8.0 Release Notes <cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/git/git/blob/v2.8.0/Documentation/RelNotes/2.8.0.txt">"Documentation/RelNotes/2.8.0.txt"</a>. 2016-03-29.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Documentation%2FRelNotes%2F2.8.0.txt&amp;rft.date=2016-03-29&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Fgit%2Fgit%2Fblob%2Fv2.8.0%2FDocumentation%2FRelNotes%2F2.8.0.txt&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-32"><span class="mw-cite-backlink"><b><a href="#cite_ref-32">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2006-10-19). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=116128307511686">"Re: VCS comparison table"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+VCS+comparison+table&amp;rft.date=2006-10-19&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D116128307511686&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-33"><span class="mw-cite-backlink"><b><a href="#cite_ref-33">^</a></b></span> <span class="reference-text">Jst's Blog on Mozillazine <cite class="citation web"><a rel="nofollow" class="external text" href="https://web.archive.org/web/20100529094107/http://weblogs.mozillazine.org/jst/archives/2006/11/vcs_performance.html">"bzr/hg/git performance"</a>. Archived from <a rel="nofollow" class="external text" href="http://weblogs.mozillazine.org/jst/archives/2006/11/vcs_performance.html">the original</a> on 29 May 2010<span class="reference-accessdate">. Retrieved <span class="nowrap">12 February</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=bzr%2Fhg%2Fgit+performance&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fweblogs.mozillazine.org%2Fjst%2Farchives%2F2006%2F11%2Fvcs_performance.html&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-34"><span class="mw-cite-backlink"><b><a href="#cite_ref-34">^</a></b></span> <span class="reference-text"><cite class="citation web">Dreier, Roland (2006-11-13). <a rel="nofollow" class="external text" href="http://digitalvampire.org/blog/index.php/2006/11/16/oh-what-a-relief-it-is/">"Oh what a relief it is"</a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Roland&amp;rft.aulast=Dreier&amp;rft.btitle=Oh+what+a+relief+it+is&amp;rft.date=2006-11-13&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fdigitalvampire.org%2Fblog%2Findex.php%2F2006%2F11%2F16%2Foh-what-a-relief-it-is%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span>, observing that "git log" is 100x faster than "svn log" because the latter must contact a remote server.</span></li>
+<li id="cite_note-35"><span class="mw-cite-backlink"><b><a href="#cite_ref-35">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://www.kernel.org/pub/software/scm/git/docs/user-manual.html#trust">"Trust"</a>. <i>Git Concepts</i>. Git User's Manual. 2006-10-18.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.atitle=Trust&amp;rft.date=2006-10-18&amp;rft.genre=unknown&amp;rft.jtitle=Git+Concepts&amp;rft_id=https%3A%2F%2Fwww.kernel.org%2Fpub%2Fsoftware%2Fscm%2Fgit%2Fdocs%2Fuser-manual.html%23trust&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-36"><span class="mw-cite-backlink"><b><a href="#cite_ref-36">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus. <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=116118369005954">"Re: VCS comparison table"</a>. <i>git</i> (Mailing list)<span class="reference-accessdate">. Retrieved <span class="nowrap">2009-04-10</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+VCS+comparison+table&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D116118369005954&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span>, describing Git's script-oriented design</span></li>
+<li id="cite_note-37"><span class="mw-cite-backlink"><b><a href="#cite_ref-37">^</a></b></span> <span class="reference-text"><cite class="citation web">iabervon (2005-12-22). <a rel="nofollow" class="external text" href="https://lwn.net/Articles/165202/">"Git rocks!"</a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.au=iabervon&amp;rft.btitle=Git+rocks%21&amp;rft.date=2005-12-22&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Flwn.net%2FArticles%2F165202%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span>, praising Git's scriptability</span></li>
+<li id="cite_note-38"><span class="mw-cite-backlink"><b><a href="#cite_ref-38">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://www.kernel.org/pub/software/scm/git/docs/user-manual.html#ensuring-reliability">"Git User's Manual"</a>. 2007-08-05.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Git+User%27s+Manual&amp;rft.date=2007-08-05&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fwww.kernel.org%2Fpub%2Fsoftware%2Fscm%2Fgit%2Fdocs%2Fuser-manual.html%23ensuring-reliability&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-39"><span class="mw-cite-backlink"><b><a href="#cite_ref-39">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2005-04-10). <a rel="nofollow" class="external text" href="https://marc.info/?l=linux-kernel&amp;m=111314792424707">"Re: more git updates.."</a>. <i>linux-kernel</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+more+git+updates..&amp;rft.date=2005-04-10&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dlinux-kernel%26m%3D111314792424707&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-40"><span class="mw-cite-backlink"><b><a href="#cite_ref-40">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Haible, Bruno (2007-02-11). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=117119479505638">"how to speed up "git log"?"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Bruno&amp;rft.aulast=Haible&amp;rft.btitle=how+to+speed+up+%22git+log%22%3F&amp;rft.date=2007-02-11&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D117119479505638&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-41"><span class="mw-cite-backlink"><b><a href="#cite_ref-41">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2006-03-01). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=114123702826251">"Re: impure renames / history tracking"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+impure+renames+%2F+history+tracking&amp;rft.date=2006-03-01&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D114123702826251&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-42"><span class="mw-cite-backlink"><b><a href="#cite_ref-42">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Hamano, Junio C. (2006-03-24). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=114316047119262">"Re: Errors GITtifying GCC and Binutils"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Junio+C.&amp;rft.aulast=Hamano&amp;rft.btitle=Re%3A+Errors+GITtifying+GCC+and+Binutils&amp;rft.date=2006-03-24&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D114316047119262&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-43"><span class="mw-cite-backlink"><b><a href="#cite_ref-43">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Hamano, Junio C. (2006-03-23). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=114315795227271">"Re: Errors GITtifying GCC and Binutils"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Junio+C.&amp;rft.aulast=Hamano&amp;rft.btitle=Re%3A+Errors+GITtifying+GCC+and+Binutils&amp;rft.date=2006-03-23&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D114315795227271&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-44"><span class="mw-cite-backlink"><b><a href="#cite_ref-44">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2006-11-28). <a rel="nofollow" class="external text" href="https://marc.info/?l=git&amp;m=116473016012824">"Re: git and bzr"</a>. <i>git</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+git+and+bzr&amp;rft.date=2006-11-28&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dgit%26m%3D116473016012824&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span>, on using <code>git-blame</code> to show code moved between source files</span></li>
+<li id="cite_note-45"><span class="mw-cite-backlink"><b><a href="#cite_ref-45">^</a></b></span> <span class="reference-text"><cite class="citation web">Torvalds, Linus (2007-07-18). <a rel="nofollow" class="external text" href="https://www.kernel.org/pub/software/scm/git/docs/git-merge.html">"git-merge(1)"</a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=git-merge%281%29&amp;rft.date=2007-07-18&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fwww.kernel.org%2Fpub%2Fsoftware%2Fscm%2Fgit%2Fdocs%2Fgit-merge.html&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-46"><span class="mw-cite-backlink"><b><a href="#cite_ref-46">^</a></b></span> <span class="reference-text"><cite class="citation web">Torvalds, Linus (18 July 2007). <a rel="nofollow" class="external text" href="https://web.archive.org/web/20060113122252/http://revctrl.org/CrissCrossMerge">"CrissCrossMerge"</a>. Archived from <a rel="nofollow" class="external text" href="http://revctrl.org/CrissCrossMerge">the original</a> on 13 January 2006.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=CrissCrossMerge&amp;rft.date=2007-07-18&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Frevctrl.org%2FCrissCrossMerge&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-47"><span class="mw-cite-backlink"><b><a href="#cite_ref-47">^</a></b></span> <span class="reference-text"><cite class="citation mailinglist">Torvalds, Linus (2005-04-10). <a rel="nofollow" class="external text" href="https://marc.info/?l=linux-kernel&amp;m=111314792424707">"Re: more git updates..."</a>. <i>linux-kernel</i> (Mailing list).</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Linus&amp;rft.aulast=Torvalds&amp;rft.btitle=Re%3A+more+git+updates...&amp;rft.date=2005-04-10&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fmarc.info%2F%3Fl%3Dlinux-kernel%26m%3D111314792424707&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-48"><span class="mw-cite-backlink"><b><a href="#cite_ref-48">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://git-scm.com/book/ch4-1.html#The-Git-Protocol">"1.4 Getting Started – Installing Git"</a>. git-scm.com<span class="reference-accessdate">. Retrieved <span class="nowrap">2013-11-01</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=1.4+Getting+Started+%E2%80%93+Installing+Git&amp;rft.genre=unknown&amp;rft.pub=git-scm.com&amp;rft_id=https%3A%2F%2Fgit-scm.com%2Fbook%2Fch4-1.html%23The-Git-Protocol&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-49"><span class="mw-cite-backlink"><b><a href="#cite_ref-49">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="https://gerrit-review.googlesource.com/Documentation/config-project-config.html">Gerrit Code Review – Project Configuration File Format</a></span></li>
+<li id="cite_note-50"><span class="mw-cite-backlink"><b><a href="#cite_ref-50">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://git-scm.com/downloads">"downloads"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">14 May</span> 2012</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=downloads&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgit-scm.com%2Fdownloads&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-51"><span class="mw-cite-backlink"><b><a href="#cite_ref-51">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/msysgit/msysgit">"msysGit"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">20 Sep</span> 2016</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=msysGit&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Fmsysgit%2Fmsysgit&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-52"><span class="mw-cite-backlink"><b><a href="#cite_ref-52">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://www.eclipse.org/jgit/">"JGit"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">24 Aug</span> 2012</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=JGit&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fwww.eclipse.org%2Fjgit%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-53"><span class="mw-cite-backlink"><b><a href="#cite_ref-53">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://www.samba.org/~jelmer/dulwich/">"Dulwich"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">27 Aug</span> 2012</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Dulwich&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fwww.samba.org%2F~jelmer%2Fdulwich%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-54"><span class="mw-cite-backlink"><b><a href="#cite_ref-54">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/libgit2/libgit2/blob/master/README.md">"libgit2"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">24 Aug</span> 2012</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=libgit2&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Flibgit2%2Flibgit2%2Fblob%2Fmaster%2FREADME.md&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-55"><span class="mw-cite-backlink"><b><a href="#cite_ref-55">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/libgit2/rugged">"rugged"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">24 Aug</span> 2012</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=rugged&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Flibgit2%2Frugged&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-56"><span class="mw-cite-backlink"><b><a href="#cite_ref-56">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/libgit2/pygit2">"pygit2"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">24 Aug</span> 2012</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=pygit2&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Flibgit2%2Fpygit2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-57"><span class="mw-cite-backlink"><b><a href="#cite_ref-57">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://hackage.haskell.org/package/hlibgit2">"hlibgit2"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">30 Apr</span> 2013</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=hlibgit2&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fhackage.haskell.org%2Fpackage%2Fhlibgit2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-58"><span class="mw-cite-backlink"><b><a href="#cite_ref-58">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="https://github.com/creationix/js-git">https://github.com/creationix/js-git</a> "js-git: a JavaScript implementation of Git." Retrieved 13 August 2013.</span></li>
+<li id="cite_note-59"><span class="mw-cite-backlink"><b><a href="#cite_ref-59">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="https://git-scm.com/book/en/Git-on-the-Server-Setting-Up-the-Server">4.4 Git on the Server – Setting Up the Server</a>, Pro Git.</span></li>
+<li id="cite_note-ianskerrett.wordpress.com-60"><span class="mw-cite-backlink"><b><a href="#cite_ref-ianskerrett.wordpress.com_60-0">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://ianskerrett.wordpress.com/2014/06/23/eclipse-community-survey-2014-results/">"Eclipse Community Survey 2014 results | Ian Skerrett"</a>. Ianskerrett.wordpress.com. 2014-06-23<span class="reference-accessdate">. Retrieved <span class="nowrap">2014-06-23</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Eclipse+Community+Survey+2014+results+%26%23124%3B+Ian+Skerrett&amp;rft.date=2014-06-23&amp;rft.genre=unknown&amp;rft.pub=Ianskerrett.wordpress.com&amp;rft_id=https%3A%2F%2Fianskerrett.wordpress.com%2F2014%2F06%2F23%2Feclipse-community-survey-2014-results%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-61"><span class="mw-cite-backlink"><b><a href="#cite_ref-61">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://eclipse.org/org/community_survey/Survey_Final_Results_2012.xls">"Results of Eclipse Community Survey 2012"</a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Results+of+Eclipse+Community+Survey+2012&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Feclipse.org%2Forg%2Fcommunity_survey%2FSurvey_Final_Results_2012.xls&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-62"><span class="mw-cite-backlink"><b><a href="#cite_ref-62">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://www.openhub.net/repositories/compare">"Compare Repositories – Open Hub"</a>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Compare+Repositories+%E2%80%93+Open+Hub&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fwww.openhub.net%2Frepositories%2Fcompare&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-63"><span class="mw-cite-backlink"><b><a href="#cite_ref-63">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://stackoverflow.com/research/developer-survey-2015#tech-sourcecontrol">"Stack Overflow Developer Survey 2015"</a>. Stack Overflow<span class="reference-accessdate">. Retrieved <span class="nowrap">1 October</span> 2016</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Stack+Overflow+Developer+Survey+2015&amp;rft.genre=unknown&amp;rft.pub=Stack+Overflow&amp;rft_id=https%3A%2F%2Fstackoverflow.com%2Fresearch%2Fdeveloper-survey-2015%23tech-sourcecontrol&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-64"><span class="mw-cite-backlink"><b><a href="#cite_ref-64">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://www.itjobswatch.co.uk/jobs/uk/git%20%28software%29.do">"Git (software) Jobs, Average Salary for Git Distributed Version Control System Skills"</a>. Itjobswatch.co.uk<span class="reference-accessdate">. Retrieved <span class="nowrap">2016-09-30</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Git+%28software%29+Jobs%2C+Average+Salary+for+Git+Distributed+Version+Control+System+Skills&amp;rft.genre=unknown&amp;rft.pub=Itjobswatch.co.uk&amp;rft_id=https%3A%2F%2Fwww.itjobswatch.co.uk%2Fjobs%2Fuk%2Fgit%2520%2528software%2529.do&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-65"><span class="mw-cite-backlink"><b><a href="#cite_ref-65">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://www.itjobswatch.co.uk/jobs/uk/team%20foundation%20server.do">"Team Foundation Server Jobs, Average Salary for Microsoft Team Foundation Server (TFS) Skills"</a>. Itjobswatch.co.uk<span class="reference-accessdate">. Retrieved <span class="nowrap">2016-09-30</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Team+Foundation+Server+Jobs%2C+Average+Salary+for+Microsoft+Team+Foundation+Server+%28TFS%29+Skills&amp;rft.genre=unknown&amp;rft.pub=Itjobswatch.co.uk&amp;rft_id=https%3A%2F%2Fwww.itjobswatch.co.uk%2Fjobs%2Fuk%2Fteam%2520foundation%2520server.do&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-66"><span class="mw-cite-backlink"><b><a href="#cite_ref-66">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://www.itjobswatch.co.uk/jobs/uk/subversion.do">"Subversion Jobs, Average Salary for Apache Subversion (SVN) Skills"</a>. Itjobswatch.co.uk<span class="reference-accessdate">. Retrieved <span class="nowrap">2016-09-30</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Subversion+Jobs%2C+Average+Salary+for+Apache+Subversion+%28SVN%29+Skills&amp;rft.genre=unknown&amp;rft.pub=Itjobswatch.co.uk&amp;rft_id=https%3A%2F%2Fwww.itjobswatch.co.uk%2Fjobs%2Fuk%2Fsubversion.do&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-67"><span class="mw-cite-backlink"><b><a href="#cite_ref-67">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://www.itjobswatch.co.uk/jobs/uk/mercurial.do">"Mercurial Jobs, Average Salary for Mercurial Skills"</a>. Itjobswatch.co.uk<span class="reference-accessdate">. Retrieved <span class="nowrap">2016-09-30</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Mercurial+Jobs%2C+Average+Salary+for+Mercurial+Skills&amp;rft.genre=unknown&amp;rft.pub=Itjobswatch.co.uk&amp;rft_id=https%3A%2F%2Fwww.itjobswatch.co.uk%2Fjobs%2Fuk%2Fmercurial.do&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-68"><span class="mw-cite-backlink"><b><a href="#cite_ref-68">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://www.itjobswatch.co.uk/jobs/uk/vss/sourcesafe.do">"VSS/SourceSafe Jobs, Average Salary for Microsoft Visual SourceSafe (VSS) Skills"</a>. Itjobswatch.co.uk<span class="reference-accessdate">. Retrieved <span class="nowrap">2016-09-30</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=VSS%2FSourceSafe+Jobs%2C+Average+Salary+for+Microsoft+Visual+SourceSafe+%28VSS%29+Skills&amp;rft.genre=unknown&amp;rft.pub=Itjobswatch.co.uk&amp;rft_id=https%3A%2F%2Fwww.itjobswatch.co.uk%2Fjobs%2Fuk%2Fvss%2Fsourcesafe.do&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-ars-windowsgit-69"><span class="mw-cite-backlink"><b><a href="#cite_ref-ars-windowsgit_69-0">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://arstechnica.com/information-technology/2017/05/90-of-windows-devs-now-using-git-creating-1760-windows-builds-per-day/">"Windows switch to Git almost complete: 8,500 commits and 1,760 builds each day"</a>. <i>Ars Technica</i><span class="reference-accessdate">. Retrieved <span class="nowrap">24 May</span> 2017</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.atitle=Windows+switch+to+Git+almost+complete%3A+8%2C500+commits+and+1%2C760+builds+each+day&amp;rft.genre=unknown&amp;rft.jtitle=Ars+Technica&amp;rft_id=https%3A%2F%2Farstechnica.com%2Finformation-technology%2F2017%2F05%2F90-of-windows-devs-now-using-git-creating-1760-windows-builds-per-day%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-70"><span class="mw-cite-backlink"><b><a href="#cite_ref-70">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external free" href="https://wincent.com/wiki/git_repository_access_control">https://wincent.com/wiki/git_repository_access_control</a></span></li>
+<li id="cite_note-71"><span class="mw-cite-backlink"><b><a href="#cite_ref-71">^</a></b></span> <span class="reference-text"><cite class="citation web">Pettersen, Tim (20 December 2014). <a rel="nofollow" class="external text" href="https://developer.atlassian.com/blog/2014/12/securing-your-git-server/">"Securing your Git server against CVE-2014-9390"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">22 December</span> 2014</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.aufirst=Tim&amp;rft.aulast=Pettersen&amp;rft.btitle=Securing+your+Git+server+against+CVE-2014-9390&amp;rft.date=2014-12-20&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fdeveloper.atlassian.com%2Fblog%2F2014%2F12%2Fsecuring-your-git-server%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-72"><span class="mw-cite-backlink"><b><a href="#cite_ref-72">^</a></b></span> <span class="reference-text"><cite class="citation newsgroup">Hamano, J. C. (18 December 2014). <a rel="nofollow" class="external text" href="https://web.archive.org/web/20141219024646/http://article.gmane.org/gmane.linux.kernel/1853266">"[Announce] Git v2.2.1 (and updates to older maintenance tracks)"</a>. <a href="/wiki/Usenet_newsgroup" title="Usenet newsgroup">Newsgroup</a>:&#160;<a rel="nofollow" class="external text" href="news:gmane.linux.kernel">gmane.linux.kernel</a>. Archived from <a rel="nofollow" class="external text" href="https://article.gmane.org/gmane.linux.kernel/1853266">the original</a> on 19 December 2014<span class="reference-accessdate">. Retrieved <span class="nowrap">22 December</span> 2014</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.au=Hamano%2C+J.+C.&amp;rft.btitle=%5BAnnounce%5D+Git+v2.2.1+%28and+updates+to+older+maintenance+tracks%29&amp;rft.date=2014-12-18&amp;rft.genre=unknown&amp;rft.pub=gmane.linux.kernel&amp;rft_id=https%3A%2F%2Farticle.gmane.org%2Fgmane.linux.kernel%2F1853266&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-73"><span class="mw-cite-backlink"><b><a href="#cite_ref-73">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://people.canonical.com/~ubuntu-security/cve/2015/CVE-2015-7545.html">"CVE-2015-7545"</a>. 15 December 2015<span class="reference-accessdate">. Retrieved <span class="nowrap">26 December</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=CVE-2015-7545&amp;rft.date=2015-12-15&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fpeople.canonical.com%2F~ubuntu-security%2Fcve%2F2015%2FCVE-2015-7545.html&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-git-v2.6.1-commit-74"><span class="mw-cite-backlink"><b><a href="#cite_ref-git-v2.6.1-commit_74-0">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/git/git/commit/22f698cb188243b313e024d618283e0293e37140">"Git 2.6.1"</a>. 29 September 2015<span class="reference-accessdate">. Retrieved <span class="nowrap">26 December</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Git+2.6.1&amp;rft.date=2015-09-29&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Fgit%2Fgit%2Fcommit%2F22f698cb188243b313e024d618283e0293e37140&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-seclists-CVE-2015-7545-75"><span class="mw-cite-backlink">^ <a href="#cite_ref-seclists-CVE-2015-7545_75-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-seclists-CVE-2015-7545_75-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-seclists-CVE-2015-7545_75-2"><sup><i><b>c</b></i></sup></a></span> <span class="reference-text"><cite class="citation web">Blake Burkhart; et al. (5 October 2015). <a rel="nofollow" class="external text" href="http://seclists.org/oss-sec/2015/q4/67">"Re: CVE Request: git"</a><span class="reference-accessdate">. Retrieved <span class="nowrap">26 December</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.au=Blake+Burkhart&amp;rft.btitle=Re%3A+CVE+Request%3A+git&amp;rft.date=2015-10-05&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fseclists.org%2Foss-sec%2F2015%2Fq4%2F67&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-76"><span class="mw-cite-backlink"><b><a href="#cite_ref-76">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://security.stackexchange.com/questions/67920/how-safe-are-signed-git-tags-only-as-safe-as-sha-1-or-somehow-safer">"hash - How safe are signed git tags? Only as safe as SHA-1 or somehow safer?"</a>. Information Security Stack Exchange. September 22, 2014.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=hash+-+How+safe+are+signed+git+tags%3F+Only+as+safe+as+SHA-1+or+somehow+safer%3F&amp;rft.date=2014-09-22&amp;rft.genre=unknown&amp;rft.pub=Information+Security+Stack+Exchange&amp;rft_id=https%3A%2F%2Fsecurity.stackexchange.com%2Fquestions%2F67920%2Fhow-safe-are-signed-git-tags-only-as-safe-as-sha-1-or-somehow-safer&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-77"><span class="mw-cite-backlink"><b><a href="#cite_ref-77">^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://stackoverflow.com/questions/28792784/why-does-git-use-a-cryptographic-hash-function">"Why does Git use a cryptographic hash function?"</a>. Stack Overflow. March 1, 2015.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AGit&amp;rft.btitle=Why+does+Git+use+a+cryptographic+hash+function%3F&amp;rft.date=2015-03-01&amp;rft.genre=unknown&amp;rft.pub=Stack+Overflow&amp;rft_id=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F28792784%2Fwhy-does-git-use-a-cryptographic-hash-function&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+</ol>
+</div>
+<h2><span class="mw-headline" id="External_links">External links</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Git&amp;action=edit&amp;section=14" title="Edit section: External links">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<table role="presentation" class="mbox-small plainlinks sistersitebox" style="background-color:#f9f9f9;border:1px solid #aaa;color:#000">
+<tr>
+<td class="mbox-image"><img alt="" src="//upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/30px-Commons-logo.svg.png" width="30" height="40" class="noviewer" srcset="//upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/45px-Commons-logo.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/59px-Commons-logo.svg.png 2x" data-file-width="1024" data-file-height="1376" /></td>
+<td class="mbox-text plainlist">Wikimedia Commons has media related to <i><b><a href="https://commons.wikimedia.org/wiki/Category:Git" class="extiw" title="commons:Category:Git">Git</a></b></i>.</td>
+</tr>
+</table>
+<table role="presentation" class="mbox-small plainlinks sistersitebox" style="background-color:#f9f9f9;border:1px solid #aaa;color:#000">
+<tr>
+<td class="mbox-image"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/40px-Wikibooks-logo-en-noslogan.svg.png" width="40" height="40" class="noviewer" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/60px-Wikibooks-logo-en-noslogan.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/80px-Wikibooks-logo-en-noslogan.svg.png 2x" data-file-width="400" data-file-height="400" /></td>
+<td class="mbox-text plainlist">Wikibooks has a book on the topic of: <i><b><a href="https://en.wikibooks.org/wiki/Git" class="extiw" title="wikibooks:Git">Git</a></b></i></td>
+</tr>
+</table>
+<ul>
+<li><span class="official-website"><span class="url"><a rel="nofollow" class="external text" href="https://git-scm.com">Official website</a></span></span></li>
+<li><a rel="nofollow" class="external text" href="https://www.openhub.net/p/git/">Git</a> at <a href="/wiki/Open_Hub" title="Open Hub">Open Hub</a></li>
+</ul>
+<div role="navigation" class="navbox" aria-labelledby="Version_control_software" style="padding:3px">
+<table class="nowraplinks hlist collapsible autocollapse navbox-inner" style="border-spacing:0;background:transparent;color:inherit">
+<tr>
+<th scope="col" class="navbox-title" colspan="3">
+<div class="plainlinks hlist navbar mini">
+<ul>
+<li class="nv-view"><a href="/wiki/Template:Version_control_software" title="Template:Version control software"><abbr title="View this template" style=";;background:none transparent;border:none;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;">v</abbr></a></li>
+<li class="nv-talk"><a href="/wiki/Template_talk:Version_control_software" title="Template talk:Version control software"><abbr title="Discuss this template" style=";;background:none transparent;border:none;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;">t</abbr></a></li>
+<li class="nv-edit"><a class="external text" href="//en.wikipedia.org/w/index.php?title=Template:Version_control_software&amp;action=edit"><abbr title="Edit this template" style=";;background:none transparent;border:none;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;">e</abbr></a></li>
+</ul>
+</div>
+<div id="Version_control_software" style="font-size:114%;margin:0 4em"><a href="/wiki/Version_control" title="Version control">Version control software</a></div>
+</th>
+</tr>
+<tr>
+<td class="navbox-abovebelow" colspan="3">
+<div>Years, where available, indicate the date of first stable release. Systems with names <i>in italics</i> are no longer maintained or have planned end-of-life dates.</div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">Local only</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Free_and_open-source_software" title="Free and open-source software">Free/open-source</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Revision_Control_System" title="Revision Control System">RCS</a> (1982)</li>
+<li><a href="/wiki/Source_Code_Control_System" title="Source Code Control System">SCCS</a> (1972)</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Proprietary_software" title="Proprietary software">Proprietary</a></th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/PVCS" title="PVCS">PVCS</a> (1985)</li>
+<li><i><a href="/wiki/QVCS" title="QVCS">QVCS</a></i> (1991)</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+<td class="navbox-image" rowspan="4" style="width:1px;padding:0px 0px 0px 2px">
+<div><a href="/wiki/File:Revision_controlled_project_visualization-2010-24-02.svg" class="image"><img alt="Revision controlled project visualization-2010-24-02.svg" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/af/Revision_controlled_project_visualization-2010-24-02.svg/80px-Revision_controlled_project_visualization-2010-24-02.svg.png" width="80" height="196" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/a/af/Revision_controlled_project_visualization-2010-24-02.svg/120px-Revision_controlled_project_visualization-2010-24-02.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/a/af/Revision_controlled_project_visualization-2010-24-02.svg/160px-Revision_controlled_project_visualization-2010-24-02.svg.png 2x" data-file-width="220" data-file-height="540" /></a></div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">Client–server</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">Free/open-source</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Concurrent_Versions_System" title="Concurrent Versions System">CVS</a> (1986, 1990 in C)</li>
+<li><a href="/wiki/CVSNT" title="CVSNT">CVSNT</a> (1998)</li>
+<li><a href="/wiki/QVCS" title="QVCS">QVCS Enterprise</a> (1998)</li>
+<li><a href="/wiki/Apache_Subversion" title="Apache Subversion">Subversion</a> (2000)</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">Proprietary</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/AccuRev_SCM" title="AccuRev SCM">AccuRev SCM</a> (2002)</li>
+<li><a href="/wiki/Rational_ClearCase" title="Rational ClearCase">ClearCase</a> (1992)</li>
+<li><i><a href="/wiki/IBM_Configuration_Management_Version_Control_(CMVC)" title="IBM Configuration Management Version Control (CMVC)">CMVC</a></i> (1994)</li>
+<li><a href="/wiki/Dimensions_CM" title="Dimensions CM">Dimensions CM</a> (1980s)</li>
+<li><i><a href="/wiki/Apollo_Computer#History" title="Apollo Computer">DSEE</a></i> (1984)</li>
+<li><a href="/wiki/Endevor" title="Endevor">Endevor</a> (1980s)</li>
+<li><a href="/wiki/PTC_Integrity" title="PTC Integrity">Integrity</a> (2001)</li>
+<li><a href="/wiki/Panvalet" title="Panvalet">Panvalet</a> (1970s)</li>
+<li><a href="/wiki/Perforce_Helix" title="Perforce Helix">Perforce Helix</a> (1995)</li>
+<li><a href="/wiki/IBM_Software_Configuration_and_Library_Manager" title="IBM Software Configuration and Library Manager">SCLM</a> (1980s?)</li>
+<li><a href="/wiki/CA_Harvest_Software_Change_Manager" title="CA Harvest Software Change Manager">Software Change Manager</a> (1970s)</li>
+<li><a href="/wiki/StarTeam" title="StarTeam">StarTeam</a> (1995)</li>
+<li><a href="/wiki/Surround_SCM" title="Surround SCM">Surround SCM</a> (2002)</li>
+<li><a href="/wiki/Rational_Synergy" title="Rational Synergy">Synergy</a> (1990)</li>
+<li><a href="/wiki/Rational_Team_Concert" title="Rational Team Concert">Team Concert</a> (2008)</li>
+<li><a href="/wiki/Team_Foundation_Server" title="Team Foundation Server">Team Foundation Server</a> (2005)</li>
+<li><a href="/wiki/Microsoft_Visual_Studio#Team_Services" title="Microsoft Visual Studio">Visual Studio Team Services</a> (2014)</li>
+<li><a href="/wiki/Vault_(version_control_system)" title="Vault (version control system)">Vault</a> (2003)</li>
+<li><i><a href="/wiki/Microsoft_Visual_SourceSafe" title="Microsoft Visual SourceSafe">Visual SourceSafe</a></i> (1994)</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Distributed_version_control" title="Distributed version control">Distributed</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">Free/open-source</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><i><a href="/wiki/ArX" title="ArX">ArX</a></i> (2003)</li>
+<li><a href="/wiki/BitKeeper" title="BitKeeper">BitKeeper</a> (2000)</li>
+<li><i><a href="/wiki/Codeville" title="Codeville">Codeville</a></i> (2005)</li>
+<li><a href="/wiki/Darcs" title="Darcs">Darcs</a> (2002)</li>
+<li><i><a href="/wiki/Distributed_Concurrent_Versions_System" title="Distributed Concurrent Versions System">DCVS</a></i> (2002)</li>
+<li><a href="/wiki/Fossil_(software)" title="Fossil (software)">Fossil</a> (2007)</li>
+<li><a class="mw-selflink selflink">Git</a> (2005)</li>
+<li><i><a href="/wiki/GNU_arch" title="GNU arch">GNU arch</a></i> (2001)</li>
+<li><a href="/wiki/GNU_Bazaar" title="GNU Bazaar">GNU Bazaar</a> (2005)</li>
+<li><a href="/wiki/Mercurial" title="Mercurial">Mercurial</a> (2005)</li>
+<li><a href="/wiki/Monotone_(software)" title="Monotone (software)">Monotone</a> (2003)</li>
+<li><i><a href="/wiki/SVK" title="SVK">SVK</a></i> (2003)</li>
+<li><a href="/wiki/Veracity_(software)" title="Veracity (software)">Veracity</a> (2010)</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">Proprietary</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><i><a href="/wiki/Sun_WorkShop_TeamWare" title="Sun WorkShop TeamWare">TeamWare</a></i> (1990s?)</li>
+<li><a href="/wiki/Code_Co-op" title="Code Co-op">Code Co-op</a> (1997)</li>
+<li><a href="/wiki/Plastic_SCM" title="Plastic SCM">Plastic SCM</a> (2006)</li>
+<li><a href="/wiki/Team_Foundation_Server" title="Team Foundation Server">Team Foundation Server</a> (2013)</li>
+<li><a href="/wiki/Visual_Studio_Team_Services" class="mw-redirect" title="Visual Studio Team Services">Visual Studio Team Services</a> (2014)</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">Concepts</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Branching_(version_control)" title="Branching (version control)">Branch</a></li>
+<li><a href="/wiki/Fork_(software_development)" title="Fork (software development)">Fork</a></li>
+<li><a href="/wiki/Changeset" title="Changeset">Changeset</a></li>
+<li><a href="/wiki/Commit_(version_control)" title="Commit (version control)">Commit</a>
+<ul>
+<li><a href="/wiki/Gated_commit" title="Gated commit">Gated commit</a></li>
+</ul>
+</li>
+<li><a href="/wiki/Interleaved_deltas" title="Interleaved deltas">Interleaved deltas</a></li>
+<li><a href="/wiki/Delta_encoding" title="Delta encoding">Delta compression</a></li>
+<li><a href="/wiki/Data_comparison" class="mw-redirect" title="Data comparison">Data comparison</a></li>
+<li><a href="/wiki/Merge_(version_control)" title="Merge (version control)">Merge</a></li>
+<li><a href="/wiki/Repository_(version_control)" title="Repository (version control)">Repository</a></li>
+<li><a href="/wiki/Revision_tag" title="Revision tag">Tag</a></li>
+<li><a href="/wiki/Trunk_(software)" title="Trunk (software)">Trunk</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<td class="navbox-abovebelow" colspan="3">
+<div>
+<ul>
+<li><b><a href="/wiki/Category:Version_control_systems" title="Category:Version control systems">Category</a></b></li>
+<li><b><a href="/wiki/Comparison_of_version_control_software" title="Comparison of version control software">Comparison</a></b></li>
+<li><b><a href="/wiki/List_of_version_control_software" title="List of version control software">List</a></b></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div role="navigation" class="navbox" aria-label="Navbox" style="padding:3px">
+<table class="nowraplinks hlist navbox-inner" style="border-spacing:0;background:transparent;color:inherit">
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Help:Authority_control" title="Help:Authority control">Authority control</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><span class="nowrap"><a href="/wiki/Integrated_Authority_File" title="Integrated Authority File">GND</a>: <span class="uid"><a rel="nofollow" class="external text" href="http://d-nb.info/gnd/7687494-1">7687494-1</a></span></span></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+
+
+<!-- 
+NewPP limit report
+Parsed by mw1218
+Cached time: 20171024154755
+Cache expiry: 1900800
+Dynamic content: false
+CPU time usage: 0.796 seconds
+Real time usage: 0.940 seconds
+Preprocessor visited node count: 6060/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 164874/2097152 bytes
+Template argument size: 6834/2097152 bytes
+Highest expansion depth: 25/40
+Expensive parser function count: 7/500
+Lua time usage: 0.404/10.000 seconds
+Lua memory usage: 7.28 MB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  832.972      1 -total
+ 45.71%  380.761      1 Template:Reflist
+ 23.15%  192.791     44 Template:Cite_web
+ 11.28%   93.990      2 Template:Infobox
+ 10.85%   90.407      1 Template:Infobox_software
+  8.74%   72.829     22 Template:Cite_mailing_list
+  7.90%   65.823      4 Template:Citation_needed
+  7.17%   59.729      4 Template:Fix
+  5.17%   43.048      5 Template:Delink
+  3.99%   33.249      1 Template:Commons_category
+-->
+</div>
+<!-- Saved in parser cache with key enwiki:pcache:idhash:1771747-0!canonical and timestamp 20171024154754 and revision id 806191967
+ -->
+<noscript><img src="//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://en.wikipedia.org/w/index.php?title=Git&amp;oldid=806191967">https://en.wikipedia.org/w/index.php?title=Git&amp;oldid=806191967</a>"					</div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/wiki/Help:Category" title="Help:Category">Categories</a>: <ul><li><a href="/wiki/Category:2005_software" title="Category:2005 software">2005 software</a></li><li><a href="/wiki/Category:Concurrent_Versions_System" title="Category:Concurrent Versions System">Concurrent Versions System</a></li><li><a href="/wiki/Category:Distributed_version_control_systems" title="Category:Distributed version control systems">Distributed version control systems</a></li><li><a href="/wiki/Category:Free_version_control_software" title="Category:Free version control software">Free version control software</a></li><li><a href="/wiki/Category:Free_software_programmed_in_C" title="Category:Free software programmed in C">Free software programmed in C</a></li><li><a href="/wiki/Category:Free_software_programmed_in_Perl" title="Category:Free software programmed in Perl">Free software programmed in Perl</a></li><li><a href="/wiki/Category:Git_(software)" title="Category:Git (software)">Git (software)</a></li><li><a href="/wiki/Category:Linux_archivers_and_compression-related_utilities" title="Category:Linux archivers and compression-related utilities">Linux archivers and compression-related utilities</a></li><li><a href="/wiki/Category:Self-hosting_software" title="Category:Self-hosting software">Self-hosting software</a></li><li><a href="/wiki/Category:Linus_Torvalds" title="Category:Linus Torvalds">Linus Torvalds</a></li><li><a href="/wiki/Category:Software_using_the_GPL_license" title="Category:Software using the GPL license">Software using the GPL license</a></li></ul></div><div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul><li><a href="/wiki/Category:Use_dmy_dates_from_March_2012" title="Category:Use dmy dates from March 2012">Use dmy dates from March 2012</a></li><li><a href="/wiki/Category:Pages_using_deprecated_image_syntax" title="Category:Pages using deprecated image syntax">Pages using deprecated image syntax</a></li><li><a href="/wiki/Category:All_articles_with_unsourced_statements" title="Category:All articles with unsourced statements">All articles with unsourced statements</a></li><li><a href="/wiki/Category:Articles_with_unsourced_statements_from_April_2017" title="Category:Articles with unsourced statements from April 2017">Articles with unsourced statements from April 2017</a></li><li><a href="/wiki/Category:Articles_with_unsourced_statements_from_February_2017" title="Category:Articles with unsourced statements from February 2017">Articles with unsourced statements from February 2017</a></li><li><a href="/wiki/Category:Articles_with_unsourced_statements_from_September_2016" title="Category:Articles with unsourced statements from September 2016">Articles with unsourced statements from September 2016</a></li><li><a href="/wiki/Category:Wikipedia_articles_needing_clarification_from_June_2014" title="Category:Wikipedia articles needing clarification from June 2014">Wikipedia articles needing clarification from June 2014</a></li><li><a href="/wiki/Category:Wikipedia_articles_with_GND_identifiers" title="Category:Wikipedia articles with GND identifiers">Wikipedia articles with GND identifiers</a></li></ul></div></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-anonuserpage">Not logged in</li><li id="pt-anontalk"><a href="/wiki/Special:MyTalk" title="Discussion about edits from this IP address [n]" accesskey="n">Talk</a></li><li id="pt-anoncontribs"><a href="/wiki/Special:MyContributions" title="A list of edits made from this IP address [y]" accesskey="y">Contributions</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Special:CreateAccount&amp;returnto=Git" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a href="/w/index.php?title=Special:UserLogin&amp;returnto=Git" title="You're encouraged to log in; however, it's not mandatory. [o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+														<li id="ca-nstab-main" class="selected"><span><a href="/wiki/Git" title="View the content page [c]" accesskey="c">Article</a></span></li>
+							<li id="ca-talk"><span><a href="/wiki/Talk:Git" rel="discussion" title="Discussion about the content page [t]" accesskey="t">Talk</a></span></li>
+						</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variants</span>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+														<li id="ca-view" class="collapsible selected"><span><a href="/wiki/Git">Read</a></span></li>
+							<li id="ca-edit" class="collapsible"><span><a href="/w/index.php?title=Git&amp;action=edit" title="Edit this page [e]" accesskey="e">Edit</a></span></li>
+							<li id="ca-history" class="collapsible"><span><a href="/w/index.php?title=Git&amp;action=history" title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+						</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>More</span></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/w/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Search Wikipedia" title="Search Wikipedia [f]" accesskey="f" id="searchInput"/><input type="hidden" value="Special:Search" name="title"/><input type="submit" name="fulltext" value="Search" title="Search Wikipedia for this text" id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton"/>							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Main_Page"  title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="/wiki/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li><li id="n-contents"><a href="/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li><li id="n-featuredcontent"><a href="/wiki/Portal:Featured_content" title="Featured content – the best of Wikipedia">Featured content</a></li><li id="n-currentevents"><a href="/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li><li id="n-randompage"><a href="/wiki/Special:Random" title="Load a random article [x]" accesskey="x">Random article</a></li><li id="n-sitesupport"><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en" title="Support us">Donate to Wikipedia</a></li><li id="n-shoplink"><a href="//shop.wikimedia.org" title="Visit the Wikipedia store">Wikipedia store</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-interaction' aria-labelledby='p-interaction-label'>
+			<h3 id='p-interaction-label'>Interaction</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-help"><a href="/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li><li id="n-aboutsite"><a href="/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li><li id="n-portal"><a href="/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li><li id="n-recentchanges"><a href="/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li><li id="n-contactpage"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact page</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="/wiki/Special:WhatLinksHere/Git" title="List of all English Wikipedia pages containing links to this page [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="/wiki/Special:RecentChangesLinked/Git" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-upload"><a href="/wiki/Wikipedia:File_Upload_Wizard" title="Upload files [u]" accesskey="u">Upload file</a></li><li id="t-specialpages"><a href="/wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-permalink"><a href="/w/index.php?title=Git&amp;oldid=806191967" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/w/index.php?title=Git&amp;action=info" title="More information about this page">Page information</a></li><li id="t-wikibase"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q186055" title="Link to connected data repository item [g]" accesskey="g">Wikidata item</a></li><li id="t-cite"><a href="/w/index.php?title=Special:CiteThisPage&amp;page=Git&amp;id=806191967" title="Information on how to cite this page">Cite this page</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-coll-print_export' aria-labelledby='p-coll-print_export-label'>
+			<h3 id='p-coll-print_export-label'>Print/export</h3>
+
+			<div class="body">
+									<ul>
+						<li id="coll-create_a_book"><a href="/w/index.php?title=Special:Book&amp;bookcmd=book_creator&amp;referer=Git">Create a book</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=Special:ElectronPdf&amp;page=Git&amp;action=show-download-screen">Download as PDF</a></li><li id="t-print"><a href="/w/index.php?title=Git&amp;printable=yes" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-wikibase-otherprojects' aria-labelledby='p-wikibase-otherprojects-label'>
+			<h3 id='p-wikibase-otherprojects-label'>In other projects</h3>
+
+			<div class="body">
+									<ul>
+						<li class="wb-otherproject-link wb-otherproject-commons"><a href="https://commons.wikimedia.org/wiki/Category:Git" hreflang="en">Wikimedia Commons</a></li><li class="wb-otherproject-link wb-otherproject-wikibooks"><a href="https://en.wikibooks.org/wiki/Git" hreflang="en">Wikibooks</a></li><li class="wb-otherproject-link wb-otherproject-wikiversity"><a href="https://en.wikiversity.org/wiki/Version_Control/Git" hreflang="en">Wikiversity</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-lang' aria-labelledby='p-lang-label'>
+			<h3 id='p-lang-label'>Languages</h3>
+
+			<div class="body">
+									<ul>
+						<li class="interlanguage-link interwiki-ar"><a href="https://ar.wikipedia.org/wiki/%D8%AC%D8%AA_(%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC)" title="جت (برنامج) – Arabic" lang="ar" hreflang="ar" class="interlanguage-link-target">العربية</a></li><li class="interlanguage-link interwiki-zh-min-nan"><a href="https://zh-min-nan.wikipedia.org/wiki/Git" title="Git – Chinese (Min Nan)" lang="zh-min-nan" hreflang="zh-min-nan" class="interlanguage-link-target">Bân-lâm-gú</a></li><li class="interlanguage-link interwiki-bg"><a href="https://bg.wikipedia.org/wiki/Git_(%D1%81%D0%BE%D1%84%D1%82%D1%83%D0%B5%D1%80)" title="Git (софтуер) – Bulgarian" lang="bg" hreflang="bg" class="interlanguage-link-target">Български</a></li><li class="interlanguage-link interwiki-bs"><a href="https://bs.wikipedia.org/wiki/Git_(softver)" title="Git (softver) – Bosnian" lang="bs" hreflang="bs" class="interlanguage-link-target">Bosanski</a></li><li class="interlanguage-link interwiki-ca"><a href="https://ca.wikipedia.org/wiki/Git" title="Git – Catalan" lang="ca" hreflang="ca" class="interlanguage-link-target">Català</a></li><li class="interlanguage-link interwiki-cs"><a href="https://cs.wikipedia.org/wiki/Git" title="Git – Czech" lang="cs" hreflang="cs" class="interlanguage-link-target">Čeština</a></li><li class="interlanguage-link interwiki-da"><a href="https://da.wikipedia.org/wiki/Git" title="Git – Danish" lang="da" hreflang="da" class="interlanguage-link-target">Dansk</a></li><li class="interlanguage-link interwiki-de"><a href="https://de.wikipedia.org/wiki/Git" title="Git – German" lang="de" hreflang="de" class="interlanguage-link-target">Deutsch</a></li><li class="interlanguage-link interwiki-et"><a href="https://et.wikipedia.org/wiki/Git" title="Git – Estonian" lang="et" hreflang="et" class="interlanguage-link-target">Eesti</a></li><li class="interlanguage-link interwiki-el"><a href="https://el.wikipedia.org/wiki/Git_(%CE%BB%CE%BF%CE%B3%CE%B9%CF%83%CE%BC%CE%B9%CE%BA%CF%8C)" title="Git (λογισμικό) – Greek" lang="el" hreflang="el" class="interlanguage-link-target">Ελληνικά</a></li><li class="interlanguage-link interwiki-es"><a href="https://es.wikipedia.org/wiki/Git" title="Git – Spanish" lang="es" hreflang="es" class="interlanguage-link-target">Español</a></li><li class="interlanguage-link interwiki-eo"><a href="https://eo.wikipedia.org/wiki/Git" title="Git – Esperanto" lang="eo" hreflang="eo" class="interlanguage-link-target">Esperanto</a></li><li class="interlanguage-link interwiki-eu"><a href="https://eu.wikipedia.org/wiki/Git" title="Git – Basque" lang="eu" hreflang="eu" class="interlanguage-link-target">Euskara</a></li><li class="interlanguage-link interwiki-fa"><a href="https://fa.wikipedia.org/wiki/%DA%AF%DB%8C%D8%AA_(%D9%86%D8%B1%D9%85%E2%80%8C%D8%A7%D9%81%D8%B2%D8%A7%D8%B1)" title="گیت (نرم‌افزار) – Persian" lang="fa" hreflang="fa" class="interlanguage-link-target">فارسی</a></li><li class="interlanguage-link interwiki-fr"><a href="https://fr.wikipedia.org/wiki/Git" title="Git – French" lang="fr" hreflang="fr" class="interlanguage-link-target">Français</a></li><li class="interlanguage-link interwiki-gl"><a href="https://gl.wikipedia.org/wiki/Git" title="Git – Galician" lang="gl" hreflang="gl" class="interlanguage-link-target">Galego</a></li><li class="interlanguage-link interwiki-gu"><a href="https://gu.wikipedia.org/wiki/%E0%AA%97%E0%AB%80%E0%AA%9F_(%E0%AA%B8%E0%AB%8B%E0%AA%AB%E0%AB%8D%E0%AA%9F%E0%AA%B5%E0%AB%87%E0%AA%B0)" title="ગીટ (સોફ્ટવેર) – Gujarati" lang="gu" hreflang="gu" class="interlanguage-link-target">ગુજરાતી</a></li><li class="interlanguage-link interwiki-ko"><a href="https://ko.wikipedia.org/wiki/%EA%B9%83_(%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4)" title="깃 (소프트웨어) – Korean" lang="ko" hreflang="ko" class="interlanguage-link-target">한국어</a></li><li class="interlanguage-link interwiki-hi"><a href="https://hi.wikipedia.org/wiki/%E0%A4%97%E0%A4%BF%E0%A4%9F" title="गिट – Hindi" lang="hi" hreflang="hi" class="interlanguage-link-target">हिन्दी</a></li><li class="interlanguage-link interwiki-hr"><a href="https://hr.wikipedia.org/wiki/Git" title="Git – Croatian" lang="hr" hreflang="hr" class="interlanguage-link-target">Hrvatski</a></li><li class="interlanguage-link interwiki-id"><a href="https://id.wikipedia.org/wiki/Git" title="Git – Indonesian" lang="id" hreflang="id" class="interlanguage-link-target">Bahasa Indonesia</a></li><li class="interlanguage-link interwiki-it"><a href="https://it.wikipedia.org/wiki/Git_(software)" title="Git (software) – Italian" lang="it" hreflang="it" class="interlanguage-link-target">Italiano</a></li><li class="interlanguage-link interwiki-he"><a href="https://he.wikipedia.org/wiki/%D7%92%D7%99%D7%98" title="גיט – Hebrew" lang="he" hreflang="he" class="interlanguage-link-target">עברית</a></li><li class="interlanguage-link interwiki-kk"><a href="https://kk.wikipedia.org/wiki/Git" title="Git – Kazakh" lang="kk" hreflang="kk" class="interlanguage-link-target">Қазақша</a></li><li class="interlanguage-link interwiki-lv"><a href="https://lv.wikipedia.org/wiki/Git" title="Git – Latvian" lang="lv" hreflang="lv" class="interlanguage-link-target">Latviešu</a></li><li class="interlanguage-link interwiki-hu"><a href="https://hu.wikipedia.org/wiki/Git" title="Git – Hungarian" lang="hu" hreflang="hu" class="interlanguage-link-target">Magyar</a></li><li class="interlanguage-link interwiki-mk"><a href="https://mk.wikipedia.org/wiki/Git" title="Git – Macedonian" lang="mk" hreflang="mk" class="interlanguage-link-target">Македонски</a></li><li class="interlanguage-link interwiki-ml"><a href="https://ml.wikipedia.org/wiki/%E0%B4%97%E0%B4%BF%E0%B4%B1%E0%B5%8D%E0%B4%B1%E0%B5%8D" title="ഗിറ്റ് – Malayalam" lang="ml" hreflang="ml" class="interlanguage-link-target">മലയാളം</a></li><li class="interlanguage-link interwiki-ms"><a href="https://ms.wikipedia.org/wiki/Git" title="Git – Malay" lang="ms" hreflang="ms" class="interlanguage-link-target">Bahasa Melayu</a></li><li class="interlanguage-link interwiki-nl"><a href="https://nl.wikipedia.org/wiki/Git_(software)" title="Git (software) – Dutch" lang="nl" hreflang="nl" class="interlanguage-link-target">Nederlands</a></li><li class="interlanguage-link interwiki-ja"><a href="https://ja.wikipedia.org/wiki/Git" title="Git – Japanese" lang="ja" hreflang="ja" class="interlanguage-link-target">日本語</a></li><li class="interlanguage-link interwiki-no"><a href="https://no.wikipedia.org/wiki/Git" title="Git – Norwegian" lang="no" hreflang="no" class="interlanguage-link-target">Norsk</a></li><li class="interlanguage-link interwiki-pl"><a href="https://pl.wikipedia.org/wiki/Git_(oprogramowanie)" title="Git (oprogramowanie) – Polish" lang="pl" hreflang="pl" class="interlanguage-link-target">Polski</a></li><li class="interlanguage-link interwiki-pt"><a href="https://pt.wikipedia.org/wiki/Git" title="Git – Portuguese" lang="pt" hreflang="pt" class="interlanguage-link-target">Português</a></li><li class="interlanguage-link interwiki-ro"><a href="https://ro.wikipedia.org/wiki/Git" title="Git – Romanian" lang="ro" hreflang="ro" class="interlanguage-link-target">Română</a></li><li class="interlanguage-link interwiki-ru"><a href="https://ru.wikipedia.org/wiki/Git" title="Git – Russian" lang="ru" hreflang="ru" class="interlanguage-link-target">Русский</a></li><li class="interlanguage-link interwiki-sco"><a href="https://sco.wikipedia.org/wiki/Git" title="Git – Scots" lang="sco" hreflang="sco" class="interlanguage-link-target">Scots</a></li><li class="interlanguage-link interwiki-simple"><a href="https://simple.wikipedia.org/wiki/Git_(software)" title="Git (software) – Simple English" lang="simple" hreflang="simple" class="interlanguage-link-target">Simple English</a></li><li class="interlanguage-link interwiki-sk"><a href="https://sk.wikipedia.org/wiki/Git_(softv%C3%A9r)" title="Git (softvér) – Slovak" lang="sk" hreflang="sk" class="interlanguage-link-target">Slovenčina</a></li><li class="interlanguage-link interwiki-sl"><a href="https://sl.wikipedia.org/wiki/Git" title="Git – Slovenian" lang="sl" hreflang="sl" class="interlanguage-link-target">Slovenščina</a></li><li class="interlanguage-link interwiki-sr"><a href="https://sr.wikipedia.org/wiki/%D0%93%D0%B8%D1%82_(%D1%81%D0%BE%D1%84%D1%82%D0%B2%D0%B5%D1%80)" title="Гит (софтвер) – Serbian" lang="sr" hreflang="sr" class="interlanguage-link-target">Српски / srpski</a></li><li class="interlanguage-link interwiki-fi"><a href="https://fi.wikipedia.org/wiki/Git" title="Git – Finnish" lang="fi" hreflang="fi" class="interlanguage-link-target">Suomi</a></li><li class="interlanguage-link interwiki-sv"><a href="https://sv.wikipedia.org/wiki/Git" title="Git – Swedish" lang="sv" hreflang="sv" class="interlanguage-link-target">Svenska</a></li><li class="interlanguage-link interwiki-ta"><a href="https://ta.wikipedia.org/wiki/%E0%AE%95%E0%AE%BF%E0%AE%9F%E0%AF%8D_(%E0%AE%AE%E0%AF%86%E0%AE%A9%E0%AF%8D%E0%AE%AA%E0%AF%8A%E0%AE%B0%E0%AF%81%E0%AE%B3%E0%AF%8D)" title="கிட் (மென்பொருள்) – Tamil" lang="ta" hreflang="ta" class="interlanguage-link-target">தமிழ்</a></li><li class="interlanguage-link interwiki-te"><a href="https://te.wikipedia.org/wiki/%E0%B0%97%E0%B0%BF%E0%B0%9F%E0%B1%8D" title="గిట్ – Telugu" lang="te" hreflang="te" class="interlanguage-link-target">తెలుగు</a></li><li class="interlanguage-link interwiki-th"><a href="https://th.wikipedia.org/wiki/%E0%B8%81%E0%B8%B4%E0%B8%95_(%E0%B8%8B%E0%B8%AD%E0%B8%9F%E0%B8%95%E0%B9%8C%E0%B9%81%E0%B8%A7%E0%B8%A3%E0%B9%8C)" title="กิต (ซอฟต์แวร์) – Thai" lang="th" hreflang="th" class="interlanguage-link-target">ไทย</a></li><li class="interlanguage-link interwiki-tr"><a href="https://tr.wikipedia.org/wiki/Git_(yaz%C4%B1l%C4%B1m)" title="Git (yazılım) – Turkish" lang="tr" hreflang="tr" class="interlanguage-link-target">Türkçe</a></li><li class="interlanguage-link interwiki-uk"><a href="https://uk.wikipedia.org/wiki/Git" title="Git – Ukrainian" lang="uk" hreflang="uk" class="interlanguage-link-target">Українська</a></li><li class="interlanguage-link interwiki-vi"><a href="https://vi.wikipedia.org/wiki/Git_(ph%E1%BA%A7n_m%E1%BB%81m)" title="Git (phần mềm) – Vietnamese" lang="vi" hreflang="vi" class="interlanguage-link-target">Tiếng Việt</a></li><li class="interlanguage-link interwiki-zh"><a href="https://zh.wikipedia.org/wiki/Git" title="Git – Chinese" lang="zh" hreflang="zh" class="interlanguage-link-target">中文</a></li>					</ul>
+				<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q186055#sitelinks-wikipedia" title="Edit interlanguage links" class="wbc-editpage">Edit links</a></span></div>			</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last edited on 20 October 2017, at 09:44.</li>
+											<li id="footer-info-copyright">Text is available under the <a rel="license" href="//en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License">Creative Commons Attribution-ShareAlike License</a><a rel="license" href="//creativecommons.org/licenses/by-sa/3.0/" style="display:none;"></a>;
+additional terms may apply.  By using this site, you agree to the <a href="//wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> and <a href="//wikimediafoundation.org/wiki/Privacy_policy">Privacy Policy</a>. Wikipedia® is a registered trademark of the <a href="//www.wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>, a non-profit organization.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="https://wikimediafoundation.org/wiki/Privacy_policy" class="extiw" title="wmf:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+											<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+											<li id="footer-places-contact"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact Wikipedia</a></li>
+											<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Developers</a></li>
+											<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Cookie statement</a></li>
+											<li id="footer-places-mobileview"><a href="//en.m.wikipedia.org/w/index.php?title=Git&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Mobile view</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="https://wikimediafoundation.org/"><img src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"/></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="//www.mediawiki.org/"><img src="/static/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.796","walltime":"0.940","ppvisitednodes":{"value":6060,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1500000},"postexpandincludesize":{"value":164874,"limit":2097152},"templateargumentsize":{"value":6834,"limit":2097152},"expansiondepth":{"value":25,"limit":40},"expensivefunctioncount":{"value":7,"limit":500},"entityaccesscount":{"value":1,"limit":400},"timingprofile":["100.00%  832.972      1 -total"," 45.71%  380.761      1 Template:Reflist"," 23.15%  192.791     44 Template:Cite_web"," 11.28%   93.990      2 Template:Infobox"," 10.85%   90.407      1 Template:Infobox_software","  8.74%   72.829     22 Template:Cite_mailing_list","  7.90%   65.823      4 Template:Citation_needed","  7.17%   59.729      4 Template:Fix","  5.17%   43.048      5 Template:Delink","  3.99%   33.249      1 Template:Commons_category"]},"scribunto":{"limitreport-timeusage":{"value":"0.404","limit":"10.000"},"limitreport-memusage":{"value":7635264,"limit":52428800}},"cachereport":{"origin":"mw1218","timestamp":"20171024154755","ttl":1900800,"transientcontent":false}}});});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":1048,"wgHostname":"mw1218"});});</script>
+	</body>
+</html>

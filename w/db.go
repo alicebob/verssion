@@ -6,7 +6,6 @@ import (
 
 type Entry struct {
 	Page          string
-	Revision      int
 	T             time.Time
 	StableVersion string
 }

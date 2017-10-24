@@ -34,14 +34,14 @@ func NewPostgres(url string) (*Postgres, error) {
 // Load the latest we have. Could be nil.
 func (p *Postgres) Load(page string) (*Entry, error) {
 	row := p.conn.QueryRow(`
-    SELECT title, revision, timestamp, stable_version
+    SELECT title, timestamp, stable_version
     FROM page
     WHERE title=$1
-	ORDER BY revision DESC
+	ORDER BY timestamp DESC
 	LIMIT 1
     `, page)
 	var e Entry
-	if err := row.Scan(&e.Page, &e.Revision, &e.T, &e.StableVersion); err != nil {
+	if err := row.Scan(&e.Page, &e.T, &e.StableVersion); err != nil {
 		if err == pgx.ErrNoRows {
 			return nil, nil
 		}
@@ -53,9 +53,9 @@ func (p *Postgres) Load(page string) (*Entry, error) {
 func (p *Postgres) Store(e Entry) error {
 	_, err := p.conn.Exec(`
 	INSERT INTO page
-		(title, revision, timestamp, stable_version)
+		(title, timestamp, stable_version)
 	VALUES
-		($1, $2, $3, $4)
-`, e.Page, e.Revision, e.T, e.StableVersion)
+		($1, $2, $3)
+`, e.Page, e.T, e.StableVersion)
 	return err
 }

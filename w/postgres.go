@@ -33,12 +33,24 @@ func NewPostgres(url string) (*Postgres, error) {
 
 // Bunch of recent changes. Just to have something
 func (p *Postgres) Recent() ([]Entry, error) {
+	return p.queryUpdates(`
+		ORDER BY timestamp DESC
+    `)
+}
+
+// History of a single page. Newest first.
+func (p *Postgres) History(page string) ([]Entry, error) {
+	return p.queryUpdates(`
+		WHERE title=$1
+		ORDER BY timestamp DESC
+    `, page)
+}
+
+func (p *Postgres) queryUpdates(where string, args ...interface{}) ([]Entry, error) {
 	var es []Entry
 	rows, err := p.conn.Query(`
 		SELECT title, timestamp, stable_version
-		FROM updates
-		ORDER BY timestamp DESC
-    `)
+		FROM updates`+where, args...)
 	if err != nil {
 		return nil, err
 	}

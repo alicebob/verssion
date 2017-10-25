@@ -30,18 +30,35 @@ func main() {
 		os.Exit(2)
 	}
 
+	up := newUpdate(db)
+
 	r := httprouter.New()
 	r.GET("/", indexHandler(db))
+	r.GET("/v/:page", pageHandler(db, up))
 	fmt.Printf("listening on %s...\n", *listen)
 	log.Fatal(http.ListenAndServe(*listen, r))
 }
 
 func indexHandler(db w.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-		fmt.Fprintf(w, "hello world<br />\n")
 		es, _ := db.Recent()
-		for _, e := range es {
-			fmt.Fprintf(w, "%s: %s<br />\n", e.Page, e.StableVersion)
+		runTmpl(w, indexTempl, map[string]interface{}{
+			"entries": es,
+		})
+	}
+}
+
+func pageHandler(db w.DB, up *update) httprouter.Handle {
+	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+		page := p.ByName("page")
+		if err := up.Update(page); err != nil {
+			log.Printf("update %q: %s", page, err)
 		}
+
+		vs, _ := db.History(page)
+		runTmpl(w, pageTempl, map[string]interface{}{
+			"page":     page,
+			"versions": vs,
+		})
 	}
 }

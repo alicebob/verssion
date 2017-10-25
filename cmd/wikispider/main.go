@@ -44,32 +44,14 @@ func main() {
 }
 
 func handlePage(db w.DB, page string) error {
-	old, err := db.Load(page)
-	if err != nil {
-		return err
-	}
-	new, err := w.GetPage(page)
+	p, err := w.GetPage(page)
 	if err != nil {
 		return err
 	}
 
-	if old != nil && new.StableVersion == old.StableVersion {
-		fmt.Printf("no update: %q (%s)\n", page, new.StableVersion)
-		return nil
-	}
-	e := w.Entry{
+	return db.Store(w.Entry{
 		Page:          page,
 		T:             time.Now().UTC(),
-		StableVersion: new.StableVersion,
-	}
-	if err := db.Store(e); err != nil {
-		return err
-	}
-	// Only a change in wikipedia change, might be no version update
-	sv := ""
-	if old != nil {
-		sv = old.StableVersion
-	}
-	fmt.Printf("stored %q: %s-> %s\n", page, sv, e.StableVersion)
-	return nil
+		StableVersion: p.StableVersion,
+	})
 }

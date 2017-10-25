@@ -8,17 +8,18 @@ import (
 )
 
 var (
-	baseTempl = template.Must(template.New("base").Parse(`
-<!DOCTYPE html>
+	baseTempl = template.Must(template.New("base").Parse(`<!DOCTYPE html>
 <html>
     <head>
-        <title>{{ .Title }}</title>
-        <link rel="stylesheet" href="/static/s.css" />
+        <title>{{ .title }}</title>
+        {{- template "head" . }}
     </head>
     <body>
         {{- template "page" . }}
     </body>
 </html>
+{{define "head"}}
+{{- end}}
 {{define "page"}}
 {{- end}}
 `))
@@ -27,12 +28,15 @@ var (
 {{define "page"}}
 Hello World<br />
 	{{- range .entries}}
-		<a href="./v/{{.Page}}">{{.Page}}</a>: {{.StableVersion}}<br />
+		<a href="./v/{{.Page}}/">{{.Page}}</a>: {{.StableVersion}}<br />
 	{{- end}}
 {{- end}}
 `))
 
 	pageTempl = template.Must(extend(baseTempl).Parse(`
+{{define "head"}}
+	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="./atom.xml"/>
+{{- end}}
 {{define "page"}}
 	{{.page}}<br />
 	{{- range .versions}}

@@ -31,23 +31,25 @@ func NewPostgres(url string) (*Postgres, error) {
 	return p, nil
 }
 
-// Load the latest we have. Could be nil.
-func (p *Postgres) Load(page string) (*Entry, error) {
-	row := p.conn.QueryRow(`
-    SELECT title, timestamp, stable_version
-    FROM page
-    WHERE title=$1
-	ORDER BY timestamp DESC
-	LIMIT 1
-    `, page)
-	var e Entry
-	if err := row.Scan(&e.Page, &e.T, &e.StableVersion); err != nil {
-		if err == pgx.ErrNoRows {
-			return nil, nil
-		}
+// Bunch of recent changes. Just to have something
+func (p *Postgres) Recent() ([]Entry, error) {
+	var es []Entry
+	rows, err := p.conn.Query(`
+		SELECT title, timestamp, stable_version
+		FROM updates
+		ORDER BY timestamp DESC
+    `)
+	if err != nil {
 		return nil, err
 	}
-	return &e, nil
+	for rows.Next() {
+		var e Entry
+		if err := rows.Scan(&e.Page, &e.T, &e.StableVersion); err != nil {
+			return nil, err
+		}
+		es = append(es, e)
+	}
+	return es, rows.Err()
 }
 
 func (p *Postgres) Store(e Entry) error {

@@ -11,6 +11,6 @@ type Entry struct {
 }
 
 type DB interface {
-	Load(string) (*Entry, error)
+	Recent() ([]Entry, error)
 	Store(Entry) error
 }

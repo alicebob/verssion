@@ -12,6 +12,6 @@ type Entry struct {
 
 type DB interface {
 	Recent() ([]Entry, error)
-	History(string) ([]Entry, error)
+	History(...string) ([]Entry, error)
 	Store(Entry) error
 }

@@ -6,7 +6,8 @@ test:
 	$(MAKE) -C w test
 		
 build:
-	$(MAKE) -C cmd/wikitree build
+	$(MAKE) -C cmd/wikispider build
+	$(MAKE) -C cmd/web build
 
 db:
 	psql w < tables.sql

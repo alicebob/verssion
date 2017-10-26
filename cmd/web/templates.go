@@ -33,6 +33,25 @@ Hello World<br />
 {{- end}}
 `))
 
+	adhocTempl = template.Must(extend(baseTempl).Parse(`
+{{define "head"}}
+	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
+{{- end}}
+{{define "page"}}
+	Pages:<br />
+	{{- range .pages}}
+		{{.}}<br />
+	{{- end}}
+	<br />
+	Atom URL: <a href="{{.atom}}">{{.atom}}</a><br />
+	<br />
+
+	{{- range .versions}}
+		{{- .Page}}: {{.StableVersion}}<br />
+	{{- end}}
+{{- end}}
+`))
+
 	pageTempl = template.Must(extend(baseTempl).Parse(`
 {{define "head"}}
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="./atom.xml"/>

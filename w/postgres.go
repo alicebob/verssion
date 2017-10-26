@@ -1,6 +1,9 @@
 package w
 
 import (
+	"fmt"
+	"strings"
+
 	"github.com/jackc/pgx"
 )
 
@@ -38,12 +41,20 @@ func (p *Postgres) Recent() ([]Entry, error) {
     `)
 }
 
-// History of a single page. Newest first.
-func (p *Postgres) History(page string) ([]Entry, error) {
+// History of a list of page. Newest first.
+func (p *Postgres) History(pages ...string) ([]Entry, error) {
+	var (
+		in   []string
+		args []interface{}
+	)
+	for i, p := range pages {
+		in = append(in, fmt.Sprintf("$%d", i+1))
+		args = append(args, p)
+	}
 	return p.queryUpdates(`
-		WHERE title=$1
+		WHERE title IN (`+strings.Join(in, ",")+`)
 		ORDER BY timestamp DESC
-    `, page)
+    `, args...)
 }
 
 func (p *Postgres) queryUpdates(where string, args ...interface{}) ([]Entry, error) {

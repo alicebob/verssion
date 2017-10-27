@@ -1,6 +1,7 @@
 package w
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -11,12 +12,15 @@ type Page struct {
 }
 
 // GetPage downloads and parses given wikipage
-func GetPage(title string) (Page, error) {
-	p, err := http.Get(wikiURL(title))
+func GetPage(page string) (Page, error) {
+	p, err := http.Get(wikiURL(page))
 	if err != nil {
 		return Page{}, err
 	}
 	defer p.Body.Close()
+	if p.StatusCode != 200 {
+		return Page{}, fmt.Errorf("not ok: %d", p.StatusCode)
+	}
 
 	return Page{
 		StableVersion: StableVersion(p.Body),
@@ -45,4 +49,17 @@ func StableVersion(n io.Reader) string {
 
 func wikiURL(page string) string {
 	return "https://en.wikipedia.org/wiki/" + page
+}
+
+// title version of a wikipage path
+func Title(page string) string {
+	return strings.Replace(page, "_", " ", -1)
+}
+
+func Titles(pages []string) []string {
+	var titles []string
+	for _, p := range pages {
+		titles = append(titles, Title(p))
+	}
+	return titles
 }

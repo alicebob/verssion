@@ -5,10 +5,16 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+
+	libw "github.com/alicebob/w/w"
 )
 
 var (
-	baseTempl = template.Must(template.New("base").Parse(`<!DOCTYPE html>
+	baseTempl = template.Must(
+		template.New("base").
+			Funcs(template.FuncMap{
+				"title": libw.Title,
+			}).Parse(`<!DOCTYPE html>
 <html>
     <head>
         <title>{{ .title }}</title>
@@ -28,7 +34,7 @@ var (
 {{define "page"}}
 Hello World<br />
 	{{- range .entries}}
-		<a href="./v/{{.Page}}/">{{.Page}}</a>: {{.StableVersion}}<br />
+		<a href="./v/{{.Page}}/">{{title .Page}}</a>: {{.StableVersion}}<br />
 	{{- end}}
 {{- end}}
 `))
@@ -40,24 +46,26 @@ Hello World<br />
 {{define "page"}}
 	Pages:<br />
 	{{- range .pages}}
-		{{.}}<br />
+		{{title .}}<br />
 	{{- end}}
 	<br />
 	Atom URL: <a href="{{.atom}}">{{.atom}}</a><br />
 	<br />
 
 	{{- range .versions}}
-		{{- .Page}}: {{.StableVersion}}<br />
+		{{- title .Page}}: {{.StableVersion}}<br />
 	{{- end}}
 {{- end}}
 `))
 
 	pageTempl = template.Must(extend(baseTempl).Parse(`
 {{define "head"}}
-	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="./atom.xml"/>
+	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
 {{- end}}
 {{define "page"}}
-	{{.page}}<br />
+	{{.title}}<br />
+	atom: <a href="{{.atom}}">{{.atom}}</a><br />
+	<br />
 	{{- range .versions}}
 		{{- .StableVersion}} - (spider: {{.T}})<br />
 	{{- end}}

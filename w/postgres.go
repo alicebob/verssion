@@ -52,7 +52,7 @@ func (p *Postgres) History(pages ...string) ([]Entry, error) {
 		args = append(args, p)
 	}
 	return p.queryUpdates(`
-		WHERE title IN (`+strings.Join(in, ",")+`)
+		WHERE page IN (`+strings.Join(in, ",")+`)
 		ORDER BY timestamp DESC
     `, args...)
 }
@@ -60,7 +60,7 @@ func (p *Postgres) History(pages ...string) ([]Entry, error) {
 func (p *Postgres) queryUpdates(where string, args ...interface{}) ([]Entry, error) {
 	var es []Entry
 	rows, err := p.conn.Query(`
-		SELECT title, timestamp, stable_version
+		SELECT page, timestamp, stable_version
 		FROM updates`+where, args...)
 	if err != nil {
 		return nil, err
@@ -78,7 +78,7 @@ func (p *Postgres) queryUpdates(where string, args ...interface{}) ([]Entry, err
 func (p *Postgres) Store(e Entry) error {
 	_, err := p.conn.Exec(`
 	INSERT INTO page
-		(title, timestamp, stable_version)
+		(page, timestamp, stable_version)
 	VALUES
 		($1, $2, $3)
 `, e.Page, e.T, e.StableVersion)

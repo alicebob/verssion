@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/alicebob/w/w"
+	libw "github.com/alicebob/w/w"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -31,7 +31,7 @@ func main() {
 		os.Exit(2)
 	}
 
-	db, err := w.NewPostgres(*dbURL)
+	db, err := libw.NewPostgres(*dbURL)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "pg: %s\n", err)
 		os.Exit(2)
@@ -47,12 +47,11 @@ func main() {
 	r.GET("/adhoc/", adhocHandler(db, up))
 	r.GET("/adhoc/atom.xml", adhocAtomHandler(db, up))
 	r.GET("/v/:page/", pageHandler(db, up))
-	r.GET("/v/:page/atom.xml", pageAtomHandler(db, up))
 	fmt.Printf("listening on %s...\n", *listen)
 	log.Fatal(http.ListenAndServe(*listen, r))
 }
 
-func indexHandler(db w.DB) httprouter.Handle {
+func indexHandler(db libw.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		es, _ := db.Recent()
 		runTmpl(w, indexTempl, map[string]interface{}{
@@ -62,7 +61,7 @@ func indexHandler(db w.DB) httprouter.Handle {
 	}
 }
 
-func adhocHandler(db w.DB, up *update) httprouter.Handle {
+func adhocHandler(db libw.DB, up *update) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		pages := r.URL.Query()["p"]
 		sort.Strings(pages)
@@ -74,22 +73,26 @@ func adhocHandler(db w.DB, up *update) httprouter.Handle {
 			}
 		}
 
-		vs, err := db.History(pages...)
-		if err != nil {
-			log.Printf("history: %s", err)
-			http.Error(w, http.StatusText(500), 500)
-			return
+		args := map[string]interface{}{
+			"pages": pages,
+			"title": "adhoc atom builder",
 		}
-		runTmpl(w, adhocTempl, map[string]interface{}{
-			"title":    strings.Join(pages, ", "),
-			"pages":    pages,
-			"versions": vs,
-			"atom":     adhocURL(pages),
-		})
+		if len(pages) > 0 {
+			vs, err := db.History(pages...)
+			if err != nil {
+				log.Printf("history: %s", err)
+				http.Error(w, http.StatusText(500), 500)
+				return
+			}
+			args["title"] = strings.Join(libw.Titles(pages), ", ")
+			args["versions"] = vs
+			args["atom"] = adhocURL(pages)
+		}
+		runTmpl(w, adhocTempl, args)
 	}
 }
 
-func adhocAtomHandler(db w.DB, up *update) httprouter.Handle {
+func adhocAtomHandler(db libw.DB, up *update) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		pages := r.URL.Query()["p"]
 		sort.Strings(pages)
@@ -112,7 +115,7 @@ func adhocAtomHandler(db w.DB, up *update) httprouter.Handle {
 		for _, v := range vs {
 			es = append(es, Entry{
 				ID:      asuri(v.Page, v.StableVersion),
-				Title:   v.Page + ": " + v.StableVersion,
+				Title:   libw.Title(v.Page) + ": " + v.StableVersion,
 				Updated: v.T,
 				Content: v.StableVersion, // TODO: prev version?
 			})
@@ -122,11 +125,11 @@ func adhocAtomHandler(db w.DB, up *update) httprouter.Handle {
 		if len(vs) > 0 {
 			update = vs[len(vs)-1].T
 		}
-		writeFeed(w, url, strings.Join(pages, ", "), update, es)
+		writeFeed(w, url, strings.Join(libw.Titles(pages), ", "), update, es)
 	}
 }
 
-func pageHandler(db w.DB, up *update) httprouter.Handle {
+func pageHandler(db libw.DB, up *update) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		page := p.ByName("page")
 		if up != nil {
@@ -142,47 +145,11 @@ func pageHandler(db w.DB, up *update) httprouter.Handle {
 			return
 		}
 		runTmpl(w, pageTempl, map[string]interface{}{
-			"title":    page,
+			"title":    libw.Title(page),
+			"atom":     adhocURL([]string{page}),
 			"page":     page,
 			"versions": vs,
 		})
-	}
-}
-
-func pageAtomHandler(db w.DB, up *update) httprouter.Handle {
-	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-		page := p.ByName("page")
-		if up != nil {
-			if err := up.Update(page); err != nil {
-				log.Printf("update %q: %s", page, err)
-			}
-		}
-
-		vs, err := db.History(page)
-		if err != nil {
-			log.Printf("history: %s", err)
-			http.Error(w, http.StatusText(500), 500)
-			return
-		}
-		if len(vs) == 0 {
-			http.Error(w, http.StatusText(404), 404)
-			return
-		}
-
-		var (
-			es   []Entry
-			prev = "?"
-		)
-		for _, v := range vs {
-			es = append(es, Entry{
-				ID:      asuri(page, v.StableVersion),
-				Title:   page + ": " + v.StableVersion,
-				Updated: v.T,
-				Content: fmt.Sprintf("%s -> %s", prev, v.StableVersion),
-			})
-			prev = v.StableVersion
-		}
-		writeFeed(w, asuri(page), page, vs[len(vs)-1].T, es)
 	}
 }
 

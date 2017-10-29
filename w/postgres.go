@@ -84,3 +84,22 @@ func (p *Postgres) Store(e Entry) error {
 `, e.Page, e.T, e.StableVersion)
 	return err
 }
+
+func (p *Postgres) Known() ([]string, error) {
+	var ps []string
+	rows, err := p.conn.Query(`
+		SELECT DISTINCT(page)
+		FROM updates
+		ORDER BY page`)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		var p string
+		if err := rows.Scan(&p); err != nil {
+			return nil, err
+		}
+		ps = append(ps, p)
+	}
+	return ps, rows.Err()
+}

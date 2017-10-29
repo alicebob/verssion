@@ -11,9 +11,15 @@ type Page struct {
 	StableVersion string
 }
 
+var client = &http.Client{
+	CheckRedirect: func(*http.Request, []*http.Request) error {
+		return http.ErrUseLastResponse
+	},
+}
+
 // GetPage downloads and parses given wikipage
 func GetPage(page string) (Page, error) {
-	p, err := http.Get(wikiURL(page))
+	p, err := client.Get(wikiURL(page))
 	if err != nil {
 		return Page{}, err
 	}

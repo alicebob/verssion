@@ -14,4 +14,5 @@ type DB interface {
 	Recent() ([]Entry, error)
 	History(...string) ([]Entry, error)
 	Store(Entry) error
+	Known() ([]string, error)
 }

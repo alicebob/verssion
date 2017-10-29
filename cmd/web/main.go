@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"regexp"
 	"sort"
 	"strings"
 	"time"
@@ -63,20 +64,36 @@ func indexHandler(db libw.DB) httprouter.Handle {
 
 func adhocHandler(db libw.DB, up *update) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-		pages := r.URL.Query()["p"]
-		sort.Strings(pages)
-		if up != nil {
-			for _, p := range pages {
+		q := r.URL.Query()
+		pages := q["p"]
+		pages = append(pages, toPages(q.Get("etc"))...)
+		pages, seen := unique(pages)
+		var errors []string
+
+		for _, p := range pages {
+			if up != nil {
 				if err := up.Update(p); err != nil {
 					log.Printf("update %q: %s", p, err)
+					errors = append(errors, fmt.Sprintf("%q: %s", p, err))
 				}
 			}
 		}
 
 		args := map[string]interface{}{
-			"pages": pages,
-			"title": "adhoc atom builder",
+			"errors": errors,
+			"pages":  pages,
+			"title":  "adhoc atom builder",
 		}
+		var av []string
+		if avail, err := db.Known(); err == nil {
+			for _, p := range avail {
+				if _, ok := seen[p]; !ok {
+					av = append(av, p)
+				}
+			}
+		}
+		args["available"] = av
+
 		if len(pages) > 0 {
 			vs, err := db.History(pages...)
 			if err != nil {
@@ -181,4 +198,34 @@ func adhocURL(pages []string) string {
 		"p": pages,
 	}.Encode()
 	return u.String()
+}
+
+var matchpage = regexp.MustCompile(`^(?:(?i:https?://en.wikipedia.org)/wiki/)?(\S+)$`)
+
+// from textarea to pages
+func toPages(q string) []string {
+	var ps []string
+	for _, l := range strings.Split(q, "\n") {
+		l = strings.TrimSpace(l)
+		if len(l) == 0 {
+			continue
+		}
+		if m := matchpage.FindStringSubmatch(l); m != nil {
+			ps = append(ps, m[1])
+		}
+	}
+	return ps
+}
+
+func unique(ps []string) ([]string, map[string]struct{}) {
+	m := map[string]struct{}{}
+	for _, p := range ps {
+		m[p] = struct{}{}
+	}
+	res := make([]string, 0, len(m))
+	for p := range m {
+		res = append(res, p)
+	}
+	sort.Strings(res)
+	return res, m
 }

@@ -82,12 +82,19 @@ func adhocAtomHandler(db libw.DB, up *update) httprouter.Handle {
 			return
 		}
 
-		writeFeed(w, asFeed(
+		feed := asFeed(
 			asURN(strings.Join(pages, ",")),
 			strings.Join(libw.Titles(pages), ", "),
 			time.Time{},
 			vs,
-		))
+		)
+		feed.Links = []Link{
+			{
+				Href: adhocURL(pages),
+				Rel:  "self",
+			},
+		}
+		writeFeed(w, feed)
 	}
 }
 

@@ -95,7 +95,7 @@ func curatedHandler(db libw.DB, up *update, base string) httprouter.Handle {
 	}
 }
 
-func curatedAtomHandler(db libw.DB, up *update) httprouter.Handle {
+func curatedAtomHandler(db libw.DB, up *update, base string) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		id := p.ByName("id")
 		cur, err := db.LoadCurated(id)
@@ -124,10 +124,17 @@ func curatedAtomHandler(db libw.DB, up *update) httprouter.Handle {
 			return
 		}
 
-		writeFeed(
-			w,
-			asFeed("urn:uuid:"+cur.ID, cur.Title(), cur.LastUpdated, vs),
-		)
+		feed := asFeed("urn:uuid:"+cur.ID, cur.Title(), cur.LastUpdated, vs)
+		feed.Links = []Link{
+			{
+				Href: fmt.Sprintf("%s/curated/%s/", base, cur.ID),
+			},
+			{
+				Href: fmt.Sprintf("%s/curated/%s/atom.xml", base, cur.ID),
+				Rel:  "self",
+			},
+		}
+		writeFeed(w, feed)
 
 		if err := db.CuratedUsed(id); err != nil {
 			log.Printf("curated used %q: %s", id, err)

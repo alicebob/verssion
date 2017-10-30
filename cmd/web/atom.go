@@ -14,9 +14,15 @@ type Feed struct {
 	XMLNS   string    `xml:"xmlns,attr"`
 	ID      string    `xml:"id"`
 	Title   string    `xml:"title"`
+	Links   []Link    `xml:"link"`
 	Updated time.Time `xml:"updated"`
 	Author  Author    `xml:"author"`
 	Entries []Entry   `xml:"entry"`
+}
+
+type Link struct {
+	Href string `xml:"href,attr"`
+	Rel  string `xml:"rel,attr,omitempty"`
 }
 
 type Author struct {

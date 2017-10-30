@@ -92,6 +92,7 @@ func adhocAtomHandler(db libw.DB, up *update) httprouter.Handle {
 			{
 				Href: adhocURL(pages),
 				Rel:  "self",
+				Type: "application/atom+xml",
 			},
 		}
 		writeFeed(w, feed)

@@ -23,6 +23,7 @@ type Feed struct {
 type Link struct {
 	Href string `xml:"href,attr"`
 	Rel  string `xml:"rel,attr,omitempty"`
+	Type string `xml:"type,attr,omitempty"`
 }
 
 type Author struct {

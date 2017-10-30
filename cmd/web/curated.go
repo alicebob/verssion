@@ -128,10 +128,13 @@ func curatedAtomHandler(db libw.DB, up *update, base string) httprouter.Handle {
 		feed.Links = []Link{
 			{
 				Href: fmt.Sprintf("%s/curated/%s/", base, cur.ID),
+				Rel:  "alternate", // not strictly true...
+				Type: "text/html",
 			},
 			{
 				Href: fmt.Sprintf("%s/curated/%s/atom.xml", base, cur.ID),
 				Rel:  "self",
+				Type: "application/atom+xml",
 			},
 		}
 		writeFeed(w, feed)

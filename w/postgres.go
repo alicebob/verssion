@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/google/uuid"
 	"github.com/jackc/pgx"
 )
 
@@ -102,4 +103,89 @@ func (p *Postgres) Known() ([]string, error) {
 		ps = append(ps, p)
 	}
 	return ps, rows.Err()
+}
+
+func (p *Postgres) CreateCurated() (string, error) {
+	id, err := uuid.NewRandom()
+	if err != nil {
+		return "", err
+	}
+	cid := id.String()
+	_, err = p.conn.Exec(`
+		INSERT INTO curated (id, created, lastused)
+		VALUES ($1, now(), now())`,
+		cid,
+	)
+	return cid, err
+}
+
+func (p *Postgres) StoreCurated(cur Curated) error {
+	return nil
+}
+
+func (p *Postgres) LoadCurated(id string) (*Curated, error) {
+	row := p.conn.QueryRow(`
+		SELECT id, created, lastused, title
+		FROM curated
+		WHERE id=$1`,
+		id,
+	)
+	cur := Curated{}
+	if err := row.Scan(&cur.ID, &cur.Created, &cur.LastUsed, &cur.CustomTitle); err != nil {
+		if err == pgx.ErrNoRows {
+			return nil, nil
+		}
+		return nil, err
+	}
+	pg, err := p.curatedPages(id)
+	if err != nil {
+		return nil, err
+	}
+	cur.Pages = pg
+	return &cur, nil
+}
+
+func (p *Postgres) curatedPages(id string) ([]string, error) {
+	var ps []string
+	rows, err := p.conn.Query(`
+		SELECT page
+		FROM curated_pages
+		WHERE curated_id=$1
+		ORDER BY page`,
+		id,
+	)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		var p string
+		if err := rows.Scan(&p); err != nil {
+			return nil, err
+		}
+		ps = append(ps, p)
+	}
+	return ps, rows.Err()
+}
+
+// pages must be unique
+func (p *Postgres) CuratedPages(id string, pages []string) error {
+	tx, err := p.conn.Begin()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+	if _, err := tx.Exec(`DELETE FROM curated_pages WHERE curated_id=$1`, id); err != nil {
+		return err
+	}
+	for _, p := range pages {
+		if _, err := tx.Exec(`INSERT INTO curated_pages (curated_id, page) VALUES ($1, $2)`, id, p); err != nil {
+			return err
+		}
+	}
+	return tx.Commit()
+}
+
+func (p *Postgres) CuratedUsed(id string) error {
+	_, err := p.conn.Exec(`UPDATE curated SET lastused=now(), used=used+1 WHERE id=$1`, id)
+	return err
 }

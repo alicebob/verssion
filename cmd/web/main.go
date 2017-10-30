@@ -131,18 +131,22 @@ func adhocAtomHandler(db libw.DB, up *update) httprouter.Handle {
 		var es []Entry
 		for _, v := range vs {
 			es = append(es, Entry{
-				ID:      asuri(v.Page, v.StableVersion),
+				ID:      asURN(v.Page + "-" + v.StableVersion),
 				Title:   libw.Title(v.Page) + ": " + v.StableVersion,
 				Updated: v.T,
 				Content: v.StableVersion, // TODO: prev version?
 			})
 		}
-		url := adhocURL(pages)
 		var update time.Time
 		if len(vs) > 0 {
 			update = vs[len(vs)-1].T
 		}
-		writeFeed(w, url, strings.Join(libw.Titles(pages), ", "), update, es)
+		writeFeed(w,
+			asURN(strings.Join(pages, ",")),
+			strings.Join(libw.Titles(pages), ", "),
+			update,
+			es,
+		)
 	}
 }
 

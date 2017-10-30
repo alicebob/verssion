@@ -1,8 +1,9 @@
 package main
 
 import (
+	"crypto/sha1"
 	"encoding/xml"
-	"net/url"
+	"fmt"
 	"time"
 )
 
@@ -27,10 +28,7 @@ type Entry struct {
 	Content string    `xml:"content"`
 }
 
-func asuri(elems ...string) string {
-	p := ""
-	for _, s := range elems {
-		p += "/" + url.PathEscape(s)
-	}
-	return "http://lijzij.de/w" + p
+func asURN(s string) string {
+	n := sha1.Sum([]byte(s))
+	return fmt.Sprintf("urn:sha1:%x", n)
 }

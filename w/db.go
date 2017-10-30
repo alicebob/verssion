@@ -16,6 +16,7 @@ type Curated struct {
 	CustomTitle string
 	Created     time.Time
 	LastUsed    time.Time
+	LastUpdated time.Time
 	Pages       []string
 }
 

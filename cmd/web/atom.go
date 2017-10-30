@@ -35,7 +35,7 @@ func asURN(s string) string {
 	return fmt.Sprintf("urn:sha1:%x", n)
 }
 
-func asFeed(id, title string, vs []libw.Entry) Feed {
+func asFeed(id, title string, update time.Time, vs []libw.Entry) Feed {
 	var es []Entry
 	for _, v := range vs {
 		es = append(es, Entry{
@@ -44,10 +44,9 @@ func asFeed(id, title string, vs []libw.Entry) Feed {
 			Updated: v.T,
 			Content: v.StableVersion, // TODO: prev version?
 		})
-	}
-	var update time.Time
-	if len(vs) > 0 {
-		update = vs[len(vs)-1].T
+		if v.T.After(update) {
+			update = v.T
+		}
 	}
 	return Feed{
 		XMLNS:   "http://www.w3.org/2005/Atom",

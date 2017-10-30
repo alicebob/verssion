@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"sort"
 	"strings"
+	"time"
 
 	libw "github.com/alicebob/w/w"
 	"github.com/julienschmidt/httprouter"
@@ -84,6 +85,7 @@ func adhocAtomHandler(db libw.DB, up *update) httprouter.Handle {
 		writeFeed(w, asFeed(
 			asURN(strings.Join(pages, ",")),
 			strings.Join(libw.Titles(pages), ", "),
+			time.Time{},
 			vs,
 		))
 	}

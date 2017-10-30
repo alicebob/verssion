@@ -112,8 +112,8 @@ func (p *Postgres) CreateCurated() (string, error) {
 	}
 	cid := id.String()
 	_, err = p.conn.Exec(`
-		INSERT INTO curated (id, created, lastused)
-		VALUES ($1, now(), now())`,
+		INSERT INTO curated (id, created, lastused, lastupdated)
+		VALUES ($1, now(), now(), now())`,
 		cid,
 	)
 	return cid, err
@@ -125,13 +125,13 @@ func (p *Postgres) StoreCurated(cur Curated) error {
 
 func (p *Postgres) LoadCurated(id string) (*Curated, error) {
 	row := p.conn.QueryRow(`
-		SELECT id, created, lastused, title
+		SELECT id, created, lastused, lastupdated, title
 		FROM curated
 		WHERE id=$1`,
 		id,
 	)
 	cur := Curated{}
-	if err := row.Scan(&cur.ID, &cur.Created, &cur.LastUsed, &cur.CustomTitle); err != nil {
+	if err := row.Scan(&cur.ID, &cur.Created, &cur.LastUsed, &cur.LastUpdated, &cur.CustomTitle); err != nil {
 		if err == pgx.ErrNoRows {
 			return nil, nil
 		}
@@ -174,6 +174,7 @@ func (p *Postgres) CuratedPages(id string, pages []string) error {
 		return err
 	}
 	defer tx.Rollback()
+
 	if _, err := tx.Exec(`DELETE FROM curated_pages WHERE curated_id=$1`, id); err != nil {
 		return err
 	}
@@ -181,6 +182,9 @@ func (p *Postgres) CuratedPages(id string, pages []string) error {
 		if _, err := tx.Exec(`INSERT INTO curated_pages (curated_id, page) VALUES ($1, $2)`, id, p); err != nil {
 			return err
 		}
+	}
+	if _, err := p.conn.Exec(`UPDATE curated SET lastupdated=now() WHERE id=$1`, id); err != nil {
+		return err
 	}
 	return tx.Commit()
 }

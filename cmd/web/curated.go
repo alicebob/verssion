@@ -126,7 +126,7 @@ func curatedAtomHandler(db libw.DB, up *update) httprouter.Handle {
 
 		writeFeed(
 			w,
-			asFeed("urn:uuid:"+cur.ID, cur.Title(), vs),
+			asFeed("urn:uuid:"+cur.ID, cur.Title(), cur.LastUpdated, vs),
 		)
 
 		if err := db.CuratedUsed(id); err != nil {

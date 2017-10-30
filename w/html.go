@@ -88,8 +88,8 @@ node:
 			case "small", "sup":
 				continue node
 			default:
+				res += tString(c)
 			}
-			fallthrough
 		default:
 			res += tString(c)
 		}

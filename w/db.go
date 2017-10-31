@@ -24,6 +24,12 @@ func (c *Curated) Title() string {
 	if t := c.CustomTitle; t != "" {
 		return t
 	}
+	return c.DefaultTitle()
+}
+func (c *Curated) DefaultTitle() string {
+	if len(c.Pages) == 0 {
+		return "[untitled list]"
+	}
 	return strings.Join(Titles(c.Pages), ", ")
 }
 
@@ -37,4 +43,5 @@ type DB interface {
 	LoadCurated(string) (*Curated, error)
 	CuratedPages(string, []string) error
 	CuratedUsed(string) error
+	CuratedTitle(string, string) error
 }

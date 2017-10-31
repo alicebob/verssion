@@ -44,13 +44,13 @@ func main() {
 	r := httprouter.New()
 	r.GET("/", indexHandler(db))
 	r.GET("/adhoc/", adhocHandler(db, up))
-	r.GET("/adhoc/atom.xml", adhocAtomHandler(db, up))
+	r.GET("/adhoc/atom.xml", adhocAtomHandler(db, up, *baseURL))
 	r.GET("/curated/", newCuratedHandler(db))
 	r.POST("/curated/", newCuratedHandler(db))
 	r.GET("/curated/:id/", curatedHandler(db, up, *baseURL))
 	r.POST("/curated/:id/", curatedHandler(db, up, *baseURL))
 	r.GET("/curated/:id/atom.xml", curatedAtomHandler(db, up, *baseURL))
-	r.GET("/v/:page/", pageHandler(db, up))
+	r.GET("/p/:page/", pageHandler(db, up))
 	fmt.Printf("listening on %s...\n", *listen)
 	log.Fatal(http.ListenAndServe(*listen, r))
 }
@@ -61,30 +61,6 @@ func indexHandler(db libw.DB) httprouter.Handle {
 		runTmpl(w, indexTempl, map[string]interface{}{
 			"title":   "hello world",
 			"entries": es,
-		})
-	}
-}
-
-func pageHandler(db libw.DB, up *update) httprouter.Handle {
-	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-		page := p.ByName("page")
-		if up != nil {
-			if err := up.Update(page); err != nil {
-				log.Printf("update %q: %s", page, err)
-			}
-		}
-
-		vs, err := db.History(page)
-		if err != nil {
-			log.Printf("history: %s", err)
-			http.Error(w, http.StatusText(500), 500)
-			return
-		}
-		runTmpl(w, pageTempl, map[string]interface{}{
-			"title":    libw.Title(page),
-			"atom":     adhocURL([]string{page}),
-			"page":     page,
-			"versions": vs,
 		})
 	}
 }

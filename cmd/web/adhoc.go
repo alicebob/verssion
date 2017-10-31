@@ -63,7 +63,7 @@ func adhocHandler(db libw.DB, up *update) httprouter.Handle {
 	}
 }
 
-func adhocAtomHandler(db libw.DB, up *update) httprouter.Handle {
+func adhocAtomHandler(db libw.DB, up *update, base string) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		pages := r.URL.Query()["p"]
 		sort.Strings(pages)
@@ -83,6 +83,7 @@ func adhocAtomHandler(db libw.DB, up *update) httprouter.Handle {
 		}
 
 		feed := asFeed(
+			base,
 			asURN(strings.Join(pages, ",")),
 			strings.Join(libw.Titles(pages), ", "),
 			time.Time{},

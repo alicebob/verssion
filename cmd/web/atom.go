@@ -35,6 +35,7 @@ type Entry struct {
 	Title   string    `xml:"title"`
 	Updated time.Time `xml:"updated"`
 	Content string    `xml:"content"`
+	Links   []Link    `xml:"link"`
 }
 
 func asURN(s string) string {
@@ -42,7 +43,7 @@ func asURN(s string) string {
 	return fmt.Sprintf("urn:sha1:%x", n)
 }
 
-func asFeed(id, title string, update time.Time, vs []libw.Entry) Feed {
+func asFeed(base, id, title string, update time.Time, vs []libw.Entry) Feed {
 	var es []Entry
 	for _, v := range vs {
 		es = append(es, Entry{
@@ -50,6 +51,13 @@ func asFeed(id, title string, update time.Time, vs []libw.Entry) Feed {
 			Title:   libw.Title(v.Page) + ": " + v.StableVersion,
 			Updated: v.T,
 			Content: v.StableVersion, // TODO: prev version?
+			Links: []Link{
+				{
+					Href: fmt.Sprintf("%s/p/%s/", base, v.Page),
+					Rel:  "alternate", // not strictly true...
+					Type: "text/html",
+				},
+			},
 		})
 		if v.T.After(update) {
 			update = v.T

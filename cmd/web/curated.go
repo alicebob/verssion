@@ -45,7 +45,6 @@ func curatedHandler(db libw.DB, up *update, base string) httprouter.Handle {
 		}
 
 		args := map[string]interface{}{
-			"title":   "curated list", // TODO: cur.Title()
 			"curated": cur,
 			"atom":    fmt.Sprintf("%s/curated/%s/atom.xml", base, cur.ID),
 		}
@@ -77,7 +76,18 @@ func curatedHandler(db libw.DB, up *update, base string) httprouter.Handle {
 				http.Error(w, http.StatusText(500), 500)
 				return
 			}
+
+			title := r.Form.Get("title")
+			if err := db.CuratedTitle(cur.ID, title); err != nil {
+				log.Printf("curated title: %s", err)
+			}
+			cur.CustomTitle = title
 		}
+
+		args["title"] = cur.Title()
+		args["defaulttitle"] = cur.DefaultTitle()
+		args["customtitle"] = cur.CustomTitle
+
 		seen := map[string]struct{}{}
 		for _, p := range cur.Pages {
 			seen[p] = struct{}{}
@@ -124,7 +134,7 @@ func curatedAtomHandler(db libw.DB, up *update, base string) httprouter.Handle {
 			return
 		}
 
-		feed := asFeed("urn:uuid:"+cur.ID, cur.Title(), cur.LastUpdated, vs)
+		feed := asFeed(base, "urn:uuid:"+cur.ID, cur.Title(), cur.LastUpdated, vs)
 		feed.Links = []Link{
 			{
 				Href: fmt.Sprintf("%s/curated/%s/", base, cur.ID),
@@ -163,14 +173,12 @@ var (
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
 {{- end}}
 {{define "page"}}
+	<h2>{{.curated.Title}}</h2>
 	Atom link: <a href="{{.atom}}">{{.atom}}</a><br />
 	<br />
-	ID: {{.curated.ID}}<br />
-	Title: {{.curated.Title}}<br />
-	Created: {{.curated.Created}}<br />
-	Last used: {{.curated.LastUsed}}<br />
 	<br />
 	<form method="POST">
+	Title: <input type="text" size="40" name="title" value="{{.customtitle}}" placeholder="{{.defaulttitle}}" /><br />
 	Pages:<br />
 	{{- with .curated.Pages}}
 		{{- range .}}

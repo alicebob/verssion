@@ -193,3 +193,8 @@ func (p *Postgres) CuratedUsed(id string) error {
 	_, err := p.conn.Exec(`UPDATE curated SET lastused=now(), used=used+1 WHERE id=$1`, id)
 	return err
 }
+
+func (p *Postgres) CuratedTitle(id, title string) error {
+	_, err := p.conn.Exec(`UPDATE curated SET title=$2, lastupdated=now() WHERE id=$1`, id, title)
+	return err
+}

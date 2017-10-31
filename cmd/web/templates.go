@@ -14,6 +14,9 @@ var (
 		template.New("base").
 			Funcs(template.FuncMap{
 				"title": libw.Title,
+				"link": func(s string) string {
+					return *baseURL + s
+				},
 			}).Parse(`<!DOCTYPE html>
 <html>
     <head>
@@ -21,6 +24,8 @@ var (
         {{- template "head" . }}
     </head>
     <body>
+		<a href="{{link "/"}}">Home</a><br />
+		<hr />
         {{- template "page" . }}
     </body>
 </html>
@@ -41,21 +46,7 @@ Hello World<br />
 
 Recent new versions:<br />
 	{{- range .entries}}
-		<a href="./v/{{.Page}}/">{{title .Page}}</a>: {{.StableVersion}}<br />
-	{{- end}}
-{{- end}}
-`))
-
-	pageTempl = template.Must(extend(baseTempl).Parse(`
-{{define "head"}}
-	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
-{{- end}}
-{{define "page"}}
-	{{.title}}<br />
-	atom: <a href="{{.atom}}">{{.atom}}</a><br />
-	<br />
-	{{- range .versions}}
-		{{- .StableVersion}} - (spider: {{.T}})<br />
+		<a href="./p/{{.Page}}/">{{title .Page}}</a>: {{.StableVersion}}<br />
 	{{- end}}
 {{- end}}
 `))

@@ -19,7 +19,7 @@ var client = &http.Client{
 
 // GetPage downloads and parses given wikipage
 func GetPage(page string) (Page, error) {
-	p, err := client.Get(wikiURL(page))
+	p, err := client.Get(WikiURL(page))
 	if err != nil {
 		return Page{}, err
 	}
@@ -53,7 +53,7 @@ func StableVersion(n io.Reader) string {
 	return ""
 }
 
-func wikiURL(page string) string {
+func WikiURL(page string) string {
 	return "https://en.wikipedia.org/wiki/" + page
 }
 

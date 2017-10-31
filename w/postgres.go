@@ -42,6 +42,19 @@ func (p *Postgres) Recent() ([]Entry, error) {
     `)
 }
 
+func (p *Postgres) Current(page string) (*Entry, error) {
+	rows, err := p.queryUpdates(`
+		WHERE page=$1
+		ORDER BY timestamp DESC
+		LIMIT 1
+    `, page)
+	if err != nil || len(rows) == 0 {
+		return nil, err
+	}
+	e := rows[0]
+	return &e, nil
+}
+
 // History of a list of page. Newest first.
 func (p *Postgres) History(pages ...string) ([]Entry, error) {
 	var (
@@ -71,6 +84,7 @@ func (p *Postgres) queryUpdates(where string, args ...interface{}) ([]Entry, err
 		if err := rows.Scan(&e.Page, &e.T, &e.StableVersion); err != nil {
 			return nil, err
 		}
+		e.T = e.T.UTC()
 		es = append(es, e)
 	}
 	return es, rows.Err()

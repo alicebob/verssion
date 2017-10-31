@@ -44,9 +44,41 @@ func curatedHandler(db libw.DB, up *update, base string) httprouter.Handle {
 			return
 		}
 
+		vs := map[string]libw.Entry{}
+		for _, p := range cur.Pages {
+			e, err := db.Current(p)
+			if err == nil && e != nil {
+				vs[p] = *e
+			}
+		}
+
+		args := map[string]interface{}{
+			"curated":      cur,
+			"atom":         fmt.Sprintf("%s/curated/%s/atom.xml", base, cur.ID),
+			"title":        cur.Title(),
+			"pageversions": vs,
+		}
+
+		runTmpl(w, curatedTempl, args)
+	}
+}
+
+func curatedEditHandler(db libw.DB, up *update, base string) httprouter.Handle {
+	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+		id := p.ByName("id")
+		cur, err := db.LoadCurated(id)
+		if err != nil {
+			log.Printf("load curated: %s", err)
+			http.Error(w, http.StatusText(500), 500)
+			return
+		}
+		if cur == nil {
+			http.Error(w, http.StatusText(404), 404)
+			return
+		}
+
 		args := map[string]interface{}{
 			"curated": cur,
-			"atom":    fmt.Sprintf("%s/curated/%s/atom.xml", base, cur.ID),
 		}
 
 		if r.Method == "POST" {
@@ -81,10 +113,11 @@ func curatedHandler(db libw.DB, up *update, base string) httprouter.Handle {
 			if err := db.CuratedTitle(cur.ID, title); err != nil {
 				log.Printf("curated title: %s", err)
 			}
-			cur.CustomTitle = title
-		}
 
-		args["title"] = cur.Title()
+			w.Header().Set("Location", "./")
+			w.WriteHeader(302)
+			return
+		}
 		args["defaulttitle"] = cur.DefaultTitle()
 		args["customtitle"] = cur.CustomTitle
 
@@ -101,7 +134,7 @@ func curatedHandler(db libw.DB, up *update, base string) httprouter.Handle {
 			}
 		}
 		args["available"] = av
-		runTmpl(w, curatedTempl, args)
+		runTmpl(w, curatedEditTempl, args)
 	}
 }
 
@@ -175,6 +208,36 @@ var (
 {{define "page"}}
 	<h2>{{.curated.Title}}</h2>
 	Atom link: <a href="{{.atom}}">{{.atom}}</a><br />
+	<br />
+	{{- with .curated.Pages}}
+		<table>
+		<tr>
+			<td>Page</td>
+			<td>Stable Version</td>
+			<td>Spider T</td>
+		</tr>
+		{{- range .}}
+			{{$p := (index $.pageversions .)}}
+			<tr>
+			<td><a href="../../p/{{.}}/" title="{{.}}">{{title .}}</a></td>
+			<td>{{$p.StableVersion}}</td>
+			<td>{{$p.T}}</td>
+			</tr>
+		{{- end}}
+		</table>
+	{{- else}}
+		No pages selected, yet.<br />
+	{{- end}}
+	<br />
+	<a href="./edit.html">Edit this list</a><br />
+	<br />
+	<br />
+{{end}}
+`))
+
+	curatedEditTempl = template.Must(extend(baseTempl).Parse(`
+{{define "page"}}
+	<h2>{{.curated.Title}}</h2>
 	<br />
 	<br />
 	<form method="POST">

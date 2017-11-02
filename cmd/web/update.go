@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"sync"
 	"time"
@@ -56,10 +57,14 @@ func (u *update) Update(page string) error {
 		return err
 	}
 
+	sv := p.StableVersion
+	if sv == "" {
+		return fmt.Errorf("no version number found")
+	}
 	if err := u.db.Store(w.Entry{
 		Page:          page,
 		T:             time.Now().UTC(),
-		StableVersion: p.StableVersion,
+		StableVersion: sv,
 	}); err != nil {
 		return err
 	}

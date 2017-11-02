@@ -10,27 +10,51 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func newCuratedHandler(db libw.DB) httprouter.Handle {
+func newCuratedHandler(db libw.DB, up *update) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-		if r.FormValue("go") != "" {
-			id, err := db.CreateCurated()
-			if err != nil {
-				log.Printf("create curated: %s", err)
-				http.Error(w, http.StatusText(500), 500)
-				return
-			}
-			w.Header().Set("Location", "./"+id+"/")
-			w.WriteHeader(302)
-			return
+		r.ParseForm()
+		var (
+			etc   = r.Form.Get("etc")
+			pages = r.Form["p"]
+		)
+		pm := map[string]bool{}
+		for _, p := range pages {
+			pm[p] = true
 		}
 		args := map[string]interface{}{
-			"title": "curated list",
+			"title":    "curated list",
+			"etc":      etc,
+			"selected": pm,
 		}
+		if r.Method == "POST" {
+			pages, errors := readPageArgs(up, pages, etc)
+			if len(pages) > 0 && len(errors) == 0 {
+				id, err := db.CreateCurated()
+				if err != nil {
+					log.Printf("create curated: %s", err)
+					http.Error(w, http.StatusText(500), 500)
+					return
+				}
+				if err := db.CuratedPages(id, pages); err != nil {
+					log.Printf("curated pages: %s", err)
+				}
+
+				w.Header().Set("Location", "./"+id+"/")
+				w.WriteHeader(302)
+				return
+			}
+			args["errors"] = errors
+		}
+		avail, err := db.Known()
+		if err != nil {
+			log.Printf("known: %s", err)
+		}
+		args["available"] = avail
 		runTmpl(w, newCuratedTempl, args)
 	}
 }
 
-func curatedHandler(db libw.DB, up *update, base string) httprouter.Handle {
+func curatedHandler(db libw.DB, base string) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		id := p.ByName("id")
 		cur, err := db.LoadCurated(id)
@@ -77,49 +101,51 @@ func curatedEditHandler(db libw.DB, up *update, base string) httprouter.Handle {
 			return
 		}
 
-		args := map[string]interface{}{
-			"curated": cur,
+		r.ParseForm()
+		var (
+			etc    = r.Form.Get("etc")
+			qPages = r.Form["p"]
+		)
+		selected := map[string]bool{}
+		for _, p := range cur.Pages {
+			selected[p] = true
 		}
-
+		args := map[string]interface{}{
+			"title":        cur.Title(),
+			"curated":      cur,
+			"etc":          etc,
+			"selected":     selected,
+			"pages":        cur.Pages,
+			"defaulttitle": cur.DefaultTitle(),
+			"customtitle":  cur.CustomTitle,
+		}
 		if r.Method == "POST" {
-			r.ParseForm()
-			var (
-				newPages = append(r.Form["p"], toPages(r.Form.Get("etc"))...)
-				pages    []string
-				errors   []string
-			)
-			for _, p := range newPages {
-				if up != nil {
-					if err := up.Update(p); err != nil {
-						log.Printf("update %q: %s", p, err)
-						errors = append(errors, fmt.Sprintf("%q: %s", p, err))
-					} else {
-						pages = append(pages, p)
-					}
-				} else {
-					pages = append(pages, p)
+			pages, errors := readPageArgs(up, qPages, etc)
+			title := r.Form.Get("title")
+			args["customtitle"] = title
+			if len(errors) == 0 {
+				if err := db.CuratedPages(cur.ID, pages); err != nil {
+					log.Printf("curated pages: %s", err)
+					http.Error(w, http.StatusText(500), 500)
+					return
 				}
-			}
-			pages = unique(pages)
-			cur.Pages = pages
-			args["errors"] = errors
-			if err := db.CuratedPages(cur.ID, pages); err != nil {
-				log.Printf("curated pages: %s", err)
-				http.Error(w, http.StatusText(500), 500)
+
+				if err := db.CuratedTitle(cur.ID, title); err != nil {
+					log.Printf("curated title: %s", err)
+				}
+
+				w.Header().Set("Location", "./")
+				w.WriteHeader(302)
 				return
 			}
 
-			title := r.Form.Get("title")
-			if err := db.CuratedTitle(cur.ID, title); err != nil {
-				log.Printf("curated title: %s", err)
+			selected := map[string]bool{}
+			for _, p := range qPages {
+				selected[p] = true
 			}
-
-			w.Header().Set("Location", "./")
-			w.WriteHeader(302)
-			return
+			args["selected"] = selected
+			args["errors"] = errors
 		}
-		args["defaulttitle"] = cur.DefaultTitle()
-		args["customtitle"] = cur.CustomTitle
 
 		seen := map[string]struct{}{}
 		for _, p := range cur.Pages {
@@ -191,11 +217,14 @@ func curatedAtomHandler(db libw.DB, up *update, base string) httprouter.Handle {
 var (
 	newCuratedTempl = template.Must(extend(baseTempl).Parse(`
 {{define "page"}}
-	Curated list is a stored on the server. Whenever you change the list you don't have to update the RSS link, since that only has the list ID.<br />
-	You can also share the link, and everyone can update the list.<br />
+	Create a new list. You can change it later.<br />
 	<br />
+
+	{{template "errors" .errors}}
 	
 	<form method="POST">
+	{{template "pageselection" .}}
+
 	<input type="submit" name="go" value="Start a list" />
 	</form>
 {{- end}}
@@ -240,32 +269,49 @@ var (
 	<h2>{{.curated.Title}}</h2>
 	<br />
 	<br />
+
+	{{template "errors" .errors}}
+
+
 	<form method="POST">
 	Title: <input type="text" size="40" name="title" value="{{.customtitle}}" placeholder="{{.defaulttitle}}" /><br />
-	Pages:<br />
-	{{- with .curated.Pages}}
-		{{- range .}}
-			<input type="checkbox" name="p" value="{{.}}" id="p{{.}}" CHECKED /><label for="p{{.}}" title="{{.}}"> {{title .}}</label><br />
-		{{- end}}
-	{{- else}}
-		No pages selected, yet.<br />
-	{{- end}}
-	<br />
-
-	{{- if .available}}
-		Add some pages we know about already:<br />
-		{{- range .available}}
-			<input type="checkbox" name="p" value="{{.}}" id="p{{.}}" /><label for="p{{.}}" title="{{.}}"> {{title .}}</label><br />
-		{{- end}}
-		<br />
-	{{- end}}
-
-	Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.<br />
-	<textarea name="etc" cols="80" rows="4">
-	</textarea><br />
+	{{template "pageselection" .}}
 	<br />
 	<input type="submit" value="Update" /><br />
 	</form>
 {{end}}
 `))
 )
+
+func runUpdates(up *update, pages []string) ([]string, []error) {
+	var (
+		ret    []string
+		errors []error
+	)
+
+	for _, p := range pages {
+		if up != nil {
+			if err := up.Update(p); err != nil {
+				log.Printf("update %q: %s", p, err)
+				errors = append(errors, fmt.Errorf("%q: %s", p, err))
+			} else {
+				ret = append(ret, p)
+			}
+		} else {
+			ret = append(ret, p)
+		}
+	}
+	return ret, errors
+}
+
+// read p and etc arguments
+func readPageArgs(up *update, pages []string, etc string) ([]string, []error) {
+	etcPages, etcErrors := toPages(etc)
+	pages = append(pages, etcPages...)
+	errors := etcErrors
+
+	pages, upErrs := runUpdates(up, pages)
+	errors = append(errors, upErrs...)
+
+	return unique(pages), errors
+}

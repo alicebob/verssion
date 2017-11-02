@@ -7,9 +7,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"regexp"
-	"sort"
-	"strings"
 
 	libw "github.com/alicebob/w/w"
 	"github.com/julienschmidt/httprouter"
@@ -43,11 +40,11 @@ func main() {
 
 	r := httprouter.New()
 	r.GET("/", indexHandler(db))
-	r.GET("/adhoc/", adhocHandler(db, up))
+	r.GET("/adhoc/", adhocHandler(db))
 	r.GET("/adhoc/atom.xml", adhocAtomHandler(db, up, *baseURL))
-	r.GET("/curated/", newCuratedHandler(db))
-	r.POST("/curated/", newCuratedHandler(db))
-	r.GET("/curated/:id/", curatedHandler(db, up, *baseURL))
+	r.GET("/curated/", newCuratedHandler(db, up))
+	r.POST("/curated/", newCuratedHandler(db, up))
+	r.GET("/curated/:id/", curatedHandler(db, *baseURL))
 	r.GET("/curated/:id/edit.html", curatedEditHandler(db, up, *baseURL))
 	r.POST("/curated/:id/edit.html", curatedEditHandler(db, up, *baseURL))
 	r.GET("/curated/:id/atom.xml", curatedAtomHandler(db, up, *baseURL))
@@ -76,34 +73,4 @@ func adhocURL(pages []string) string {
 		"p": pages,
 	}.Encode()
 	return u.String()
-}
-
-var matchpage = regexp.MustCompile(`^(?:(?i:https?://en.wikipedia.org)/wiki/)?(\S+)$`)
-
-// from textarea to pages
-func toPages(q string) []string {
-	var ps []string
-	for _, l := range strings.Split(q, "\n") {
-		l = strings.TrimSpace(l)
-		if len(l) == 0 {
-			continue
-		}
-		if m := matchpage.FindStringSubmatch(l); m != nil {
-			ps = append(ps, m[1])
-		}
-	}
-	return ps
-}
-
-func unique(ps []string) []string {
-	m := map[string]struct{}{}
-	for _, p := range ps {
-		m[p] = struct{}{}
-	}
-	res := make([]string, 0, len(m))
-	for p := range m {
-		res = append(res, p)
-	}
-	sort.Strings(res)
-	return res
 }

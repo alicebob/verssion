@@ -33,6 +33,36 @@ var (
 {{- end}}
 {{define "page"}}
 {{- end}}
+
+{{define "errors"}}
+	{{- with .}}
+		Some problems:<br />
+		{{- range .}}
+			{{.}}<br />
+		{{- end}}
+		<br />
+		<br />
+	{{- end}}
+{{end}}
+
+{{define "pageselection"}}
+	{{- if .pages}}
+	Selected pages:<br />
+	{{- range .pages}}
+		<input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label><br />
+	{{- end}}
+	<br />
+	{{- end}}
+
+	Add some pages:<br />
+	{{- range .available}}
+		<input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label><br />
+	{{- end}}
+	<br />
+
+	Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.<br />
+	<textarea name="etc" cols="80" rows="4">{{.etc}}</textarea><br />
+{{end}}
 `))
 
 	indexTempl = template.Must(extend(baseTempl).Parse(`

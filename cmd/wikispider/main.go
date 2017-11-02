@@ -49,9 +49,14 @@ func handlePage(db w.DB, page string) error {
 		return err
 	}
 
+	sv := p.StableVersion
+	if sv == "" {
+		return fmt.Errorf("no stable version found")
+	}
+
 	return db.Store(w.Entry{
 		Page:          page,
 		T:             time.Now().UTC(),
-		StableVersion: p.StableVersion,
+		StableVersion: sv,
 	})
 }

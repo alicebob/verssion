@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -13,11 +12,12 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func adhocHandler(db libw.DB, up *update) httprouter.Handle {
+func adhocHandler(db libw.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		q := r.URL.Query()
 		pages := q["p"]
-		pages = append(pages, toPages(q.Get("etc"))...)
+		etcP, _ := toPages(q.Get("etc"))
+		pages = append(pages, etcP...)
 		pages = unique(pages)
 		var (
 			errors []string
@@ -25,12 +25,6 @@ func adhocHandler(db libw.DB, up *update) httprouter.Handle {
 		)
 		for _, p := range pages {
 			seen[p] = struct{}{}
-			if up != nil {
-				if err := up.Update(p); err != nil {
-					log.Printf("update %q: %s", p, err)
-					errors = append(errors, fmt.Sprintf("%q: %s", p, err))
-				}
-			}
 		}
 
 		args := map[string]interface{}{

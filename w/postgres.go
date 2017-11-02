@@ -35,24 +35,26 @@ func NewPostgres(url string) (*Postgres, error) {
 	return p, nil
 }
 
-// Bunch of recent changes. Just to have something
-func (p *Postgres) Recent() ([]Page, error) {
-	return p.queryUpdates(`
-		ORDER BY timestamp DESC
+// All pages we know about
+func (p *Postgres) CurrentAll() ([]Page, error) {
+	return p.queryCurrent(`
+		ORDER BY page
     `)
 }
 
-func (p *Postgres) Current(page string) (*Page, error) {
-	rows, err := p.queryUpdates(`
-		WHERE page=$1
-		ORDER BY timestamp DESC
-		LIMIT 1
-    `, page)
-	if err != nil || len(rows) == 0 {
-		return nil, err
+func (p *Postgres) Current(pages ...string) ([]Page, error) {
+	var (
+		in   []string
+		args []interface{}
+	)
+	for i, p := range pages {
+		in = append(in, fmt.Sprintf("$%d", i+1))
+		args = append(args, p)
 	}
-	e := rows[0]
-	return &e, nil
+	return p.queryCurrent(`
+		WHERE page IN (`+strings.Join(in, ",")+`)
+		ORDER BY timestamp DESC
+    `, args...)
 }
 
 // History of a list of page. Newest first.
@@ -71,11 +73,19 @@ func (p *Postgres) History(pages ...string) ([]Page, error) {
     `, args...)
 }
 
+func (p *Postgres) queryCurrent(where string, args ...interface{}) ([]Page, error) {
+	return p.queryPages("current", where, args...)
+}
+
 func (p *Postgres) queryUpdates(where string, args ...interface{}) ([]Page, error) {
+	return p.queryPages("updates", where, args...)
+}
+
+func (p *Postgres) queryPages(table, where string, args ...interface{}) ([]Page, error) {
 	var es []Page
 	rows, err := p.conn.Query(`
 		SELECT page, timestamp, stable_version, homepage
-		FROM updates`+where, args...)
+		FROM `+table+where, args...)
 	if err != nil {
 		return nil, err
 	}

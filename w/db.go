@@ -35,9 +35,9 @@ func (c *Curated) DefaultTitle() string {
 }
 
 type DB interface {
-	Recent() ([]Page, error)
+	CurrentAll() ([]Page, error)
+	Current(...string) ([]Page, error)
 	History(...string) ([]Page, error)
-	Current(string) (*Page, error)
 	Store(Page) error
 	Known() ([]string, error)
 

@@ -18,11 +18,18 @@ func pageHandler(db libw.DB, up *update) httprouter.Handle {
 			}
 		}
 
-		cur, err := db.Current(page)
+		curs, err := db.Current(page)
 		if err != nil {
 			log.Printf("current: %s", err)
 			http.Error(w, http.StatusText(500), 500)
 			return
+		}
+		cur := libw.Page{}
+		for _, c := range curs {
+			if c.Page == page {
+				cur = c
+				break
+			}
 		}
 
 		vs, err := db.History(page)

@@ -20,6 +20,16 @@ AS SELECT page, timestamp, stable_version, homepage
     ) sub
     WHERE prev IS NULL OR stable_version <> prev;
 
+CREATE VIEW current
+AS SELECT page, timestamp, stable_version, homepage
+    FROM (
+        SELECT *, rank() OVER (
+            PARTITION BY page ORDER BY timestamp DESC
+        )
+        FROM updates
+    ) sub
+    WHERE rank=1;
+
 CREATE TABLE curated
     ( id text NOT NULL UNIQUE
     , created timestamptz NOT NULL

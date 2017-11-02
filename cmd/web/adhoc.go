@@ -43,14 +43,7 @@ func adhocHandler(db libw.DB) httprouter.Handle {
 		args["available"] = av
 
 		if len(pages) > 0 {
-			vs, err := db.History(pages...)
-			if err != nil {
-				log.Printf("history: %s", err)
-				http.Error(w, http.StatusText(500), 500)
-				return
-			}
 			args["title"] = strings.Join(libw.Titles(pages), ", ")
-			args["versions"] = vs
 			args["atom"] = adhocURL(pages)
 		}
 		runTmpl(w, adhocTempl, args)
@@ -139,13 +132,6 @@ var (
 
 	<input type="submit" value="Update" /><br />
 </form>
-
-	<br />
-	<hr />
-	Version history of selected pages:<br />
-	{{- range .versions}}
-		{{- title .Page}}: {{.StableVersion}}<br />
-	{{- end}}
 {{- end}}
 `))
 )

@@ -68,12 +68,11 @@ func curatedHandler(db libw.DB, base string) httprouter.Handle {
 			return
 		}
 
-		vs := map[string]libw.Page{}
-		for _, p := range cur.Pages {
-			e, err := db.Current(p)
-			if err == nil && e != nil {
-				vs[p] = *e
-			}
+		vs, err := db.Current(cur.Pages...)
+		if err != nil {
+			log.Printf("current: %s", err)
+			http.Error(w, http.StatusText(500), 500)
+			return
 		}
 
 		args := map[string]interface{}{
@@ -238,7 +237,7 @@ var (
 	<h2>{{.curated.Title}}</h2>
 	Atom link: <a href="{{.atom}}">{{.atom}}</a><br />
 	<br />
-	{{- with .curated.Pages}}
+	{{- with .pageversions}}
 		<table>
 		<tr>
 			<td>Page</td>
@@ -246,11 +245,10 @@ var (
 			<td>Spider T</td>
 		</tr>
 		{{- range .}}
-			{{$p := (index $.pageversions .)}}
 			<tr>
-			<td><a href="../../p/{{.}}/" title="{{.}}">{{title .}}</a></td>
-			<td>{{$p.StableVersion}}</td>
-			<td>{{$p.T}}</td>
+			<td><a href="../../p/{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
+			<td>{{.StableVersion}}</td>
+			<td>{{.T}}</td>
 			</tr>
 		{{- end}}
 		</table>

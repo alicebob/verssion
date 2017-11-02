@@ -68,16 +68,21 @@ var (
 	indexTempl = template.Must(extend(baseTempl).Parse(`
 {{define "page"}}
 Hello World<br />
-
-<br />
-<a href="./adhoc/">ad hoc feeds</a><br />
-<a href="./curated/">curated feeds</a><br />
 <br />
 
-Recent new versions:<br />
+<a href="./curated/">curated feed</a><br />
+<a href="./adhoc/">ad hoc feed</a><br />
+<br />
+
+Recent versions:<br />
+	<table>
 	{{- range .entries}}
-		<a href="./p/{{.Page}}/">{{title .Page}}</a>: {{.StableVersion}}<br />
+		<tr>
+			<td><a href="./p/{{.Page}}/">{{title .Page}}</a></td>
+			<td>{{.StableVersion}}</td>
+		</tr>
 	{{- end}}
+	</table>
 {{- end}}
 `))
 )

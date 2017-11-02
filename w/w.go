@@ -7,8 +7,9 @@ import (
 	"strings"
 )
 
-type Page struct {
+type WikiPage struct {
 	StableVersion string
+	Homepage      string
 }
 
 var client = &http.Client{
@@ -18,26 +19,25 @@ var client = &http.Client{
 }
 
 // GetPage downloads and parses given wikipage
-func GetPage(page string) (Page, error) {
+func GetPage(page string) (WikiPage, error) {
 	p, err := client.Get(WikiURL(page))
 	if err != nil {
-		return Page{}, err
+		return WikiPage{}, err
 	}
 	defer p.Body.Close()
 	if p.StatusCode != 200 {
-		return Page{}, fmt.Errorf("not ok: %d", p.StatusCode)
+		return WikiPage{}, fmt.Errorf("not ok: %d", p.StatusCode)
 	}
 
-	return Page{
-		StableVersion: StableVersion(p.Body),
-	}, nil
+	return StableVersion(p.Body), nil
 }
 
-func StableVersion(n io.Reader) string {
+func StableVersion(n io.Reader) WikiPage {
 	ts, err := FindTables(n)
 	if err != nil {
-		return ""
+		return WikiPage{}
 	}
+	p := WikiPage{}
 	for _, t := range ts {
 		for _, r := range t.Rows {
 			if len(r) < 2 {
@@ -46,11 +46,15 @@ func StableVersion(n io.Reader) string {
 			k, v := r[0], r[1]
 			switch k {
 			case "Stable release", "Latest release":
-				return strings.Split(v, ";")[0]
+				p.StableVersion = strings.Split(v, ";")[0]
+			case "Official website", "Website":
+				if v != "" {
+					p.Homepage = v
+				}
 			}
 		}
 	}
-	return ""
+	return p
 }
 
 func WikiURL(page string) string {

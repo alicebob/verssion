@@ -54,9 +54,10 @@ func handlePage(db w.DB, page string) error {
 		return fmt.Errorf("no stable version found")
 	}
 
-	return db.Store(w.Entry{
+	return db.Store(w.Page{
 		Page:          page,
 		T:             time.Now().UTC(),
 		StableVersion: sv,
+		Homepage:      p.Homepage,
 	})
 }

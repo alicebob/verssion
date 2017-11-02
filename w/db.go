@@ -5,10 +5,11 @@ import (
 	"time"
 )
 
-type Entry struct {
+type Page struct {
 	Page          string
 	T             time.Time
 	StableVersion string
+	Homepage      string
 }
 
 type Curated struct {
@@ -34,10 +35,10 @@ func (c *Curated) DefaultTitle() string {
 }
 
 type DB interface {
-	Recent() ([]Entry, error)
-	History(...string) ([]Entry, error)
-	Current(string) (*Entry, error)
-	Store(Entry) error
+	Recent() ([]Page, error)
+	History(...string) ([]Page, error)
+	Current(string) (*Page, error)
+	Store(Page) error
 	Known() ([]string, error)
 
 	CreateCurated() (string, error)

@@ -61,10 +61,11 @@ func (u *update) Update(page string) error {
 	if sv == "" {
 		return fmt.Errorf("no version number found")
 	}
-	if err := u.db.Store(w.Entry{
+	if err := u.db.Store(w.Page{
 		Page:          page,
 		T:             time.Now().UTC(),
 		StableVersion: sv,
+		Homepage:      p.Homepage,
 	}); err != nil {
 		return err
 	}

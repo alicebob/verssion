@@ -68,7 +68,7 @@ func curatedHandler(db libw.DB, base string) httprouter.Handle {
 			return
 		}
 
-		vs := map[string]libw.Entry{}
+		vs := map[string]libw.Page{}
 		for _, p := range cur.Pages {
 			e, err := db.Current(p)
 			if err == nil && e != nil {

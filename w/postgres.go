@@ -36,13 +36,13 @@ func NewPostgres(url string) (*Postgres, error) {
 }
 
 // Bunch of recent changes. Just to have something
-func (p *Postgres) Recent() ([]Entry, error) {
+func (p *Postgres) Recent() ([]Page, error) {
 	return p.queryUpdates(`
 		ORDER BY timestamp DESC
     `)
 }
 
-func (p *Postgres) Current(page string) (*Entry, error) {
+func (p *Postgres) Current(page string) (*Page, error) {
 	rows, err := p.queryUpdates(`
 		WHERE page=$1
 		ORDER BY timestamp DESC
@@ -56,7 +56,7 @@ func (p *Postgres) Current(page string) (*Entry, error) {
 }
 
 // History of a list of page. Newest first.
-func (p *Postgres) History(pages ...string) ([]Entry, error) {
+func (p *Postgres) History(pages ...string) ([]Page, error) {
 	var (
 		in   []string
 		args []interface{}
@@ -71,17 +71,17 @@ func (p *Postgres) History(pages ...string) ([]Entry, error) {
     `, args...)
 }
 
-func (p *Postgres) queryUpdates(where string, args ...interface{}) ([]Entry, error) {
-	var es []Entry
+func (p *Postgres) queryUpdates(where string, args ...interface{}) ([]Page, error) {
+	var es []Page
 	rows, err := p.conn.Query(`
-		SELECT page, timestamp, stable_version
+		SELECT page, timestamp, stable_version, homepage
 		FROM updates`+where, args...)
 	if err != nil {
 		return nil, err
 	}
 	for rows.Next() {
-		var e Entry
-		if err := rows.Scan(&e.Page, &e.T, &e.StableVersion); err != nil {
+		var e Page
+		if err := rows.Scan(&e.Page, &e.T, &e.StableVersion, &e.Homepage); err != nil {
 			return nil, err
 		}
 		e.T = e.T.UTC()
@@ -90,13 +90,13 @@ func (p *Postgres) queryUpdates(where string, args ...interface{}) ([]Entry, err
 	return es, rows.Err()
 }
 
-func (p *Postgres) Store(e Entry) error {
+func (p *Postgres) Store(e Page) error {
 	_, err := p.conn.Exec(`
 	INSERT INTO page
-		(page, timestamp, stable_version)
+		(page, timestamp, stable_version, homepage)
 	VALUES
-		($1, $2, $3)
-`, e.Page, e.T, e.StableVersion)
+		($1, $2, $3, $4)
+`, e.Page, e.T, e.StableVersion, e.Homepage)
 	return err
 }
 

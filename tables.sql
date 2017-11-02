@@ -6,13 +6,14 @@ CREATE TABLE page
     ( page text NOT NULL
     , timestamp timestamptz NOT NULL
     , stable_version text NOT NULL 
+    , homepage text NOT NULL
     );
 CREATE INDEX page_page ON page (page, timestamp);
 
 CREATE VIEW updates
-AS SELECT page, timestamp, stable_version
+AS SELECT page, timestamp, stable_version, homepage
     FROM (
-        SELECT page, timestamp, stable_version, lag(stable_version) OVER (
+        SELECT page, timestamp, stable_version, homepage, lag(stable_version) OVER (
             PARTITION BY page ORDER BY timestamp
         ) AS prev
         FROM page

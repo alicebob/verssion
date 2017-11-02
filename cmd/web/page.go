@@ -18,6 +18,13 @@ func pageHandler(db libw.DB, up *update) httprouter.Handle {
 			}
 		}
 
+		cur, err := db.Current(page)
+		if err != nil {
+			log.Printf("current: %s", err)
+			http.Error(w, http.StatusText(500), 500)
+			return
+		}
+
 		vs, err := db.History(page)
 		if err != nil {
 			log.Printf("history: %s", err)
@@ -28,6 +35,7 @@ func pageHandler(db libw.DB, up *update) httprouter.Handle {
 			"title":     libw.Title(page),
 			"atom":      adhocURL([]string{page}),
 			"wikipedia": libw.WikiURL(page),
+			"current":   cur,
 			"page":      page,
 			"versions":  vs,
 		})
@@ -41,11 +49,23 @@ var (
 {{- end}}
 {{define "page"}}
 	{{.title}}<br />
-	atom: <a href="{{.atom}}">{{.atom}}</a><br />
+	Atom feed: <a href="{{.atom}}">{{.atom}}</a><br />
 	Wikipedia: <a href="{{.wikipedia}}">{{.wikipedia}}</a><br />
-	<br />
+	Homepage: {{with .current.Homepage}}<a href="https://{{.}}">{{.}}</a>{{- end}}<br />
+	Latest version: {{with .current.StableVersion}}{{.}}{{- end}}<br />
+    <br />
+    <br />
+	History:
+	<table>
+	<tr>
+		<th>Version Wiki text</th>
+		<th>Spider T</th>
+	</tr>
 	{{- range .versions}}
-		{{- .StableVersion}} - (spider: {{.T}})<br />
+		<tr>
+			<td>{{- .StableVersion}}</td>
+			<td>{{.T}})</td>
+		</tr>
 	{{- end}}
 {{- end}}
 `))

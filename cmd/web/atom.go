@@ -43,7 +43,7 @@ func asURN(s string) string {
 	return fmt.Sprintf("urn:sha1:%x", n)
 }
 
-func asFeed(base, id, title string, update time.Time, vs []libw.Entry) Feed {
+func asFeed(base, id, title string, update time.Time, vs []libw.Page) Feed {
 	var es []Entry
 	for _, v := range vs {
 		es = append(es, Entry{

@@ -35,7 +35,10 @@ func (c *Curated) DefaultTitle() string {
 }
 
 type DB interface {
-	CurrentAll() ([]Page, error)
+	// Last spider
+	Last(string) (*Page, error)
+	Recent(int) ([]Page, error)
+	// Most recent changed version
 	Current(...string) ([]Page, error)
 	History(...string) ([]Page, error)
 	Store(Page) error

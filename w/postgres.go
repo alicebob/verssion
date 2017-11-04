@@ -35,11 +35,33 @@ func NewPostgres(url string) (*Postgres, error) {
 	return p, nil
 }
 
-// All pages we know about
-func (p *Postgres) CurrentAll() ([]Page, error) {
+// recent updates to have something to show
+func (p *Postgres) Recent(n int) ([]Page, error) {
 	return p.queryCurrent(`
-		ORDER BY page
-    `)
+		ORDER BY timestamp DESC
+		LIMIT $1
+    `, n)
+}
+
+func (p *Postgres) Last(page string) (*Page, error) {
+	row := p.conn.QueryRow(`
+		SELECT page, timestamp, stable_version, homepage
+		FROM page
+		WHERE page=$1
+		ORDER BY timestamp DESC
+		LIMIT 1
+	`,
+		page,
+	)
+	res := Page{}
+	if err := row.Scan(&res.Page, &res.T, &res.StableVersion, &res.Homepage); err != nil {
+		if err == pgx.ErrNoRows {
+			return nil, nil
+		}
+		return nil, err
+	}
+	res.T = res.T.UTC()
+	return &res, nil
 }
 
 func (p *Postgres) Current(pages ...string) ([]Page, error) {

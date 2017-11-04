@@ -64,18 +64,19 @@ var (
 	Wikipedia: <a href="{{.wikipedia}}">{{.wikipedia}}</a><br />
 	Homepage: {{with .current.Homepage}}<a href="https://{{.}}">{{.}}</a>{{- end}}<br />
 	Latest version: {{with .current.StableVersion}}{{.}}{{- end}}<br />
+	Latest spider check: {{if not .current.T.IsZero}}{{.current.T.Format "2006-01-02 15:04 UTC"}}{{- end}}<br />
     <br />
     <br />
 	History:
 	<table>
 	<tr>
-		<th>Version Wiki text</th>
-		<th>Spider T</th>
+		<th style="padding-right: 2em">Spider timestamp</th>
+		<th style="text-align: left">Version</th>
 	</tr>
 	{{- range .versions}}
 		<tr>
+			<td>{{.T.Format "2006-01-02 15:04 UTC"}}</td>
 			<td>{{- .StableVersion}}</td>
-			<td>{{.T}})</td>
 		</tr>
 	{{- end}}
 {{- end}}

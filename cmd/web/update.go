@@ -48,6 +48,14 @@ func (u *update) cachedFetch(page string) (libw.Page, error) {
 	l, ok := u.pages[page]
 	if !ok {
 		l = &last{}
+		// load last spider from the DB
+		p, err := u.db.Last(page)
+		if err != nil {
+			log.Printf("last %q: %s", page, err)
+		} else {
+			l.page = *p
+			l.cacheTill = p.T.Add(cacheOK)
+		}
 		u.pages[page] = l
 	}
 	u.mu.Unlock()

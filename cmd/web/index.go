@@ -11,7 +11,7 @@ import (
 
 func indexHandler(db libw.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-		es, err := db.CurrentAll()
+		es, err := db.Recent(12)
 		if err != nil {
 			log.Printf("current all: %s", err)
 			http.Error(w, http.StatusText(500), 500)
@@ -39,7 +39,7 @@ You can create feeds for your own use, or share them with collegues.<br />
 <a href="./adhoc/">ad hoc feed</a> (kinda outdated)<br />
 <br />
 
-Recent versions:<br />
+Some recent updates:<br />
 	<table>
 	{{- range .entries}}
 		<tr>

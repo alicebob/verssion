@@ -82,7 +82,7 @@ func StableVersion(n io.Reader) (string, string) {
 			case "Stable release", "Latest release":
 				stable = strings.Split(v, ";")[0]
 			case "Official website", "Website":
-				if v != "" {
+				if homepage == "" && v != "" {
 					homepage = v
 				}
 			}

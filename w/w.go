@@ -5,39 +5,73 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"time"
 )
 
-type WikiPage struct {
-	StableVersion string
-	Homepage      string
-}
-
-var client = &http.Client{
+var client = http.Client{
 	CheckRedirect: func(*http.Request, []*http.Request) error {
 		return http.ErrUseLastResponse
 	},
 }
 
-// GetPage downloads and parses given wikipage
-func GetPage(page string) (WikiPage, error) {
-	p, err := client.Get(WikiURL(page))
-	if err != nil {
-		return WikiPage{}, err
-	}
-	defer p.Body.Close()
-	if p.StatusCode != 200 {
-		return WikiPage{}, fmt.Errorf("not ok: %d", p.StatusCode)
-	}
-
-	return StableVersion(p.Body), nil
+type ErrRedirect struct {
+	Page, To string
 }
 
-func StableVersion(n io.Reader) WikiPage {
+func (e ErrRedirect) Error() string {
+	return fmt.Sprintf("%q: see page %q", e.Page, e.To)
+}
+
+type ErrNotFound struct {
+	Page string
+}
+
+func (e ErrNotFound) Error() string {
+	return fmt.Sprintf("%q: no such page", e.Page)
+}
+
+// GetPage downloads and parses given wikipage
+func GetPage(page string) (Page, error) {
+	p := Page{
+		Page: page,
+		T:    time.Now().UTC(),
+	}
+
+	// no redirects
+	r, err := client.Get(WikiURL(page))
+	if err != nil {
+		return p, err
+	}
+	defer r.Body.Close()
+
+	switch code := r.StatusCode; code {
+	case 200:
+		p.StableVersion, p.Homepage = StableVersion(r.Body)
+		if p.StableVersion == "" {
+			fmt.Errorf("%q: no version found", page)
+		}
+		return p, nil
+	case 301:
+		loc, err := r.Location()
+		if err != nil {
+			return p, err
+		}
+		to := strings.TrimPrefix(loc.Path, "/wiki/")
+		return p, ErrRedirect{Page: page, To: to}
+	case 404:
+		return p, ErrNotFound{Page: page}
+	default:
+		return p, fmt.Errorf("%q: wikipedia error (status: %d)", page, code)
+	}
+}
+
+func StableVersion(n io.Reader) (string, string) {
+	var stable, homepage string
+
 	ts, err := FindTables(n)
 	if err != nil {
-		return WikiPage{}
+		return "", ""
 	}
-	p := WikiPage{}
 	for _, t := range ts {
 		for _, r := range t.Rows {
 			if len(r) < 2 {
@@ -46,15 +80,15 @@ func StableVersion(n io.Reader) WikiPage {
 			k, v := r[0], r[1]
 			switch k {
 			case "Stable release", "Latest release":
-				p.StableVersion = strings.Split(v, ";")[0]
+				stable = strings.Split(v, ";")[0]
 			case "Official website", "Website":
 				if v != "" {
-					p.Homepage = v
+					homepage = v
 				}
 			}
 		}
 	}
-	return p
+	return stable, homepage
 }
 
 func WikiURL(page string) string {

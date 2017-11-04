@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -12,38 +13,41 @@ import (
 func pageHandler(db libw.DB, up *update) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		page := p.ByName("page")
-		if up != nil {
-			if err := up.Update(page); err != nil {
-				log.Printf("update %q: %s", page, err)
-			}
-		}
-
-		curs, err := db.Current(page)
+		cur, err := up.Fetch(page, 10)
 		if err != nil {
-			log.Printf("current: %s", err)
+			if p, ok := err.(libw.ErrNotFound); ok {
+				log.Printf("not found %q: %s", page, err)
+				w.WriteHeader(404)
+				runTmpl(w, pageNotFoundTempl, map[string]interface{}{
+					"title":     libw.Title(p.Page),
+					"wikipedia": libw.WikiURL(p.Page),
+					"page":      p.Page,
+				})
+				return
+			}
+			log.Printf("update %q: %s", page, err)
 			http.Error(w, http.StatusText(500), 500)
 			return
 		}
-		cur := libw.Page{}
-		for _, c := range curs {
-			if c.Page == page {
-				cur = c
-				break
-			}
+
+		if page != cur.Page {
+			w.Header().Set("Location", fmt.Sprintf("%s/p/%s/", *baseURL, cur.Page))
+			w.WriteHeader(302)
+			return
 		}
 
-		vs, err := db.History(page)
+		vs, err := db.History(cur.Page)
 		if err != nil {
 			log.Printf("history: %s", err)
 			http.Error(w, http.StatusText(500), 500)
 			return
 		}
 		runTmpl(w, pageTempl, map[string]interface{}{
-			"title":     libw.Title(page),
-			"atom":      adhocURL([]string{page}),
-			"wikipedia": libw.WikiURL(page),
+			"title":     libw.Title(cur.Page),
+			"atom":      adhocURL([]string{cur.Page}),
+			"wikipedia": libw.WikiURL(cur.Page),
 			"current":   cur,
-			"page":      page,
+			"page":      cur.Page,
 			"versions":  vs,
 		})
 	}
@@ -74,6 +78,14 @@ var (
 			<td>{{.T}})</td>
 		</tr>
 	{{- end}}
+{{- end}}
+`))
+
+	pageNotFoundTempl = template.Must(extend(baseTempl).Parse(`
+{{define "page"}}
+	Page not found: {{.page}}<br />
+	Maybe you can create it on <a href="{{.wikipedia}}">Wikipedia</a><br />
+    <br />
 {{- end}}
 `))
 )

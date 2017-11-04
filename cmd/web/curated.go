@@ -177,15 +177,9 @@ func curatedAtomHandler(db libw.DB, up *update, base string) httprouter.Handle {
 			return
 		}
 
-		if up != nil {
-			for _, p := range cur.Pages {
-				if err := up.Update(p); err != nil {
-					log.Printf("update %q: %s", p, err)
-				}
-			}
-		}
+		actualPages, _ := runUpdates(up, cur.Pages)
 
-		vs, err := db.History(cur.Pages...)
+		vs, err := db.History(actualPages...)
 		if err != nil {
 			log.Printf("history: %s", err)
 			http.Error(w, http.StatusText(500), 500)
@@ -280,27 +274,6 @@ var (
 {{end}}
 `))
 )
-
-func runUpdates(up *update, pages []string) ([]string, []error) {
-	var (
-		ret    []string
-		errors []error
-	)
-
-	for _, p := range pages {
-		if up != nil {
-			if err := up.Update(p); err != nil {
-				log.Printf("update %q: %s", p, err)
-				errors = append(errors, fmt.Errorf("%q: %s", p, err))
-			} else {
-				ret = append(ret, p)
-			}
-		} else {
-			ret = append(ret, p)
-		}
-	}
-	return ret, errors
-}
 
 // read p and etc arguments
 func readPageArgs(up *update, pages []string, etc string) ([]string, []error) {

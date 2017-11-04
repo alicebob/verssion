@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"regexp"
 	"sort"
 	"strings"
@@ -40,4 +41,25 @@ func unique(ps []string) []string {
 	}
 	sort.Strings(res)
 	return res
+}
+
+func runUpdates(up *update, pages []string) ([]string, []error) {
+	var (
+		ret    []string
+		errors []error
+	)
+
+	for _, p := range pages {
+		if up == nil {
+			ret = append(ret, p)
+		} else {
+			if n, err := up.Fetch(p, 10); err != nil {
+				log.Printf("update %q: %s", p, err)
+				errors = append(errors, fmt.Errorf("%q: %s", p, err))
+			} else {
+				ret = append(ret, n.Page)
+			}
+		}
+	}
+	return ret, errors
 }

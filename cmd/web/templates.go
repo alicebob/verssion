@@ -64,27 +64,6 @@ var (
 	<textarea name="etc" cols="80" rows="4">{{.etc}}</textarea><br />
 {{end}}
 `))
-
-	indexTempl = template.Must(extend(baseTempl).Parse(`
-{{define "page"}}
-Hello World<br />
-<br />
-
-<a href="./curated/">curated feed</a><br />
-<a href="./adhoc/">ad hoc feed</a><br />
-<br />
-
-Recent versions:<br />
-	<table>
-	{{- range .entries}}
-		<tr>
-			<td><a href="./p/{{.Page}}/">{{title .Page}}</a></td>
-			<td>{{.StableVersion}}</td>
-		</tr>
-	{{- end}}
-	</table>
-{{- end}}
-`))
 )
 
 func extend(t *template.Template) *template.Template {

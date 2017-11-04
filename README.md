@@ -4,6 +4,7 @@ Bugs
 ====
 
 * 'Firefox' versions on wikipedia are not supported.
+* 'Foo_bar' page is the same as 'Foobar', but it's not a proper redirect.
 
 Setup
 =====

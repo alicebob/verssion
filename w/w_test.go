@@ -30,11 +30,11 @@ func TestStableVersion(t *testing.T) {
 			t.Fatal(err)
 		}
 		defer r.Close()
-		wp := StableVersion(r)
-		if have, want := wp.StableVersion, c.Version; have != want {
+		stable, homepage := StableVersion(r)
+		if have, want := stable, c.Version; have != want {
 			t.Errorf("have %v, want %v", have, want)
 		}
-		if have, want := wp.Homepage, c.Homepage; have != want {
+		if have, want := homepage, c.Homepage; have != want {
 			t.Errorf("have %v, want %v", have, want)
 		}
 	}

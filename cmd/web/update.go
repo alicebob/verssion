@@ -6,33 +6,44 @@ import (
 	"sync"
 	"time"
 
-	"github.com/alicebob/w/w"
+	libw "github.com/alicebob/w/w"
 )
 
 const (
 	cacheErr = 30 * time.Second
-	cacheOK  = 1 * time.Hour
+	cacheOK  = 6 * time.Hour
 )
 
 type update struct {
-	db    w.DB
+	db    libw.DB
 	mu    sync.Mutex
 	pages map[string]*last
 }
 
 type last struct {
-	mu       sync.Mutex
-	waitTill time.Time
+	mu        sync.Mutex
+	cacheTill time.Time
+	page      libw.Page
+	err       error
 }
 
-func newUpdate(db w.DB) *update {
+func newUpdate(db libw.DB) *update {
 	return &update{
 		db:    db,
 		pages: map[string]*last{},
 	}
 }
 
-func (u *update) Update(page string) error {
+func (u *update) fetch(page string) (libw.Page, error) {
+	p, err := libw.GetPage(page)
+	if err != nil {
+		return p, err
+	}
+	return p, u.db.Store(p)
+
+}
+
+func (u *update) cachedFetch(page string) (libw.Page, error) {
 	u.mu.Lock()
 	l, ok := u.pages[page]
 	if !ok {
@@ -41,35 +52,36 @@ func (u *update) Update(page string) error {
 	}
 	u.mu.Unlock()
 
-	now := time.Now()
-
-	l.mu.Lock()
-	defer l.mu.Unlock()
-	if now.Before(l.waitTill) {
+	now := time.Now().UTC()
+	if now.Before(l.cacheTill) {
 		log.Printf("cached %q...", page)
-		return nil
+		return l.page, l.err
 	}
 
-	log.Printf("updating %q...", page)
-	l.waitTill = now.Add(cacheErr)
-	p, err := w.GetPage(page)
-	if err != nil {
-		return err
+	l.page, l.err = u.fetch(page)
+	c := cacheOK
+	if l.err != nil {
+		if _, ok := l.err.(libw.ErrRedirect); !ok {
+			c = cacheErr
+		}
+	}
+	l.cacheTill = now.Add(c)
+	return l.page, l.err
+}
+
+// Fetch the most recent version (or a cache).
+// Follows redirects.
+func (u *update) Fetch(page string, redir int) (*libw.Page, error) {
+	if redir < 0 {
+		return nil, fmt.Errorf("%q: too many redirects", page)
 	}
 
-	sv := p.StableVersion
-	if sv == "" {
-		return fmt.Errorf("no version number found")
+	p, err := u.cachedFetch(page)
+	if err == nil {
+		return &p, nil
 	}
-	if err := u.db.Store(w.Page{
-		Page:          page,
-		T:             time.Now().UTC(),
-		StableVersion: sv,
-		Homepage:      p.Homepage,
-	}); err != nil {
-		return err
+	if red, ok := err.(libw.ErrRedirect); ok {
+		return u.Fetch(red.To, redir-1)
 	}
-
-	l.waitTill = now.Add(cacheOK)
-	return nil
+	return nil, err
 }

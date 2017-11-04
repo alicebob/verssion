@@ -53,21 +53,6 @@ func main() {
 	log.Fatal(http.ListenAndServe(*listen, r))
 }
 
-func indexHandler(db libw.DB) httprouter.Handle {
-	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-		es, err := db.CurrentAll()
-		if err != nil {
-			log.Printf("current all: %s", err)
-			http.Error(w, http.StatusText(500), 500)
-			return
-		}
-		runTmpl(w, indexTempl, map[string]interface{}{
-			"title":   "hello world",
-			"entries": es,
-		})
-	}
-}
-
 func adhocURL(pages []string) string {
 	u, err := url.Parse(*baseURL)
 	if err != nil {

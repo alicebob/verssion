@@ -11,6 +11,21 @@ import (
 	libw "github.com/alicebob/verssion/w"
 )
 
+func allPagesHandler(db libw.DB, up *update) httprouter.Handle {
+	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+		all, err := db.CurrentAll()
+		if err != nil {
+			log.Printf("current all: %s", err)
+			http.Error(w, http.StatusText(500), 500)
+			return
+		}
+		runTmpl(w, allPagesTempl, map[string]interface{}{
+			"title": "Pages overview",
+			"pages": all,
+		})
+	}
+}
+
 func pageHandler(db libw.DB, up *update) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		page := p.ByName("page")
@@ -55,6 +70,26 @@ func pageHandler(db libw.DB, up *update) httprouter.Handle {
 }
 
 var (
+	allPagesTempl = template.Must(extend(baseTempl).Parse(`
+{{define "page"}}
+	All known pages:<br />
+	<table>
+	<tr>
+		<th></th>
+		<th></th>
+	</tr>
+	{{- range .pages}}
+		<tr>
+			<td><a href="./{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
+			<td>{{.StableVersion}}</td>
+		</tr>
+	{{- end}}
+	</table>
+	<br />
+	<a href="{{link "/curated/"}}">Make a custom feed</a><br />
+{{- end}}
+`))
+
 	pageTempl = template.Must(extend(baseTempl).Parse(`
 {{define "head"}}
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>

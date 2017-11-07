@@ -43,6 +43,7 @@ func main() {
 	r.GET("/curated/:id/edit.html", curatedEditHandler(db, up, *baseURL))
 	r.POST("/curated/:id/edit.html", curatedEditHandler(db, up, *baseURL))
 	r.GET("/curated/:id/atom.xml", curatedAtomHandler(db, up, *baseURL))
+	r.GET("/p/", allPagesHandler(db, up))
 	r.GET("/p/:page/", pageHandler(db, up))
 	fmt.Printf("listening on %s...\n", *listen)
 	log.Fatal(http.ListenAndServe(*listen, r))

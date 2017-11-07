@@ -64,6 +64,12 @@ func (p *Postgres) Last(page string) (*Page, error) {
 	return &res, nil
 }
 
+func (p *Postgres) CurrentAll() ([]Page, error) {
+	return p.queryCurrent(`
+		ORDER BY page
+    `)
+}
+
 func (p *Postgres) Current(pages ...string) ([]Page, error) {
 	var (
 		in   []string

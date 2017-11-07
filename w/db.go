@@ -38,7 +38,8 @@ type DB interface {
 	// Last spider
 	Last(string) (*Page, error)
 	Recent(int) ([]Page, error)
-	// Most recent changed version
+	// Latest versions
+	CurrentAll() ([]Page, error)
 	Current(...string) ([]Page, error)
 	History(...string) ([]Page, error)
 	Store(Page) error

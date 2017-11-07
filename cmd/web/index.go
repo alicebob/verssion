@@ -19,7 +19,7 @@ func indexHandler(db libw.DB) httprouter.Handle {
 			return
 		}
 		runTmpl(w, indexTempl, map[string]interface{}{
-			"title":   "hello world",
+			"title":   "VeRSSion",
 			"entries": es,
 		})
 	}
@@ -30,7 +30,7 @@ var (
 {{define "page"}}
 <div style="width: 40em"> 
 Verssion(*) tracks stable version of software projects (e.g.: databases, editors, JS frameworks), and makes that available as an RSS (atom) feed. The main use-case is for dev-ops and developers who use a lot of open source software projects, and who like to keep an eye on releases. Without making that a fulltime job, and without signing up for dozens of e-mail lists. Turns out wikipedia is a great source for version information, so that's what we use.<br />
-You can create feeds for your own use, or share them with collegues.<br />
+You can create feeds for your own use, or share them with colleagues.<br />
 <br />
 <a href="https://github.com/alicebob/verssion/">Full source</a> for issues and PRs.<br />
 <br />
@@ -38,7 +38,7 @@ You can create feeds for your own use, or share them with collegues.<br />
 </div>
 <br />
 
-<a href="./curated/">New feed!</a><br />
+<a href="./curated/">Create new feed!</a><br />
 <a href="./adhoc/">ad hoc feed</a> (kinda outdated)<br />
 <br />
 

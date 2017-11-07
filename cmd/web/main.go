@@ -17,7 +17,6 @@ var (
 	baseURL = flag.String("base", "http://localhost:3141", "base URL")
 	dbURL   = flag.String("db", "postgresql:///w", "postgres URL")
 	listen  = flag.String("listen", ":3141", "http listen")
-	updates = flag.Bool("update", true, "update pages")
 )
 
 func main() {
@@ -35,10 +34,6 @@ func main() {
 	}
 
 	up := newUpdate(db)
-	if !*updates {
-		up = nil
-	}
-
 	r := httprouter.New()
 	r.GET("/", indexHandler(db))
 	r.GET("/adhoc/atom.xml", adhocAtomHandler(db, up, *baseURL))

@@ -278,12 +278,14 @@ var (
 
 // read p and etc arguments
 func readPageArgs(up *update, pages []string, etc string) ([]string, []error) {
+	var errors []error
+
 	etcPages, etcErrors := toPages(etc)
 	pages = append(pages, etcPages...)
-	errors := etcErrors
+	errors = append(errors, etcErrors...)
 
-	pages, upErrs := runUpdates(up, pages)
-	errors = append(errors, upErrs...)
+	finalPages, upErrors := runUpdates(up, pages)
+	errors = append(errors, upErrors...)
 
-	return unique(pages), errors
+	return unique(finalPages), errors
 }

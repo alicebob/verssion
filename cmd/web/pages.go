@@ -50,15 +50,11 @@ func runUpdates(up *update, pages []string) ([]string, []error) {
 	)
 
 	for _, p := range pages {
-		if up == nil {
-			ret = append(ret, p)
+		if n, err := up.Fetch(p, 10); err != nil {
+			log.Printf("update %q: %s", p, err)
+			errors = append(errors, fmt.Errorf("%q: %s", p, err))
 		} else {
-			if n, err := up.Fetch(p, 10); err != nil {
-				log.Printf("update %q: %s", p, err)
-				errors = append(errors, fmt.Errorf("%q: %s", p, err))
-			} else {
-				ret = append(ret, n.Page)
-			}
+			ret = append(ret, n.Page)
 		}
 	}
 	return ret, errors

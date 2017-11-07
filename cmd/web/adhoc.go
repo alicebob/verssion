@@ -8,8 +8,9 @@ import (
 	"strings"
 	"time"
 
-	libw "github.com/alicebob/w/w"
 	"github.com/julienschmidt/httprouter"
+
+	libw "github.com/alicebob/verssion/w"
 )
 
 func adhocHandler(db libw.DB) httprouter.Handle {

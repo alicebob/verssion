@@ -1,10 +1,11 @@
-Monitor (stable) software versions via Wikipedia
+Atom feeds of (stable) software versions, as found in Wikipedia.
 
 Bugs
 ====
 
-* 'Firefox' versions on wikipedia are not supported.
-* 'Foo_bar' page is the same as 'Foobar', but it's not a proper redirect.
+* Versions on the wikipedia 'Firefox' page are not supported.
+* 'Foo_bar' page is the same page as 'Foobar', but wikipedia doesn't do a proper redirect.
+* Better name pun.
 
 Setup
 =====

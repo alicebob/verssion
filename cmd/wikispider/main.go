@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/alicebob/w/w"
+	libw "github.com/alicebob/verssion/w"
 )
 
 var (
@@ -26,7 +26,7 @@ func main() {
 
 	fmt.Printf("there we go...\n")
 
-	db, err := w.NewPostgres(*dburl)
+	db, err := libw.NewPostgres(*dburl)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "pg: %s\n", err)
 		os.Exit(2)
@@ -43,8 +43,8 @@ func main() {
 	}
 }
 
-func handlePage(db w.DB, page string) error {
-	p, err := w.GetPage(page)
+func handlePage(db libw.DB, page string) error {
+	p, err := libw.GetPage(page)
 	if err != nil {
 		return err
 	}
@@ -54,7 +54,7 @@ func handlePage(db w.DB, page string) error {
 		return fmt.Errorf("no stable version found")
 	}
 
-	return db.Store(w.Page{
+	return db.Store(libw.Page{
 		Page:          page,
 		T:             time.Now().UTC(),
 		StableVersion: sv,

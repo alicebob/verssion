@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	libw "github.com/alicebob/w/w"
+	libw "github.com/alicebob/verssion/w"
 )
 
 const (

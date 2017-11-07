@@ -6,8 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	libw "github.com/alicebob/w/w"
 	"github.com/julienschmidt/httprouter"
+
+	libw "github.com/alicebob/verssion/w"
 )
 
 func pageHandler(db libw.DB, up *update) httprouter.Handle {

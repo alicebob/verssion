@@ -8,8 +8,9 @@ import (
 	"net/url"
 	"os"
 
-	libw "github.com/alicebob/w/w"
 	"github.com/julienschmidt/httprouter"
+
+	libw "github.com/alicebob/verssion/w"
 )
 
 var (

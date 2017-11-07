@@ -93,6 +93,9 @@ node:
 				if !ignoreTag(c.Data, c.Attr) {
 					res += tString(c)
 				}
+				if c.Data == "tr" {
+					res += "\n"
+				}
 			}
 		default:
 			res += tString(c)
@@ -125,14 +128,28 @@ func stripCtl(s string) string {
 	}, s)
 }
 
+// Clean spaces in a multiline string. Keeps newlines.
 func cleanSpace(s string) string {
+	var res []string
+	for _, l := range strings.Split(s, "\n") {
+		if line := cleanLine(l); len(line) > 0 {
+			res = append(res, line)
+		}
+	}
+	return strings.Join(res, "\n")
+}
+
+func cleanLine(s string) string {
 	var inSpace = false
 	return strings.Map(func(r rune) rune {
-		sp := unicode.IsSpace(r)
-		if sp && inSpace {
-			return -1
+		if unicode.IsSpace(r) {
+			if inSpace {
+				return -1
+			}
+			inSpace = true
+			return ' '
 		}
-		inSpace = sp
+		inSpace = false
 		return r
 	}, strings.TrimSpace(s))
 }

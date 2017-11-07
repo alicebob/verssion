@@ -7,6 +7,22 @@ import (
 	"testing"
 )
 
+func TestCleanSpace(t *testing.T) {
+	for orig, want := range map[string]string{
+		" foo   ":          "foo",
+		" f   oo   ":       "f oo",
+		"new\nline":        "new\nline",
+		"new  \n line":     "new\nline",
+		"  new  \n\n line": "new\nline",
+		"\n":               "",
+		"\n\n":             "",
+	} {
+		if have := cleanSpace(orig); have != want {
+			t.Errorf("have %q, want %q", have, want)
+		}
+	}
+}
+
 func TestFindTables(t *testing.T) {
 	type cas struct {
 		Html string
@@ -76,7 +92,4 @@ func TestFindTablesReal(t *testing.T) {
 	if have, want := ts[0], t1; !reflect.DeepEqual(have, want) {
 		t.Errorf("have %#v\nwant %#v", have, want)
 	}
-	// for _, tb := range ts {
-	// t.Logf("table: %#v\n\n", tb)
-	// }
 }

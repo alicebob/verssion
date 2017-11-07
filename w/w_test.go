@@ -32,6 +32,11 @@ func TestStableVersion(t *testing.T) {
 			Version:  "3.6.3 / 3 October 2017\n2.7.14 / 16 September 2017",
 			Homepage: "www.python.org",
 		},
+		{
+			Filename: "firefox.html",
+			Version:  "Standard 56.0.2 / 26 October 2017\nESR 52.4.1 / 9 October 2017",
+			Homepage: "mozilla.org/firefox",
+		},
 	}
 
 	for _, c := range cases {
@@ -42,10 +47,10 @@ func TestStableVersion(t *testing.T) {
 		defer r.Close()
 		stable, homepage := StableVersion(r)
 		if have, want := stable, c.Version; have != want {
-			t.Errorf("have %v, want %v", have, want)
+			t.Errorf("have %q, want %q", have, want)
 		}
 		if have, want := homepage, c.Homepage; have != want {
-			t.Errorf("have %v, want %v", have, want)
+			t.Errorf("have %q, want %q", have, want)
 		}
 	}
 }

@@ -10,8 +10,6 @@ Bugs
 Setup
 =====
 
-Postgres
---------
-
-postgres@yourmachine:~$ createdb -O youruser w
-youruser@yourmachine:~/w/$ make db
+    postgres@yourmachine:~$ createdb -O youruser w
+    youruser@yourmachine:~/verssion/$ make db
+    youruser@yourmachine:~/verssion/$ make && ./cmd/web/web -base https://yourwebsite.example

@@ -53,8 +53,10 @@ func (u *update) cachedFetch(page string) (libw.Page, error) {
 		if err != nil {
 			log.Printf("last %q: %s", page, err)
 		} else {
-			l.page = *p
-			l.cacheTill = p.T.Add(cacheOK)
+			if p != nil {
+				l.page = *p
+				l.cacheTill = p.T.Add(cacheOK)
+			}
 		}
 		u.pages[page] = l
 	}

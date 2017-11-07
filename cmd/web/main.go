@@ -41,7 +41,6 @@ func main() {
 
 	r := httprouter.New()
 	r.GET("/", indexHandler(db))
-	r.GET("/adhoc/", adhocHandler(db))
 	r.GET("/adhoc/atom.xml", adhocAtomHandler(db, up, *baseURL))
 	r.GET("/curated/", newCuratedHandler(db, up))
 	r.POST("/curated/", newCuratedHandler(db, up))

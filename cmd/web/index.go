@@ -39,7 +39,6 @@ You can create feeds for your own use, or share them with colleagues.<br />
 <br />
 
 <a href="./curated/">Create new feed!</a><br />
-<a href="./adhoc/">ad hoc feed</a> (kinda outdated)<br />
 <br />
 
 Some recent updates:<br />

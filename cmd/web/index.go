@@ -48,7 +48,7 @@ Make a feed which combines multiple projects in a single feed:<br />
 	{{- range .entries}}
 		<tr>
 			<td><a href="./p/{{.Page}}/">{{title .Page}}</a></td>
-			<td>{{.StableVersion}}</td>
+			<td>{{version .StableVersion}}</td>
 		</tr>
 	{{- end}}
 		<tr>

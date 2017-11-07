@@ -81,7 +81,7 @@ var (
 	{{- range .pages}}
 		<tr>
 			<td><a href="./{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
-			<td>{{.StableVersion}}</td>
+			<td>{{version .StableVersion}}</td>
 		</tr>
 	{{- end}}
 	</table>
@@ -112,7 +112,7 @@ var (
 	{{- range .versions}}
 		<tr>
 			<td>{{.T.Format "2006-01-02 15:04 UTC"}}</td>
-			<td>{{- .StableVersion}}</td>
+			<td>{{version .StableVersion}}</td>
 		</tr>
 	{{- end}}
 {{- end}}

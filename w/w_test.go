@@ -27,6 +27,11 @@ func TestStableVersion(t *testing.T) {
 			Version:  "10.0 / 5 October 2017",
 			Homepage: "postgresql.org",
 		},
+		{
+			Filename: "python.html",
+			Version:  "3.6.3 / 3 October 2017\n2.7.14 / 16 September 2017",
+			Homepage: "www.python.org",
+		},
 	}
 
 	for _, c := range cases {

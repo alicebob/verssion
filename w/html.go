@@ -87,14 +87,31 @@ node:
 			switch c.Data {
 			case "small", "sup":
 				continue node
+			case "br":
+				res += "\n"
 			default:
-				res += tString(c)
+				if !ignoreTag(c.Data, c.Attr) {
+					res += tString(c)
+				}
 			}
 		default:
 			res += tString(c)
 		}
 	}
 	return res
+}
+
+// ignore certain HTML elemens. Specific to wikipedia
+func ignoreTag(tag string, attr []html.Attribute) bool {
+	for _, a := range attr {
+		if a.Key == "class" && strings.Contains(a.Val, "noprint") {
+			return true
+		}
+		if a.Key == "style" && strings.Contains(a.Val, "display:none") {
+			return true
+		}
+	}
+	return false
 }
 
 func stripCtl(s string) string {

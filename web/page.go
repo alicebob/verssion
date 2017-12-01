@@ -1,4 +1,4 @@
-package main
+package web
 
 import (
 	"fmt"
@@ -11,7 +11,7 @@ import (
 	libw "github.com/alicebob/verssion/w"
 )
 
-func allPagesHandler(db libw.DB, up *update) httprouter.Handle {
+func allPagesHandler(base string, db libw.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		all, err := db.CurrentAll()
 		if err != nil {
@@ -20,23 +20,25 @@ func allPagesHandler(db libw.DB, up *update) httprouter.Handle {
 			return
 		}
 		runTmpl(w, allPagesTempl, map[string]interface{}{
+			"base":  base,
 			"title": "Pages overview",
 			"pages": all,
 		})
 	}
 }
 
-func pageHandler(db libw.DB, up *update) httprouter.Handle {
+func pageHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		page := p.ByName("page")
-		cur, err := up.Fetch(page, 10)
+		cur, err := loadPage(page, db, fetch)
 		if err != nil {
 			if p, ok := err.(libw.ErrNotFound); ok {
 				log.Printf("not found %q: %s", page, err)
 				w.WriteHeader(404)
 				runTmpl(w, pageNotFoundTempl, map[string]interface{}{
+					"base":      base,
 					"title":     libw.Title(p.Page),
-					"wikipedia": libw.WikiURL(p.Page),
+					"wikipedia": WikiURL(p.Page),
 					"page":      p.Page,
 				})
 				return
@@ -47,7 +49,7 @@ func pageHandler(db libw.DB, up *update) httprouter.Handle {
 		}
 
 		if page != cur.Page {
-			w.Header().Set("Location", fmt.Sprintf("%s/p/%s/", *baseURL, cur.Page))
+			w.Header().Set("Location", fmt.Sprintf("%s/p/%s/", base, cur.Page))
 			w.WriteHeader(302)
 			return
 		}
@@ -59,9 +61,10 @@ func pageHandler(db libw.DB, up *update) httprouter.Handle {
 			return
 		}
 		runTmpl(w, pageTempl, map[string]interface{}{
+			"base":      base,
 			"title":     libw.Title(cur.Page),
-			"atom":      adhocURL([]string{cur.Page}),
-			"wikipedia": libw.WikiURL(cur.Page),
+			"atom":      adhocURL(base, []string{cur.Page}),
+			"wikipedia": WikiURL(cur.Page),
 			"current":   cur,
 			"page":      cur.Page,
 			"versions":  vs,
@@ -86,7 +89,7 @@ var (
 	{{- end}}
 	</table>
 	<br />
-	<a href="{{link "/curated/"}}">Make a custom feed</a><br />
+	<a href="{{.base}}/curated/">Make a custom feed</a><br />
 {{- end}}
 `))
 

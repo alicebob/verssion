@@ -5,12 +5,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"net/url"
 	"os"
 
-	"github.com/julienschmidt/httprouter"
-
 	libw "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/web"
 )
 
 var (
@@ -33,30 +31,8 @@ func main() {
 		os.Exit(2)
 	}
 
-	up := newUpdate(db)
-	r := httprouter.New()
-	r.GET("/", indexHandler(db))
-	r.GET("/adhoc/atom.xml", adhocAtomHandler(db, up, *baseURL))
-	r.GET("/curated/", newCuratedHandler(db, up))
-	r.POST("/curated/", newCuratedHandler(db, up))
-	r.GET("/curated/:id/", curatedHandler(db, *baseURL))
-	r.GET("/curated/:id/edit.html", curatedEditHandler(db, up, *baseURL))
-	r.POST("/curated/:id/edit.html", curatedEditHandler(db, up, *baseURL))
-	r.GET("/curated/:id/atom.xml", curatedAtomHandler(db, up, *baseURL))
-	r.GET("/p/", allPagesHandler(db, up))
-	r.GET("/p/:page/", pageHandler(db, up))
-	fmt.Printf("listening on %s...\n", *listen)
-	log.Fatal(http.ListenAndServe(*listen, r))
-}
+	mux := web.Mux(*baseURL, db, web.WikiFetcher())
 
-func adhocURL(pages []string) string {
-	u, err := url.Parse(*baseURL)
-	if err != nil {
-		panic(err)
-	}
-	u.Path += "/adhoc/atom.xml"
-	u.RawQuery = url.Values{
-		"p": pages,
-	}.Encode()
-	return u.String()
+	fmt.Printf("listening on %s...\n", *listen)
+	log.Fatal(http.ListenAndServe(*listen, mux))
 }

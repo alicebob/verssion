@@ -1,4 +1,4 @@
-package main
+package web
 
 import (
 	"html/template"
@@ -10,7 +10,7 @@ import (
 	libw "github.com/alicebob/verssion/w"
 )
 
-func indexHandler(db libw.DB) httprouter.Handle {
+func indexHandler(base string, db libw.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		es, err := db.Recent(12)
 		if err != nil {
@@ -19,6 +19,7 @@ func indexHandler(db libw.DB) httprouter.Handle {
 			return
 		}
 		runTmpl(w, indexTempl, map[string]interface{}{
+			"base":    base,
 			"title":   "VeRSSion",
 			"entries": es,
 		})

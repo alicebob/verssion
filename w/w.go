@@ -31,14 +31,14 @@ func (e ErrNotFound) Error() string {
 }
 
 // GetPage downloads and parses given wikipage
-func GetPage(page string) (Page, error) {
+func GetPage(page, url string) (Page, error) {
 	p := Page{
 		Page: page,
 		T:    time.Now().UTC(),
 	}
 
 	// no redirects
-	r, err := client.Get(WikiURL(page))
+	r, err := client.Get(url)
 	if err != nil {
 		return p, err
 	}
@@ -100,10 +100,6 @@ func StableVersion(n io.Reader) (string, string) {
 		}
 	}
 	return stable, homepage
-}
-
-func WikiURL(page string) string {
-	return "https://en.wikipedia.org/wiki/" + page
 }
 
 // title version of a wikipage path

@@ -1,4 +1,4 @@
-package main
+package web
 
 import (
 	"bytes"
@@ -15,9 +15,6 @@ var (
 		template.New("base").
 			Funcs(template.FuncMap{
 				"title": libw.Title,
-				"link": func(s string) string {
-					return *baseURL + s
-				},
 				"version": func(s string) template.HTML {
 					h := template.HTMLEscapeString(s)
 					return template.HTML(strings.Replace(h, "\n", "<br />", -1))
@@ -34,7 +31,7 @@ td {
         {{- template "head" . }}
     </head>
     <body>
-        <a href="{{link "/"}}">Home</a><br />
+        <a href="{{.base}}/">Home</a><br />
         <hr />
         {{- template "page" . }}
     </body>

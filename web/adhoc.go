@@ -1,4 +1,4 @@
-package main
+package web
 
 import (
 	"log"
@@ -12,11 +12,11 @@ import (
 	libw "github.com/alicebob/verssion/w"
 )
 
-func adhocAtomHandler(db libw.DB, up *update, base string) httprouter.Handle {
+func adhocAtomHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		pages := r.URL.Query()["p"]
 		sort.Strings(pages)
-		actualPages, _ := runUpdates(up, pages)
+		actualPages, _ := runUpdates(db, fetch, pages)
 
 		vs, err := db.History(actualPages...)
 		if err != nil {
@@ -34,7 +34,7 @@ func adhocAtomHandler(db libw.DB, up *update, base string) httprouter.Handle {
 		)
 		feed.Links = []Link{
 			{
-				Href: adhocURL(actualPages),
+				Href: adhocURL(base, actualPages),
 				Rel:  "self",
 				Type: "application/atom+xml",
 			},

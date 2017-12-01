@@ -1,4 +1,4 @@
-package main
+package web
 
 import (
 	"fmt"
@@ -6,6 +6,8 @@ import (
 	"regexp"
 	"sort"
 	"strings"
+
+	libw "github.com/alicebob/verssion/w"
 )
 
 var matchpage = regexp.MustCompile(`^(?:(?i:https?://en.wikipedia.org)/wiki/)?(\S+)$`)
@@ -43,14 +45,14 @@ func unique(ps []string) []string {
 	return res
 }
 
-func runUpdates(up *update, pages []string) ([]string, []error) {
+func runUpdates(db libw.DB, fetch Fetcher, pages []string) ([]string, []error) {
 	var (
 		ret    []string
 		errors []error
 	)
 
 	for _, p := range pages {
-		if n, err := up.Fetch(p, 10); err != nil {
+		if n, err := loadPage(p, db, fetch); err != nil {
 			log.Printf("update %q: %s", p, err)
 			errors = append(errors, fmt.Errorf("%q: %s", p, err))
 		} else {

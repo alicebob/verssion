@@ -27,6 +27,7 @@ func (c *Curated) Title() string {
 	}
 	return c.DefaultTitle()
 }
+
 func (c *Curated) DefaultTitle() string {
 	if len(c.Pages) == 0 {
 		return "[untitled list]"
@@ -35,13 +36,11 @@ func (c *Curated) DefaultTitle() string {
 }
 
 type DB interface {
-	// Last spider
-	Last(string) (*Page, error)
+	Last(string) (*Page, error) // Last spider
 	Recent(int) ([]Page, error)
-	// Latest versions
 	CurrentAll() ([]Page, error)
 	Current(...string) ([]Page, error)
-	History(...string) ([]Page, error)
+	History(...string) ([]Page, error) // Newest first
 	Store(Page) error
 	Known() ([]string, error)
 

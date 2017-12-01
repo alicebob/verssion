@@ -1,4 +1,4 @@
-package main
+package web
 
 import (
 	"fmt"
@@ -11,7 +11,7 @@ import (
 	libw "github.com/alicebob/verssion/w"
 )
 
-func newCuratedHandler(db libw.DB, up *update) httprouter.Handle {
+func newCuratedHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		r.ParseForm()
 		var (
@@ -28,7 +28,7 @@ func newCuratedHandler(db libw.DB, up *update) httprouter.Handle {
 			"selected": pm,
 		}
 		if r.Method == "POST" {
-			pages, errors := readPageArgs(up, pages, etc)
+			pages, errors := readPageArgs(db, fetch, pages, etc)
 			if len(pages) > 0 && len(errors) == 0 {
 				id, err := db.CreateCurated()
 				if err != nil {
@@ -55,7 +55,7 @@ func newCuratedHandler(db libw.DB, up *update) httprouter.Handle {
 	}
 }
 
-func curatedHandler(db libw.DB, base string) httprouter.Handle {
+func curatedHandler(base string, db libw.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		id := p.ByName("id")
 		cur, err := db.LoadCurated(id)
@@ -87,7 +87,7 @@ func curatedHandler(db libw.DB, base string) httprouter.Handle {
 	}
 }
 
-func curatedEditHandler(db libw.DB, up *update, base string) httprouter.Handle {
+func curatedEditHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		id := p.ByName("id")
 		cur, err := db.LoadCurated(id)
@@ -111,6 +111,7 @@ func curatedEditHandler(db libw.DB, up *update, base string) httprouter.Handle {
 			selected[p] = true
 		}
 		args := map[string]interface{}{
+			"base":         base,
 			"title":        cur.Title(),
 			"curated":      cur,
 			"etc":          etc,
@@ -120,7 +121,7 @@ func curatedEditHandler(db libw.DB, up *update, base string) httprouter.Handle {
 			"customtitle":  cur.CustomTitle,
 		}
 		if r.Method == "POST" {
-			pages, errors := readPageArgs(up, qPages, etc)
+			pages, errors := readPageArgs(db, fetch, qPages, etc)
 			title := r.Form.Get("title")
 			args["customtitle"] = title
 			if len(errors) == 0 {
@@ -164,7 +165,7 @@ func curatedEditHandler(db libw.DB, up *update, base string) httprouter.Handle {
 	}
 }
 
-func curatedAtomHandler(db libw.DB, up *update, base string) httprouter.Handle {
+func curatedAtomHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		id := p.ByName("id")
 		cur, err := db.LoadCurated(id)
@@ -178,7 +179,7 @@ func curatedAtomHandler(db libw.DB, up *update, base string) httprouter.Handle {
 			return
 		}
 
-		actualPages, _ := runUpdates(up, cur.Pages)
+		actualPages, _ := runUpdates(db, fetch, cur.Pages)
 
 		vs, err := db.History(actualPages...)
 		if err != nil {
@@ -277,14 +278,14 @@ var (
 )
 
 // read p and etc arguments
-func readPageArgs(up *update, pages []string, etc string) ([]string, []error) {
+func readPageArgs(db libw.DB, fetch Fetcher, pages []string, etc string) ([]string, []error) {
 	var errors []error
 
 	etcPages, etcErrors := toPages(etc)
 	pages = append(pages, etcPages...)
 	errors = append(errors, etcErrors...)
 
-	finalPages, upErrors := runUpdates(up, pages)
+	finalPages, upErrors := runUpdates(db, fetch, pages)
 	errors = append(errors, upErrors...)
 
 	return unique(finalPages), errors

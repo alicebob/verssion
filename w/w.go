@@ -48,7 +48,7 @@ func GetPage(page, url string) (Page, error) {
 	case 200:
 		p.StableVersion, p.Homepage = StableVersion(r.Body)
 		if p.StableVersion == "" {
-			fmt.Errorf("%q: no version found", page)
+			return p, fmt.Errorf("%q: no version found", page)
 		}
 		return p, nil
 	case 301:
@@ -104,7 +104,11 @@ func StableVersion(n io.Reader) (string, string) {
 
 // title version of a wikipage path
 func Title(page string) string {
-	return strings.Replace(page, "_", " ", -1)
+	s := strings.Replace(page, "_", " ", -1)
+	// remove some common disambiguations
+	s = strings.Replace(s, " (software)", "", -1)
+	s = strings.Replace(s, " (programming language)", "", -1)
+	return s
 }
 
 func Titles(pages []string) []string {

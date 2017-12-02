@@ -54,7 +54,7 @@ func runUpdates(db libw.DB, fetch Fetcher, pages []string) ([]string, []error) {
 	for _, p := range pages {
 		if n, err := loadPage(p, db, fetch); err != nil {
 			log.Printf("update %q: %s", p, err)
-			errors = append(errors, fmt.Errorf("%q: %s", p, err))
+			errors = append(errors, err)
 		} else {
 			ret = append(ret, n.Page)
 		}

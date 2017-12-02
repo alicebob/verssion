@@ -54,3 +54,17 @@ func TestStableVersion(t *testing.T) {
 		}
 	}
 }
+
+func TestTitle(t *testing.T) {
+	for title, want := range map[string]string{
+		"Foo":                        "Foo",
+		"Foo_bar":                    "Foo bar",
+		"Foo (not software)":         "Foo (not software)",
+		"Foo (software)":             "Foo",
+		"Foo (programming language)": "Foo",
+	} {
+		if have := Title(title); have != want {
+			t.Errorf("%q: have %q, want %q", title, have, want)
+		}
+	}
+}

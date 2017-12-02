@@ -71,6 +71,9 @@ func (p *Postgres) CurrentAll() ([]Page, error) {
 }
 
 func (p *Postgres) Current(pages ...string) ([]Page, error) {
+	if len(pages) == 0 {
+		return nil, nil
+	}
 	var (
 		in   []string
 		args []interface{}
@@ -87,6 +90,9 @@ func (p *Postgres) Current(pages ...string) ([]Page, error) {
 
 // History of a list of page. Newest first.
 func (p *Postgres) History(pages ...string) ([]Page, error) {
+	if len(pages) == 0 {
+		return nil, nil
+	}
 	var (
 		in   []string
 		args []interface{}

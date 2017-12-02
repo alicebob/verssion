@@ -1,6 +1,7 @@
 package w
 
 import (
+	"fmt"
 	"strings"
 	"time"
 )
@@ -29,10 +30,23 @@ func (c *Curated) Title() string {
 }
 
 func (c *Curated) DefaultTitle() string {
-	if len(c.Pages) == 0 {
+	var (
+		p        = c.Pages
+		ellipses = 0
+		maxEls   = 4
+	)
+	if len(p) == 0 {
 		return "[untitled list]"
 	}
-	return strings.Join(Titles(c.Pages), ", ")
+	if len(p) > maxEls {
+		ellipses = len(p) - maxEls
+		p = p[:maxEls]
+	}
+	t := strings.Join(Titles(p), ", ")
+	if ellipses > 0 {
+		t += fmt.Sprintf(", ... (%d more)", ellipses)
+	}
+	return t
 }
 
 type DB interface {

@@ -2,7 +2,6 @@ package web
 
 import (
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
 
@@ -210,7 +209,7 @@ func curatedAtomHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handl
 }
 
 var (
-	newCuratedTempl = template.Must(extend(baseTempl).Parse(`
+	newCuratedTempl = withBase(`
 {{define "page"}}
 	Create a new list. You can change it later.<br />
 	<br />
@@ -223,9 +222,9 @@ var (
 	<input type="submit" name="go" value="Start a list" />
 	</form>
 {{- end}}
-`))
+`)
 
-	curatedTempl = template.Must(extend(baseTempl).Parse(`
+	curatedTempl = withBase(`
 {{define "head"}}
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
 {{- end}}
@@ -256,9 +255,9 @@ var (
 	<br />
 	<br />
 {{end}}
-`))
+`)
 
-	curatedEditTempl = template.Must(extend(baseTempl).Parse(`
+	curatedEditTempl = withBase(`
 {{define "page"}}
 	<h2>{{.curated.Title}}</h2>
 	<br />
@@ -274,7 +273,7 @@ var (
 	<input type="submit" value="Update" /><br />
 	</form>
 {{end}}
-`))
+`)
 )
 
 // read p and etc arguments

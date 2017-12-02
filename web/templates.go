@@ -17,7 +17,8 @@ var (
 				"title": libw.Title,
 				"version": func(s string) template.HTML {
 					h := template.HTMLEscapeString(s)
-					return template.HTML(strings.Replace(h, "\n", "<br />", -1))
+					t := template.HTML(strings.Replace(h, "\n", "<br />", -1))
+					return t
 				},
 			}).Parse(`<!DOCTYPE html>
 <html>
@@ -28,18 +29,14 @@ td {
     vertical-align: top;
 }
         </style>
-        {{- template "head" . }}
+        {{- block "head" .}}{{end}}
     </head>
     <body>
         <a href="{{.base}}/">Home</a><br />
         <hr />
-        {{- template "page" . }}
+        {{- block "page" .}}{{end}}
     </body>
 </html>
-{{define "head"}}
-{{- end}}
-{{define "page"}}
-{{- end}}
 
 {{define "errors"}}
     {{- with .}}
@@ -73,8 +70,8 @@ td {
 `))
 )
 
-func extend(t *template.Template) *template.Template {
-	return template.Must(t.Clone())
+func withBase(s string) *template.Template {
+	return template.Must(template.Must(baseTempl.Clone()).Parse(s))
 }
 
 func runTmpl(w http.ResponseWriter, t *template.Template, args interface{}) {

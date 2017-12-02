@@ -1,7 +1,6 @@
 package web
 
 import (
-	"html/template"
 	"log"
 	"net/http"
 
@@ -27,7 +26,7 @@ func indexHandler(base string, db libw.DB) httprouter.Handle {
 }
 
 var (
-	indexTempl = template.Must(extend(baseTempl).Parse(`
+	indexTempl = withBase(`
 {{define "page"}}
 <h2>What</h2>
 <div style="width: 40em"> 
@@ -60,5 +59,5 @@ Make a feed which combines multiple projects in a single feed:<br />
 	<br />
 
 {{- end}}
-`))
+`)
 )

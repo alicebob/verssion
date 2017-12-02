@@ -2,7 +2,6 @@ package web
 
 import (
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
 
@@ -73,7 +72,7 @@ func pageHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
 }
 
 var (
-	allPagesTempl = template.Must(extend(baseTempl).Parse(`
+	allPagesTempl = withBase(`
 {{define "page"}}
 	All known pages:<br />
 	<table>
@@ -91,9 +90,9 @@ var (
 	<br />
 	<a href="{{.base}}/curated/">Make a custom feed</a><br />
 {{- end}}
-`))
+`)
 
-	pageTempl = template.Must(extend(baseTempl).Parse(`
+	pageTempl = withBase(`
 {{define "head"}}
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
 {{- end}}
@@ -119,13 +118,13 @@ var (
 		</tr>
 	{{- end}}
 {{- end}}
-`))
+`)
 
-	pageNotFoundTempl = template.Must(extend(baseTempl).Parse(`
+	pageNotFoundTempl = withBase(`
 {{define "page"}}
 	Page not found: {{.page}}<br />
 	Maybe you can create it on <a href="{{.wikipedia}}">Wikipedia</a><br />
     <br />
 {{- end}}
-`))
+`)
 )

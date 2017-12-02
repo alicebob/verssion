@@ -97,19 +97,16 @@ var (
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
 {{- end}}
 {{define "page"}}
-	{{.title}}<br />
-	Atom feed: <a href="{{.atom}}">{{.atom}}</a><br />
+	<h2>{{.title}}</h2>
 	Wikipedia: <a href="{{.wikipedia}}">{{.wikipedia}}</a><br />
-	Homepage: {{with .current.Homepage}}<a href="https://{{.}}">{{.}}</a>{{- end}}<br />
-	Latest version: {{with .current.StableVersion}}{{.}}{{- end}}<br />
-	Latest spider check: {{if not .current.T.IsZero}}{{.current.T.Format "2006-01-02 15:04 UTC"}}{{- end}}<br />
+	Homepage: {{with .current.Homepage}}<a href="https://{{.}}">https://{{.}}</a>{{- end}}<br />
+	Current stable version: {{with .current.StableVersion}}{{.}}{{- end}}<br />
     <br />
     <br />
-	History:
 	<table>
 	<tr>
-		<th style="padding-right: 2em">Spider timestamp</th>
-		<th style="text-align: left">Version</th>
+		<th>Spider timestamp:</th>
+		<th>Version:</th>
 	</tr>
 	{{- range .versions}}
 		<tr>
@@ -117,6 +114,10 @@ var (
 			<td>{{version .StableVersion}}</td>
 		</tr>
 	{{- end}}
+	</table>
+	<br />
+	Atom feed: <a href="{{.atom}}">{{.atom}}</a><br />
+	Latest spider check: {{if not .current.T.IsZero}}{{.current.T.Format "2006-01-02 15:04 UTC"}}{{- end}}<br />
 {{- end}}
 `)
 

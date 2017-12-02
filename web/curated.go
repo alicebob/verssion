@@ -235,15 +235,15 @@ var (
 	{{- with .pageversions}}
 		<table>
 		<tr>
-			<td>Page</td>
-			<td>Stable Version</td>
-			<td>Spider T</td>
+			<th>Page:</th>
+			<th>Stable version:</th>
+			<th>Spider timestamp:</th>
 		</tr>
 		{{- range .}}
 			<tr>
-			<td><a href="../../p/{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
+			<td><a href="{{$.base}}/p/{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
 			<td>{{.StableVersion}}</td>
-			<td>{{.T}}</td>
+			<td>{{.T.Format "2006-01-02 15:04 UTC"}}</td>
 			</tr>
 		{{- end}}
 		</table>
@@ -251,7 +251,7 @@ var (
 		No pages selected, yet.<br />
 	{{- end}}
 	<br />
-	<a href="./edit.html">Edit this list</a><br />
+	<a href="./edit.html">Edit the pages in this feed</a><br />
 	<br />
 	<br />
 {{end}}

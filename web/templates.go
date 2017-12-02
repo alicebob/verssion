@@ -22,20 +22,72 @@ var (
 				},
 			}).Parse(`<!DOCTYPE html>
 <html>
-    <head>
-        <title>{{ .title }}</title>
-        <style type="text/css">
-td {
-    vertical-align: top;
+<head>
+	<title>{{ .title }}</title>
+	<style type="text/css">
+body {
+	margin: 0;
 }
-        </style>
-        {{- block "head" .}}{{end}}
-    </head>
-    <body>
-        <a href="{{.base}}/">Home</a><br />
-        <hr />
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+th {
+	text-align: left;
+	font-weight: normal;
+}
+td, th {
+    vertical-align: top;
+	padding: 0;
+	padding-bottom: 3px;
+}
+h2, th {
+	border-bottom: 1px solid #ddd;
+}
+a, a:visited {
+	color: #357cb7;
+}
+a:hover {
+	color: black;
+}
+.head {
+	background-color: #35b7b1;
+	text-align: justify;
+	padding: 0.5em;
+}
+.head div {
+	margin: 0 auto;
+	width: 760px;
+}
+.head a {
+	color: black;
+	text-decoration: none;
+}
+.head a:hover {
+	text-decoration: underline;
+}
+.body {
+	margin: 0 auto;
+	width: 760px;
+}
+.body p {
+	text-align: justify;
+}
+	</style>
+	{{- block "head" .}}{{end}}
+</head>
+<body>
+	<div class="head">
+		<div>
+        <a href="{{.base}}/">Home</a>
+        - <a href="{{.base}}/curated/">New feed</a>
+        - <a href="{{.base}}/p/">All pages</a>
+		</div>
+	</div>
+	<div class="body">
         {{- block "page" .}}{{end}}
-    </body>
+	</div>
+</body>
 </html>
 
 {{define "errors"}}

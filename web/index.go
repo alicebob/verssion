@@ -29,10 +29,11 @@ var (
 	indexTempl = withBase(`
 {{define "page"}}
 <h2>What</h2>
-<div style="width: 40em"> 
+<div><p>
 Verssion(*) tracks stable version of software projects (e.g.: databases, editors, JS frameworks), and makes that available as an RSS (atom) feed. The main use-case is for dev-ops and developers who use a lot of open source software projects, and who like to keep an eye on releases. Without making that a fulltime job, and without signing up for dozens of e-mail lists. Turns out wikipedia is a great source for version information, so that's what we use.<br />
 You can create feeds for your own use, or share them with colleagues.<br />
 *) working title<br />
+</p>
 <br />
 <a href="https://github.com/alicebob/verssion/">Full source</a> for issues and PRs.<br />
 </div>

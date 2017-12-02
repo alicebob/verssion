@@ -36,7 +36,7 @@ func (c *Curated) DefaultTitle() string {
 		maxEls   = 4
 	)
 	if len(p) == 0 {
-		return "[untitled list]"
+		return "[untitled feed]"
 	}
 	if len(p) > maxEls {
 		ellipses = len(p) - maxEls

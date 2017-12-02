@@ -74,12 +74,8 @@ func pageHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
 var (
 	allPagesTempl = withBase(`
 {{define "page"}}
-	All known pages:<br />
+	<h2>All known pages</h2>
 	<table>
-	<tr>
-		<th></th>
-		<th></th>
-	</tr>
 	{{- range .pages}}
 		<tr>
 			<td><a href="./{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
@@ -98,11 +94,23 @@ var (
 {{- end}}
 {{define "page"}}
 	<h2>{{.title}}</h2>
-	Wikipedia: <a href="{{.wikipedia}}">{{.wikipedia}}</a><br />
-	Homepage: {{with .current.Homepage}}<a href="https://{{.}}">https://{{.}}</a>{{- end}}<br />
-	Current stable version: {{with .current.StableVersion}}{{.}}{{- end}}<br />
+	<table>
+		<tr>
+			<td>Wikipedia:</td>
+			<td><a href="{{.wikipedia}}">{{.wikipedia}}</a></td>
+		</tr>
+		<tr>
+			<td>Homepage:</td>
+			<td>{{with .current.Homepage}}<a href="https://{{.}}">https://{{.}}</a>{{- end}}</td>
+		</tr>
+		<tr>
+			<td>Current stable version:</td>
+			<td>{{with .current.StableVersion}}{{version .}}{{- end}}</td>
+		</tr>
+	</table>
     <br />
     <br />
+	<h2>Version history</h2>
 	<table>
 	<tr>
 		<th>Spider timestamp:</th>
@@ -116,7 +124,7 @@ var (
 	{{- end}}
 	</table>
 	<br />
-	Atom feed: <a href="{{.atom}}">{{.atom}}</a><br />
+	RSS link: <a href="{{.atom}}">Atom feed</a><br />
 	Latest spider check: {{if not .current.T.IsZero}}{{.current.T.Format "2006-01-02 15:04 UTC"}}{{- end}}<br />
 {{- end}}
 `)

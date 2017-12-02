@@ -41,7 +41,10 @@ td, th {
 	padding: 0;
 	padding-bottom: 3px;
 }
-h2, th {
+td:first-child {
+	width: 250px;
+}
+h2 {
 	border-bottom: 1px solid #ddd;
 }
 a, a:visited {

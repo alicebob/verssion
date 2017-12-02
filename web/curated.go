@@ -251,7 +251,7 @@ var (
 		{{- range .}}
 			<tr>
 			<td><a href="{{$.base}}/p/{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
-			<td>{{.StableVersion}}</td>
+			<td>{{version .StableVersion}}</td>
 			<td>{{.T.Format "2006-01-02 15:04 UTC"}}</td>
 			</tr>
 		{{- end}}

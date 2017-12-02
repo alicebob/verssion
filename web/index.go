@@ -3,6 +3,7 @@ package web
 import (
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/julienschmidt/httprouter"
 
@@ -17,12 +18,40 @@ func indexHandler(base string, db libw.DB) httprouter.Handle {
 			http.Error(w, http.StatusText(500), 500)
 			return
 		}
+
+		curated, err := readCuratedCookies(r, db)
+		if err != nil {
+			log.Printf("readCuratedCookies: %s", err)
+		}
 		runTmpl(w, indexTempl, map[string]interface{}{
 			"base":    base,
 			"title":   "VeRSSion",
 			"entries": es,
+			"curated": curated,
 		})
 	}
+}
+
+func readCuratedCookies(r *http.Request, db libw.DB) ([]libw.Curated, error) {
+	var (
+		curs    []libw.Curated
+		lastErr error
+	)
+	for _, cookie := range r.Cookies() {
+		t := strings.SplitN(cookie.Name, "-", 2)
+		if len(t) != 2 || t[0] != "curated" {
+			continue
+		}
+		c, err := db.LoadCurated(t[1])
+		if err != nil {
+			lastErr = err
+		} else {
+			if c != nil {
+				curs = append(curs, *c)
+			}
+		}
+	}
+	return curs, lastErr
 }
 
 var (
@@ -42,6 +71,13 @@ You can create feeds for your own use, or share them with colleagues.<br />
 <h2>Feed</h2>
 Make a feed which combines multiple projects in a single feed:<br />
 <a href="./curated/">Create new feed!</a><br />
+	{{- if .curated}}
+		<br />
+		Your recent feeds:<br />
+		{{- range .curated}}
+			<a href="{{$.base}}/curated/{{.ID}}">{{.Title}}</a><br />
+		{{- end}}
+	{{- end}}
 <br />
 
 <h2>Updates</h2>

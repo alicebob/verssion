@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/julienschmidt/httprouter"
 
@@ -81,6 +82,14 @@ func curatedHandler(base string, db libw.DB) httprouter.Handle {
 			"title":        cur.Title(),
 			"pageversions": vs,
 		}
+
+		c := &http.Cookie{
+			Name:     "curated-" + cur.ID,
+			Path:     "/",
+			HttpOnly: true,
+			Expires:  time.Now().Add(30 * 24 * time.Hour),
+		}
+		w.Header().Add("Set-Cookie", c.String())
 
 		runTmpl(w, curatedTempl, args)
 	}

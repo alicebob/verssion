@@ -57,8 +57,8 @@ a:hover {
 }
 .head {
 	background-color: #35b7b1;
-	text-align: justify;
 	padding: 0.5em;
+	font-family: monospace;
 }
 .head div {
 	margin: 0 auto;

@@ -24,6 +24,8 @@ var (
 <html>
 <head>
 	<title>{{ .title }}</title>
+	<link rel="shortcut icon" href="{{.base}}/s/favicon.png" type="image/png" sizes="16x16 24x24 32x32 64x64">
+	<link rel="apple-touch-icon" href="{{.base}}/s/favicon.png">
 	<style type="text/css">
 body {
 	margin: 0;

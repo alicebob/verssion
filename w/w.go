@@ -82,7 +82,7 @@ func StableVersion(n io.Reader) (string, string) {
 				v = r[1]
 			}
 			switch k := r[0]; k {
-			case "Stable release", "Latest release":
+			case "Stable release", "Latest release", "Last release":
 				stable = v
 			case "Stable release(s) [±]":
 				// Firefox, has a table with versions. The version is in the

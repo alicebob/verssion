@@ -37,6 +37,11 @@ func TestStableVersion(t *testing.T) {
 			Version:  "Standard 56.0.2 / 26 October 2017\nESR 52.4.1 / 9 October 2017",
 			Homepage: "mozilla.org/firefox",
 		},
+		{
+			Filename: "pine.html",
+			Version:  "4.64",
+			Homepage: "www.washington.edu/pine",
+		},
 	}
 
 	for _, c := range cases {

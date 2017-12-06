@@ -93,7 +93,7 @@ var (
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
 {{- end}}
 {{define "page"}}
-	<h2>{{.title}}</h2>
+	<h2>{{.page}}</h2>
 	<table>
 		<tr>
 			<td>Wikipedia:</td>
@@ -125,7 +125,12 @@ var (
 	</table>
 	<br />
 	RSS link: <a href="{{.atom}}">Atom feed</a><br />
-	Latest spider check: {{if not .current.T.IsZero}}{{.current.T.Format "2006-01-02 15:04 UTC"}}{{- end}}<br />
+	<br />
+	<small>
+		Version numbers are retrieved from Wikipedia, and are licensed under Creative Commons.<br />
+		If the current stable version is out of date, please edit <a href="{{.wikipedia}}">Wikipedia</a>.<br />
+		Latest spider check: {{if not .current.T.IsZero}}{{.current.T.Format "2006-01-02 15:04 UTC"}}{{- end}}<br />
+	</small>
 {{- end}}
 `)
 

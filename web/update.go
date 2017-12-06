@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	libw "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 )
 
 const (
@@ -21,7 +21,7 @@ type Update struct {
 type last struct {
 	mu        sync.Mutex
 	cacheTill time.Time
-	page      libw.Page
+	page      core.Page
 	err       error
 }
 
@@ -31,11 +31,11 @@ func NewUpdate() *Update {
 	}
 }
 
-func (u *Update) fetch(page string) (libw.Page, error) {
-	return libw.GetPage(page, WikiURL(page))
+func (u *Update) fetch(page string) (core.Page, error) {
+	return core.GetPage(page, WikiURL(page))
 }
 
-func (u *Update) cachedFetch(page string) (libw.Page, error) {
+func (u *Update) cachedFetch(page string) (core.Page, error) {
 	u.mu.Lock()
 	l, ok := u.pages[page]
 	if !ok {
@@ -61,7 +61,7 @@ func (u *Update) cachedFetch(page string) (libw.Page, error) {
 
 // Fetch the most recent version (or a cache).
 // Follows redirects.
-func (u *Update) Fetch(page string, redir int) (*libw.Page, error) {
+func (u *Update) Fetch(page string, redir int) (*core.Page, error) {
 	if redir < 0 {
 		return nil, fmt.Errorf("%q: too many redirects", page)
 	}
@@ -70,7 +70,7 @@ func (u *Update) Fetch(page string, redir int) (*libw.Page, error) {
 	if err == nil {
 		return &p, nil
 	}
-	if red, ok := err.(libw.ErrRedirect); ok {
+	if red, ok := err.(core.ErrRedirect); ok {
 		return u.Fetch(red.To, redir-1)
 	}
 	return nil, err

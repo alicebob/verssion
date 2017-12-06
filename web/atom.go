@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	libw "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 )
 
 type Feed struct {
@@ -43,12 +43,12 @@ func asURN(s string) string {
 	return fmt.Sprintf("urn:sha1:%x", n)
 }
 
-func asFeed(base, id, title string, update time.Time, vs []libw.Page) Feed {
+func asFeed(base, id, title string, update time.Time, vs []core.Page) Feed {
 	var es []Entry
 	for _, v := range vs {
 		es = append(es, Entry{
 			ID:      asURN(v.Page + "-" + v.StableVersion),
-			Title:   libw.Title(v.Page) + ": " + v.StableVersion,
+			Title:   core.Title(v.Page) + ": " + v.StableVersion,
 			Updated: v.T,
 			Content: v.StableVersion, // TODO: prev version?
 			Links: []Link{

@@ -9,10 +9,10 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
-	libw "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 )
 
-func adhocAtomHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
+func adhocAtomHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		pages := r.URL.Query()["p"]
 		sort.Strings(pages)
@@ -28,7 +28,7 @@ func adhocAtomHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle 
 		feed := asFeed(
 			base,
 			asURN(strings.Join(actualPages, ",")),
-			strings.Join(libw.Titles(actualPages), ", "),
+			strings.Join(core.Titles(actualPages), ", "),
 			time.Time{},
 			vs,
 		)

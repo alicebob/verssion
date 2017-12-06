@@ -1,4 +1,4 @@
-package w
+package core
 
 import (
 	"fmt"

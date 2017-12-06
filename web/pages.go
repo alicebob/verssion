@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	libw "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 )
 
 var matchpage = regexp.MustCompile(`^(?:(?i:https?://en.wikipedia.org)/wiki/)?(\S+)$`)
@@ -45,7 +45,7 @@ func unique(ps []string) []string {
 	return res
 }
 
-func runUpdates(db libw.DB, fetch Fetcher, pages []string) ([]string, []error) {
+func runUpdates(db core.DB, fetch Fetcher, pages []string) ([]string, []error) {
 	var (
 		ret    []string
 		errors []error

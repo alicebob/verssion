@@ -6,19 +6,19 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 	"github.com/alicebob/verssion/web"
 )
 
 func TestPages(t *testing.T) {
 	var (
-		db = w.NewMemory()
+		db = core.NewMemory()
 		m  = web.Mux("", db, web.NotFetcher())
 	)
 	s := httptest.NewServer(m)
 	defer s.Close()
-	db.Store(w.Page{Page: "Debian", StableVersion: "my version"})
-	db.Store(w.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.1 / July 22, 2017"})
+	db.Store(core.Page{Page: "Debian", StableVersion: "my version"})
+	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.1 / July 22, 2017"})
 
 	status, body := get(t, s, "/p/")
 	if have, want := status, 200; have != want {
@@ -39,14 +39,14 @@ func TestPages(t *testing.T) {
 
 func TestPage(t *testing.T) {
 	var (
-		db = w.NewMemory()
+		db = core.NewMemory()
 		m  = web.Mux("", db, web.NotFetcher())
 	)
 	s := httptest.NewServer(m)
 	defer s.Close()
-	db.Store(w.Page{Page: "Debian", StableVersion: "my version"})
-	db.Store(w.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.0", T: time.Now()})
-	db.Store(w.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.1 / July 22, 2017", Homepage: "https://haskell.org/ghc", T: time.Now()})
+	db.Store(core.Page{Page: "Debian", StableVersion: "my version"})
+	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.0", T: time.Now()})
+	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.1 / July 22, 2017", Homepage: "https://haskell.org/ghc", T: time.Now()})
 
 	{
 		status, _ := get(t, s, "/p/Glasgow_Haskell_Compiler")

@@ -7,14 +7,14 @@ import (
 	"net/http"
 	"strings"
 
-	libw "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 )
 
 var (
 	baseTempl = template.Must(
 		template.New("base").
 			Funcs(template.FuncMap{
-				"title": libw.Title,
+				"title": core.Title,
 				"version": func(s string) template.HTML {
 					h := template.HTMLEscapeString(s)
 					t := template.HTML(strings.Replace(h, "\n", "<br />", -1))

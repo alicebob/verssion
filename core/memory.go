@@ -1,5 +1,5 @@
 // in-memory implementation of the DB interface for tests
-package w
+package core
 
 type Memory struct {
 	hist []Page

@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	libw "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 	"github.com/alicebob/verssion/web"
 )
 
@@ -25,7 +25,7 @@ func main() {
 		os.Exit(2)
 	}
 
-	db, err := libw.NewPostgres(*dbURL)
+	db, err := core.NewPostgres(*dbURL)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "pg: %s\n", err)
 		os.Exit(2)

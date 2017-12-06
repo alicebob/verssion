@@ -3,10 +3,10 @@ package web
 import (
 	"github.com/julienschmidt/httprouter"
 
-	w "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 )
 
-func Mux(baseURL string, db w.DB, up Fetcher) *httprouter.Router {
+func Mux(baseURL string, db core.DB, up Fetcher) *httprouter.Router {
 	r := httprouter.New()
 	r.GET("/", indexHandler(baseURL, db))
 	r.GET("/adhoc/atom.xml", adhocAtomHandler(baseURL, db, up))

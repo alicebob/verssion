@@ -7,10 +7,10 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
-	libw "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 )
 
-func indexHandler(base string, db libw.DB) httprouter.Handle {
+func indexHandler(base string, db core.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		es, err := db.Recent(12)
 		if err != nil {
@@ -32,9 +32,9 @@ func indexHandler(base string, db libw.DB) httprouter.Handle {
 	}
 }
 
-func readCuratedCookies(r *http.Request, db libw.DB) ([]libw.Curated, error) {
+func readCuratedCookies(r *http.Request, db core.DB) ([]core.Curated, error) {
 	var (
-		curs    []libw.Curated
+		curs    []core.Curated
 		lastErr error
 	)
 	for _, cookie := range r.Cookies() {

@@ -8,10 +8,10 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
-	libw "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 )
 
-func newCuratedHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
+func newCuratedHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		r.ParseForm()
 		var (
@@ -55,7 +55,7 @@ func newCuratedHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle
 	}
 }
 
-func curatedHandler(base string, db libw.DB) httprouter.Handle {
+func curatedHandler(base string, db core.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		id := p.ByName("id")
 		cur, err := db.LoadCurated(id)
@@ -95,7 +95,7 @@ func curatedHandler(base string, db libw.DB) httprouter.Handle {
 	}
 }
 
-func curatedEditHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
+func curatedEditHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		id := p.ByName("id")
 		cur, err := db.LoadCurated(id)
@@ -173,7 +173,7 @@ func curatedEditHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handl
 	}
 }
 
-func curatedAtomHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
+func curatedAtomHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		id := p.ByName("id")
 		cur, err := db.LoadCurated(id)
@@ -286,7 +286,7 @@ var (
 )
 
 // read p and etc arguments
-func readPageArgs(db libw.DB, fetch Fetcher, pages []string, etc string) ([]string, []error) {
+func readPageArgs(db core.DB, fetch Fetcher, pages []string, etc string) ([]string, []error) {
 	var errors []error
 
 	etcPages, etcErrors := toPages(etc)

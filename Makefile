@@ -3,7 +3,7 @@
 all: test build
 
 test:
-	$(MAKE) -C w test
+	$(MAKE) -C core test
 		
 build:
 	$(MAKE) -C cmd/web build

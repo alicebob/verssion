@@ -4,14 +4,14 @@ import (
 	"log"
 	"time"
 
-	libw "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 )
 
-type Fetcher func(page string) (*libw.Page, error)
+type Fetcher func(page string) (*core.Page, error)
 
 // NotFetcher doesn't fetch a page. Use in tests.
 func NotFetcher() Fetcher {
-	return func(string) (*libw.Page, error) {
+	return func(string) (*core.Page, error) {
 		return nil, nil
 	}
 }
@@ -21,7 +21,7 @@ var _ Fetcher = NotFetcher()
 // WikiFetcher loads from wikipedia
 func WikiFetcher() Fetcher {
 	up := NewUpdate()
-	return func(page string) (*libw.Page, error) {
+	return func(page string) (*core.Page, error) {
 		return up.Fetch(page, 10)
 	}
 }
@@ -30,7 +30,7 @@ var _ Fetcher = WikiFetcher()
 
 // loadPage returns a the lastest from the DB if that's recent enough, or uses
 // the fetcher to spider the page
-func loadPage(page string, db libw.DB, fetch Fetcher) (*libw.Page, error) {
+func loadPage(page string, db core.DB, fetch Fetcher) (*core.Page, error) {
 	{
 		p, err := db.Last(page)
 		if err != nil {
@@ -48,7 +48,7 @@ func loadPage(page string, db libw.DB, fetch Fetcher) (*libw.Page, error) {
 	}
 	// can happen with the NotFetcher
 	if p == nil {
-		return nil, libw.ErrNotFound{Page: page}
+		return nil, core.ErrNotFound{Page: page}
 	}
 
 	if err := db.Store(*p); err != nil {

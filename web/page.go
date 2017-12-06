@@ -7,10 +7,10 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
-	libw "github.com/alicebob/verssion/w"
+	"github.com/alicebob/verssion/core"
 )
 
-func allPagesHandler(base string, db libw.DB) httprouter.Handle {
+func allPagesHandler(base string, db core.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		all, err := db.CurrentAll()
 		if err != nil {
@@ -26,17 +26,17 @@ func allPagesHandler(base string, db libw.DB) httprouter.Handle {
 	}
 }
 
-func pageHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
+func pageHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		page := p.ByName("page")
 		cur, err := loadPage(page, db, fetch)
 		if err != nil {
-			if p, ok := err.(libw.ErrNotFound); ok {
+			if p, ok := err.(core.ErrNotFound); ok {
 				log.Printf("not found %q: %s", page, err)
 				w.WriteHeader(404)
 				runTmpl(w, pageNotFoundTempl, map[string]interface{}{
 					"base":      base,
-					"title":     libw.Title(p.Page),
+					"title":     core.Title(p.Page),
 					"wikipedia": WikiURL(p.Page),
 					"page":      p.Page,
 				})
@@ -61,7 +61,7 @@ func pageHandler(base string, db libw.DB, fetch Fetcher) httprouter.Handle {
 		}
 		runTmpl(w, pageTempl, map[string]interface{}{
 			"base":      base,
-			"title":     libw.Title(cur.Page),
+			"title":     core.Title(cur.Page),
 			"atom":      adhocURL(base, []string{cur.Page}),
 			"wikipedia": WikiURL(cur.Page),
 			"current":   cur,

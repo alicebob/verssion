@@ -111,7 +111,7 @@ var (
     <br />
     <br />
 	<h2>Version history</h2>
-	<table>
+	<table class="history">
 	<tr>
 		<th>Spider timestamp:</th>
 		<th>Version:</th>

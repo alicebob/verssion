@@ -75,6 +75,17 @@ a:hover {
 .body p {
 	text-align: justify;
 }
+
+@media only screen and (max-width: 700px) {
+	table, thead, tbody, tr, th, td {
+		display: block;
+	}
+
+	/* don't show 'spider timestamp' column on small screens */
+	table.history th, table.history td:first-child {
+		display: none;
+	}
+}
 	</style>
 	{{- block "head" .}}{{end}}
 </head>

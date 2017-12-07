@@ -24,6 +24,7 @@ Kibana
 LibreSSL
 MacOS
 Mercurial
+MongoDB
 Mutt_(email_client)
 MySQL
 NetBSD

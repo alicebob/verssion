@@ -11,7 +11,7 @@ testrace:
 build:
 	$(MAKE) -C cmd/web build
 
-integration: db
+integration:
 	go test -tags integration ./...
 
 db:

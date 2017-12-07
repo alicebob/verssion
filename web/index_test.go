@@ -12,7 +12,7 @@ import (
 func TestIndex(t *testing.T) {
 	var (
 		db = core.NewMemory()
-		m  = web.Mux("/", db, web.NotFetcher())
+		m  = web.Mux("/", db, web.NotFetcher(), "")
 	)
 	s := httptest.NewServer(m)
 	defer s.Close()

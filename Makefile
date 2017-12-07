@@ -1,15 +1,18 @@
-.PHONY: all test build integration db
+.PHONY: all test testrace build integration db
 
 all: test build
 
 test:
-	$(MAKE) -C core test
+	go test ./...
+
+testrace:
+	go test -race ./...
 		
 build:
 	$(MAKE) -C cmd/web build
 
 integration: db
-	$(MAKE) -C core integration
+	go test -tags integration ./...
 
 db:
 	psql verssion < tables.sql

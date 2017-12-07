@@ -13,7 +13,7 @@ import (
 func TestPages(t *testing.T) {
 	var (
 		db = core.NewMemory()
-		m  = web.Mux("", db, web.NotFetcher())
+		m  = web.Mux("", db, web.NotFetcher(), "")
 	)
 	s := httptest.NewServer(m)
 	defer s.Close()
@@ -40,7 +40,7 @@ func TestPages(t *testing.T) {
 func TestPage(t *testing.T) {
 	var (
 		db = core.NewMemory()
-		m  = web.Mux("", db, web.NotFetcher())
+		m  = web.Mux("", db, web.NotFetcher(), "")
 	)
 	s := httptest.NewServer(m)
 	defer s.Close()

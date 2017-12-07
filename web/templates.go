@@ -24,6 +24,7 @@ var (
 <html>
 <head>
 	<title>{{ .title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="{{.base}}/s/favicon.png" type="image/png" sizes="16x16 24x24 32x32 64x64">
 	<link rel="apple-touch-icon" href="{{.base}}/s/favicon.png">
 	<style type="text/css">
@@ -57,11 +58,7 @@ a:hover {
 }
 .head {
 	background-color: #35b7b1;
-	padding: 0.5em;
-}
-.head div {
-	margin: 0 auto;
-	width: 760px;
+	padding: 0.5em 0;
 }
 .head a {
 	color: black;
@@ -70,9 +67,10 @@ a:hover {
 .head a:hover {
 	text-decoration: underline;
 }
-.body {
+.body, .head div {
 	margin: 0 auto;
-	width: 760px;
+	max-width: 760px;
+	padding: 0 0.5em;
 }
 .body p {
 	text-align: justify;
@@ -121,7 +119,7 @@ a:hover {
     <br />
 
     Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.<br />
-    <textarea name="etc" cols="80" rows="4">{{.etc}}</textarea><br />
+    <textarea name="etc" style="width:100%" rows="4">{{.etc}}</textarea><br />
 {{end}}
 `))
 )

@@ -47,6 +47,10 @@ td, th {
 td:first-child {
 	width: 250px;
 }
+textarea {
+	box-sizing: border-box;
+	width: 100%;
+}
 h2 {
 	border-bottom: 1px solid #ddd;
 }
@@ -130,7 +134,7 @@ a:hover {
     <br />
 
     Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.<br />
-    <textarea name="etc" style="width:100%" rows="4">{{.etc}}</textarea><br />
+    <textarea name="etc" rows="4">{{.etc}}</textarea><br />
 {{end}}
 `))
 )

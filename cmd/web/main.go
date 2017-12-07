@@ -13,7 +13,7 @@ import (
 
 var (
 	baseURL = flag.String("base", "http://localhost:3141", "base URL")
-	dbURL   = flag.String("db", "postgresql:///w", "postgres URL")
+	dbURL   = flag.String("db", "postgresql:///verssion", "postgres URL")
 	listen  = flag.String("listen", ":3141", "http listen")
 	static  = flag.String("static", "", "subdir with static files")
 )

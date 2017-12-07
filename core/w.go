@@ -8,6 +8,10 @@ import (
 	"time"
 )
 
+const (
+	UserAgent = "verssion_bot/1.0 (https://verssion.one)"
+)
+
 var client = http.Client{
 	CheckRedirect: func(*http.Request, []*http.Request) error {
 		return http.ErrUseLastResponse
@@ -37,8 +41,14 @@ func GetPage(page, url string) (Page, error) {
 		T:    time.Now().UTC(),
 	}
 
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return p, err
+	}
+	req.Header.Set("User-Agent", UserAgent)
+
 	// no redirects
-	r, err := client.Get(url)
+	r, err := client.Do(req)
 	if err != nil {
 		return p, err
 	}

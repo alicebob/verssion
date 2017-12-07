@@ -1,12 +1,21 @@
 // in-memory implementation of the DB interface for tests
+
 package core
 
+import (
+	"sync"
+)
+
 type Memory struct {
-	hist []Page
+	hist    []Page
+	current map[string]Page
+	mu      sync.Mutex
 }
 
 func NewMemory() *Memory {
-	return &Memory{}
+	return &Memory{
+		current: map[string]Page{},
+	}
 }
 
 var _ DB = NewMemory()
@@ -25,6 +34,7 @@ func (m *Memory) Last(page string) (*Page, error) {
 }
 
 func (m *Memory) Recent(n int) ([]Page, error) {
+	// TODO: this is not right
 	h, err := m.CurrentAll()
 	if err != nil {
 		return nil, err
@@ -36,23 +46,27 @@ func (m *Memory) Recent(n int) ([]Page, error) {
 }
 
 func (m *Memory) CurrentAll() ([]Page, error) {
-	var seen = map[string]Page{}
-	for _, p := range m.hist {
-		if sp, ok := seen[p.Page]; ok && sp.T.After(p.T) {
-			continue
-		}
-		seen[p.Page] = p
-	}
+	m.mu.Lock()
+	defer m.mu.Unlock()
 
 	var ps []Page
-	for _, p := range seen {
+	for _, p := range m.current {
 		ps = append(ps, p)
 	}
 	return ps, nil
 }
 
-func (m *Memory) Current(...string) ([]Page, error) {
-	return nil, nil
+func (m *Memory) Current(pages ...string) ([]Page, error) {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+
+	var ps []Page
+	for _, p := range pages {
+		if c, ok := m.current[p]; ok {
+			ps = append(ps, c)
+		}
+	}
+	return ps, nil
 }
 
 func (m *Memory) History(pages ...string) ([]Page, error) {
@@ -70,11 +84,26 @@ func (m *Memory) History(pages ...string) ([]Page, error) {
 
 func (m *Memory) Store(p Page) error {
 	m.hist = append(m.hist, p)
+
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	old, ok := m.current[p.Page]
+	if !ok || old.StableVersion != p.StableVersion {
+		m.current[p.Page] = p
+	}
+
 	return nil
 }
 
 func (m *Memory) Known() ([]string, error) {
-	return nil, nil
+	m.mu.Lock()
+	defer m.mu.Unlock()
+
+	var ps []string
+	for k := range m.current {
+		ps = append(ps, k)
+	}
+	return ps, nil
 }
 
 func (m *Memory) CreateCurated() (string, error) {

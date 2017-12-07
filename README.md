@@ -9,6 +9,9 @@ Bugs
 Setup
 =====
 
-    postgres@yourmachine:~$ createdb -O youruser w
+    postgres@yourmachine:~$ createdb -O youruser verssion
     youruser@yourmachine:~/verssion/$ make db
     youruser@yourmachine:~/verssion/$ make && ./cmd/web/web -base https://yourwebsite.example
+
+`make integration` will use the `verssion` database, and wipe everything from
+it. Just so you know.

@@ -1,4 +1,4 @@
-.PHONY: all test build db
+.PHONY: all test build integration db
 
 all: test build
 
@@ -8,5 +8,8 @@ test:
 build:
 	$(MAKE) -C cmd/web build
 
+integration: db
+	$(MAKE) -C core integration
+
 db:
-	psql w < tables.sql
+	psql verssion < tables.sql

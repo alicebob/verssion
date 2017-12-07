@@ -15,3 +15,8 @@ Setup
 
 `make integration` will use the `verssion` database, and wipe everything from
 it. Just so you know.
+
+&c.
+===
+
+[![Build Status](https://travis-ci.org/alicebob/verssion.svg?branch=travis)](https://travis-ci.org/alicebob/verssion)

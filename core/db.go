@@ -1,10 +1,13 @@
 package core
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 	"time"
 )
+
+var ErrCuratedNotFound = errors.New("curated ID not found")
 
 type Page struct {
 	Page          string
@@ -59,8 +62,8 @@ type DB interface {
 	Known() ([]string, error)
 
 	CreateCurated() (string, error)
-	LoadCurated(string) (*Curated, error)
-	CuratedPages(string, []string) error
-	CuratedUsed(string) error
-	CuratedTitle(string, string) error
+	LoadCurated(string) (*Curated, error) // will return (nil, nil) on not found
+	CuratedSetPages(string, []string) error
+	CuratedSetUsed(string) error
+	CuratedSetTitle(string, string) error
 }

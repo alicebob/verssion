@@ -226,7 +226,7 @@ func (p *Postgres) curatedPages(id string) ([]string, error) {
 }
 
 // pages must be unique
-func (p *Postgres) CuratedPages(id string, pages []string) error {
+func (p *Postgres) CuratedSetPages(id string, pages []string) error {
 	tx, err := p.conn.Begin()
 	if err != nil {
 		return err
@@ -241,18 +241,29 @@ func (p *Postgres) CuratedPages(id string, pages []string) error {
 			return err
 		}
 	}
-	if _, err := p.conn.Exec(`UPDATE curated SET lastupdated=now() WHERE id=$1`, id); err != nil {
+	res, err := p.conn.Exec(`UPDATE curated SET lastupdated=now() WHERE id=$1`, id)
+	if err != nil {
 		return err
+	}
+	if res.RowsAffected() == 0 {
+		tx.Rollback()
+		return ErrCuratedNotFound
 	}
 	return tx.Commit()
 }
 
-func (p *Postgres) CuratedUsed(id string) error {
-	_, err := p.conn.Exec(`UPDATE curated SET lastused=now(), used=used+1 WHERE id=$1`, id)
+func (p *Postgres) CuratedSetUsed(id string) error {
+	res, err := p.conn.Exec(`UPDATE curated SET lastused=now(), used=used+1 WHERE id=$1`, id)
+	if res.RowsAffected() == 0 {
+		return ErrCuratedNotFound
+	}
 	return err
 }
 
-func (p *Postgres) CuratedTitle(id, title string) error {
-	_, err := p.conn.Exec(`UPDATE curated SET title=$2, lastupdated=now() WHERE id=$1`, id, title)
+func (p *Postgres) CuratedSetTitle(id, title string) error {
+	res, err := p.conn.Exec(`UPDATE curated SET title=$2, lastupdated=now() WHERE id=$1`, id, title)
+	if res.RowsAffected() == 0 {
+		return ErrCuratedNotFound
+	}
 	return err
 }

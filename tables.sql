@@ -35,6 +35,7 @@ CREATE TABLE curated
     , created timestamptz NOT NULL
     , used int NOT NULL default 0
     , lastused timestamptz NOT NULL
+    , lastupdated timestamptz NOT NULL
     , title text NOT NULL default ''
     );
 

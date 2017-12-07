@@ -1,6 +1,7 @@
 package core
 
 import (
+	"reflect"
 	"testing"
 	"time"
 )
@@ -102,5 +103,94 @@ func InterfaceTestDB(t *testing.T, db DB) {
 		if have, want := ls[0], test1_2; have != want {
 			t.Fatalf("have %v, want %v", have, want)
 		}
+	}
+}
+
+// InterfaceTestCurated is used to test the Curated methods of DB implementations
+func InterfaceTestCurated(t *testing.T, db DB) {
+	{
+		c, err := db.LoadCurated("nosuch")
+		if err != nil {
+			t.Fatal(err)
+		}
+		if c != nil {
+			t.Fatal("want nil")
+		}
+	}
+	id, err := db.CreateCurated()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if have, want := len(id), 36; have != want {
+		t.Fatalf("have %v, want %v", have, want)
+	}
+	if db.CuratedSetPages(id, []string{"page1", "page2"}); err != nil {
+		t.Fatal(err)
+	}
+	if db.CuratedSetPages(id, []string{"page3", "page2"}); err != nil {
+		t.Fatal(err)
+	}
+	if db.CuratedSetTitle(id, "My first list"); err != nil {
+		t.Fatal(err)
+	}
+
+	c, err := db.LoadCurated(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if have, want := c.ID, id; have != want {
+		t.Fatalf("have %v, want %v", have, want)
+	}
+	if have, want := c.Pages, []string{"page2", "page3"}; !reflect.DeepEqual(have, want) {
+		t.Fatalf("have %#v, want %#v", have, want)
+	}
+	if have, want := c.CustomTitle, "My first list"; have != want {
+		t.Fatalf("have %v, want %v", have, want)
+	}
+	if have, want := c.Title(), "My first list"; have != want {
+		t.Fatalf("have %v, want %v", have, want)
+	}
+	if c.Created.IsZero() {
+		t.Fatal("0 created")
+	}
+	if c.LastUpdated.IsZero() {
+		t.Fatal("0 last updated")
+	}
+	if have, want := c.LastUsed, c.Created; !want.Equal(have) {
+		t.Fatalf("have %v, want %v", have, want)
+	}
+
+	// Check SetUsed
+	{
+		if db.CuratedSetUsed(id); err != nil {
+			t.Fatal(err)
+		}
+		c, err := db.LoadCurated(id)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if have, want := c.LastUsed, c.Created; want.Equal(have) {
+			t.Fatalf("not: have %v, want %v", have, want)
+		}
+	}
+
+	{
+		id2, err := db.CreateCurated()
+		if err != nil {
+			t.Fatal(err)
+		}
+		if id == id2 {
+			t.Fatalf("double curated ID")
+		}
+	}
+
+	if have, want := db.CuratedSetPages("nosuch", nil), ErrCuratedNotFound; have != want {
+		t.Fatal("have error %v, want error %v", have, want)
+	}
+	if have, want := db.CuratedSetTitle("nosuch", "foo"), ErrCuratedNotFound; have != want {
+		t.Fatal("have error %v, want error %v", have, want)
+	}
+	if have, want := db.CuratedSetUsed("nosuch"), ErrCuratedNotFound; have != want {
+		t.Fatal("have error %v, want error %v", have, want)
 	}
 }

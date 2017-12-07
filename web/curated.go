@@ -36,7 +36,7 @@ func newCuratedHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle
 					http.Error(w, http.StatusText(500), 500)
 					return
 				}
-				if err := db.CuratedPages(id, pages); err != nil {
+				if err := db.CuratedSetPages(id, pages); err != nil {
 					log.Printf("curated pages: %s", err)
 				}
 
@@ -133,13 +133,13 @@ func curatedEditHandler(base string, db core.DB, fetch Fetcher) httprouter.Handl
 			title := r.Form.Get("title")
 			args["customtitle"] = title
 			if len(errors) == 0 {
-				if err := db.CuratedPages(cur.ID, pages); err != nil {
+				if err := db.CuratedSetPages(cur.ID, pages); err != nil {
 					log.Printf("curated pages: %s", err)
 					http.Error(w, http.StatusText(500), 500)
 					return
 				}
 
-				if err := db.CuratedTitle(cur.ID, title); err != nil {
+				if err := db.CuratedSetTitle(cur.ID, title); err != nil {
 					log.Printf("curated title: %s", err)
 				}
 
@@ -211,7 +211,7 @@ func curatedAtomHandler(base string, db core.DB, fetch Fetcher) httprouter.Handl
 		}
 		writeFeed(w, feed)
 
-		if err := db.CuratedUsed(id); err != nil {
+		if err := db.CuratedSetUsed(id); err != nil {
 			log.Printf("curated used %q: %s", id, err)
 		}
 	}

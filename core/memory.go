@@ -3,18 +3,24 @@
 package core
 
 import (
+	"sort"
 	"sync"
+	"time"
+
+	"github.com/google/uuid"
 )
 
 type Memory struct {
 	hist    []Page
 	current map[string]Page
 	mu      sync.Mutex
+	curated map[string]Curated
 }
 
 func NewMemory() *Memory {
 	return &Memory{
 		current: map[string]Page{},
+		curated: map[string]Curated{},
 	}
 }
 
@@ -107,21 +113,70 @@ func (m *Memory) Known() ([]string, error) {
 }
 
 func (m *Memory) CreateCurated() (string, error) {
-	return "fake", nil
+	id, err := uuid.NewRandom()
+	if err != nil {
+		return "", err
+	}
+	m.mu.Lock()
+	defer m.mu.Unlock()
+
+	t := time.Now()
+	ids := id.String()
+	m.curated[ids] = Curated{
+		ID:          ids,
+		Created:     t,
+		LastUpdated: t,
+		LastUsed:    t,
+	}
+	return ids, nil
 }
 
-func (m *Memory) LoadCurated(string) (*Curated, error) {
-	return nil, nil
+func (m *Memory) LoadCurated(id string) (*Curated, error) {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	c, ok := m.curated[id]
+	if !ok {
+		return nil, nil
+	}
+	return &c, nil
 }
 
-func (m *Memory) CuratedPages(string, []string) error {
+func (m *Memory) CuratedSetPages(id string, pages []string) error {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+
+	c, ok := m.curated[id]
+	if !ok {
+		return ErrCuratedNotFound
+	}
+	c.Pages = pages
+	sort.Strings(c.Pages)
+	m.curated[id] = c
 	return nil
 }
 
-func (m *Memory) CuratedUsed(string) error {
+func (m *Memory) CuratedSetUsed(id string) error {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+
+	c, ok := m.curated[id]
+	if !ok {
+		return ErrCuratedNotFound
+	}
+	c.LastUsed = time.Now().UTC()
+	m.curated[id] = c
 	return nil
 }
 
-func (m *Memory) CuratedTitle(string, string) error {
+func (m *Memory) CuratedSetTitle(id string, title string) error {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+
+	c, ok := m.curated[id]
+	if !ok {
+		return ErrCuratedNotFound
+	}
+	c.CustomTitle = title
+	m.curated[id] = c
 	return nil
 }

@@ -2,7 +2,6 @@ package web_test
 
 import (
 	"net/http/httptest"
-	"strings"
 	"testing"
 
 	"github.com/alicebob/verssion/core"
@@ -24,21 +23,11 @@ func TestIndex(t *testing.T) {
 		t.Fatalf("have %v, want %v", have, want)
 	}
 
-	if in, want := body, "<title>VeRSSion"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found", want)
-	}
-
-	if in, want := body, "Debian"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found", want)
-	}
-	if in, want := body, "my version"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found", want)
-	}
-	// titleification test
-	if in, want := body, "Glasgow Haskell Compiler"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found", want)
-	}
-	if in, want := body, "Glasgow_Haskell_Compiler/"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found", want)
-	}
+	contains(t, body,
+		"<title>VeRSSion",
+		"Debian",
+		"my version",
+		"Glasgow Haskell Compiler", // titleification test
+		"Glasgow_Haskell_Compiler",
+	)
 }

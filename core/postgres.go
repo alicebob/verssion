@@ -183,13 +183,13 @@ func (p *Postgres) StoreCurated(cur Curated) error {
 
 func (p *Postgres) LoadCurated(id string) (*Curated, error) {
 	row := p.conn.QueryRow(`
-		SELECT id, created, lastused, lastupdated, title
+		SELECT created, lastused, lastupdated, title
 		FROM curated
 		WHERE id=$1`,
 		id,
 	)
 	cur := Curated{}
-	if err := row.Scan(&cur.ID, &cur.Created, &cur.LastUsed, &cur.LastUpdated, &cur.CustomTitle); err != nil {
+	if err := row.Scan(&cur.Created, &cur.LastUsed, &cur.LastUpdated, &cur.CustomTitle); err != nil {
 		if err == pgx.ErrNoRows {
 			return nil, nil
 		}

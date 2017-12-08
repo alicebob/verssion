@@ -123,7 +123,6 @@ func (m *Memory) CreateCurated() (string, error) {
 	t := time.Now()
 	ids := id.String()
 	m.curated[ids] = Curated{
-		ID:          ids,
 		Created:     t,
 		LastUpdated: t,
 		LastUsed:    t,

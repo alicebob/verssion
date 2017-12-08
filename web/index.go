@@ -32,9 +32,9 @@ func indexHandler(base string, db core.DB) httprouter.Handle {
 	}
 }
 
-func readCuratedCookies(r *http.Request, db core.DB) ([]core.Curated, error) {
+func readCuratedCookies(r *http.Request, db core.DB) (map[string]*core.Curated, error) {
 	var (
-		curs    []core.Curated
+		curs    = map[string]*core.Curated{}
 		lastErr error
 	)
 	for _, cookie := range r.Cookies() {
@@ -42,12 +42,13 @@ func readCuratedCookies(r *http.Request, db core.DB) ([]core.Curated, error) {
 		if len(t) != 2 || t[0] != "curated" {
 			continue
 		}
-		c, err := db.LoadCurated(t[1])
+		id := t[1]
+		c, err := db.LoadCurated(id)
 		if err != nil {
 			lastErr = err
 		} else {
 			if c != nil {
-				curs = append(curs, *c)
+				curs[id] = c
 			}
 		}
 	}
@@ -73,8 +74,8 @@ Make a feed which combines multiple projects in a single feed:<br />
 	{{- if .curated}}
 		<br />
 		Your recent feeds:<br />
-		{{- range .curated}}
-			- <a href="{{$.base}}/curated/{{.ID}}">{{.Title}}</a><br />
+		{{- range $id, $cur := .curated}}
+			- <a href="{{$.base}}/curated/{{$id}}/">{{$cur.Title}}</a><br />
 		{{- end}}
 	{{- end}}
 <br />

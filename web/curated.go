@@ -78,13 +78,13 @@ func curatedHandler(base string, db core.DB) httprouter.Handle {
 
 		args := map[string]interface{}{
 			"curated":      cur,
-			"atom":         fmt.Sprintf("%s/curated/%s/atom.xml", base, cur.ID),
+			"atom":         fmt.Sprintf("%s/curated/%s/atom.xml", base, id),
 			"title":        cur.Title(),
 			"pageversions": vs,
 		}
 
 		c := &http.Cookie{
-			Name:     "curated-" + cur.ID,
+			Name:     "curated-" + id,
 			Path:     "/",
 			HttpOnly: true,
 			Expires:  time.Now().Add(30 * 24 * time.Hour),
@@ -133,13 +133,13 @@ func curatedEditHandler(base string, db core.DB, fetch Fetcher) httprouter.Handl
 			title := r.Form.Get("title")
 			args["customtitle"] = title
 			if len(errors) == 0 {
-				if err := db.CuratedSetPages(cur.ID, pages); err != nil {
+				if err := db.CuratedSetPages(id, pages); err != nil {
 					log.Printf("curated pages: %s", err)
 					http.Error(w, http.StatusText(500), 500)
 					return
 				}
 
-				if err := db.CuratedSetTitle(cur.ID, title); err != nil {
+				if err := db.CuratedSetTitle(id, title); err != nil {
 					log.Printf("curated title: %s", err)
 				}
 
@@ -196,15 +196,15 @@ func curatedAtomHandler(base string, db core.DB, fetch Fetcher) httprouter.Handl
 			return
 		}
 
-		feed := asFeed(base, "urn:uuid:"+cur.ID, cur.Title(), cur.LastUpdated, vs)
+		feed := asFeed(base, "urn:uuid:"+id, cur.Title(), cur.LastUpdated, vs)
 		feed.Links = []Link{
 			{
-				Href: fmt.Sprintf("%s/curated/%s/", base, cur.ID),
+				Href: fmt.Sprintf("%s/curated/%s/", base, id),
 				Rel:  "alternate", // not strictly true...
 				Type: "text/html",
 			},
 			{
-				Href: fmt.Sprintf("%s/curated/%s/atom.xml", base, cur.ID),
+				Href: fmt.Sprintf("%s/curated/%s/atom.xml", base, id),
 				Rel:  "self",
 				Type: "application/atom+xml",
 			},

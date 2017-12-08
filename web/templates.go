@@ -85,8 +85,7 @@ a:hover {
 		display: block;
 	}
 
-	/* don't show 'spider timestamp' column on small screens */
-	table.history th, table.history td:first-child {
+	.optional {
 		display: none;
 	}
 }

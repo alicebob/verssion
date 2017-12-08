@@ -244,15 +244,15 @@ var (
 	{{- with .pageversions}}
 		<table>
 		<tr>
-			<th>Page:</th>
-			<th>Stable version:</th>
-			<th>Spider timestamp:</th>
+			<th class="optional">Page:</th>
+			<th class="optional">Stable version:</th>
+			<th class="optional">Spider timestamp:</th>
 		</tr>
 		{{- range .}}
 			<tr>
 			<td><a href="{{$.base}}/p/{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
 			<td>{{version .StableVersion}}</td>
-			<td>{{.T.Format "2006-01-02 15:04 UTC"}}</td>
+			<td class="optional">{{.T.Format "2006-01-02 15:04 UTC"}}</td>
 			</tr>
 		{{- end}}
 		</table>

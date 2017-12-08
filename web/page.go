@@ -93,7 +93,7 @@ var (
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
 {{- end}}
 {{define "page"}}
-	<h2>{{.page}}</h2>
+	<h2>{{title .page}}</h2>
 	<table>
 		<tr>
 			<td>Wikipedia:</td>
@@ -113,12 +113,12 @@ var (
 	<h2>Version history</h2>
 	<table class="history">
 	<tr>
-		<th>Spider timestamp:</th>
-		<th>Version:</th>
+		<th class="optional">Spider timestamp:</th>
+		<th class="optional">Version:</th>
 	</tr>
 	{{- range .versions}}
 		<tr>
-			<td>{{.T.Format "2006-01-02 15:04 UTC"}}</td>
+			<td class="optional">{{.T.Format "2006-01-02 15:04 UTC"}}</td>
 			<td>{{version .StableVersion}}</td>
 		</tr>
 	{{- end}}

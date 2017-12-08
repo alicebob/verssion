@@ -118,18 +118,59 @@ a:hover {
 {{end}}
 
 {{define "pageselection"}}
+	<script>
+function moveChecked() {
+	var avail = document.getElementById("available").childNodes;
+	avail.forEach(function(elem) {
+		if (elem.nodeType != Node.ELEMENT_NODE) {
+			return
+		};
+		if (elem.firstElementChild.checked) {
+			document.getElementById("selected").appendChild(elem);
+		}
+	});
+}
+function runFilter(v) {
+    v = v.toLowerCase();
+	var avail = document.getElementById("available").childNodes;
+	avail.forEach(function(elem) {
+		if (elem.nodeType != Node.ELEMENT_NODE) {
+			return
+		};
+		if (! elem.dataset) {
+			return;
+		}
+		var page = elem.dataset["page"].toLowerCase(),
+			title = elem.dataset["title"].toLowerCase();
+		if (title.length == 0) {
+			return;
+		};
+		var visible = v.length == 0 || title.indexOf(v) >= 0 || page.indexOf(v) >= 0;
+		elem.style.display = visible ? "block" : "none";
+	});
+}
+	</script>
+	<div id="selected">
     {{- if .pages}}
     Selected pages:<br />
     {{- range .pages}}
-        <input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label><br />
+		<div>
+        <input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
+		</div>
     {{- end}}
+    {{- end}}
+	</div>
     <br />
-    {{- end}}
 
     Add some pages:<br />
+	Filter: <input type="text" oninput="moveChecked();runFilter(this.value)"><br />
+	<div id="available">
     {{- range .available}}
-        <input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label><br />
+		<div data-page="{{.}}" data-title="{{title .}}">
+        <input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
+		</div>
     {{- end}}
+	</div>
     <br />
 
     Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.<br />

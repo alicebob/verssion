@@ -101,7 +101,7 @@ var (
 		</tr>
 		<tr>
 			<td>Homepage:</td>
-			<td>{{with .current.Homepage}}<a href="https://{{.}}">https://{{.}}</a>{{- end}}</td>
+			<td>{{with .current.Homepage}}{{link .}}{{- end}}</td>
 		</tr>
 		<tr>
 			<td>Current stable version:</td>

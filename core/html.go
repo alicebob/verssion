@@ -1,6 +1,7 @@
 package core
 
 import (
+	"fmt"
 	"io"
 	"strings"
 	"unicode"
@@ -89,6 +90,16 @@ node:
 				continue node
 			case "br":
 				res += "\n"
+			case "a":
+				var (
+					href = getAttr("href", c.Attr)
+					name = tString(c)
+				)
+				if strings.HasPrefix(href, "http://") || strings.HasPrefix(href, "https://") {
+					res += fmt.Sprintf("[%s](%s)", name, href)
+				} else {
+					res += name
+				}
 			default:
 				if !ignoreTag(c.Data, c.Attr) {
 					res += tString(c)
@@ -152,4 +163,13 @@ func cleanLine(s string) string {
 		inSpace = false
 		return r
 	}, strings.TrimSpace(s))
+}
+
+func getAttr(attr string, attrs []html.Attribute) string {
+	for _, a := range attrs {
+		if a.Key == attr {
+			return a.Val
+		}
+	}
+	return ""
 }

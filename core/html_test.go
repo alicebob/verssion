@@ -79,7 +79,7 @@ func TestFindTablesReal(t *testing.T) {
 		[]string{""},
 		[]string{"Stable release", "2.14.2 / 22 September 2017"},
 		[]string{""},
-		[]string{"Repository", "git-scm.com/downloads"},
+		[]string{"Repository", "[git-scm.com/downloads](https://git-scm.com/downloads)"},
 		[]string{"Development status", "Active"},
 		[]string{"Written in", "C, Shell, Perl, Tcl, Python"},
 		[]string{"Operating system", "POSIX: Linux, Windows, macOS"},
@@ -87,7 +87,7 @@ func TestFindTablesReal(t *testing.T) {
 		[]string{"Available in", "English"},
 		[]string{"Type", "Version control"},
 		[]string{"License", "GNU GPL v2 and GNU LGPL v2.1"},
-		[]string{"Website", "git-scm.com"},
+		[]string{"Website", "[git-scm.com](https://git-scm.com)"},
 	}}
 	if have, want := ts[0], t1; !reflect.DeepEqual(have, want) {
 		t.Errorf("have %#v\nwant %#v", have, want)

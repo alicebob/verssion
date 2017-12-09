@@ -20,6 +20,7 @@ var (
 					t := template.HTML(strings.Replace(h, "\n", "<br />", -1))
 					return t
 				},
+				"link": basicMarkdown,
 			}).Parse(`<!DOCTYPE html>
 <html>
 <head>

@@ -26,6 +26,7 @@ func indexHandler(base string, db core.DB) httprouter.Handle {
 		runTmpl(w, indexTempl, map[string]interface{}{
 			"base":    base,
 			"title":   "VeRSSion",
+			"current": "home",
 			"entries": es,
 			"curated": curated,
 		})

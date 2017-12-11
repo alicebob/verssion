@@ -46,7 +46,12 @@ func TestPage(t *testing.T) {
 	defer s.Close()
 	db.Store(core.Page{Page: "Debian", StableVersion: "my version"})
 	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.0", T: time.Now()})
-	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.1 / July 22, 2017", Homepage: "https://haskell.org/ghc", T: time.Now()})
+	db.Store(core.Page{
+		Page:          "Glasgow_Haskell_Compiler",
+		StableVersion: "8.2.1 / July 22, 2017",
+		Homepage:      "https://haskell.org/ghc",
+		T:             time.Now(),
+	})
 
 	{
 		status, _ := get(t, s, "/p/Glasgow_Haskell_Compiler")
@@ -59,21 +64,19 @@ func TestPage(t *testing.T) {
 	if have, want := status, 200; have != want {
 		t.Fatalf("have %v, want %v", have, want)
 	}
+	contains(t, body,
+		"<title>Glasgow Haskell Compiler",
+		"Glasgow Haskell Compiler",
+		"https://haskell.org",
+		"8.2.1",
+		"8.2.0",
+	)
 
-	if in, want := body, "<title>Glasgow Haskell Compiler"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found in %q", want, in)
-	}
-
-	if in, want := body, "Glasgow Haskell Compiler"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found in %q", want, in)
-	}
-	if in, want := body, "https://haskell.org"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found in %q", want, in)
-	}
-	if in, want := body, "8.2.1"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found in %q", want, in)
-	}
-	if in, want := body, "8.2.0"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found in %q", want, in)
+	{
+		status, body := get(t, s, "/p/nosuch/")
+		if have, want := status, 404; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+		contains(t, body, "not found")
 	}
 }

@@ -23,7 +23,9 @@ func newCuratedHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle
 			pm[p] = true
 		}
 		args := map[string]interface{}{
+			"base":     base,
 			"title":    "curated list",
+			"current":  "curated",
 			"etc":      etc,
 			"selected": pm,
 		}
@@ -77,9 +79,11 @@ func curatedHandler(base string, db core.DB) httprouter.Handle {
 		}
 
 		args := map[string]interface{}{
+			"base":         base,
+			"title":        cur.Title(),
+			"current":      "curated",
 			"curated":      cur,
 			"atom":         fmt.Sprintf("%s/curated/%s/atom.xml", base, id),
-			"title":        cur.Title(),
 			"pageversions": vs,
 		}
 

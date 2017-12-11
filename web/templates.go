@@ -31,6 +31,7 @@ var (
 	<style type="text/css">
 body {
 	margin: 0;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 table {
 	width: 100%;

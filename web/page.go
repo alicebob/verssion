@@ -19,9 +19,10 @@ func allPagesHandler(base string, db core.DB) httprouter.Handle {
 			return
 		}
 		runTmpl(w, allPagesTempl, map[string]interface{}{
-			"base":  base,
-			"title": "Pages overview",
-			"pages": all,
+			"base":    base,
+			"title":   "Pages overview",
+			"current": "allpages",
+			"pages":   all,
 		})
 	}
 }
@@ -37,6 +38,7 @@ func pageHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
 				runTmpl(w, pageNotFoundTempl, map[string]interface{}{
 					"base":      base,
 					"title":     core.Title(p.Page),
+					"current":   "",
 					"wikipedia": WikiURL(p.Page),
 					"page":      p.Page,
 				})
@@ -62,10 +64,10 @@ func pageHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
 		runTmpl(w, pageTempl, map[string]interface{}{
 			"base":      base,
 			"title":     core.Title(cur.Page),
+			"current":   "",
 			"atom":      adhocURL(base, []string{cur.Page}),
 			"wikipedia": WikiURL(cur.Page),
-			"current":   cur,
-			"page":      cur.Page,
+			"page":      cur,
 			"versions":  vs,
 		})
 	}
@@ -93,7 +95,7 @@ var (
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
 {{- end}}
 {{define "page"}}
-	<h2>{{title .page}}</h2>
+	<h2>{{title .page.Page}}</h2>
 	<table>
 		<tr>
 			<td>Wikipedia:</td>
@@ -101,11 +103,11 @@ var (
 		</tr>
 		<tr>
 			<td>Homepage:</td>
-			<td>{{with .current.Homepage}}{{link .}}{{- end}}</td>
+			<td>{{with .page.Homepage}}{{link .}}{{- end}}</td>
 		</tr>
 		<tr>
 			<td>Current stable version:</td>
-			<td>{{with .current.StableVersion}}{{version .}}{{- end}}</td>
+			<td>{{with .page.StableVersion}}{{version .}}{{- end}}</td>
 		</tr>
 	</table>
     <br />
@@ -129,7 +131,7 @@ var (
 	<small>
 		Version numbers are retrieved from Wikipedia, and are licensed under Creative Commons.<br />
 		If the current stable version is out of date, please edit <a href="{{.wikipedia}}">Wikipedia</a>.<br />
-		Latest spider check: {{if not .current.T.IsZero}}{{.current.T.Format "2006-01-02 15:04 UTC"}}{{- end}}<br />
+		Latest spider check: {{if not .page.T.IsZero}}{{.page.T.Format "2006-01-02 15:04 UTC"}}{{- end}}<br />
 	</small>
 {{- end}}
 `)

@@ -36,7 +36,8 @@ func TestCurated(t *testing.T) {
 			t.Fatalf("have %v, want %v", have, want)
 		}
 		contains(t, body,
-			"Create a new list",
+			"<title>New feed",
+			"<h2>New feed",
 			"Glasgow Haskell Compiler",
 			"Glasgow_Haskell_Compiler",
 		)

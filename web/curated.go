@@ -24,7 +24,7 @@ func newCuratedHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle
 		}
 		args := map[string]interface{}{
 			"base":     base,
-			"title":    "curated list",
+			"title":    "New feed",
 			"current":  "curated",
 			"etc":      etc,
 			"selected": pm,
@@ -224,8 +224,8 @@ func curatedAtomHandler(base string, db core.DB, fetch Fetcher) httprouter.Handl
 var (
 	newCuratedTempl = withBase(`
 {{define "page"}}
-	Create a new list. You can change it later.<br />
-	<br />
+	<h2>New feed</h2>
+	Create a new RSS/Atom feed combining multiple pages. You can always change the feed later.<br />
 
 	{{template "errors" .errors}}
 	

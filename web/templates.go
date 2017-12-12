@@ -31,7 +31,7 @@ var (
 	<link rel="apple-touch-icon" href="{{.base}}/s/favicon.png">
 	<style type="text/css">
 body {
-	margin: 0;
+	margin: 0 0 2em 0;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 table {
@@ -63,18 +63,30 @@ a, a:visited {
 a:hover {
 	color: black;
 }
-.head {
+nav {
 	background-color: #35b7b1;
 	padding: 0.5em 0;
 }
-.head a {
-	color: black;
+nav ul {
+	padding: 0;
+	margin: 0;
+}
+nav li {
+	list-style: none;
+	display: inline;
+	padding-right: 1em;
+}
+nav a {
+	font-weight: bold;
+}
+nav a, nav a:visited {
+	color: rgba(0, 0, 0, 0.5);
 	text-decoration: none;
 }
-.head a:hover {
-	text-decoration: underline;
+nav a.active, nav a:hover {
+	color: rgba(0, 0, 0, 1);
 }
-.body, .head div {
+.body, nav div {
 	margin: 0 auto;
 	max-width: 760px;
 	padding: 0 0.5em;
@@ -96,13 +108,15 @@ a:hover {
 	{{- block "head" .}}{{end}}
 </head>
 <body>
-	<div class="head">
+	<nav>
 		<div>
-        <a href="{{.base}}/">Home</a>
-        - <a href="{{.base}}/curated/">New feed</a>
-        - <a href="{{.base}}/p/">All pages</a>
+		<ul>
+        <li><a href="{{.base}}/"{{if eq .current "home"}} class="active"{{end}}>Home</a></li>
+        <li><a href="{{.base}}/curated/"{{if eq .current "curated"}} class="active"{{end}}>New feed</a></li>
+        <li><a href="{{.base}}/p/"{{if eq .current "allpages"}} class="active"{{end}}>All pages</a></li>
+		</ul>
 		</div>
-	</div>
+	</nav>
 	<div class="body">
         {{- block "page" .}}{{end}}
 	</div>

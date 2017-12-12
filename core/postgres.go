@@ -11,7 +11,7 @@ import (
 const DBURL = "postgresql:///w"
 
 type Postgres struct {
-	conn *pgx.Conn
+	conn *pgx.ConnPool
 }
 
 var _ DB = &Postgres{}
@@ -24,7 +24,7 @@ func NewPostgres(url string) (*Postgres, error) {
 	if err != nil {
 		return nil, err
 	}
-	conn, err := pgx.Connect(cc)
+	conn, err := pgx.NewConnPool(pgx.ConnPoolConfig{ConnConfig: cc})
 	if err != nil {
 		return nil, err
 	}

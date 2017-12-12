@@ -68,7 +68,8 @@ func readPair(s string, open, close byte) (string, int) {
 	return "", 0
 }
 
-func basicMarkdown(src string) template.HTML {
+// markdown to html (properly escaped)
+func htmlMarkdown(src string) template.HTML {
 	var res string
 	for _, t := range parseMarkdown(src) {
 		switch s := t.(type) {
@@ -92,4 +93,20 @@ func basicMarkdown(src string) template.HTML {
 
 func safeURL(url string) bool {
 	return strings.HasPrefix(url, "http://") || strings.HasPrefix(url, "https://")
+}
+
+// markdown to plain text
+func textMarkdown(src string) string {
+	var res string
+	for _, t := range parseMarkdown(src) {
+		switch s := t.(type) {
+		case string:
+			res += s
+		case link:
+			res += s.title
+		default:
+			// panic?
+		}
+	}
+	return res
 }

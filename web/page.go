@@ -33,7 +33,7 @@ func pageHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
 		cur, err := loadPage(page, db, fetch)
 		if err != nil {
 			if p, ok := err.(core.ErrNotFound); ok {
-				log.Printf("not found %q: %s", page, err)
+				log.Printf("not found: %s", err)
 				w.WriteHeader(404)
 				runTmpl(w, pageNotFoundTempl, map[string]interface{}{
 					"base":      base,

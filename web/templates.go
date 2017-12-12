@@ -16,11 +16,12 @@ var (
 			Funcs(template.FuncMap{
 				"title": core.Title,
 				"version": func(s string) template.HTML {
-					h := template.HTMLEscapeString(s)
-					t := template.HTML(strings.Replace(h, "\n", "<br />", -1))
-					return t
+					h := textMarkdown(s)
+					h = template.HTMLEscapeString(h)
+					return template.HTML(strings.Replace(h, "\n", "<br />", -1))
 				},
-				"link": basicMarkdown,
+				"link":      htmlMarkdown,
+				"plainText": textMarkdown,
 			}).Parse(`<!DOCTYPE html>
 <html>
 <head>

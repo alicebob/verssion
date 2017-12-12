@@ -17,6 +17,7 @@ func TestIndex(t *testing.T) {
 	defer s.Close()
 	db.Store(core.Page{Page: "Debian", StableVersion: "my version"})
 	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.1 / July 22, 2017"})
+	db.Store(core.Page{Page: "WithLink", StableVersion: "a [link](https://link.me)!"})
 
 	status, body := get(t, s, "")
 	if have, want := status, 200; have != want {
@@ -29,5 +30,6 @@ func TestIndex(t *testing.T) {
 		"my version",
 		"Glasgow Haskell Compiler", // titleification test
 		"Glasgow_Haskell_Compiler",
+		"a link!",
 	)
 }

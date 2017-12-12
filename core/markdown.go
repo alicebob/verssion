@@ -1,6 +1,6 @@
 // only knows about "[link](https://..)" markdown markup
 
-package web
+package core
 
 import (
 	"fmt"
@@ -59,17 +59,20 @@ func readPair(s string, open, close byte) (string, int) {
 	}
 	for i := 1; i < len(s); i++ {
 		switch s[i] {
+		case '\\':
+			i++
 		case open:
 			return "", 0
 		case close:
-			return s[1:i], i + 1
+			res := strings.Replace(s[1:i], `\`, ``, -1)
+			return res, i + 1
 		}
 	}
 	return "", 0
 }
 
 // markdown to html (properly escaped)
-func htmlMarkdown(src string) template.HTML {
+func HtmlMarkdown(src string) template.HTML {
 	var res string
 	for _, t := range parseMarkdown(src) {
 		switch s := t.(type) {
@@ -96,7 +99,7 @@ func safeURL(url string) bool {
 }
 
 // markdown to plain text
-func textMarkdown(src string) string {
+func TextMarkdown(src string) string {
 	var res string
 	for _, t := range parseMarkdown(src) {
 		switch s := t.(type) {

@@ -99,7 +99,7 @@ func StableVersion(n io.Reader) (string, string) {
 			if len(r) > 1 {
 				v = r[1]
 			}
-			switch k := r[0]; k {
+			switch k := r[0]; TextMarkdown(k) {
 			case "Stable release", "Latest release", "Last release":
 				stable = v
 			case "Stable release(s) [±]":

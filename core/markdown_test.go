@@ -1,4 +1,4 @@
-package web
+package core
 
 import (
 	"html/template"
@@ -39,6 +39,13 @@ func TestMarkdownParse(t *testing.T) {
 			},
 		},
 		{
+			Src: `foo [\[bar\]](link)`,
+			Tokens: []interface{}{
+				"foo ",
+				link{href: "link", title: "[bar]", raw: `[\[bar\]](link)`},
+			},
+		},
+		{
 			Src:    "foo [bar]",
 			Tokens: []interface{}{"foo [bar]"},
 		},
@@ -75,6 +82,12 @@ func TestMarkdownParse(t *testing.T) {
 			Src: "[foo]()",
 			Tokens: []interface{}{
 				"[foo]()",
+			},
+		},
+		{
+			Src: `foo [\`,
+			Tokens: []interface{}{
+				`foo [\`,
 			},
 		},
 	} {
@@ -132,10 +145,10 @@ func TestMarkdown(t *testing.T) {
 			Text: "mariadb.org, mariadb.com",
 		},
 	} {
-		if have, want := htmlMarkdown(c.Src), template.HTML(c.HTML); have != want {
+		if have, want := HtmlMarkdown(c.Src), template.HTML(c.HTML); have != want {
 			t.Errorf("case %d: have %q, want %q", i, have, want)
 		}
-		if have, want := textMarkdown(c.Src), c.Text; have != want {
+		if have, want := TextMarkdown(c.Src), c.Text; have != want {
 			t.Errorf("case %d: have %q, want %q", i, have, want)
 		}
 	}

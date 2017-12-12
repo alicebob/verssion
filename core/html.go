@@ -95,8 +95,12 @@ node:
 					href = getAttr("href", c.Attr)
 					name = tString(c)
 				)
+				if strings.HasPrefix(href, "//") {
+					href = "https:" + href
+				}
 				if strings.HasPrefix(href, "http://") || strings.HasPrefix(href, "https://") {
-					res += fmt.Sprintf("[%s](%s)", name, href)
+					n := strings.NewReplacer(`[`, `\[`, `]`, `\]`).Replace(name)
+					res += fmt.Sprintf("[%s](%s)", n, href)
 				} else {
 					res += name
 				}

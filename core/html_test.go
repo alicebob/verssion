@@ -45,6 +45,30 @@ func TestFindTables(t *testing.T) {
 				},
 			},
 		},
+		{
+			Html: `<html><body><table><tr><td><a href="https://foo">bar</a></td></table>`,
+			Want: []Table{
+				{
+					Rows: [][]string{{"[bar](https://foo)"}},
+				},
+			},
+		},
+		{
+			Html: `<html><body><table><tr><td><a href="//foo">bar</a></td></table>`,
+			Want: []Table{
+				{
+					Rows: [][]string{{"[bar](https://foo)"}},
+				},
+			},
+		},
+		{
+			Html: `<html><body><table><tr><td><a href="https://foo">[bar]</a></td></table>`,
+			Want: []Table{
+				{
+					Rows: [][]string{{`[\[bar\]](https://foo)`}},
+				},
+			},
+		},
 	}
 	for i, c := range cases {
 		d, err := FindTables(bytes.NewBufferString(c.Html))

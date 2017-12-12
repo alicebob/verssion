@@ -1,6 +1,8 @@
 package web_test
 
 import (
+	"io/ioutil"
+	"log"
 	"net/http/httptest"
 	"strings"
 	"testing"
@@ -11,6 +13,7 @@ import (
 )
 
 func TestPages(t *testing.T) {
+	log.SetOutput(ioutil.Discard)
 	var (
 		db = core.NewMemory()
 		m  = web.Mux("", db, web.NotFetcher(), "")
@@ -44,8 +47,16 @@ func TestPage(t *testing.T) {
 	)
 	s := httptest.NewServer(m)
 	defer s.Close()
-	db.Store(core.Page{Page: "Debian", StableVersion: "my version"})
-	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.0", T: time.Now()})
+	db.Store(core.Page{
+		Page:          "Debian",
+		StableVersion: "my version",
+		T:             time.Now(),
+	})
+	db.Store(core.Page{
+		Page:          "Glasgow_Haskell_Compiler",
+		StableVersion: "8.2.0",
+		T:             time.Now(),
+	})
 	db.Store(core.Page{
 		Page:          "Glasgow_Haskell_Compiler",
 		StableVersion: "8.2.1 / July 22, 2017",

@@ -34,6 +34,14 @@ func (e ErrNotFound) Error() string {
 	return fmt.Sprintf("%q: no such page", e.Page)
 }
 
+type ErrNoVersion struct {
+	Page string
+}
+
+func (e ErrNoVersion) Error() string {
+	return fmt.Sprintf("%q: no version found", e.Page)
+}
+
 // GetPage downloads and parses given wikipage
 func GetPage(page, url string) (Page, error) {
 	p := Page{
@@ -58,7 +66,7 @@ func GetPage(page, url string) (Page, error) {
 	case 200:
 		p.StableVersion, p.Homepage = StableVersion(r.Body)
 		if p.StableVersion == "" {
-			return p, fmt.Errorf("%q: no version found", page)
+			return p, ErrNoVersion{Page: page}
 		}
 		return p, nil
 	case 301:

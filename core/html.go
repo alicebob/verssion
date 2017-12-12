@@ -86,7 +86,7 @@ node:
 			res += stripCtl(c.Data)
 		case html.ElementNode:
 			switch c.Data {
-			case "small", "sup":
+			case "sup":
 				continue node
 			case "br":
 				res += "\n"
@@ -95,6 +95,10 @@ node:
 					href = getAttr("href", c.Attr)
 					name = tString(c)
 				)
+				if name == `[±]` {
+					// special case for wikipedia 'edit' link
+					continue
+				}
 				if strings.HasPrefix(href, "//") {
 					href = "https:" + href
 				}

@@ -19,7 +19,7 @@ func TestStableVersion(t *testing.T) {
 		},
 		{
 			Filename: "debian.html",
-			Version:  "9.2 (Stretch)",
+			Version:  "9.2 (Stretch) (October 7, 2017)",
 			Homepage: "[www.debian.org](https://www.debian.org)",
 		},
 		{
@@ -39,17 +39,17 @@ func TestStableVersion(t *testing.T) {
 		},
 		{
 			Filename: "pine.html",
-			Version:  "4.64",
+			Version:  "4.64 (September 28, 2005)",
 			Homepage: "[www.washington.edu/pine](http://www.washington.edu/pine)",
 		},
 		{
 			Filename: "systemd.html",
-			Version:  "235",
+			Version:  "235 (October 6, 2017)",
 			Homepage: "[freedesktop.org/.../systemd/](https://freedesktop.org/wiki/Software/systemd/)",
 		},
 		{
 			Filename: "mariadb.html",
-			Version:  "10.2.11",
+			Version:  "10.2.11 (November 28, 2017)",
 			Homepage: "[mariadb.org](https://mariadb.org/), [mariadb.com](https://mariadb.com/)",
 		},
 	}

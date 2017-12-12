@@ -50,7 +50,8 @@ func readLink(s string) (*link, int) {
 	if href == "" {
 		return nil, 0
 	}
-	return &link{title: title, href: href, raw: s[:n+m]}, n + m
+	l := &link{title: title, href: href, raw: s[:n+m]}
+	return l, n + m
 }
 
 func readPair(s string, open, close byte) (string, int) {

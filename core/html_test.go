@@ -69,6 +69,14 @@ func TestFindTables(t *testing.T) {
 				},
 			},
 		},
+		{
+			Html: `<html><body><table><tr><td>no<a href="https://foo">[±]</a>link</td></table>`,
+			Want: []Table{
+				{
+					Rows: [][]string{{"nolink"}},
+				},
+			},
+		},
 	}
 	for i, c := range cases {
 		d, err := FindTables(bytes.NewBufferString(c.Html))

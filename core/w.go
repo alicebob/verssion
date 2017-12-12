@@ -102,7 +102,7 @@ func StableVersion(n io.Reader) (string, string) {
 			switch k := r[0]; TextMarkdown(k) {
 			case "Stable release", "Latest release", "Last release":
 				stable = v
-			case "Stable release(s) [±]":
+			case "Stable release(s)":
 				// Firefox, has a table with versions. The version is in the
 				// next row.
 				if len(t.Rows) > i {

@@ -60,26 +60,27 @@ var (
 	indexTempl = withBase(`
 {{define "page"}}
 <h2>What</h2>
-<div><p>
-Verssion tracks stable version of software projects (e.g.: databases, editors, JS frameworks), and makes that available as an RSS (atom) feed. The main use-case is for dev-ops and developers who use a lot of open source software projects, and who like to keep an eye on releases. Without making that a fulltime job, and without signing up for dozens of e-mail lists. Turns out wikipedia is a great source for version information, so that's what we use.<br />
-You can create feeds for your own use, or share them with colleagues.<br />
-</p>
-<br />
-<a href="https://github.com/alicebob/verssion/">Full source</a> for issues and suggestions.<br />
+<div>
+Verssion tracks stable version of software projects (e.g.: databases, editors, JS frameworks), and makes that available as an RSS (atom) feed. The main use-case is for dev-ops and developers who use a lot of open source software projects, and who like to keep an eye on releases. Without making that a fulltime job, and without signing up for dozens of e-mail lists. Turns out wikipedia is a great source for version information, so that's what we use.
+<p>
+You can create feeds for your own use, or share them with colleagues.
+<p>
+<a href="https://github.com/alicebob/verssion/">Full source</a> for issues and suggestions.
 </div>
-<br />
 
 <h2>Feed</h2>
-Make a feed which combines multiple projects in a single feed:<br />
-<a href="./curated/">Create new feed!</a><br />
+Make a feed which combines multiple projects in a single feed:
+<a href="./curated/">Create new feed!</a>
+<p>
+
 	{{- if .curated}}
-		<br />
-		Your recent feeds:<br />
+		Your recent feeds:
+		<ul>
 		{{- range $id, $cur := .curated}}
-			- <a href="{{$.base}}/curated/{{$id}}/">{{$cur.Title}}</a><br />
+			<li><a href="{{$.base}}/curated/{{$id}}/">{{$cur.Title}}</a><br /></li>
 		{{- end}}
+		</ul>
 	{{- end}}
-<br />
 
 <h2>Updates</h2>
 	<table>
@@ -94,7 +95,6 @@ Make a feed which combines multiple projects in a single feed:<br />
 			<td></td>
 		</tr>
 	</table>
-	<br />
 
 {{- end}}
 `)

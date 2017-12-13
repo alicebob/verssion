@@ -125,6 +125,7 @@ func curatedEditHandler(base string, db core.DB, fetch Fetcher) httprouter.Handl
 		args := map[string]interface{}{
 			"base":         base,
 			"title":        cur.Title(),
+			"current":      "curated",
 			"curated":      cur,
 			"etc":          etc,
 			"selected":     selected,

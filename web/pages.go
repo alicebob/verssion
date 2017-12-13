@@ -45,14 +45,14 @@ func unique(ps []string) []string {
 	return res
 }
 
-func runUpdates(db core.DB, fetch Fetcher, pages []string) ([]string, []error) {
+func runUpdates(db core.DB, spider core.Spider, pages []string) ([]string, []error) {
 	var (
 		ret    []string
 		errors []error
 	)
 
 	for _, p := range pages {
-		if n, err := loadPage(p, db, fetch); err != nil {
+		if n, err := StoreSpider(db, spider, p); err != nil {
 			log.Printf("update %q: %s", p, err)
 			errors = append(errors, err)
 		} else {

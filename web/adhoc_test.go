@@ -14,7 +14,7 @@ import (
 func TestAdhoc(t *testing.T) {
 	var (
 		db = core.NewMemory()
-		m  = web.Mux("", db, web.NotFetcher(), "")
+		m  = web.Mux("", db, NewFixedSpider(), "")
 	)
 	s := httptest.NewServer(m)
 	defer s.Close()

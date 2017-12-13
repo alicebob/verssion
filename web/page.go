@@ -110,8 +110,8 @@ var (
 			<td>{{with .page.StableVersion}}{{version .}}{{- end}}</td>
 		</tr>
 	</table>
-    <br />
-    <br />
+	<br />
+	<br />
 	<h2>Version history</h2>
 	<table class="history">
 	<tr>
@@ -140,7 +140,7 @@ var (
 {{define "page"}}
 	Page not found: {{.page}}<br />
 	Maybe you can create it on <a href="{{.wikipedia}}">Wikipedia</a><br />
-    <br />
+	<br />
 {{- end}}
 `)
 )

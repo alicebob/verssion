@@ -43,7 +43,7 @@ th {
 	font-weight: normal;
 }
 td, th {
-    vertical-align: top;
+	vertical-align: top;
 	padding: 0;
 	padding-bottom: 3px;
 }
@@ -111,27 +111,27 @@ nav a.active, nav a:hover {
 	<nav>
 		<div>
 		<ul>
-        <li><a href="{{.base}}/"{{if eq .current "home"}} class="active"{{end}}>Home</a></li>
-        <li><a href="{{.base}}/curated/"{{if eq .current "curated"}} class="active"{{end}}>New feed</a></li>
-        <li><a href="{{.base}}/p/"{{if eq .current "allpages"}} class="active"{{end}}>All pages</a></li>
+		<li><a href="{{.base}}/"{{if eq .current "home"}} class="active"{{end}}>Home</a></li>
+		<li><a href="{{.base}}/curated/"{{if eq .current "curated"}} class="active"{{end}}>New feed</a></li>
+		<li><a href="{{.base}}/p/"{{if eq .current "allpages"}} class="active"{{end}}>All pages</a></li>
 		</ul>
 		</div>
 	</nav>
 	<div class="body">
-        {{- block "page" .}}{{end}}
+		{{- block "page" .}}{{end}}
 	</div>
 </body>
 </html>
 
 {{define "errors"}}
-    {{- with .}}
-        Some problems:<br />
-        {{- range .}}
-            {{.}}<br />
-        {{- end}}
-        <br />
-        <br />
-    {{- end}}
+	{{- with .}}
+		Some problems:<br />
+		{{- range .}}
+			{{.}}<br />
+		{{- end}}
+		<br />
+		<br />
+	{{- end}}
 {{end}}
 
 {{define "pageselection"}}
@@ -148,7 +148,7 @@ function moveChecked() {
 	});
 }
 function runFilter(v) {
-    v = v.toLowerCase();
+	v = v.toLowerCase();
 	var avail = document.getElementById("available").childNodes;
 	avail.forEach(function(elem) {
 		if (elem.nodeType != Node.ELEMENT_NODE) {
@@ -168,30 +168,30 @@ function runFilter(v) {
 }
 	</script>
 	<div id="selected">
-    {{- if .pages}}
-    Selected pages:<br />
-    {{- range .pages}}
+	{{- if .pages}}
+	Selected pages:<br />
+	{{- range .pages}}
 		<div>
-        <input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
+		<input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
 		</div>
-    {{- end}}
-    {{- end}}
+	{{- end}}
+	{{- end}}
 	</div>
-    <br />
+	<br />
 
-    Add some pages:<br />
+	Add some pages:<br />
 	Filter: <input type="text" oninput="moveChecked();runFilter(this.value)"><br />
 	<div id="available">
-    {{- range .available}}
+	{{- range .available}}
 		<div data-page="{{.}}" data-title="{{title .}}">
-        <input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
+		<input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
 		</div>
-    {{- end}}
+	{{- end}}
 	</div>
-    <br />
+	<br />
 
-    Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.<br />
-    <textarea name="etc" rows="4">{{.etc}}</textarea><br />
+	Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.<br />
+	<textarea name="etc" rows="4">{{.etc}}</textarea><br />
 {{end}}
 `))
 )

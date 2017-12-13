@@ -40,7 +40,7 @@ func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle 
 			w.WriteHeader(301)
 			return
 		}
-		page = page[0 : len(page)-1] // post /
+		page = page[:len(page)-1] // post /
 		cur, err := StoreSpider(db, spider, page)
 		if err != nil {
 			if p, ok := err.(core.ErrNotFound); ok {

@@ -18,8 +18,7 @@ func Mux(baseURL string, db core.DB, sp core.Spider, static string) *httprouter.
 	r.GET("/curated/:id/edit.html", curatedEditHandler(baseURL, db, sp))
 	r.POST("/curated/:id/edit.html", curatedEditHandler(baseURL, db, sp))
 	r.GET("/curated/:id/atom.xml", curatedAtomHandler(baseURL, db, sp))
-	r.GET("/p/", allPagesHandler(baseURL, db))
-	r.GET("/p/:page/", pageHandler(baseURL, db, sp))
+	r.GET("/p/*page", pageHandler(baseURL, db, sp))
 	if static != "" {
 		r.ServeFiles("/s/*filepath", http.Dir(static))
 	}

@@ -4,32 +4,43 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/julienschmidt/httprouter"
 
 	"github.com/alicebob/verssion/core"
 )
 
-func allPagesHandler(base string, db core.DB) httprouter.Handle {
-	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-		all, err := db.CurrentAll()
-		if err != nil {
-			log.Printf("current all: %s", err)
-			http.Error(w, http.StatusText(500), 500)
-			return
-		}
-		runTmpl(w, allPagesTempl, map[string]interface{}{
-			"base":    base,
-			"title":   "Pages overview",
-			"current": "allpages",
-			"pages":   all,
-		})
+func allPages(base string, db core.DB, w http.ResponseWriter, r *http.Request) {
+	all, err := db.CurrentAll()
+	if err != nil {
+		log.Printf("current all: %s", err)
+		http.Error(w, http.StatusText(500), 500)
+		return
 	}
+	runTmpl(w, allPagesTempl, map[string]interface{}{
+		"base":    base,
+		"title":   "Pages overview",
+		"current": "allpages",
+		"pages":   all,
+	})
 }
 
+// pageHandler deal with everything under `/p/`.
 func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		page := p.ByName("page")
+		if page == "" || page == "/" {
+			allPages(base, db, w, r)
+			return
+		}
+		page = page[1:] // prefix /
+		if !strings.HasSuffix(page, "/") {
+			w.Header().Set("Location", base+"/p/"+page+"/")
+			w.WriteHeader(301)
+			return
+		}
+		page = page[0 : len(page)-1] // post /
 		cur, err := StoreSpider(db, spider, page)
 		if err != nil {
 			if p, ok := err.(core.ErrNotFound); ok {

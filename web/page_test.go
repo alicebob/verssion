@@ -4,7 +4,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http/httptest"
-	"strings"
 	"testing"
 	"time"
 
@@ -23,21 +22,22 @@ func TestPages(t *testing.T) {
 	s := httptest.NewServer(m)
 	defer s.Close()
 
+	{
+		status, _ := get(t, s, "/p")
+		if have, want := status, 301; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+	}
+
 	status, body := get(t, s, "/p/")
 	if have, want := status, 200; have != want {
 		t.Fatalf("have %v, want %v", have, want)
 	}
-
-	if in, want := body, "<title>Pages overview"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found", want)
-	}
-
-	if in, want := body, "Debian"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found", want)
-	}
-	if in, want := body, "Glasgow Haskell Compiler"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found", want)
-	}
+	contains(t, body,
+		"<title>Pages overview",
+		"Debian",
+		"Glasgow Haskell Compiler",
+	)
 }
 
 func TestPage(t *testing.T) {
@@ -61,6 +61,11 @@ func TestPage(t *testing.T) {
 		Page:          "Glasgow_Haskell_Compiler",
 		StableVersion: "8.2.1 / July 22, 2017",
 		Homepage:      "https://haskell.org/ghc",
+		T:             time.Now(),
+	})
+	db.Store(core.Page{
+		Page:          "OS/2",
+		StableVersion: "4.52 (2001)",
 		T:             time.Now(),
 	})
 
@@ -89,5 +94,23 @@ func TestPage(t *testing.T) {
 			t.Fatalf("have %v, want %v", have, want)
 		}
 		contains(t, body, "not found")
+	}
+
+	{
+		status, _ := get(t, s, "/p/OS/2")
+		if have, want := status, 301; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+	}
+
+	{
+		status, body := get(t, s, "/p/OS/2/")
+		if have, want := status, 200; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+		contains(t, body,
+			"<title>OS/2",
+			"4.52",
+		)
 	}
 }

@@ -77,7 +77,7 @@ Make a feed which combines multiple projects in a single feed:
 		Your recent feeds:
 		<ul>
 		{{- range $id, $cur := .curated}}
-			<li><a href="{{$.base}}/curated/{{$id}}/">{{$cur.Title}}</a><br /></li>
+			<li><a href="{{$.base}}/curated/{{$id}}/">{{$cur.Title}}</a></li>
 		{{- end}}
 		</ul>
 	{{- end}}

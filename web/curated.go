@@ -229,7 +229,7 @@ var (
 	newCuratedTempl = withBase(`
 {{define "page"}}
 	<h2>New feed</h2>
-	Create a new RSS/Atom feed combining multiple pages. You can always change the feed later.<br />
+	<p>Create a new RSS/Atom feed combining multiple pages. You can always change the feed later.</p>
 
 	{{template "errors" .errors}}
 	
@@ -277,16 +277,12 @@ var (
 	curatedEditTempl = withBase(`
 {{define "page"}}
 	<h2>{{.curated.Title}}</h2>
-	<br />
-	<br />
 
 	{{template "errors" .errors}}
 
-
 	<form method="POST">
-	Title: <input type="text" size="40" name="title" value="{{.customtitle}}" placeholder="{{.defaulttitle}}" /><br />
+	<label>Title <input type="text" size="40" name="title" value="{{.customtitle}}" placeholder="{{.defaulttitle}}" /></label>
 	{{template "pageselection" .}}
-	<br />
 	<input type="submit" value="Update" /><br />
 	</form>
 {{end}}

@@ -57,6 +57,9 @@ textarea {
 h2 {
 	border-bottom: 1px solid #ddd;
 }
+h4 {
+	margin: 2em 0 0.5em 0;
+}
 a, a:visited {
 	color: #357cb7;
 }
@@ -125,12 +128,14 @@ nav a.active, nav a:hover {
 
 {{define "errors"}}
 	{{- with .}}
-		Some problems:<br />
+		<p>
+		Some problems:
+		<ul>
 		{{- range .}}
-			{{.}}<br />
+			<li>{{.}}</li>
 		{{- end}}
-		<br />
-		<br />
+		</ul>
+		</p>
 	{{- end}}
 {{end}}
 
@@ -167,31 +172,30 @@ function runFilter(v) {
 	});
 }
 	</script>
-	<div id="selected">
 	{{- if .pages}}
-	Selected pages:<br />
+	<h4>Selected pages</h4>
+	<span id="selected">
 	{{- range .pages}}
 		<div>
 		<input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
 		</div>
 	{{- end}}
+	</span>
 	{{- end}}
-	</div>
-	<br />
 
-	Add some pages:<br />
-	Filter: <input type="text" oninput="moveChecked();runFilter(this.value)"><br />
-	<div id="available">
+	<h4>Add pages</h4>
+	<label>Filter <input type="text" oninput="moveChecked();runFilter(this.value)"></label>
+	<span id="available">
 	{{- range .available}}
 		<div data-page="{{.}}" data-title="{{title .}}">
 		<input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
 		</div>
 	{{- end}}
-	</div>
-	<br />
+	</span>
 
-	Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.<br />
-	<textarea name="etc" rows="4">{{.etc}}</textarea><br />
+	<h4>Add more pages</h4>
+	Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.
+	<textarea name="etc" rows="4">{{.etc}}</textarea>
 {{end}}
 `))
 )

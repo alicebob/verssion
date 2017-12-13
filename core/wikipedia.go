@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -39,6 +40,7 @@ func (spider *WikipediaSpider) Spider(page string) (*Page, error) {
 		T:    time.Now().UTC(),
 	}
 
+	log.Printf("wiki fetch %q", page)
 	req, err := http.NewRequest("GET", spider.URL(page), nil)
 	if err != nil {
 		return nil, err

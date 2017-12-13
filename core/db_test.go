@@ -73,6 +73,16 @@ func InterfaceTestDB(t *testing.T, db DB) {
 			t.Fatalf("have %v, want %v", have, want)
 		}
 	}
+
+	{
+		l, err := db.Last("nosuchpage")
+		if err != nil {
+			t.Fatal(err)
+		}
+		if l != nil {
+			t.Fatal("not a nil: %v", l)
+		}
+	}
 }
 
 // InterfaceTestCurated is used to test the Curated methods of DB implementations

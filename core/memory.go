@@ -36,7 +36,7 @@ func (m *Memory) Last(page string) (*Page, error) {
 	if last.Page != "" {
 		return &last, nil
 	}
-	return nil, ErrNotFound{Page: page}
+	return nil, nil
 }
 
 func (m *Memory) Recent(n int) ([]Page, error) {

@@ -43,20 +43,28 @@ func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle 
 		page = page[:len(page)-1] // post /
 		cur, err := StoreSpider(db, spider, page)
 		if err != nil {
-			if p, ok := err.(core.ErrNotFound); ok {
+			switch e := err.(type) {
+			case core.ErrNotFound:
 				log.Printf("not found: %s", err)
 				w.WriteHeader(404)
 				runTmpl(w, pageNotFoundTempl, map[string]interface{}{
 					"base":      base,
-					"title":     core.Title(p.Page),
+					"title":     core.Title(e.Page),
 					"current":   "",
-					"wikipedia": WikiURL(p.Page),
-					"page":      p.Page,
+					"wikipedia": WikiURL(e.Page),
+					"page":      e.Page,
 				})
-				return
+			case core.ErrNoVersion:
+				runTmpl(w, noVersionTempl, map[string]interface{}{
+					"base":    base,
+					"title":   core.Title(e.Page),
+					"current": "",
+					"page":    e.Page,
+				})
+			default:
+				log.Printf("update %q: %s", page, err)
+				http.Error(w, http.StatusText(500), 500)
 			}
-			log.Printf("update %q: %s", page, err)
-			http.Error(w, http.StatusText(500), 500)
 			return
 		}
 
@@ -149,8 +157,18 @@ var (
 
 	pageNotFoundTempl = withBase(`
 {{define "page"}}
+	<h2>{{.page}}</h2>
 	Page not found: {{.page}}<br />
 	Maybe you can create it on <a href="{{.wikipedia}}">Wikipedia</a><br />
+	<br />
+{{- end}}
+`)
+
+	noVersionTempl = withBase(`
+{{define "page"}}
+	<h2>{{.page}}</h2>
+	No version found for <b>{{.page}}</b><br />
+	Maybe this is a disambiguation page? <a href="https://en.wikipedia.org/w/index.php?search={{.page}}">Search</a> on Wikipedia.<br />
 	<br />
 {{- end}}
 `)

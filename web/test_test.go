@@ -55,6 +55,7 @@ func contains(t *testing.T, body string, needles ...string) {
 
 type FixedSpider struct {
 	pages map[string]core.Page
+	errs  map[string]error
 }
 
 func NewFixedSpider(pages ...core.Page) *FixedSpider {
@@ -64,15 +65,24 @@ func NewFixedSpider(pages ...core.Page) *FixedSpider {
 	}
 	return &FixedSpider{
 		pages: ps,
+		errs:  map[string]error{},
 	}
 }
 
 var _ core.Spider = NewFixedSpider()
 
 func (s *FixedSpider) Spider(page string) (*core.Page, error) {
+	if err, ok := s.errs[page]; ok && err != nil {
+		return nil, err
+	}
+
 	p, ok := s.pages[page]
 	if !ok {
 		return nil, core.ErrNotFound{Page: page}
 	}
 	return &p, nil
+}
+
+func (s *FixedSpider) SetError(page string, err error) {
+	s.errs[page] = err
 }

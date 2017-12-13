@@ -16,12 +16,12 @@ func TestPages(t *testing.T) {
 	log.SetOutput(ioutil.Discard)
 	var (
 		db = core.NewMemory()
-		m  = web.Mux("", db, web.NotFetcher(), "")
+		m  = web.Mux("", db, NewFixedSpider(), "")
 	)
-	s := httptest.NewServer(m)
-	defer s.Close()
 	db.Store(core.Page{Page: "Debian", StableVersion: "my version"})
 	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.1 / July 22, 2017"})
+	s := httptest.NewServer(m)
+	defer s.Close()
 
 	status, body := get(t, s, "/p/")
 	if have, want := status, 200; have != want {
@@ -43,7 +43,7 @@ func TestPages(t *testing.T) {
 func TestPage(t *testing.T) {
 	var (
 		db = core.NewMemory()
-		m  = web.Mux("", db, web.NotFetcher(), "")
+		m  = web.Mux("", db, NewFixedSpider(), "")
 	)
 	s := httptest.NewServer(m)
 	defer s.Close()

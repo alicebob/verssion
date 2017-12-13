@@ -27,10 +27,10 @@ func allPagesHandler(base string, db core.DB) httprouter.Handle {
 	}
 }
 
-func pageHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
+func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		page := p.ByName("page")
-		cur, err := loadPage(page, db, fetch)
+		cur, err := StoreSpider(db, spider, page)
 		if err != nil {
 			if p, ok := err.(core.ErrNotFound); ok {
 				log.Printf("not found: %s", err)

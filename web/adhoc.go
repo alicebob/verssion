@@ -12,11 +12,14 @@ import (
 	"github.com/alicebob/verssion/core"
 )
 
-func adhocAtomHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
+func adhocAtomHandler(base string, db core.DB, spider core.Spider) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		pages := r.URL.Query()["p"]
 		sort.Strings(pages)
-		actualPages, _ := runUpdates(db, fetch, pages)
+		actualPages, errs := runUpdates(db, spider, pages)
+		if len(errs) != 0 {
+			log.Printf("adhoc atom runUpdates: %s", errs)
+		}
 
 		vs, err := db.History(actualPages...)
 		if err != nil {

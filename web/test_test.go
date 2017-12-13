@@ -9,6 +9,8 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"github.com/alicebob/verssion/core"
 )
 
 var noRedirect = func(*http.Request, []*http.Request) error {
@@ -49,4 +51,28 @@ func contains(t *testing.T, body string, needles ...string) {
 			t.Fatalf("no %q found", want)
 		}
 	}
+}
+
+type FixedSpider struct {
+	pages map[string]core.Page
+}
+
+func NewFixedSpider(pages ...core.Page) *FixedSpider {
+	ps := map[string]core.Page{}
+	for _, p := range pages {
+		ps[p.Page] = p
+	}
+	return &FixedSpider{
+		pages: ps,
+	}
+}
+
+var _ core.Spider = NewFixedSpider()
+
+func (s *FixedSpider) Spider(page string) (*core.Page, error) {
+	p, ok := s.pages[page]
+	if !ok {
+		return nil, core.ErrNotFound{Page: page}
+	}
+	return &p, nil
 }

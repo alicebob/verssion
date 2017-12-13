@@ -32,7 +32,7 @@ func main() {
 		os.Exit(2)
 	}
 
-	mux := web.Mux(*baseURL, db, web.WikiFetcher(), *static)
+	mux := web.Mux(*baseURL, db, web.WikiSpider(), *static)
 
 	fmt.Printf("listening on %s...\n", *listen)
 	log.Fatal(http.ListenAndServe(*listen, mux))

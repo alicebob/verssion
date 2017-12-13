@@ -1,87 +1,9 @@
 package core
 
 import (
-	"fmt"
 	"io"
-	"net/http"
 	"strings"
-	"time"
 )
-
-const (
-	UserAgent = "verssion_bot/1.0 (https://verssion.one)"
-)
-
-var client = http.Client{
-	CheckRedirect: func(*http.Request, []*http.Request) error {
-		return http.ErrUseLastResponse
-	},
-}
-
-type ErrRedirect struct {
-	Page, To string
-}
-
-func (e ErrRedirect) Error() string {
-	return fmt.Sprintf("%q: see page %q", e.Page, e.To)
-}
-
-type ErrNotFound struct {
-	Page string
-}
-
-func (e ErrNotFound) Error() string {
-	return fmt.Sprintf("%q: no such page", e.Page)
-}
-
-type ErrNoVersion struct {
-	Page string
-}
-
-func (e ErrNoVersion) Error() string {
-	return fmt.Sprintf("%q: no version found", e.Page)
-}
-
-// GetPage downloads and parses given wikipage
-func GetPage(page, url string) (Page, error) {
-	p := Page{
-		Page: page,
-		T:    time.Now().UTC(),
-	}
-
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return p, err
-	}
-	req.Header.Set("User-Agent", UserAgent)
-
-	// no redirects
-	r, err := client.Do(req)
-	if err != nil {
-		return p, err
-	}
-	defer r.Body.Close()
-
-	switch code := r.StatusCode; code {
-	case 200:
-		p.StableVersion, p.Homepage = StableVersion(r.Body)
-		if p.StableVersion == "" {
-			return p, ErrNoVersion{Page: page}
-		}
-		return p, nil
-	case 301:
-		loc, err := r.Location()
-		if err != nil {
-			return p, err
-		}
-		to := strings.TrimPrefix(loc.Path, "/wiki/")
-		return p, ErrRedirect{Page: page, To: to}
-	case 404:
-		return p, ErrNotFound{Page: page}
-	default:
-		return p, fmt.Errorf("%q: wikipedia error (status: %d)", page, code)
-	}
-}
 
 func StableVersion(n io.Reader) (string, string) {
 	var stable, homepage string

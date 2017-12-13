@@ -11,7 +11,7 @@ import (
 	"github.com/alicebob/verssion/core"
 )
 
-func newCuratedHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
+func newCuratedHandler(base string, db core.DB, spider core.Spider) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		r.ParseForm()
 		var (
@@ -30,7 +30,7 @@ func newCuratedHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle
 			"selected": pm,
 		}
 		if r.Method == "POST" {
-			pages, errors := readPageArgs(db, fetch, pages, etc)
+			pages, errors := readPageArgs(db, spider, pages, etc)
 			if len(pages) > 0 && len(errors) == 0 {
 				id, err := db.CreateCurated()
 				if err != nil {
@@ -99,7 +99,7 @@ func curatedHandler(base string, db core.DB) httprouter.Handle {
 	}
 }
 
-func curatedEditHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
+func curatedEditHandler(base string, db core.DB, spider core.Spider) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		id := p.ByName("id")
 		cur, err := db.LoadCurated(id)
@@ -133,7 +133,7 @@ func curatedEditHandler(base string, db core.DB, fetch Fetcher) httprouter.Handl
 			"customtitle":  cur.CustomTitle,
 		}
 		if r.Method == "POST" {
-			pages, errors := readPageArgs(db, fetch, qPages, etc)
+			pages, errors := readPageArgs(db, spider, qPages, etc)
 			title := r.Form.Get("title")
 			args["customtitle"] = title
 			if len(errors) == 0 {
@@ -177,7 +177,7 @@ func curatedEditHandler(base string, db core.DB, fetch Fetcher) httprouter.Handl
 	}
 }
 
-func curatedAtomHandler(base string, db core.DB, fetch Fetcher) httprouter.Handle {
+func curatedAtomHandler(base string, db core.DB, spider core.Spider) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		id := p.ByName("id")
 		cur, err := db.LoadCurated(id)
@@ -191,7 +191,10 @@ func curatedAtomHandler(base string, db core.DB, fetch Fetcher) httprouter.Handl
 			return
 		}
 
-		actualPages, _ := runUpdates(db, fetch, cur.Pages)
+		actualPages, errs := runUpdates(db, spider, cur.Pages)
+		if len(errs) != 0 {
+			log.Printf("curated atom runUpdates: %s", errs)
+		}
 
 		vs, err := db.History(actualPages...)
 		if err != nil {
@@ -290,14 +293,14 @@ var (
 )
 
 // read p and etc arguments
-func readPageArgs(db core.DB, fetch Fetcher, pages []string, etc string) ([]string, []error) {
+func readPageArgs(db core.DB, spider core.Spider, pages []string, etc string) ([]string, []error) {
 	var errors []error
 
 	etcPages, etcErrors := toPages(etc)
 	pages = append(pages, etcPages...)
 	errors = append(errors, etcErrors...)
 
-	finalPages, upErrors := runUpdates(db, fetch, pages)
+	finalPages, upErrors := runUpdates(db, spider, pages)
 	errors = append(errors, upErrors...)
 
 	return unique(finalPages), errors

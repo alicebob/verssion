@@ -73,14 +73,14 @@ Make a feed which combines multiple projects in a single feed:
 <a href="./curated/">Create new feed!</a>
 <p>
 
-	{{- if .curated}}
-		Your recent feeds:
-		<ul>
-		{{- range $id, $cur := .curated}}
-			<li><a href="{{$.base}}/curated/{{$id}}/">{{$cur.Title}}</a></li>
-		{{- end}}
-		</ul>
+{{- if .curated}}
+	Your recent feeds:
+	<ul>
+	{{- range $id, $cur := .curated}}
+		<li><a href="{{$.base}}/curated/{{$id}}/">{{$cur.Title}}</a></li>
 	{{- end}}
+	</ul>
+{{- end}}
 
 <h2>Updates</h2>
 	<table>

@@ -101,4 +101,14 @@ func TestCurated(t *testing.T) {
 			t.Errorf("have %v, want %v", have, want)
 		}
 	}
+
+	{
+		status, body := get(t, s, curURL+"edit.html")
+		if have, want := status, 200; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+		contains(t, body,
+			"Debian",
+		)
+	}
 }

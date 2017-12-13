@@ -252,9 +252,9 @@ var (
 	{{- with .pageversions}}
 		<table>
 		<tr>
-			<th class="optional">Page:</th>
-			<th class="optional">Stable version:</th>
-			<th class="optional">Spider timestamp:</th>
+			<th class="optional">Page</th>
+			<th class="optional">Stable version</th>
+			<th class="optional">Spider timestamp</th>
 		</tr>
 		{{- range .}}
 			<tr>

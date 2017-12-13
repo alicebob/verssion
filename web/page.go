@@ -109,15 +109,15 @@ var (
 	<h2>{{title .page.Page}}</h2>
 	<table>
 		<tr>
-			<td>Wikipedia:</td>
+			<td>Wikipedia</td>
 			<td><a href="{{.wikipedia}}">{{.wikipedia}}</a></td>
 		</tr>
 		<tr>
-			<td>Homepage:</td>
+			<td>Homepage</td>
 			<td>{{with .page.Homepage}}{{link .}}{{- end}}</td>
 		</tr>
 		<tr>
-			<td>Current stable version:</td>
+			<td>Current stable version</td>
 			<td>{{with .page.StableVersion}}{{version .}}{{- end}}</td>
 		</tr>
 	</table>
@@ -126,8 +126,8 @@ var (
 	<h2>Version history</h2>
 	<table class="history">
 	<tr>
-		<th class="optional">Spider timestamp:</th>
-		<th class="optional">Version:</th>
+		<th class="optional">Spider timestamp</th>
+		<th class="optional">Version</th>
 	</tr>
 	{{- range .versions}}
 		<tr>

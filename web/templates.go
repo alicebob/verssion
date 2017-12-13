@@ -157,12 +157,11 @@ function runFilter(v) {
 		if (! elem.dataset) {
 			return;
 		}
-		var page = elem.dataset["page"].toLowerCase(),
-			title = elem.dataset["title"].toLowerCase();
+		var title = elem.dataset["title"].toLowerCase();
 		if (title.length == 0) {
 			return;
 		}
-		var visible = v.length == 0 || title.indexOf(v) >= 0 || page.indexOf(v) >= 0;
+		var visible = v.length == 0 || title.indexOf(v) >= 0;
 		elem.style.display = visible ? "block" : "none";
 	});
 }
@@ -183,7 +182,7 @@ function runFilter(v) {
 	Filter: <input type="text" oninput="moveChecked();runFilter(this.value)"><br />
 	<div id="available">
 	{{- range .available}}
-		<div data-page="{{.}}" data-title="{{title .}}">
+		<div data-title="{{title .}}">
 		<input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
 		</div>
 	{{- end}}

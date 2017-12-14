@@ -3,7 +3,51 @@ package core
 import (
 	"os"
 	"testing"
+
+	"golang.org/x/net/html"
 )
+
+func TestCanonicalPage(t *testing.T) {
+	type cas struct {
+		Filename  string
+		Canonical string
+	}
+	cases := []cas{
+		{
+			Filename:  "git.html",
+			Canonical: "Git",
+		},
+		{
+			Filename:  "debian.html",
+			Canonical: "Debian",
+		},
+		{
+			Filename:  "leftpad.html",
+			Canonical: "Npm_(software)",
+		},
+	}
+
+	for _, c := range cases {
+		r, err := os.Open("./data/" + c.Filename)
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer r.Close()
+
+		doc, err := html.Parse(r)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		can, err := CanonicalPage(doc)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if have, want := can, c.Canonical; have != want {
+			t.Errorf("have %q, want %q", have, want)
+		}
+	}
+}
 
 func TestStableVersion(t *testing.T) {
 	type cas struct {
@@ -60,7 +104,13 @@ func TestStableVersion(t *testing.T) {
 			t.Fatal(err)
 		}
 		defer r.Close()
-		stable, homepage := StableVersion(r)
+
+		doc, err := html.Parse(r)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		stable, homepage := StableVersion(doc)
 		if have, want := stable, c.Version; have != want {
 			t.Errorf("have %q, want %q", have, want)
 		}

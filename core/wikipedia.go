@@ -4,8 +4,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
+
+	"golang.org/x/net/html"
 )
 
 const (
@@ -56,7 +59,17 @@ func (spider *WikipediaSpider) Spider(page string) (*Page, error) {
 
 	switch code := r.StatusCode; code {
 	case 200:
-		p.StableVersion, p.Homepage = StableVersion(r.Body)
+		doc, err := html.Parse(r.Body)
+		if err != nil {
+			return nil, err
+		}
+
+		canonical, err := CanonicalPage(doc)
+		if err == nil && canonical != "" && canonical != page {
+			return nil, ErrRedirect{Page: page, To: canonical}
+		}
+
+		p.StableVersion, p.Homepage = StableVersion(doc)
 		if p.StableVersion == "" {
 			return nil, ErrNoVersion{Page: page}
 		}
@@ -73,4 +86,16 @@ func (spider *WikipediaSpider) Spider(page string) (*Page, error) {
 	default:
 		return nil, fmt.Errorf("%q: wikipedia error (status: %d)", page, code)
 	}
+}
+
+// given a full wikipedia url returns the page name
+// also works with parts of the wikipedia url
+func WikiBasePage(href string) string {
+	u, err := url.Parse(href)
+	if err != nil {
+		return href
+	}
+	p := u.Path
+	p = strings.TrimPrefix(p, "/wiki/")
+	return p
 }

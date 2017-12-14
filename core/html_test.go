@@ -5,6 +5,8 @@ import (
 	"os"
 	"reflect"
 	"testing"
+
+	"golang.org/x/net/html"
 )
 
 func TestCleanSpace(t *testing.T) {
@@ -79,7 +81,12 @@ func TestFindTables(t *testing.T) {
 		},
 	}
 	for i, c := range cases {
-		d, err := FindTables(bytes.NewBufferString(c.Html))
+		doc, err := html.Parse(bytes.NewBufferString(c.Html))
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		d, err := FindTables(doc)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -95,7 +102,13 @@ func TestFindTablesReal(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer r.Close()
-	ts, err := FindTables(r)
+
+	doc, err := html.Parse(r)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	ts, err := FindTables(doc)
 	if err != nil {
 		t.Fatal(err)
 	}

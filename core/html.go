@@ -2,7 +2,6 @@ package core
 
 import (
 	"fmt"
-	"io"
 	"strings"
 	"unicode"
 
@@ -14,12 +13,7 @@ type Table struct {
 }
 
 // FindTables returns all top-level tables
-func FindTables(r io.Reader) ([]Table, error) {
-	doc, err := html.Parse(r)
-	if err != nil {
-		return nil, err
-	}
-
+func FindTables(doc *html.Node) ([]Table, error) {
 	var ts []Table
 	var f func(*html.Node) error
 	f = func(n *html.Node) error {
@@ -41,6 +35,34 @@ func FindTables(r io.Reader) ([]Table, error) {
 		return nil
 	}
 	return ts, f(doc)
+}
+
+type Link struct {
+	Rel   string
+	Href  string
+	Title string
+}
+
+// FindHeadLink returns all <link> nodes
+func FindHeadLink(doc *html.Node) ([]Link, error) {
+	var nodes []Link
+	var f func(*html.Node) error
+	f = func(n *html.Node) error {
+		if n.Type == html.ElementNode && n.Data == "link" {
+			nodes = append(nodes, Link{
+				Rel:   getAttr("rel", n.Attr),
+				Href:  getAttr("href", n.Attr),
+				Title: getAttr("title", n.Attr),
+			})
+		}
+		for c := n.FirstChild; c != nil; c = c.NextSibling {
+			if err := f(c); err != nil {
+				return err
+			}
+		}
+		return nil
+	}
+	return nodes, f(doc)
 }
 
 func tTable(n *html.Node) (*Table, error) {

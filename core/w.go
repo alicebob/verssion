@@ -1,11 +1,25 @@
 package core
 
 import (
-	"io"
 	"strings"
+
+	"golang.org/x/net/html"
 )
 
-func StableVersion(n io.Reader) (string, string) {
+func CanonicalPage(doc *html.Node) (string, error) {
+	links, err := FindHeadLink(doc)
+	if err != nil {
+		return "", err
+	}
+	for _, link := range links {
+		if link.Rel == "canonical" {
+			return WikiBasePage(link.Href), nil
+		}
+	}
+	return "", nil
+}
+
+func StableVersion(n *html.Node) (string, string) {
 	var stable, homepage string
 
 	ts, err := FindTables(n)

@@ -39,19 +39,7 @@ func (m *Memory) Last(page string) (*Page, error) {
 	return nil, nil
 }
 
-func (m *Memory) Recent(n int) ([]Page, error) {
-	// TODO: this is not right
-	h, err := m.CurrentAll()
-	if err != nil {
-		return nil, err
-	}
-	if len(h) > n {
-		h = h[:n]
-	}
-	return h, nil
-}
-
-func (m *Memory) CurrentAll() ([]Page, error) {
+func (m *Memory) Current(limit int, order SortBy) ([]Page, error) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 
@@ -59,10 +47,25 @@ func (m *Memory) CurrentAll() ([]Page, error) {
 	for _, p := range m.current {
 		ps = append(ps, p)
 	}
+
+	if limit > 0 && len(ps) > limit {
+		ps = ps[:limit]
+	}
+
+	sort.Slice(ps, func(i, j int) bool {
+		switch order {
+		case SpiderT:
+			return ps[i].T.After(ps[j].T)
+		case Alphabet:
+			return ps[i].Page < ps[j].Page
+		default:
+			panic("!$#@#$")
+		}
+	})
 	return ps, nil
 }
 
-func (m *Memory) Current(pages ...string) ([]Page, error) {
+func (m *Memory) CurrentIn(pages ...string) ([]Page, error) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 

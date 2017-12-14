@@ -35,14 +35,6 @@ func NewPostgres(url string) (*Postgres, error) {
 	return p, nil
 }
 
-// recent updates to have something to show
-func (p *Postgres) Recent(n int) ([]Page, error) {
-	return p.queryCurrent(`
-		ORDER BY timestamp DESC
-		LIMIT $1
-    `, n)
-}
-
 func (p *Postgres) Last(page string) (*Page, error) {
 	row := p.conn.QueryRow(`
 		SELECT page, timestamp, stable_version, homepage
@@ -64,13 +56,15 @@ func (p *Postgres) Last(page string) (*Page, error) {
 	return &res, nil
 }
 
-func (p *Postgres) CurrentAll() ([]Page, error) {
-	return p.queryCurrent(`
-		ORDER BY page
-    `)
+func (p *Postgres) Current(limit int, order SortBy) ([]Page, error) {
+	q := " ORDER BY " + order.String()
+	if limit > 0 {
+		q += fmt.Sprintf(" LIMIT %d", limit)
+	}
+	return p.queryCurrent(q)
 }
 
-func (p *Postgres) Current(pages ...string) ([]Page, error) {
+func (p *Postgres) CurrentIn(pages ...string) ([]Page, error) {
 	if len(pages) == 0 {
 		return nil, nil
 	}

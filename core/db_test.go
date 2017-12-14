@@ -32,7 +32,7 @@ func InterfaceTestDB(t *testing.T, db DB) {
 		test2   = "test_2"
 		test2_1 = Page{
 			Page:          test2,
-			T:             now,
+			T:             now.Add(time.Second),
 			StableVersion: "1.0",
 		}
 	)
@@ -61,7 +61,23 @@ func InterfaceTestDB(t *testing.T, db DB) {
 	}
 
 	{
-		ls, err := db.Current(test1)
+		ls, err := db.Current(0, SpiderT)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if have, want := len(ls), 2; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+		if have, want := ls[0], test2_1; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+		if have, want := ls[1], test1_2; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+	}
+
+	{
+		ls, err := db.CurrentIn(test1)
 		if err != nil {
 			t.Fatal(err)
 		}

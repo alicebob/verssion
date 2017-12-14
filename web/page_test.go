@@ -18,8 +18,16 @@ func TestPages(t *testing.T) {
 		spider = NewFixedSpider()
 		m      = web.Mux("", db, spider, "")
 	)
-	db.Store(core.Page{Page: "Debian", StableVersion: "my version"})
-	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.1 / July 22, 2017"})
+	db.Store(core.Page{
+		Page:          "Debian",
+		StableVersion: "my version",
+		T:             time.Now(),
+	})
+	db.Store(core.Page{
+		Page:          "Glasgow_Haskell_Compiler",
+		StableVersion: "8.2.1 / July 22, 2017",
+		T:             time.Now().Add(time.Minute),
+	})
 	s := httptest.NewServer(m)
 	defer s.Close()
 
@@ -39,6 +47,16 @@ func TestPages(t *testing.T) {
 		"Debian",
 		"Glasgow Haskell Compiler",
 	)
+
+	{
+		status, sbody := get(t, s, "/p/?order=spider")
+		if have, want := status, 200; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+		if sbody == body {
+			t.Fatal("order change doesn't do anything")
+		}
+	}
 }
 
 func TestPage(t *testing.T) {

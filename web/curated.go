@@ -71,7 +71,7 @@ func curatedHandler(base string, db core.DB) httprouter.Handle {
 			return
 		}
 
-		vs, err := db.Current(cur.Pages...)
+		vs, err := db.CurrentIn(cur.Pages...)
 		if err != nil {
 			log.Printf("current: %s", err)
 			http.Error(w, http.StatusText(500), 500)

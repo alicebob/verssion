@@ -12,7 +12,12 @@ import (
 )
 
 func allPages(base string, db core.DB, w http.ResponseWriter, r *http.Request) {
-	all, err := db.CurrentAll()
+	qorder := r.FormValue("order")
+	order := core.Alphabet
+	if qorder == "spider" {
+		order = core.SpiderT
+	}
+	all, err := db.Current(0, order)
 	if err != nil {
 		log.Printf("current all: %s", err)
 		http.Error(w, http.StatusText(500), 500)
@@ -23,6 +28,7 @@ func allPages(base string, db core.DB, w http.ResponseWriter, r *http.Request) {
 		"title":   "Pages overview",
 		"current": "allpages",
 		"pages":   all,
+		"order":   qorder,
 	})
 }
 
@@ -104,8 +110,13 @@ var (
 		</tr>
 	{{- end}}
 	</table>
-	<br />
-	<a href="{{.base}}/curated/">Make a custom feed</a><br />
+	<p>
+	Order by: {{if eq .order "spider"}}
+		Update - <a href="./">Alphabetical</a>
+	{{else}}
+		<a href="./?order=spider">Update</a> - Alphabetical
+	{{end}}
+	</p>
 {{- end}}
 `)
 

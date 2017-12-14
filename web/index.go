@@ -12,9 +12,9 @@ import (
 
 func indexHandler(base string, db core.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-		es, err := db.Recent(12)
+		es, err := db.Current(12, core.SpiderT)
 		if err != nil {
-			log.Printf("current all: %s", err)
+			log.Printf("current: %s", err)
 			http.Error(w, http.StatusText(500), 500)
 			return
 		}
@@ -88,7 +88,7 @@ var (
 		</tr>
 	{{- end}}
 		<tr>
-			<td><a href="./p/">...</a></td>
+			<td><a href="./p/?order=spider">...</a></td>
 			<td></td>
 		</tr>
 	</table>

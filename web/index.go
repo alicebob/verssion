@@ -87,12 +87,8 @@ var (
 			<td>{{version .StableVersion}}</td>
 		</tr>
 	{{- end}}
-		<tr>
-			<td><a href="./p/">...</a></td>
-			<td></td>
-		</tr>
 	</table>
-
+	<p>Or see the list of <a href="./p/">all pages</a>.</p>
 {{- end}}
 `)
 )

@@ -97,5 +97,6 @@ func WikiBasePage(href string) string {
 	}
 	p := u.Path
 	p = strings.TrimPrefix(p, "/wiki/")
+	p = strings.Replace(p, " ", "_", -1)
 	return p
 }

@@ -15,8 +15,10 @@ func TestWikiBasePage(t *testing.T) {
 		"https://en.wikipedia.org/wiki/Npm":                        "Npm",
 		"https://en.wikipedia.org/wiki/Npm_(software)":             "Npm_(software)",
 		"https://en.wikipedia.org/wiki/Npm_(software)#Description": "Npm_(software)",
-		"/wiki/Npm": "Npm",
-		"Npm":       "Npm",
+		"/wiki/Npm":                          "Npm",
+		"Npm":                                "Npm",
+		"Npm (software)":                     "Npm_(software)",
+		"/wiki/Npm (software)":               "Npm_(software)",
 		"https://en.wikipedia.org/wiki/A/UX": "A/UX",
 	} {
 		if have, want := WikiBasePage(url), page; have != want {

@@ -6,7 +6,7 @@ import (
 )
 
 func TestToPages(t *testing.T) {
-	haveOK, haveErr := toPages(`
+	have := toPages(`
 http://en.wikipedia.org/wiki/Foo1
 http://En.wiKIPedia.oRg/wiki/Foo2
 http://En.wiKIPedia.oRg/wiKI/Foo3
@@ -15,21 +15,19 @@ Foo5
 
 wiki/Foo6
 Foo 7
+/wiki/Foo8
 `)
-	wantOK := []string{
-		"Foo1", "Foo2", "http://En.wiKIPedia.oRg/wiKI/Foo3", "Foo4", "Foo5", "wiki/Foo6",
+	want := []string{
+		"Foo1",
+		"Foo2",
+		"/wiKI/Foo3",
+		"Foo4",
+		"Foo5",
+		"wiki/Foo6",
+		"Foo_7",
+		"Foo8",
 	}
-	wantErr := []string{
-		`invalid page: "Foo 7"`,
-	}
-	if !reflect.DeepEqual(haveOK, wantOK) {
-		t.Errorf("have %v, want %v", haveOK, wantOK)
-	}
-	var have []string
-	for _, e := range haveErr {
-		have = append(have, e.Error())
-	}
-	if !reflect.DeepEqual(have, wantErr) {
-		t.Errorf("have %v, want %v", have, wantErr)
+	if !reflect.DeepEqual(have, want) {
+		t.Errorf("have %v, want %v", have, want)
 	}
 }

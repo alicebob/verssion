@@ -1,35 +1,26 @@
 package web
 
 import (
-	"fmt"
 	"log"
-	"regexp"
 	"sort"
 	"strings"
 
 	"github.com/alicebob/verssion/core"
 )
 
-var matchpage = regexp.MustCompile(`^(?:(?i:https?://en.wikipedia.org)/wiki/)?(\S+)$`)
-
 // from textarea to pages
-func toPages(q string) ([]string, []error) {
+func toPages(q string) []string {
 	var (
-		ps     []string
-		errors []error
+		ps []string
 	)
 	for _, l := range strings.Split(q, "\n") {
 		l = strings.TrimSpace(l)
 		if len(l) == 0 {
 			continue
 		}
-		if m := matchpage.FindStringSubmatch(l); m != nil {
-			ps = append(ps, m[1])
-		} else {
-			errors = append(errors, fmt.Errorf("invalid page: %q", l))
-		}
+		ps = append(ps, core.WikiBasePage(l))
 	}
-	return ps, errors
+	return ps
 }
 
 func unique(ps []string) []string {

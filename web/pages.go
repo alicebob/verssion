@@ -1,9 +1,9 @@
 package web
 
 import (
-	"log"
 	"sort"
 	"strings"
+	"sync"
 
 	"github.com/alicebob/verssion/core"
 )
@@ -38,17 +38,36 @@ func unique(ps []string) []string {
 
 func runUpdates(db core.DB, spider core.Spider, pages []string) ([]string, []error) {
 	var (
-		ret    []string
-		errors []error
+		retc   = make(chan string, len(pages))
+		errorc = make(chan error, len(pages))
+		wg     sync.WaitGroup
 	)
 
 	for _, p := range pages {
-		if n, err := StoreSpider(db, spider, p); err != nil {
-			log.Printf("update %q: %s", p, err)
-			errors = append(errors, err)
-		} else {
-			ret = append(ret, n.Page)
-		}
+		wg.Add(1)
+		go func(p string) {
+			defer wg.Done()
+			n, err := StoreSpider(db, spider, p)
+			if err != nil {
+				errorc <- err
+				return
+			}
+			retc <- n.Page
+		}(p)
 	}
-	return ret, errors
+	wg.Wait()
+	close(retc)
+	close(errorc)
+
+	var (
+		res    []string
+		errors []error
+	)
+	for r := range retc {
+		res = append(res, r)
+	}
+	for e := range errorc {
+		errors = append(errors, e)
+	}
+	return res, errors
 }

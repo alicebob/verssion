@@ -13,6 +13,7 @@ import (
 
 const (
 	DefaultUserAgent = "verssion_bot/1.0 (https://verssion.one)"
+	MaxConcurrency   = 5
 )
 
 var client = http.Client{
@@ -24,6 +25,7 @@ var client = http.Client{
 type WikipediaSpider struct {
 	URL       func(string) string
 	UserAgent string
+	semaphore chan struct{}
 }
 
 var _ Spider = &WikipediaSpider{}
@@ -33,6 +35,7 @@ func NewWikipediaSpider(url func(string) string) *WikipediaSpider {
 	return &WikipediaSpider{
 		URL:       url,
 		UserAgent: DefaultUserAgent,
+		semaphore: make(chan struct{}, MaxConcurrency),
 	}
 }
 
@@ -42,6 +45,11 @@ func (spider *WikipediaSpider) Spider(page string) (*Page, error) {
 		Page: page,
 		T:    time.Now().UTC(),
 	}
+
+	spider.semaphore <- struct{}{}
+	defer func() {
+		<-spider.semaphore
+	}()
 
 	log.Printf("wiki fetch %q", page)
 	req, err := http.NewRequest("GET", spider.URL(page), nil)

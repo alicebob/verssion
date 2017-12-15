@@ -1,6 +1,7 @@
 package web
 
 import (
+	"log"
 	"time"
 
 	"github.com/alicebob/verssion/core"
@@ -21,6 +22,7 @@ func StoreSpider(db core.DB, spider core.Spider, page string) (*core.Page, error
 
 	p, err := spider.Spider(page)
 	if err != nil {
+		log.Printf("update %q: %s", page, err)
 		return nil, err
 	}
 

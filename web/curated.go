@@ -290,8 +290,14 @@ var (
 )
 
 // read p and etc arguments
-func readPageArgs(db core.DB, spider core.Spider, pages []string, etc string) ([]string, []error) {
+func readPageArgs(
+	db core.DB,
+	spider core.Spider,
+	pages []string,
+	etc string,
+) ([]string, []error) {
 	pages = append(pages, toPages(etc)...)
+
 	finalPages, errors := runUpdates(db, spider, pages)
 
 	return unique(finalPages), errors

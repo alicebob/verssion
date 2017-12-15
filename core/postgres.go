@@ -57,7 +57,7 @@ func (p *Postgres) Last(page string) (*Page, error) {
 }
 
 func (p *Postgres) Current(limit int, order SortBy) ([]Page, error) {
-	q := " ORDER BY " + order.String()
+	q := " ORDER BY " + order.OrderBy()
 	if limit > 0 {
 		q += fmt.Sprintf(" LIMIT %d", limit)
 	}

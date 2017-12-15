@@ -21,7 +21,7 @@ const (
 	Alphabet
 )
 
-func (s SortBy) String() string {
+func (s SortBy) OrderBy() string {
 	switch s {
 	case SpiderT:
 		return "timestamp DESC"

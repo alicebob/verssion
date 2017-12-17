@@ -32,8 +32,8 @@ func TestPages(t *testing.T) {
 	defer s.Close()
 
 	{
-		status, _ := get(t, s, "/p")
-		if have, want := status, 301; have != want {
+		location := getRedirect(t, s, "/p")
+		if have, want := location, "/p/"; have != want {
 			t.Fatalf("have %v, want %v", have, want)
 		}
 	}
@@ -57,6 +57,36 @@ func TestPages(t *testing.T) {
 			t.Fatal("order change doesn't do anything")
 		}
 	}
+}
+
+func TestNewPage(t *testing.T) {
+	var (
+		db     = core.NewMemory()
+		spider = NewFixedSpider(core.Page{
+			Page:          "Foo",
+			StableVersion: "Version 1",
+			T:             time.Now(),
+		})
+		m = web.Mux("", db, spider, "")
+	)
+	s := httptest.NewServer(m)
+	defer s.Close()
+
+	{
+		location := getRedirect(t, s, "/p/?page=https://en.wikipedia.org/wiki/Foo")
+		if have, want := location, "/p/Foo/"; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+	}
+
+	status, body := get(t, s, "/p/Foo/")
+	if have, want := status, 200; have != want {
+		t.Fatalf("have %v, want %v", have, want)
+	}
+	contains(t, body,
+		"<title>Foo",
+		"Version 1",
+	)
 }
 
 func TestPage(t *testing.T) {

@@ -12,6 +12,14 @@ import (
 )
 
 func allPages(base string, db core.DB, w http.ResponseWriter, r *http.Request) {
+	if url := r.FormValue("page"); url != "" {
+		// "new page" form
+		if page := core.WikiBasePage(url); page != "" {
+			w.Header().Set("Location", base+"/p/"+page+"/")
+			w.WriteHeader(301)
+			return
+		}
+	}
 	qorder := r.FormValue("order")
 	order := core.Alphabet
 	if qorder == "spider" {
@@ -116,6 +124,14 @@ var (
 	{{else}}
 		<a href="./?order=spider">Update</a> - Alphabetical
 	{{end}}
+	</p>
+	<h4>New page</h4>
+	<p>
+		You're missing something? Add a wikipedia page. Give either the full URL or the title of the page.<br />
+		<form method="GET">
+		<input type="text" name="page" size="60" />
+		<input type="submit" value="Go" />
+		</form>
 	</p>
 {{- end}}
 `)

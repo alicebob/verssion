@@ -44,6 +44,25 @@ func get(t *testing.T, s *httptest.Server, url string) (int, string) {
 	return r.StatusCode, string(b)
 }
 
+// getRedirect does a GET and expects a redirect. Returns the Location header
+func getRedirect(t *testing.T, s *httptest.Server, url string) string {
+	t.Helper()
+
+	c := s.Client()
+	c.CheckRedirect = noRedirect
+	r, err := s.Client().Get(s.URL + url)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer r.Body.Close()
+	switch c := r.StatusCode; c {
+	case 301, 302:
+	default:
+		t.Fatalf("not a redirect: %d", c)
+	}
+	return r.Header.Get("Location")
+}
+
 func contains(t *testing.T, body string, needles ...string) {
 	t.Helper()
 	for _, need := range needles {

@@ -1,6 +1,7 @@
 package web
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -40,6 +41,15 @@ func allPages(base string, db core.DB, w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// PageJSON is returned for ?format=json
+type PageJSON struct {
+	Page          string `json:"page"`
+	Title         string `json:"title"`
+	StableVersion string `json:"stable_version"`
+	Homepage      string `json:"homepage"`
+	WikipediaURL  string `json:"wikipedia_url"`
+}
+
 // pageHandler deal with everything under `/p/`.
 func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
@@ -61,20 +71,29 @@ func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle 
 			case core.ErrNotFound:
 				log.Printf("not found: %s", err)
 				w.WriteHeader(404)
-				runTmpl(w, pageNotFoundTempl, map[string]interface{}{
-					"base":      base,
-					"title":     core.Title(e.Page),
-					"current":   "",
-					"wikipedia": WikiURL(e.Page),
-					"page":      e.Page,
-				})
+				switch r.FormValue("format") {
+				case "json":
+				default:
+					runTmpl(w, pageNotFoundTempl, map[string]interface{}{
+						"base":      base,
+						"title":     core.Title(e.Page),
+						"current":   "",
+						"wikipedia": WikiURL(e.Page),
+						"page":      e.Page,
+					})
+				}
 			case core.ErrNoVersion:
-				runTmpl(w, noVersionTempl, map[string]interface{}{
-					"base":    base,
-					"title":   core.Title(e.Page),
-					"current": "",
-					"page":    e.Page,
-				})
+				switch r.FormValue("format") {
+				case "json":
+					w.WriteHeader(404)
+				default:
+					runTmpl(w, noVersionTempl, map[string]interface{}{
+						"base":    base,
+						"title":   core.Title(e.Page),
+						"current": "",
+						"page":    e.Page,
+					})
+				}
 			default:
 				log.Printf("update %q: %s", page, err)
 				http.Error(w, http.StatusText(500), 500)
@@ -94,15 +113,31 @@ func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle 
 			http.Error(w, http.StatusText(500), 500)
 			return
 		}
-		runTmpl(w, pageTempl, map[string]interface{}{
-			"base":      base,
-			"title":     core.Title(cur.Page),
-			"current":   "",
-			"atom":      adhocURL(base, []string{cur.Page}),
-			"wikipedia": WikiURL(cur.Page),
-			"page":      cur,
-			"versions":  vs,
-		})
+
+		switch r.FormValue("format") {
+		case "json":
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(PageJSON{
+				Page:          cur.Page,
+				Title:         core.Title(cur.Page),
+				WikipediaURL:  WikiURL(cur.Page),
+				StableVersion: cur.StableVersion,
+				Homepage:      cur.Homepage,
+			})
+		case "", "html":
+			runTmpl(w, pageTempl, map[string]interface{}{
+				"base":      base,
+				"title":     core.Title(cur.Page),
+				"current":   "",
+				"atom":      adhocURL(base, []string{cur.Page}),
+				"json":      fmt.Sprintf("%s/p/%s/?format=json", base, cur.Page),
+				"wikipedia": WikiURL(cur.Page),
+				"page":      cur,
+				"versions":  vs,
+			})
+		default:
+			http.Error(w, http.StatusText(400), 400)
+		}
 	}
 }
 
@@ -139,6 +174,7 @@ var (
 	pageTempl = withBase(`
 {{define "head"}}
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
+	<link rel="alternate" type="application/json" title="JSON" href="{{.json}}"/>
 {{- end}}
 {{define "page"}}
 	<h2>{{title .page.Page}}</h2>

@@ -1,6 +1,7 @@
 package web_test
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"log"
 	"net/http/httptest"
@@ -175,4 +176,42 @@ func TestPage(t *testing.T) {
 			"No version",
 		)
 	}
+
+	{
+		status, body := get(t, s, "/p/Glasgow_Haskell_Compiler/?format=json")
+		if have, want := status, 200; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+		var res web.PageJSON
+		if err := json.Unmarshal([]byte(body), &res); err != nil {
+			t.Fatal(err)
+		}
+		if have, want := res.Page, "Glasgow_Haskell_Compiler"; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+		if have, want := res.Title, "Glasgow Haskell Compiler"; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+		if have, want := res.StableVersion, "8.2.1 / July 22, 2017"; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+		if have, want := res.Homepage, "https://haskell.org/ghc"; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+	}
+
+	{
+		status, _ := get(t, s, "/p/Glasgow_Haskell_Compiler/?format=foo")
+		if have, want := status, 400; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+	}
+
+	{
+		status, _ := get(t, s, "/p/Android/?format=json")
+		if have, want := status, 404; have != want {
+			t.Fatalf("have %v, want %v", have, want)
+		}
+	}
+
 }

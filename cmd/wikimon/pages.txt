@@ -1,0 +1,58 @@
+# good
+#Git https://git-scm.com/
+#FreeBSD https://www.freebsd.org/
+#Kibana https://www.elastic.co/downloads/kibana
+#Redis https://redis.io/
+#Tmux https://github.com/tmux/tmux/releases
+#PostgreSQL https://www.postgresql.org/
+
+# broken
+#OpenBSD http://openbsd.org/
+#PHP https://secure.php.net/
+
+#
+#
+#Aerospike_database
+#AngularJS
+#Apache_HTTP_Server
+#Cabal_(software)
+#Chef_(software)
+#Clang
+#CMake
+#Darwin_(operating_system)
+#Debian
+#DragonflyBSD
+#Eclipse_(software)
+#Elasticsearch
+#Elm_(programming_language)
+#Firefox
+#Flask_(web_framework)
+#GitLab
+#Glasgow_Haskell_Compiler
+#GNU_Compiler_Collection
+#Go_(programming_language)
+#Grunt_(software)
+#IOS
+#LibreSSL
+#MacOS
+#Mercurial
+#MongoDB
+#Mutt_(email_client)
+#MySQL
+#NetBSD
+#Nginx
+#NixOS
+#Nix_package_manager
+#OpenSSH
+#OpenSSL
+#Perl
+#Puppet_(software)
+#Python_(programming_language)
+#Rake_(software)
+#React_(JavaScript_library)
+#Requests_(software)
+#Ruby_on_Rails
+#Ruby_(programming_language)
+#Terraform_(software)
+#Vagrant_(software)
+#Vim_(text_editor)

@@ -1,3 +1,16 @@
+Git         https://git-scm.com/
+FreeBSD     https://www.freebsd.org/
+Kibana      https://www.elastic.co/downloads/kibana
+Redis       https://redis.io/
+Tmux        https://github.com/tmux/tmux/releases
+PostgreSQL  https://www.postgresql.org/
+
+# broken
+#OpenBSD    http://openbsd.org/
+OpenBSD
+#PHP        https://secure.php.net/
+PHP
+
 Aerospike_database
 AngularJS
 Apache_HTTP_Server
@@ -13,15 +26,12 @@ Elasticsearch
 Elm_(programming_language)
 Firefox
 Flask_(web_framework)
-FreeBSD
-Git
 GitLab
 Glasgow_Haskell_Compiler
 GNU_Compiler_Collection
 Go_(programming_language)
 Grunt_(software)
 IOS
-Kibana
 LibreSSL
 MacOS
 Mercurial
@@ -32,17 +42,13 @@ NetBSD
 Nginx
 NixOS
 Nix_package_manager
-OpenBSD
 OpenSSH
 OpenSSL
 Perl
-PHP
-PostgreSQL
 Puppet_(software)
 Python_(programming_language)
 Rake_(software)
 React_(JavaScript_library)
-Redis
 Requests_(software)
 Ruby_on_Rails
 Ruby_(programming_language)

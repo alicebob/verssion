@@ -1,11 +1,5 @@
 Atom feeds of (stable) software versions, as found in Wikipedia.
 
-Bugs
-====
-
-* 'Foo_bar' page is the same page as 'Foobar', but wikipedia doesn't do a proper redirect.
-* Better name pun.
-
 Setup
 =====
 
@@ -20,3 +14,7 @@ it. Just so you know.
 ===
 
 [![Build Status](https://travis-ci.org/alicebob/verssion.svg?branch=travis)](https://travis-ci.org/alicebob/verssion)
+
+`cmd/web/web` is the main HTTP server. `cmd/wikimon/wikimon` is a helper to
+compare verssion and wikipedia against the websites of projects. I run it via cron
+to help keep wikipedia up to date.

@@ -122,8 +122,8 @@ func TestPage(t *testing.T) {
 	spider.SetError("Android", core.ErrNoVersion{Page: "Android"})
 
 	{
-		status, _ := get(t, s, "/p/Glasgow_Haskell_Compiler")
-		if have, want := status, 301; have != want {
+		location := getRedirect(t, s, "/p/Glasgow_Haskell_Compiler")
+		if have, want := location, "/p/Glasgow_Haskell_Compiler/"; have != want {
 			t.Fatalf("have %v, want %v", have, want)
 		}
 	}

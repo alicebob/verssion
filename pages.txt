@@ -20,7 +20,7 @@ Clang
 CMake
 Darwin_(operating_system)
 Debian
-DragonflyBSD
+DragonFly_BSD
 Eclipse_(software)
 Elasticsearch
 Elm_(programming_language)

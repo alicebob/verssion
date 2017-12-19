@@ -16,12 +16,20 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"time"
 
 	"golang.org/x/net/html"
 )
 
 var (
 	baseURL = flag.String("base", "https://verssion.one", "verssion URL")
+	sleep   = flag.Duration("sleep", time.Second, "sleep between spiders")
+
+	client = &http.Client{
+		CheckRedirect: func(*http.Request, []*http.Request) error {
+			return http.ErrUseLastResponse
+		},
+	}
 )
 
 func main() {
@@ -40,6 +48,7 @@ func main() {
 			switch len(l) {
 			case 1:
 				// only spider verssion
+				fmt.Printf("ping %s\n", l[0])
 				_, err := verssion(l[0])
 				if err != nil {
 					log.Print(err.Error())
@@ -52,6 +61,7 @@ func main() {
 			default:
 				log.Printf("invalid line: %q", strings.Join(l, " "))
 			}
+			time.Sleep(*sleep)
 		}
 	}
 }
@@ -117,25 +127,28 @@ type Page struct {
 }
 
 func verssion(p string) (*Page, error) {
-	res, err := http.Get(*baseURL + "/p/" + p + "/?format=json")
+	res, err := client.Get(*baseURL + "/p/" + p + "/?format=json")
 	if err != nil {
 		return nil, err
 	}
 	defer res.Body.Close()
-	if code := res.StatusCode; code != 200 {
+	switch code := res.StatusCode; code {
+	case 200:
+		// all fine
+	case 301, 302:
+		l, _ := res.Location()
+		return nil, fmt.Errorf("%s: HTTP %d %s", p, code, l)
+	default:
 		return nil, fmt.Errorf("%s: HTTP %d", p, code)
 	}
 
 	r := &Page{}
-	if err := json.NewDecoder(res.Body).Decode(r); err != nil {
-		return nil, err
-	}
-	return r, nil
+	return r, json.NewDecoder(res.Body).Decode(r)
 }
 
 // getText gets a text version of a URL
 func getText(url string) (string, error) {
-	res, err := http.Get(url)
+	res, err := client.Get(url)
 	if err != nil {
 		return "", err
 	}

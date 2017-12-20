@@ -1,57 +1,68 @@
-Git         https://git-scm.com/
-FreeBSD     https://www.freebsd.org/
-Kibana      https://www.elastic.co/downloads/kibana
-Redis       https://redis.io/
-Tmux        https://github.com/tmux/tmux/releases
-PostgreSQL  https://www.postgresql.org/
+# Pages in here we spider daily to make sure they are updated (other pages are
+# spidered lazily).
+# If there is a URL listed the (thing which looks like a) version number on
+# that pages is compared against the version in verssion.
+#
+# broken version detection:
+# OpenBSD    http://openbsd.org/
+# PHP        https://secure.php.net/
 
-# broken
-#OpenBSD    http://openbsd.org/
-OpenBSD
-#PHP        https://secure.php.net/
-PHP
-
-Aerospike_database
+Aerospike_database      https://www.aerospike.com/download/server/notes.html
 AngularJS
-Apache_HTTP_Server
+Apache_HTTP_Server      https://httpd.apache.org/download.cgi
+BIND                    https://www.isc.org/downloads/bind/
 Cabal_(software)
 Chef_(software)
 Clang
-CMake
+CMake                   https://cmake.org/download/
+CURL                    https://curl.haxx.se/download.html
 Darwin_(operating_system)
 Debian
-DragonFly_BSD
+DragonFly_BSD           https://www.dragonflybsd.org/
 Eclipse_(software)
 Elasticsearch
 Elm_(programming_language)
 Firefox
 Flask_(web_framework)
+FreeBSD                 https://www.freebsd.org/
+Git                     https://git-scm.com/
 GitLab
-Glasgow_Haskell_Compiler
+Glasgow_Haskell_Compiler    https://www.haskell.org/ghc/download.html
 GNU_Compiler_Collection
 Go_(programming_language)
 Grunt_(software)
 IOS
-LibreSSL
+Kibana                  https://www.elastic.co/downloads/kibana
+LibreSSL                https://www.libressl.org/
+Linux_kernel            https://www.kernel.org/
 MacOS
-Mercurial
-MongoDB
-Mutt_(email_client)
+Mercurial               https://www.mercurial-scm.org/
+MongoDB                 https://www.mongodb.com/
+Music_Player_Daemon     https://www.musicpd.org/
+Mutt_(email_client)     http://www.mutt.org/
 MySQL
 NetBSD
 Nginx
 NixOS
 Nix_package_manager
+OpenBSD
 OpenSSH
 OpenSSL
 Perl
+PHP
+PostgreSQL              https://www.postgresql.org/
 Puppet_(software)
 Python_(programming_language)
+QBittorrent             https://www.qbittorrent.org/
 Rake_(software)
 React_(JavaScript_library)
+Redis                   https://redis.io/
 Requests_(software)
-Ruby_on_Rails
-Ruby_(programming_language)
+Ruby_on_Rails           http://rubyonrails.org/
+Ruby_(programming_language)     https://www.ruby-lang.org/en/downloads
+SQLite                  https://sqlite.org/
 Terraform_(software)
+Tmux                    https://github.com/tmux/tmux/releases
 Vagrant_(software)
 Vim_(text_editor)
+Zlib                    https://zlib.net/

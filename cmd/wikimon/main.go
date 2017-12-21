@@ -24,12 +24,6 @@ import (
 var (
 	baseURL = flag.String("base", "https://verssion.one", "verssion URL")
 	sleep   = flag.Duration("sleep", time.Second, "sleep between spiders")
-
-	client = &http.Client{
-		CheckRedirect: func(*http.Request, []*http.Request) error {
-			return http.ErrUseLastResponse
-		},
-	}
 )
 
 func main() {
@@ -114,7 +108,13 @@ func lookat(p, url string) error {
 	fmt.Printf("%s: site =~ %q\n", cur.Page, guessVersion(txt))
 
 	if have, want := guessVersion(cur.StableVersion), guessVersion(txt); have != want {
-		log.Printf("%s: we have %q, website has %q", cur.Page, have, want)
+		log.Printf("%s: we have %q, website has %q\n  %s\n  %s",
+			cur.Page,
+			have,
+			want,
+			verssionURL(cur.Page),
+			url,
+		)
 	}
 	return nil
 }
@@ -126,8 +126,12 @@ type Page struct {
 	Homepage      string `json:"homepage"`
 }
 
+func verssionURL(p string) string {
+	return *baseURL + "/p/" + p + "/"
+}
+
 func verssion(p string) (*Page, error) {
-	res, err := client.Get(*baseURL + "/p/" + p + "/?format=json")
+	res, err := http.Get(verssionURL(p) + "?format=json")
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +152,7 @@ func verssion(p string) (*Page, error) {
 
 // getText gets a text version of a URL
 func getText(url string) (string, error) {
-	res, err := client.Get(url)
+	res, err := http.Get(url)
 	if err != nil {
 		return "", err
 	}
@@ -187,7 +191,13 @@ func asText(s io.Reader) (string, error) {
 
 var versionre = regexp.MustCompile(`v?\d+(\.\d+)+`)
 
-// finds the first thing which looks like a version number. Or an empty string.
+// finds the longest thing which looks like a version number. Or an empty string.
 func guessVersion(s string) string {
-	return versionre.FindString(s)
+	v := ""
+	for _, d := range versionre.FindAllString(s, -1) {
+		if len(d) > len(v) {
+			v = d
+		}
+	}
+	return v
 }

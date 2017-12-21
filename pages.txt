@@ -7,7 +7,7 @@
 # OpenBSD    http://openbsd.org/
 # PHP        https://secure.php.net/
 
-Aerospike_database      https://www.aerospike.com/download/server/notes.html
+Aerospike_database      https://www.aerospike.com/download
 AngularJS
 Apache_HTTP_Server      https://httpd.apache.org/download.cgi
 BIND                    https://www.isc.org/downloads/bind/
@@ -59,7 +59,7 @@ React_(JavaScript_library)
 Redis                   https://redis.io/
 Requests_(software)
 Ruby_on_Rails           http://rubyonrails.org/
-Ruby_(programming_language)     https://www.ruby-lang.org/en/downloads
+Ruby_(programming_language)     https://www.ruby-lang.org/en/downloads/
 SQLite                  https://sqlite.org/
 Terraform_(software)
 Tmux                    https://github.com/tmux/tmux/releases

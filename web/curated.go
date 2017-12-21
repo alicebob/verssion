@@ -226,31 +226,36 @@ func curatedAtomHandler(base string, db core.DB, spider core.Spider) httprouter.
 }
 
 var (
-	newCuratedTempl = withBase(`
-{{define "page"}}
-	<h2>New feed</h2>
-	<p>Create a new RSS/Atom feed combining multiple pages. You can always change the feed later.</p>
+	newCuratedTempl = withPage(`
+{{define "hero"}}
+<h1>New Feed</h1>
+<p>Create a new RSS/Atom feed combining multiple pages. You can always change the feed later.</p>
+{{end}}
 
-	{{template "errors" .errors}}
+{{define "body"}}
+{{template "errors" .errors}}
 	
-	<form method="POST">
-	{{template "pageselection" .}}
-
-	<input type="submit" name="go" value="Start a list" />
-	</form>
+<form method="POST" class="form start-list-form">
+{{template "pageselection" .}}
+<input type="submit" name="go" class="btn" value="Start a list" />
+</form>
 {{- end}}
 `)
 
-	curatedTempl = withBase(`
+	curatedTempl = withPage(`
 {{define "head"}}
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
 {{- end}}
-{{define "page"}}
+
+{{define "hero"}}
 	<h2>{{.curated.Title}}</h2>
-	Atom link: <a href="{{.atom}}">{{.atom}}</a><br />
-	<br />
+	<p>Atom link: <a href="{{.atom}}">{{.atom}}</a></p>
+{{end}}
+
+{{define "body"}}
+<div class="row">
 	{{- with .pageversions}}
-		<table>
+		<table class="table-responsive table-2">
 		<tr>
 			<th class="optional">Page</th>
 			<th class="optional">Stable version</th>
@@ -267,25 +272,36 @@ var (
 	{{- else}}
 		No pages selected, yet.<br />
 	{{- end}}
-	<br />
-	<a href="./edit.html">Edit the pages in this feed</a><br />
-	<br />
-	<br />
+	<p>
+	<a href="./edit.html" class="btn">Edit this feed</a>
+	</p>
+</div>
 {{end}}
 `)
 
-	curatedEditTempl = withBase(`
-{{define "page"}}
-	<h2>{{.curated.Title}}</h2>
-
-	{{template "errors" .errors}}
-
-	<form method="POST">
-	<label>Title <input type="text" size="40" name="title" value="{{.customtitle}}" placeholder="{{.defaulttitle}}" /></label>
-	{{template "pageselection" .}}
-	<input type="submit" value="Update" /><br />
-	</form>
+	curatedEditTempl = withPage(`
+{{define "hero"}}
+<h1>{{.curated.Title}}</h1>
 {{end}}
+
+{{define "body"}}
+{{template "errors" .errors}}
+	
+<form method="POST" class="form start-list-form">
+<div class="row">
+	<div class="col-sm-12">
+		<div class="row filter">
+			<div class="col-sm-2"><label for="input-1">feed title</label></div>
+			<div class="col-sm-7">
+			<input type="text" name="title" value="{{.customtitle}}" placeholder="{{.defaulttitle}}" />
+			</div>
+		</div>
+	</div>
+</div>
+{{template "pageselection" .}}
+<input type="submit" class="btn" value="Update" /><br />
+</form>
+{{- end}}
 `)
 )
 

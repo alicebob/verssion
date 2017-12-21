@@ -37,7 +37,7 @@ func TestCurated(t *testing.T) {
 		}
 		contains(t, body,
 			"<title>New feed",
-			"<h2>New feed",
+			"<h1>New Feed",
 			"Glasgow Haskell Compiler",
 			"Glasgow_Haskell_Compiler",
 		)

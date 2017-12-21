@@ -27,102 +27,66 @@ var (
 <head>
 	<title>{{ .title }}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="{{.base}}/s/favicon.png" type="image/png" sizes="16x16 24x24 32x32 64x64">
-	<link rel="apple-touch-icon" href="{{.base}}/s/favicon.png">
-	<style type="text/css">
-body {
-	margin: 0 0 2em 0;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-table {
-	width: 100%;
-	border-collapse: collapse;
-}
-th {
-	text-align: left;
-	font-weight: normal;
-}
-td, th {
-	vertical-align: top;
-	padding: 0;
-	padding-bottom: 3px;
-}
-td:first-child {
-	width: 250px;
-}
-textarea {
-	box-sizing: border-box;
-	width: 100%;
-}
-h2 {
-	border-bottom: 1px solid #ddd;
-}
-h4 {
-	margin: 2em 0 0.5em 0;
-}
-a, a:visited {
-	color: #357cb7;
-}
-a:hover {
-	color: black;
-}
-nav {
-	background-color: #35b7b1;
-	padding: 0.5em 0;
-}
-nav ul {
-	padding: 0;
-	margin: 0;
-}
-nav li {
-	list-style: none;
-	display: inline;
-	padding-right: 1em;
-}
-nav a {
-	font-weight: bold;
-}
-nav a, nav a:visited {
-	color: rgba(0, 0, 0, 0.5);
-	text-decoration: none;
-}
-nav a.active, nav a:hover {
-	color: rgba(0, 0, 0, 1);
-}
-.body, nav div {
-	margin: 0 auto;
-	max-width: 760px;
-	padding: 0 0.5em;
-}
-.body p {
-	text-align: justify;
-}
 
-@media only screen and (max-width: 700px) {
-	table, thead, tbody, tr, th, td {
-		display: block;
-	}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{.base}}/s/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{.base}}/s/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{.base}}/s/favicons/favicon-16x16.png">
+    <link rel="manifest" href="{{.base}}/s/favicons/manifest.json">
+    <link rel="mask-icon" href="{{.base}}/s/favicons/safari-pinned-tab.svg" color="#5bbad5">
 
-	.optional {
-		display: none;
-	}
-}
-	</style>
+    <link rel="stylesheet" href="{{.base}}/s/bootstrap.css">
+    <link rel="stylesheet" href="{{.base}}/s/pure-menu.css">
+    <link rel="stylesheet" href="{{.base}}/s/pure-responsive-menu.css">
+    <link rel="stylesheet" href="{{.base}}/s/fonts/font-awesome.css">
+    <link rel="stylesheet" href="{{.base}}/s/verssion.css">
+
 	{{- block "head" .}}{{end}}
 </head>
 <body>
-	<nav>
-		<div>
-		<ul>
-		<li><a href="{{.base}}/"{{if eq .current "home"}} class="active"{{end}}>Home</a></li>
-		<li><a href="{{.base}}/curated/"{{if eq .current "curated"}} class="active"{{end}}>New feed</a></li>
-		<li><a href="{{.base}}/p/"{{if eq .current "allpages"}} class="active"{{end}}>All pages</a></li>
-		</ul>
+<div class="navbar navbar-fixed-top" role="navigation" id="header">
+<div class="container">
+<div class="custom-wrapper pure-g" id="menu-container">
+<div class="wrapper">
+	<div id="brand-image-field">
+		<div class="pure-menu">
+			<a class="navbar-brand" title="Verssion" href="{{.base}}/">Verssion</a>
+			<a style="z-index:8866;" href="#" class="custom-toggle" id="toggle">
+				<s class="bar"></s>
+				<s class="bar"></s>
+				<s class="bar"></s>
+			</a>
 		</div>
-	</nav>
-	<div class="body">
-		{{- block "page" .}}{{end}}
 	</div>
+	<div id="menu-field">
+		<nav id="menu" role="navigation" class="nav pure-menu pure-menu-horizontal custom-can-transform">
+			<ul class="pure-menu-list" id="navigation-bar">
+				<li class="menu-item{{if eq .current "home"}} current-menu-item{{end}}"><a href="{{.base}}/">Home</a></li>
+				<li class="menu-item{{if eq .current "curated"}} current-menu-item{{end}}"><a href="{{.base}}/curated/">New Feed</a></li>
+				<li class="menu-item{{if eq .current "allpages"}} current-menu-item{{end}}"><a href="{{.base}}/p/">All Pages</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
+</div>
+</div>
+</div>
+
+{{- block "page" .}}{{end}}
+
+<footer>
+	<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<p>&copy; Copyright 2017 <i><strong>VERSSION</strong></i></p>
+		</div>
+	</div>
+	</div>
+</footer>
+
+<script src="{{.base}}/s/jquery.min.js"></script>
+<script src="{{.base}}/s/bootstrap.min.js"></script>
+<script src="{{.base}}/s/jquery.matchHeight.js"></script>
+<script src="{{.base}}/s/scripts.js"></script>
 </body>
 </html>
 
@@ -171,36 +135,83 @@ function runFilter(v) {
 	});
 }
 	</script>
+
 	{{- if .pages}}
 	<h4>Selected pages</h4>
-	<span id="selected">
-	{{- range .pages}}
-		<div>
-		<input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
+	{{- end}}
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="row checks" id="selected">
+			{{- range .pages}}
+				<div class="col-sm-12 check-row">
+				<input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
+				</div>
+			{{- end}}
+			</div>
 		</div>
-	{{- end}}
-	</span>
-	{{- end}}
+	</div>
 
-	<h4>Add pages</h4>
-	<label>Filter <input type="text" oninput="moveChecked();runFilter(this.value)"></label>
-	<span id="available">
-	{{- range .available}}
-		<div data-title="{{title .}}">
-		<input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
+	<h4>Known pages</h4>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="row filter">
+				<div class="col-sm-2"><label for="input-1">filter</label></div>
+				<div class="col-sm-7">
+				<input type="text" oninput="moveChecked();runFilter(this.value)">
+				</div>
+			</div>
+			<div class="row checks" id="available">
+			{{- range .available}}
+				<div class="col-sm-12 check-row" data-title="{{title .}}">
+					<input type="checkbox" name="p" value="{{.}}" id="p{{.}}" {{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}">{{title .}}</label>
+				</div>
+			{{- end}}
+			</div>
 		</div>
-	{{- end}}
-	</span>
+	</div>
+		
 
-	<h4>Add more pages</h4>
-	Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.
-	<textarea name="etc" rows="4">{{.etc}}</textarea>
+	<div class="row">
+		<div class="col-sm-12">
+			<h4>Add more pages</h4>
+			<p>Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.</p>
+			<textarea name="etc" rows="4">{{.etc}}</textarea>
+		</div>
+	</div>
 {{end}}
 `))
+
+	basePageTempl = `
+{{define "page"}}
+<div class="hero soft-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+{{- block "hero" .}}{{end}}
+			</div>
+		</div>
+	</div>
+</div>
+
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1 page">
+{{- block "body" .}}{{end}}
+			</div>
+		</div>
+	</div>
+</section>
+{{end}}
+`
 )
 
 func withBase(s string) *template.Template {
 	return template.Must(template.Must(baseTempl.Clone()).Parse(s))
+}
+
+func withPage(s string) *template.Template {
+	return template.Must(withBase(basePageTempl).Parse(s))
 }
 
 func runTmpl(w http.ResponseWriter, t *template.Template, args interface{}) {

@@ -142,17 +142,27 @@ func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle 
 }
 
 var (
-	allPagesTempl = withBase(`
-{{define "page"}}
-	<h2>All known pages</h2>
-	<table>
-	{{- range .pages}}
-		<tr>
-			<td><a href="./{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
-			<td>{{version .StableVersion}}</td>
-		</tr>
-	{{- end}}
-	</table>
+	allPagesTempl = withPage(`
+{{define "hero"}}
+	<h1>All Known Pages</h1>
+{{end}}
+
+{{define "body"}}
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table-responsive table-1">
+			<tbody>
+			{{- range .pages}}
+				<tr>
+					<td><a href="./{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
+					<td>{{version .StableVersion}}</td>
+				</tr>
+			{{- end}}
+			</tbody>
+		</table>
+	</div>
+</div>
+
 	<p>
 	Order by: {{if eq .order "spider"}}
 		Update - <a href="./">Alphabetical</a>
@@ -160,79 +170,92 @@ var (
 		<a href="./?order=spider">Update</a> - Alphabetical
 	{{end}}
 	</p>
-	<h4>New page</h4>
-	<p>
-		You're missing something? Add a wikipedia page. Give either the full URL or the title of the page.<br />
-		<form method="GET">
-		<input type="text" name="page" size="60" />
-		<input type="submit" value="Go" />
+
+<div class="row">
+	<div class="col-sm-12">
+		<h4>New page</h4>
+		<p>You're missing something? Add a wikipedia page. Give either the full URL or the title of the page.</p>
+		<form class="form pages-form" method="GET">
+		<input type="text" name="page"/>
+		<button type="submit" class="btn">go</button>
 		</form>
-	</p>
+	</div>
+</div>
 {{- end}}
 `)
 
-	pageTempl = withBase(`
+	pageTempl = withPage(`
 {{define "head"}}
 	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="{{.atom}}"/>
 	<link rel="alternate" type="application/json" title="JSON" href="{{.json}}"/>
 {{- end}}
-{{define "page"}}
-	<h2>{{title .page.Page}}</h2>
-	<table>
-		<tr>
-			<td>Wikipedia</td>
-			<td><a href="{{.wikipedia}}">{{.wikipedia}}</a></td>
-		</tr>
-		<tr>
-			<td>Homepage</td>
-			<td>{{with .page.Homepage}}{{link .}}{{- end}}</td>
-		</tr>
-		<tr>
-			<td>Current stable version</td>
-			<td>{{with .page.StableVersion}}{{version .}}{{- end}}</td>
-		</tr>
-	</table>
-	<br />
-	<br />
-	<h2>Version history</h2>
-	<table class="history">
-	<tr>
-		<th class="optional">Spider timestamp</th>
-		<th class="optional">Version</th>
-	</tr>
-	{{- range .versions}}
-		<tr>
-			<td class="optional">{{.T.Format "2006-01-02 15:04 UTC"}}</td>
-			<td>{{version .StableVersion}}</td>
-		</tr>
-	{{- end}}
-	</table>
-	<br />
-	RSS link: <a href="{{.atom}}">Atom feed</a><br />
-	<br />
-	<small>
-		Version numbers are retrieved from Wikipedia, and are licensed under Creative Commons.<br />
-		If the current stable version is out of date, please edit <a href="{{.wikipedia}}">Wikipedia</a>.<br />
-		Latest spider check: {{if not .page.T.IsZero}}{{.page.T.Format "2006-01-02 15:04 UTC"}}{{- end}}<br />
-	</small>
-{{- end}}
+
+{{define "hero"}}
+<h1>{{title .page.Page}}</h1>
+<div class="row">
+	<div class="col-sm-4"><p>Wikipedia</p></div>
+	<div class="col-sm-8"><p><i class="fa fa-wikipedia-w"></i><a href="{{.wikipedia}}">{{.wikipedia}}</a></p></div>
+</div><!-- end row -->
+<div class="row">
+	<div class="col-sm-4"><p>Homepage</p></div>
+	<div class="col-sm-8"><p><i class="fa fa-external-link"></i>{{with .page.Homepage}}{{link .}}{{- end}}</p></div>
+</div><!-- end row -->
+<div class="row">
+	<div class="col-sm-4"><p>Current stable version</p></div>
+	<div class="col-sm-8"><p>{{with .page.StableVersion}}{{version .}}{{- end}}</p></div>
+</div><!-- end row -->
+{{end}}
+
+{{define "body"}}
+<div class="row"><div class="col-sm-12 text-center"><h3>Version history</h3></div></div>
+	
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table-responsive table-2">
+			<thead>
+				<tr>
+					<td class="hidden-xs"><strong>Spider timestamp</strong></td>
+					<td><strong>Version</strong></td>
+				</tr>
+			</thead>
+			<tbody>
+			{{- range .versions}}
+				<tr>
+					<td class="hidden-xs">{{.T.Format "2006-01-02 15:04 UTC"}}</td>
+					<td>{{version .StableVersion}}</td>
+				</tr>
+			{{- end}}
+			</tbody>
+		</table>
+		<p>RSS link: <a href="{{.atom}}">Atom feed</a></p>
+		<div class="soft-footer">
+			<p>Version numbers are retrieved from Wikipedia, and are licensed under Creative Commons.</p>
+			<p>If the current stable version is out of date, please edit <a href="{{.wikipedia}}">Wikipedia</a>.</p>
+			<p>Latest spider check: {{if not .page.T.IsZero}}{{.page.T.Format "2006-01-02 15:04 UTC"}}{{- end}}</p>
+		</div>
+	</div>
+</div>
+{{end}}
 `)
 
-	pageNotFoundTempl = withBase(`
-{{define "page"}}
-	<h2>{{.page}}</h2>
-	Page not found: {{.page}}<br />
-	Maybe you can create it on <a href="{{.wikipedia}}">Wikipedia</a><br />
-	<br />
-{{- end}}
+	pageNotFoundTempl = withPage(`
+{{define "hero"}}
+	<h1>{{.page}}</h1>
+{{end}}
+{{define "body"}}
+	<p>Page not found: {{.page}}</p>
+	<p>Maybe you can create it on <a href="{{.wikipedia}}">Wikipedia</a></p>
+{{end}}
 `)
 
-	noVersionTempl = withBase(`
-{{define "page"}}
-	<h2>{{.page}}</h2>
-	No version found for <b>{{.page}}</b><br />
-	Maybe this is a disambiguation page? <a href="https://en.wikipedia.org/w/index.php?search={{.page}}">Search</a> on Wikipedia.<br />
-	<br />
-{{- end}}
+	noVersionTempl = withPage(`
+{{define "hero"}}
+	<h1>{{.page}}</h1>
+{{end}}
+
+{{define "body"}}
+	<p>No version found for <b>{{.page}}</b></p>
+	<p>Maybe this is a disambiguation page? <a href="https://en.wikipedia.org/w/index.php?search={{.page}}">Search</a> on Wikipedia.</p>
+{{end}}
 `)
 )

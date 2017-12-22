@@ -254,18 +254,19 @@ var (
 
 {{define "body"}}
 <div class="row">
+<div class="col-sm-12">
 	{{- with .pageversions}}
 		<table class="table-responsive table-2">
 		<tr>
-			<th class="optional">Page</th>
-			<th class="optional">Stable version</th>
-			<th class="optional">Spider timestamp</th>
+			<th class="hidden-xs">Page</th>
+			<th class="hidden-xs">Stable version</th>
+			<th class="hidden-xs">Spider timestamp</th>
 		</tr>
 		{{- range .}}
 			<tr>
 			<td><a href="{{$.base}}/p/{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
 			<td>{{version .StableVersion}}</td>
-			<td class="optional">{{.T.Format "2006-01-02 15:04 UTC"}}</td>
+			<td class="hidden-xs">{{.T.Format "2006-01-02 15:04 UTC"}}</td>
 			</tr>
 		{{- end}}
 		</table>
@@ -275,6 +276,7 @@ var (
 	<p>
 	<a href="./edit.html" class="btn">Edit this feed</a>
 	</p>
+</div>
 </div>
 {{end}}
 `)

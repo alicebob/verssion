@@ -39,11 +39,12 @@ var (
     <link rel="stylesheet" href="{{.base}}/s/pure-responsive-menu.css">
     <link rel="stylesheet" href="{{.base}}/s/fonts/font-awesome.css">
     <link rel="stylesheet" href="{{.base}}/s/verssion.css">
+    <link rel="stylesheet" href="{{.base}}/s/grid.css">
 
 	{{- block "head" .}}{{end}}
 </head>
 <body>
-<div class="navbar navbar-fixed-top" role="navigation" id="header">
+<div class="navtobe navbar-fixed-top" role="navigation" id="header">
 <div class="container">
 <div class="custom-wrapper pure-g" id="menu-container">
 <div class="wrapper">
@@ -71,21 +72,15 @@ var (
 </div>
 </div>
 
+<div class="herobg">
+</div>
 {{- block "page" .}}{{end}}
 
 <footer>
-	<div class="container">
-	<div class="row">
-		<div class="col-sm-12">
-			<p>&copy; Copyright 2017 <i><strong>VERSSION</strong></i></p>
-		</div>
-	</div>
-	</div>
+	<p>&copy; Copyright 2017 <i><strong>VERSSION</strong></i></p>
 </footer>
 
 <script src="{{.base}}/s/jquery.min.js"></script>
-<script src="{{.base}}/s/bootstrap.min.js"></script>
-<script src="{{.base}}/s/jquery.matchHeight.js"></script>
 <script src="{{.base}}/s/scripts.js"></script>
 </body>
 </html>
@@ -183,25 +178,14 @@ function runFilter(v) {
 
 	basePageTempl = `
 {{define "page"}}
-<div class="hero soft-hero">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 col-md-10 col-md-offset-1">
+<div class="hero page">
 {{- block "hero" .}}{{end}}
-			</div>
-		</div>
-	</div>
 </div>
 
-<section>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 col-md-10 col-md-offset-1 page">
+<div class="pagebg"></div>
+<div class="content page">
 {{- block "body" .}}{{end}}
-			</div>
-		</div>
-	</div>
-</section>
+</div>
 {{end}}
 `
 )

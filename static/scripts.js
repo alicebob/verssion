@@ -62,29 +62,6 @@ jQuery(window).scroll(function() {
 		jQuery('body .navbar').removeClass('nav-bg');
 	}
 });
-    
-// Match height
-
-	$(function() {
-    $('.same').matchHeight({
-	    property: 'min-height'
-    });
-	});
-
-/* Box slide on scroll */
-	
-$(window).scroll(function() {
-	if ($(this).scrollTop() > 150) {
-	    $('.cta.slidein').stop().animate({ right: '0px' });
-	} else {
-	    $('.cta.slidein').stop().animate({ right: '-390px' });
-	}
-});
-
-$('.cta .close-link').click(function( event ) {
-  event.preventDefault();
-  $('.cta').stop().animate({ right: '-375px' }).removeClass('slidein');
-});
 
 
 /* Scroll to element */

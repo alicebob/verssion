@@ -148,39 +148,31 @@ var (
 {{end}}
 
 {{define "body"}}
-<div class="row">
-	<div class="col-sm-12">
-		<table class="table-responsive table-1">
-			<tbody>
-			{{- range .pages}}
-				<tr>
-					<td><a href="./{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
-					<td>{{version .StableVersion}}</td>
-				</tr>
-			{{- end}}
-			</tbody>
-		</table>
-	</div>
-</div>
+<table class="table-responsive table-1">
+	<tbody>
+	{{- range .pages}}
+		<tr>
+			<td><a href="./{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
+			<td>{{version .StableVersion}}</td>
+		</tr>
+	{{- end}}
+	</tbody>
+</table>
 
-	<p>
-	Order by: {{if eq .order "spider"}}
-		Update - <a href="./">Alphabetical</a>
-	{{else}}
-		<a href="./?order=spider">Update</a> - Alphabetical
-	{{end}}
-	</p>
+<p>
+Order by: {{if eq .order "spider"}}
+	Update - <a href="./">Alphabetical</a>
+{{else}}
+	<a href="./?order=spider">Update</a> - Alphabetical
+{{end}}
+</p>
 
-<div class="row">
-	<div class="col-sm-12">
-		<h4>New page</h4>
-		<p>You're missing something? Add a wikipedia page. Give either the full URL or the title of the page.</p>
-		<form class="form pages-form" method="GET">
-		<input type="text" name="page"/>
-		<button type="submit" class="btn">go</button>
-		</form>
-	</div>
-</div>
+<h4>New page</h4>
+<p>You're missing something? Add a wikipedia page. Give either the full URL or the title of the page.</p>
+<form class="form pages-form" method="GET">
+<input type="text" name="page"/>
+<button type="submit" class="btn">go</button>
+</form>
 {{- end}}
 `)
 
@@ -207,33 +199,29 @@ var (
 {{end}}
 
 {{define "body"}}
-<div class="row"><div class="col-sm-12 text-center"><h3>Version history</h3></div></div>
+<h3>Version history</h3>
 	
-<div class="row">
-	<div class="col-sm-12">
-		<table class="table-responsive table-2">
-			<thead>
-				<tr>
-					<td class="hidden-xs"><strong>Spider timestamp</strong></td>
-					<td><strong>Version</strong></td>
-				</tr>
-			</thead>
-			<tbody>
-			{{- range .versions}}
-				<tr>
-					<td class="hidden-xs">{{.T.Format "2006-01-02 15:04 UTC"}}</td>
-					<td>{{version .StableVersion}}</td>
-				</tr>
-			{{- end}}
-			</tbody>
-		</table>
-		<p>RSS link: <a href="{{.atom}}">Atom feed</a></p>
-		<div class="soft-footer">
-			<p>Version numbers are retrieved from Wikipedia, and are licensed under Creative Commons.</p>
-			<p>If the current stable version is out of date, please edit <a href="{{.wikipedia}}">Wikipedia</a>.</p>
-			<p>Latest spider check: {{if not .page.T.IsZero}}{{.page.T.Format "2006-01-02 15:04 UTC"}}{{- end}}</p>
-		</div>
-	</div>
+<table class="table-responsive table-2">
+	<thead>
+		<tr>
+			<td class="hidden-xs"><strong>Spider timestamp</strong></td>
+			<td><strong>Version</strong></td>
+		</tr>
+	</thead>
+	<tbody>
+	{{- range .versions}}
+		<tr>
+			<td class="hidden-xs">{{.T.Format "2006-01-02 15:04 UTC"}}</td>
+			<td>{{version .StableVersion}}</td>
+		</tr>
+	{{- end}}
+	</tbody>
+</table>
+<p>RSS link: <a href="{{.atom}}">Atom feed</a></p>
+<div class="soft-footer">
+	<p>Version numbers are retrieved from Wikipedia, and are licensed under Creative Commons.</p>
+	<p>If the current stable version is out of date, please edit <a href="{{.wikipedia}}">Wikipedia</a>.</p>
+	<p>Latest spider check: {{if not .page.T.IsZero}}{{.page.T.Format "2006-01-02 15:04 UTC"}}{{- end}}</p>
 </div>
 {{end}}
 `)

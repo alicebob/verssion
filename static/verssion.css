@@ -304,12 +304,6 @@ section {
 	padding: 110px 0 40px 0;
 	background: url(./bg.jpg) no-repeat center 50% / cover;
 }
-.box {
-	padding: 40px;
-	background: #fff;
-	border-radius: 3px;
-	box-shadow: rgba(72,75,76,0.05) 0 10px 15px;
-}
 .title-1,
 .title-2 {
 	position: relative;
@@ -337,9 +331,6 @@ section {
   	content: "\f09e";
 	color: #a448c6;
 }
-.box .btn {
-	margin-bottom: 30px;
-}
 .feeds li {
 	margin-bottom: 8px;
 	position: relative;
@@ -355,9 +346,6 @@ section {
 	left: 0;
 	top: 0;
 	position: absolute;
-}
-.updates {
-	background: #fff;
 }
 .table-responsive {
 	width: 100%;
@@ -390,22 +378,6 @@ footer p {
 	margin: 0;
 	color: #69656e;
 	font-size: 14px;
-}
-.hero {
-	padding: 140px 0 130px 0;
-	background: url(./bg.jpg) no-repeat center 50% / cover;
-}
-.hero p {
-	font-size: 18px;
-	word-wrap: break-word;
-}
-.page {
-	margin-top: -150px;
-	margin-bottom: 50px;
-	padding: 60px 80px;
-	background: #fff;
-	border-radius: 3px;
-	box-shadow: rgba(72,75,76,0.05) 0 10px 15px;
 }
 .page h3 {
 	margin-bottom: 30px;
@@ -558,12 +530,6 @@ label:hover:before {
     top: 0;
     cursor: pointer;
     padding: 12px 20px;
-}
-.soft-hero p {
-	margin-bottom: 5px;
-}
-.soft-hero p i {
-	margin-right: 8px;
 }
 .table-2 tr td {
 	padding: 5px 10px;
@@ -722,9 +688,6 @@ label:hover:before {
 	.custom-wrapper.open #menu-field {
 		width: 70%;
     }
-    .box {
-	    margin-bottom: 30px;
-    }
     .table-responsive {
 	    border: none;
     }
@@ -733,10 +696,6 @@ label:hover:before {
 		width: 100%;
 		float: left;
 	}
-	.page {
-		padding: 50px;
-	}
-	
 }
 
 /* /////////////////////////////////////////////////////////    640px     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
@@ -749,12 +708,6 @@ label:hover:before {
     h2 {
 	    font-size: 32px !important;
     }
-	.page {
-		padding: 50px 40px;
-	}
-	.box {
-		padding: 40px 30px;
-	}
 }
 
 /* /////////////////////////////////////////////////////////    480px     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
@@ -767,10 +720,6 @@ label:hover:before {
 	h2 {
 		font-size: 30px !important;
 	}
-	.page {
-		padding: 40px 20px;
-	}
-
 	
 }
 

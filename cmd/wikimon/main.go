@@ -195,7 +195,7 @@ var versionre = regexp.MustCompile(`v?\d+(\.\d+)+`)
 func guessVersion(s string) string {
 	v := ""
 	for _, d := range versionre.FindAllString(s, -1) {
-		if len(d) > len(v) {
+		if strings.Count(d, ".") > strings.Count(v, ".") {
 			v = d
 		}
 	}

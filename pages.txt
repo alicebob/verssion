@@ -36,7 +36,7 @@ Kibana                  https://www.elastic.co/downloads/kibana
 LibreSSL                https://www.libressl.org/
 Linux_kernel            https://www.kernel.org/
 MacOS
-Mercurial               https://www.mercurial-scm.org/
+Mercurial
 MongoDB                 https://www.mongodb.com/
 Music_Player_Daemon     https://www.musicpd.org/
 Mutt_(email_client)     http://www.mutt.org/

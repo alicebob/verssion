@@ -25,8 +25,8 @@ body > div {
 	grid-row: 2/3;
 }
 .hero.page {
-	padding-top: 80px;
-	padding-bottom: 190px;
+	padding-top: 65px;
+	padding-bottom: 130px;
 }
 .herobg {
 	grid-column: 1/4;
@@ -45,9 +45,9 @@ body > div {
 }
 .content.page {
 	background-color: white;
-	margin-top: -150px;
-	margin-bottom: 150px;
-	padding: 40px;
+	margin-top: -100px;
+	margin-bottom: 100px;
+	padding: 80px;
 }
 footer {
 	background-color: black;
@@ -108,4 +108,7 @@ h2 {
 }
 .hero .btn {
 	margin-bottom: 30px;
+}
+.page h3 {
+    text-align: center;
 }

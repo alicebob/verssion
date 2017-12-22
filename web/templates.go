@@ -82,7 +82,6 @@ var (
 
 <script src="{{.base}}/s/jquery.min.js"></script>
 <script src="{{.base}}/s/bootstrap.min.js"></script>
-<script src="{{.base}}/s/jquery.matchHeight.js"></script>
 <script src="{{.base}}/s/scripts.js"></script>
 </body>
 </html>

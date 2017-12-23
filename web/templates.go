@@ -34,6 +34,7 @@ var (
     <link rel="manifest" href="{{.base}}/s/favicons/manifest.json">
     <link rel="mask-icon" href="{{.base}}/s/favicons/safari-pinned-tab.svg" color="#5bbad5">
 
+    <link rel="stylesheet" href="{{.base}}/s/bootstrap.css">
     <link rel="stylesheet" href="{{.base}}/s/pure-menu.css">
     <link rel="stylesheet" href="{{.base}}/s/pure-responsive-menu.css">
     <link rel="stylesheet" href="{{.base}}/s/fonts/font-awesome.css">

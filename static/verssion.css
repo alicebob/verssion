@@ -92,10 +92,6 @@ ul {
 	padding: 0;
 	margin-bottom: 30px;
 }
-section {
-	position: relative;
-	padding: 50px 0;
-}
 .navbar {
 	margin: 0;
 	border: none;
@@ -300,10 +296,6 @@ section {
 	color: #fff;
 	box-shadow: none;
 }
-.s-1 {
-	padding: 110px 0 40px 0;
-	background: url(./bg.jpg) no-repeat center 50% / cover;
-}
 .title-1,
 .title-2 {
 	position: relative;
@@ -382,13 +374,6 @@ footer p {
 .page h3 {
 	margin-bottom: 30px;
 }
-label {
-	font-family: 'Tahoma-Bold';
-	font-size: 14px;
-	color: #29343a;
-	text-transform: uppercase;
-	padding: 10px 0 0;
-}
 .form input[type=text],
 .form input[type=tel],
 .form input[type=email],
@@ -413,9 +398,6 @@ label {
 }
 .filter {
 	margin-bottom: 20px;
-}
-.checks {
-	margin-bottom: 30px;
 }
 .check-row input[type=checkbox] {
 	margin-right: 10px;

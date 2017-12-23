@@ -184,18 +184,14 @@ Order by: {{if eq .order "spider"}}
 
 {{define "hero"}}
 <h1>{{title .page.Page}}</h1>
-<div class="row">
-	<div class="col-sm-4"><p>Wikipedia</p></div>
-	<div class="col-sm-8"><p><i class="fa fa-wikipedia-w"></i><a href="{{.wikipedia}}">{{.wikipedia}}</a></p></div>
-</div><!-- end row -->
-<div class="row">
-	<div class="col-sm-4"><p>Homepage</p></div>
-	<div class="col-sm-8"><p><i class="fa fa-external-link"></i>{{with .page.Homepage}}{{link .}}{{- end}}</p></div>
-</div><!-- end row -->
-<div class="row">
-	<div class="col-sm-4"><p>Current stable version</p></div>
-	<div class="col-sm-8"><p>{{with .page.StableVersion}}{{version .}}{{- end}}</p></div>
-</div><!-- end row -->
+<dl>
+	<dt>Wikipedia</dt>
+	<dd><i class="fa fa-wikipedia-w"></i><a href="{{.wikipedia}}">{{.wikipedia}}</a></dd>
+	<dt>Homepage</dt>
+	<dd><i class="fa fa-external-link"></i>{{with .page.Homepage}}{{link .}}{{- end}}</dd>
+	<dt>Current stable version</dt>
+	<dd>{{with .page.StableVersion}}{{version .}}{{- end}}</dd>
+</dl>
 {{end}}
 
 {{define "body"}}

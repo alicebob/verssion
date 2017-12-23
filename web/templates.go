@@ -34,7 +34,6 @@ var (
     <link rel="manifest" href="{{.base}}/s/favicons/manifest.json">
     <link rel="mask-icon" href="{{.base}}/s/favicons/safari-pinned-tab.svg" color="#5bbad5">
 
-    <link rel="stylesheet" href="{{.base}}/s/bootstrap.css">
     <link rel="stylesheet" href="{{.base}}/s/pure-menu.css">
     <link rel="stylesheet" href="{{.base}}/s/pure-responsive-menu.css">
     <link rel="stylesheet" href="{{.base}}/s/fonts/font-awesome.css">
@@ -130,49 +129,41 @@ function runFilter(v) {
 	});
 }
 	</script>
+	
+	<dl>
 
-	{{- if .pages}}
-	<h4>Selected pages</h4>
-	{{- end}}
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="row checks" id="selected">
-			{{- range .pages}}
-				<div class="col-sm-12 check-row">
+	<dt>Title</dt>
+	<dd>
+		<input type="text" name="title" value="{{.customtitle}}" placeholder="{{.defaulttitle}}" />
+	</dd>
+
+	<dt>Pages</dt>
+	<dd>
+		<div class="checks" id="selected">
+		{{- range .pages}}
+			<div>
 				<input type="checkbox" name="p" value="{{.}}" id="p{{.}}"{{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}"> {{title .}}</label>
-				</div>
-			{{- end}}
 			</div>
+		{{- end}}
 		</div>
-	</div>
-
-	<h4>Known pages</h4>
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="row filter">
-				<div class="col-sm-2"><label for="input-1">filter</label></div>
-				<div class="col-sm-7">
-				<input type="text" oninput="moveChecked();runFilter(this.value)">
-				</div>
+		<label class="input">filter</label>
+		<input type="text" oninput="moveChecked();runFilter(this.value)">
+		<div class="checks" id="available">
+		{{- range .available}}
+			<div data-title="{{title .}}">
+				<input type="checkbox" name="p" value="{{.}}" id="p{{.}}" {{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}">{{title .}}</label>
 			</div>
-			<div class="row checks" id="available">
-			{{- range .available}}
-				<div class="col-sm-12 check-row" data-title="{{title .}}">
-					<input type="checkbox" name="p" value="{{.}}" id="p{{.}}" {{if (index $.selected .)}} CHECKED{{end}}/><label for="p{{.}}" title="{{.}}">{{title .}}</label>
-				</div>
-			{{- end}}
-			</div>
+		{{- end}}
 		</div>
-	</div>
+	</dd>
 		
 
-	<div class="row">
-		<div class="col-sm-12">
-			<h4>Add more pages</h4>
-			<p>Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.</p>
-			<textarea name="etc" rows="4">{{.etc}}</textarea>
-		</div>
-	</div>
+	<dt>Add more pages</dt>
+	<dd>
+		<p>Or add other en.wikipedia.org pages (either the full URL or the part after <code>/wiki/</code>). One per line.</p>
+		<textarea name="etc" rows="4">{{.etc}}</textarea>
+	</dd>
+	</dl>
 {{end}}
 `))
 

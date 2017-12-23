@@ -17,17 +17,20 @@ func newCuratedHandler(base string, db core.DB, spider core.Spider) httprouter.H
 		var (
 			etc   = r.Form.Get("etc")
 			pages = r.Form["p"]
+			title = r.Form.Get("title")
 		)
 		pm := map[string]bool{}
 		for _, p := range pages {
 			pm[p] = true
 		}
 		args := map[string]interface{}{
-			"base":     base,
-			"title":    "New feed",
-			"current":  "curated",
-			"etc":      etc,
-			"selected": pm,
+			"base":         base,
+			"title":        "New feed",
+			"current":      "curated",
+			"etc":          etc,
+			"selected":     pm,
+			"defaulttitle": "",
+			"customtitle":  title,
 		}
 		if r.Method == "POST" {
 			pages, errors := readPageArgs(db, spider, pages, etc)
@@ -40,6 +43,9 @@ func newCuratedHandler(base string, db core.DB, spider core.Spider) httprouter.H
 				}
 				if err := db.CuratedSetPages(id, pages); err != nil {
 					log.Printf("curated pages: %s", err)
+				}
+				if err := db.CuratedSetTitle(id, title); err != nil {
+					log.Printf("curated title: %s", err)
 				}
 
 				w.Header().Set("Location", "./"+id+"/")
@@ -253,31 +259,30 @@ var (
 {{end}}
 
 {{define "body"}}
-<div class="row">
-<div class="col-sm-12">
-	{{- with .pageversions}}
-		<table class="table-responsive table-2">
+{{- with .pageversions}}
+	<table class="table-responsive table-2">
+	<tr>
+		<th class="hidden-xs">Page</th>
+		<th class="hidden-xs">Stable version</th>
+		<th class="hidden-xs">Spider timestamp</th>
+	</tr>
+	{{- range .}}
 		<tr>
-			<th class="hidden-xs">Page</th>
-			<th class="hidden-xs">Stable version</th>
-			<th class="hidden-xs">Spider timestamp</th>
+		<td><a href="{{$.base}}/p/{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
+		<td>{{version .StableVersion}}</td>
+		<td class="hidden-xs">{{.T.Format "2006-01-02 15:04 UTC"}}</td>
 		</tr>
-		{{- range .}}
-			<tr>
-			<td><a href="{{$.base}}/p/{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
-			<td>{{version .StableVersion}}</td>
-			<td class="hidden-xs">{{.T.Format "2006-01-02 15:04 UTC"}}</td>
-			</tr>
-		{{- end}}
-		</table>
-	{{- else}}
-		No pages selected, yet.<br />
 	{{- end}}
-	<p>
+	</table>
+{{- else}}
+<p>
+	No pages selected, yet.<br />
+</p>
+{{- end}}
+
+<p>
 	<a href="./edit.html" class="btn">Edit this feed</a>
-	</p>
-</div>
-</div>
+</p>
 {{end}}
 `)
 
@@ -290,16 +295,6 @@ var (
 {{template "errors" .errors}}
 	
 <form method="POST" class="form start-list-form">
-<div class="row">
-	<div class="col-sm-12">
-		<div class="row filter">
-			<div class="col-sm-2"><label for="input-1">feed title</label></div>
-			<div class="col-sm-7">
-			<input type="text" name="title" value="{{.customtitle}}" placeholder="{{.defaulttitle}}" />
-			</div>
-		</div>
-	</div>
-</div>
 {{template "pageselection" .}}
 <input type="submit" class="btn" value="Update" /><br />
 </form>

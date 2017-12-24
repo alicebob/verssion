@@ -3,10 +3,6 @@
 # If there is a URL listed the (thing which looks like a) version number on
 # that pages is compared against the version in verssion.
 #
-# broken version detection:
-# OpenBSD    http://openbsd.org/
-# PHP        https://secure.php.net/
-
 Aerospike_database      https://www.aerospike.com/download
 AngularJS
 Apache_HTTP_Server      https://httpd.apache.org/download.cgi
@@ -29,6 +25,7 @@ Git                     https://git-scm.com/
 GitLab
 Glasgow_Haskell_Compiler    https://www.haskell.org/ghc/download.html
 GNU_Compiler_Collection
+GNU_nano                https://www.nano-editor.org/
 Go_(programming_language)
 Grunt_(software)
 IOS
@@ -36,12 +33,14 @@ Kibana                  https://www.elastic.co/downloads/kibana
 LibreSSL                https://www.libressl.org/
 Linux_kernel            https://www.kernel.org/
 MacOS
+MediaWiki               https://www.mediawiki.org/wiki/Download
 Mercurial
 MongoDB                 https://www.mongodb.com/
 Music_Player_Daemon     https://www.musicpd.org/
 Mutt_(email_client)     http://www.mutt.org/
 MySQL
 NetBSD
+NetHack                 https://www.nethack.org/
 Nginx
 NixOS
 Nix_package_manager
@@ -52,7 +51,7 @@ Perl
 PHP
 PostgreSQL              https://www.postgresql.org/
 Puppet_(software)
-Python_(programming_language)
+Python_(programming_language)   https://www.python.org/
 QBittorrent             https://www.qbittorrent.org/
 Rake_(software)
 React_(JavaScript_library)

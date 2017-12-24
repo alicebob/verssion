@@ -288,30 +288,6 @@ footer p {
 label:hover:before {
 	border: 2px solid #4778d9!important;
 }
-
-.select-wrap {
-	width: 100%;
-	height: 50px;
-	overflow: hidden;
-	background: url(../img/select-btn.png) no-repeat 96% center #fff;
-	background-size: 28px;
-	padding: 15px 20px;
-	display: inline-block;
-	position: relative;
-	padding-right: 4px;
-}
-.select-wrap select {
-	background: transparent;
-	background-image: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	position: absolute;
-	left: 0;
-	top: 0;
-	cursor: pointer;
-	padding: 12px 20px;
-}
 .table-2 tr td {
 	padding: 5px 10px;
 	padding-left: 0;
@@ -324,17 +300,6 @@ label:hover:before {
 .soft-footer p {
 	font-size: 13px;
 	margin-bottom: 0;
-}
-
-@media (max-width:768px){
-	.table-responsive {
-		border: none;
-	}
-	.table-1 td:first-child,
-	.table-1 td:last-child {
-		width: 100%;
-		float: left;
-	}
 }
 
 @media (max-width:640px){

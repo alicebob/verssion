@@ -34,9 +34,6 @@ var (
     <link rel="manifest" href="{{.base}}/s/favicons/manifest.json">
     <link rel="mask-icon" href="{{.base}}/s/favicons/safari-pinned-tab.svg" color="#5bbad5">
 
-    <link rel="stylesheet" href="{{.base}}/s/bootstrap.css">
-    <link rel="stylesheet" href="{{.base}}/s/pure-menu.css">
-    <link rel="stylesheet" href="{{.base}}/s/pure-responsive-menu.css">
     <link rel="stylesheet" href="{{.base}}/s/fonts/font-awesome.css">
     <link rel="stylesheet" href="{{.base}}/s/verssion.css">
     <link rel="stylesheet" href="{{.base}}/s/grid.css">
@@ -44,33 +41,15 @@ var (
 	{{- block "head" .}}{{end}}
 </head>
 <body>
-<div class="navtobe navbar-fixed-top" role="navigation" id="header">
-<div class="container">
-<div class="custom-wrapper pure-g" id="menu-container">
-<div class="wrapper">
-	<div id="brand-image-field">
-		<div class="pure-menu">
-			<a class="navbar-brand" title="Verssion" href="{{.base}}/">Verssion</a>
-			<a style="z-index:8866;" href="#" class="custom-toggle" id="toggle">
-				<s class="bar"></s>
-				<s class="bar"></s>
-				<s class="bar"></s>
-			</a>
-		</div>
-	</div>
-	<div id="menu-field">
-		<nav id="menu" role="navigation" class="nav pure-menu pure-menu-horizontal custom-can-transform">
-			<ul class="pure-menu-list" id="navigation-bar">
-				<li class="menu-item{{if eq .current "home"}} current-menu-item{{end}}"><a href="{{.base}}/">Home</a></li>
-				<li class="menu-item{{if eq .current "curated"}} current-menu-item{{end}}"><a href="{{.base}}/curated/">New Feed</a></li>
-				<li class="menu-item{{if eq .current "allpages"}} current-menu-item{{end}}"><a href="{{.base}}/p/">All Pages</a></li>
-			</ul>
-		</nav>
-	</div>
-</div>
-</div>
-</div>
-</div>
+
+<nav role="navigation">
+    <ul>
+    <li class="logo"><a href="{{.base}}" title="Verssoin"></a></li>
+    <li{{if eq .current "home"}} class="current-menu-item"{{end}}><a href="/">Home</a></li>
+    <li{{if eq .current "curated"}} class="current-menu-item"{{end}}><a href="/curated/">New Feed</a></li>
+    <li{{if eq .current "allpages"}} class="current-menu-item"{{end}}><a href="/p/">All Pages</a></li>
+    </ul>
+</nav>
 
 <div class="herobg">
 </div>
@@ -80,8 +59,6 @@ var (
 	<p>&copy; Copyright 2017 <i><strong>VERSSION</strong></i></p>
 </footer>
 
-<script src="{{.base}}/s/jquery.min.js"></script>
-<script src="{{.base}}/s/scripts.js"></script>
 </body>
 </html>
 

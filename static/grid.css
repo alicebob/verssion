@@ -15,12 +15,13 @@ body > div {
 	padding-right: 15px;
 }
 
-.navtobe {
+nav {
 	background-color: white;
 	grid-column: 2/3;
 	grid-row: 1/2;
 	padding: 0 15px;
 }
+
 .hero {
 	grid-column: 2/3;
 	grid-row: 2/3;
@@ -102,6 +103,7 @@ dl {
 	grid-template-columns: 250px auto;
 }
 dt, dd {
+    margin-left: 0;
 	padding-bottom: 16px;
 	font-weight: normal;
 }
@@ -157,4 +159,97 @@ td, th {
 
 .checks div {
 	margin-bottom: 10px;
+}
+
+
+
+nav {
+}
+nav ul {
+    margin: 0;
+    padding: 0;
+    display: inline-grid;
+    grid-template-columns: 200px repeat(3, auto);
+    width: 600px;
+	list-style: none;
+}
+nav li {
+    text-align: center;
+    line-height: 1;
+}
+nav .logo, nav .logo a:hover {
+	background: url(./logo50.png) no-repeat;
+	background-size: auto 25px;
+    background-position: 18px 24px;
+    padding: 0;
+}
+nav a, nav a:hover {
+    display: inline-block;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    width: 100%;
+    color: #29343a;
+    text-decoration: none;
+}
+nav .logo a {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+nav a:hover {
+    background-color: #eef2f5;
+}
+.current-menu-item a{
+	font-family: 'Tahoma-Bold';
+}
+.current-menu-item a:hover {
+    background-color: white;
+}
+nav li:nth-child(2).current-menu-item > a {
+	border-bottom: #35b7b1 solid 2px;
+}
+nav li:nth-child(3).current-menu-item > a {
+	border-bottom: #a448c6 solid 2px;
+}
+nav li:nth-child(4).current-menu-item > a {
+	border-bottom: #70b32f solid 2px;
+}
+@media (min-width:480px) {
+    nav li:nth-child(2) > a:before {
+        content: "\f015";
+        font-family: 'FontAwesome';
+        color: #35b7b1;
+        margin-right: 8px;
+    }
+    nav li:nth-child(3) > a:before {
+        content: "\f09e";
+        font-family: 'FontAwesome';
+        color: #a448c6;
+        margin-right: 8px;
+    }
+    nav li:nth-child(4) > a:before {
+        content: "\f15c";
+        font-family: 'FontAwesome';
+        color: #70b32f;
+        margin-right: 8px;
+    }
+}
+@media (max-width:480px) {
+    nav ul {
+        grid-template-columns: 30px repeat(3, auto);
+        width: 100%;
+    }
+    nav .logo, nav .logo a:hover {
+        background-position: 0 10px;
+    }
+    nav ul a, nav ul a:hover {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+  .hidden-xs {
+    display: none !important;
+  }
 }

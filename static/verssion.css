@@ -18,9 +18,11 @@ body {
 	overflow-x: hidden;
 }
 a,
-a:hover,
 a:focus {
-	text-decoration:none;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
 }
 h1, h2, h3, h4, h5 {
 	color: #29343a;
@@ -280,6 +282,17 @@ label:hover:before {
 .table-2 tr td {
 	padding: 5px 10px;
 	padding-left: 0;
+}
+
+@media (max-width:768px){
+	.table-responsive {
+		border: none;
+	}
+	.table-1 td:first-child,
+	.table-1 td:last-child {
+		width: 100%;
+		float: left;
+	}
 }
 
 @media (max-width:640px){

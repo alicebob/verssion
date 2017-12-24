@@ -69,7 +69,7 @@ var (
 	<div>
 		<h2 class="title-2">Feed</h2>
 		<p>Make a feed which combines multiple projects in a single feed:</p>
-		<a href="./curated/" class="btn">Create new feed</a></p>
+		<p class="text-center"><a href="./curated/" class="btn">Create new feed</a></p>
 
 		{{- if .curated}}
 		<h4>Your recent feeds</h4>

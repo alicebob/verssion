@@ -70,6 +70,16 @@ footer .fab {
 	font-family: 'FontAwesome';
 }
 
+.soft-footer {
+	   width: 100%;
+	   border-top: #e5e5e5 solid 1px;
+	   padding-top: 20px;
+}
+.soft-footer p {
+	   font-size: 13px;
+	   margin-bottom: 0;
+}
+
 .indexhero {
 	display: grid;
 	grid-gap: 30px;
@@ -151,6 +161,12 @@ table {
 td, th {
 	text-align: left;
 }
+ul {
+	padding: 0;
+}
+li {
+	list-style: none;
+}
 
 .hero p {
 	font-size: 18px;
@@ -172,8 +188,6 @@ td, th {
 
 
 
-nav {
-}
 nav ul {
 	margin: 0;
 	padding: 0;
@@ -240,7 +254,7 @@ nav li:nth-child(4).current-menu-item > a {
 		content: "\f15c";
 		font-family: 'FontAwesome';
 		color: #70b32f;
-        margin-right: 8px;
+		margin-right: 8px;
 	}
 }
 @media (max-width:480px) {
@@ -249,16 +263,19 @@ nav li:nth-child(4).current-menu-item > a {
 		width: 100%;
 	}
 	nav .logo, nav .logo a:hover {
-		background-position: 0 10px;
+		background-position: 0 6px;
 	}
 	nav ul a, nav ul a:hover {
 		padding-top: 10px;
 		padding-bottom: 10px;
 	}
+	body {
+		grid-template-rows: 38px repeat(3, auto);
+	}
 }
 
 @media (max-width: 767px) {
-    .hidden-xs {
-        display: none !important;
-    }
+	.hidden-xs {
+		display: none !important;
+	}
 }

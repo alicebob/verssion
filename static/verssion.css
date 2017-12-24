@@ -85,13 +85,13 @@ p a:focus {
 	display: inline-block;
 	line-height: 1;
 	box-shadow: #00426e 0 3px 0;
-	transition:all 0.2s ease-in-out 0s;
 }
 .btn:hover,
 .btn:focus {
 	background: #0085de;
 	color: #fff;
 	box-shadow: none;
+	transition:all 0.2s ease-in-out 0s;
 }
 .title-1,
 .title-2 {
@@ -157,17 +157,6 @@ tr td {
 .table-1 td:first-child a:focus {
 	color: #007fd4;
 	text-decoration: underline;
-}
-
-footer {
-	padding: 35px 0;
-	background: #10071b;
-	text-align: center;
-}
-footer p {
-	margin: 0;
-	color: #69656e;
-	font-size: 14px;
 }
 
 .page h3 {
@@ -291,15 +280,6 @@ label:hover:before {
 .table-2 tr td {
 	padding: 5px 10px;
 	padding-left: 0;
-}
-.soft-footer {
-	width: 100%;
-	border-top: #e5e5e5 solid 1px;
-	padding-top: 20px;
-}
-.soft-footer p {
-	font-size: 13px;
-	margin-bottom: 0;
 }
 
 @media (max-width:640px){

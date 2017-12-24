@@ -56,7 +56,7 @@ var (
 {{- block "page" .}}{{end}}
 
 <footer>
-	<p>&copy; Copyright 2017 <i><strong>VERSSION</strong></i></p>
+	<p><a href="https://github.com/alicebob/verssion"><strong>VERSSION</strong> <span class="fab fa-github" /></a> :: Version data <span class="fab fa-creative-commons"></span> Wikipedia</p>
 </footer>
 
 </body>

@@ -51,13 +51,23 @@ nav {
 	margin-bottom: 100px;
 	padding: 80px;
 }
+
 footer {
+	padding: 10px;
 	background-color: black;
 	color: white;
 	grid-column: 1/4;
 	grid-row: 4/5;
 	text-align: center;
-	padding: 30px;
+}
+footer p, footer a, footer a:hover {
+	padding-top: 20px;
+	margin-bottom: 0;
+	color: #69656e;
+	font-size: 14px;
+}
+footer .fab {
+	font-family: 'FontAwesome';
 }
 
 .indexhero {

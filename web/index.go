@@ -100,3 +100,8 @@ var (
 {{- end}}
 `)
 )
+
+func robotsHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	w.Write([]byte(`User-agent: *
+Disallow:`))
+}

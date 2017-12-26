@@ -34,9 +34,10 @@ var (
     <link rel="manifest" href="/s/favicons/manifest.json">
     <link rel="mask-icon" href="/s/favicons/safari-pinned-tab.svg" color="#5bbad5">
 
-    <link rel="stylesheet" href="/s/fonts/font-awesome.css">
     <link rel="stylesheet" href="/s/verssion.css">
     <link rel="stylesheet" href="/s/grid.css">
+
+    <script defer src="/s/fontawesome-verssion.js"></script>
 
 	{{- block "head" .}}{{end}}
 </head>

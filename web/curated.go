@@ -24,7 +24,6 @@ func newCuratedHandler(base string, db core.DB, spider core.Spider) httprouter.H
 			pm[p] = true
 		}
 		args := map[string]interface{}{
-			"base":         base,
 			"title":        "New feed",
 			"current":      "curated",
 			"etc":          etc,
@@ -85,7 +84,6 @@ func curatedHandler(base string, db core.DB) httprouter.Handle {
 		}
 
 		args := map[string]interface{}{
-			"base":         base,
 			"title":        cur.Title(),
 			"current":      "curated",
 			"curated":      cur,
@@ -129,7 +127,6 @@ func curatedEditHandler(base string, db core.DB, spider core.Spider) httprouter.
 			selected[p] = true
 		}
 		args := map[string]interface{}{
-			"base":         base,
 			"title":        cur.Title(),
 			"current":      "",
 			"curated":      cur,
@@ -268,7 +265,7 @@ var (
 	</tr>
 	{{- range .}}
 		<tr>
-		<td><a href="{{$.base}}/p/{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
+		<td><a href="/p/{{.Page}}/" title="{{.Page}}">{{title .Page}}</a></td>
 		<td>{{version .StableVersion}}</td>
 		<td class="hidden-xs">{{.T.Format "2006-01-02 15:04 UTC"}}</td>
 		</tr>

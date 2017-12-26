@@ -28,15 +28,15 @@ var (
 	<title>{{ .title }}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{.base}}/s/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{.base}}/s/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{.base}}/s/favicons/favicon-16x16.png">
-    <link rel="manifest" href="{{.base}}/s/favicons/manifest.json">
-    <link rel="mask-icon" href="{{.base}}/s/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="/s/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/s/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/s/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/s/favicons/manifest.json">
+    <link rel="mask-icon" href="/s/favicons/safari-pinned-tab.svg" color="#5bbad5">
 
-    <link rel="stylesheet" href="{{.base}}/s/fonts/font-awesome.css">
-    <link rel="stylesheet" href="{{.base}}/s/verssion.css">
-    <link rel="stylesheet" href="{{.base}}/s/grid.css">
+    <link rel="stylesheet" href="/s/fonts/font-awesome.css">
+    <link rel="stylesheet" href="/s/verssion.css">
+    <link rel="stylesheet" href="/s/grid.css">
 
 	{{- block "head" .}}{{end}}
 </head>
@@ -44,7 +44,7 @@ var (
 
 <nav role="navigation">
     <ul>
-    <li class="logo"><a href="{{.base}}" title="Verssoin"></a></li>
+    <li class="logo"><a href="/" title="Verssion"></a></li>
     <li{{if eq .current "home"}} class="current-menu-item"{{end}}><a href="/">Home</a></li>
     <li{{if eq .current "curated"}} class="current-menu-item"{{end}}><a href="/curated/">New Feed</a></li>
     <li{{if eq .current "allpages"}} class="current-menu-item"{{end}}><a href="/p/">All Pages</a></li>

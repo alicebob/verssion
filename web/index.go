@@ -24,7 +24,6 @@ func indexHandler(base string, db core.DB) httprouter.Handle {
 			log.Printf("readCuratedCookies: %s", err)
 		}
 		runTmpl(w, indexTempl, map[string]interface{}{
-			"base":    base,
 			"title":   "VeRSSion",
 			"current": "home",
 			"entries": es,
@@ -75,7 +74,7 @@ var (
 		<h4>Your recent feeds</h4>
 		<ul class="feeds">
 		{{- range $id, $cur := .curated}}
-				<li><a href="{{$.base}}/curated/{{$id}}/">{{$cur.Title}}</a></li>
+				<li><a href="/curated/{{$id}}/">{{$cur.Title}}</a></li>
 		{{- end}}
 		</ul>
 		{{- end}}

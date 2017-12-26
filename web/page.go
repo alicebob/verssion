@@ -12,11 +12,11 @@ import (
 	"github.com/alicebob/verssion/core"
 )
 
-func allPages(base string, db core.DB, w http.ResponseWriter, r *http.Request) {
+func allPages(db core.DB, w http.ResponseWriter, r *http.Request) {
 	if url := r.FormValue("page"); url != "" {
 		// "new page" form
 		if page := core.WikiBasePage(url); page != "" {
-			w.Header().Set("Location", base+"/p/"+page+"/")
+			w.Header().Set("Location", "/p/"+page+"/")
 			w.WriteHeader(301)
 			return
 		}
@@ -33,7 +33,6 @@ func allPages(base string, db core.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	runTmpl(w, allPagesTempl, map[string]interface{}{
-		"base":    base,
 		"title":   "Pages overview",
 		"current": "allpages",
 		"pages":   all,
@@ -55,12 +54,12 @@ func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle 
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		page := p.ByName("page")
 		if page == "" || page == "/" {
-			allPages(base, db, w, r)
+			allPages(db, w, r)
 			return
 		}
 		page = page[1:] // prefix /
 		if !strings.HasSuffix(page, "/") {
-			w.Header().Set("Location", base+"/p/"+page+"/")
+			w.Header().Set("Location", "/p/"+page+"/")
 			w.WriteHeader(301)
 			return
 		}
@@ -75,7 +74,6 @@ func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle 
 				case "json":
 				default:
 					runTmpl(w, pageNotFoundTempl, map[string]interface{}{
-						"base":      base,
 						"title":     core.Title(e.Page),
 						"current":   "",
 						"wikipedia": WikiURL(e.Page),
@@ -88,7 +86,6 @@ func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle 
 					w.WriteHeader(404)
 				default:
 					runTmpl(w, noVersionTempl, map[string]interface{}{
-						"base":    base,
 						"title":   core.Title(e.Page),
 						"current": "",
 						"page":    e.Page,
@@ -102,7 +99,7 @@ func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle 
 		}
 
 		if page != cur.Page {
-			w.Header().Set("Location", fmt.Sprintf("%s/p/%s/", base, cur.Page))
+			w.Header().Set("Location", fmt.Sprintf("/p/%s/", cur.Page))
 			w.WriteHeader(302)
 			return
 		}
@@ -126,7 +123,6 @@ func pageHandler(base string, db core.DB, spider core.Spider) httprouter.Handle 
 			})
 		case "", "html":
 			runTmpl(w, pageTempl, map[string]interface{}{
-				"base":      base,
 				"title":     core.Title(cur.Page),
 				"current":   "",
 				"atom":      adhocURL(base, []string{cur.Page}),

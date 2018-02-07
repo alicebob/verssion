@@ -2,6 +2,8 @@ package web_test
 
 import (
 	"encoding/xml"
+	"io/ioutil"
+	"log"
 	"net/http/httptest"
 	"strings"
 	"testing"
@@ -56,4 +58,24 @@ func TestAdhoc404(t *testing.T) {
 	if have, want := status, 404; have != want {
 		t.Fatalf("have %v, want %v", have, want)
 	}
+}
+
+func TestAdhocNoLink(t *testing.T) {
+	var (
+		db = core.NewMemory()
+		m  = web.Mux("", db, NewFixedSpider(), "")
+	)
+	s := httptest.NewServer(m)
+	defer s.Close()
+	db.Store(core.Page{Page: "Z_shell", StableVersion: "[5.4.2](https://sourceforge.net/projects/zsh/files/zsh/5.4.2/) / August 28, 2017", T: time.Now()})
+
+	status, body := get(t, s, "/adhoc/atom.xml?p=Z_shell")
+	if have, want := status, 200; have != want {
+		t.Fatalf("have %v, want %v", have, want)
+	}
+	with(t, body,
+		mustcontain("Z shell"),
+		mustcontain("5.4.2"),
+		mustnotcontain("sourceforge"),
+	)
 }

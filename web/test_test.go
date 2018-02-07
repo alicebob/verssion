@@ -72,6 +72,32 @@ func contains(t *testing.T, body string, needles ...string) {
 	}
 }
 
+type test func(*testing.T, string)
+
+func mustcontain(need string) test {
+	return func(t *testing.T, body string) {
+		t.Helper()
+		if in, want := body, need; !strings.Contains(in, want) {
+			t.Fatalf("no %q found in %q", want, in)
+		}
+	}
+}
+func mustnotcontain(need string) test {
+	return func(t *testing.T, body string) {
+		t.Helper()
+		if in, wantnot := body, need; strings.Contains(in, wantnot) {
+			t.Fatalf("%q found in %q", wantnot, in)
+		}
+	}
+}
+
+func with(t *testing.T, body string, tests ...test) {
+	t.Helper()
+	for _, test_ := range tests {
+		test_(t, body)
+	}
+}
+
 type FixedSpider struct {
 	pages map[string]core.Page
 	errs  map[string]error

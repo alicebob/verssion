@@ -46,11 +46,12 @@ func asURN(s string) string {
 func asFeed(base, id, title string, update time.Time, vs []core.Page) Feed {
 	var es []Entry
 	for _, v := range vs {
+		sv := core.TextMarkdown(v.StableVersion)
 		es = append(es, Entry{
 			ID:      asURN(v.Page + "-" + v.StableVersion),
-			Title:   core.Title(v.Page) + ": " + v.StableVersion,
+			Title:   core.Title(v.Page) + ": " + sv,
 			Updated: v.T,
-			Content: v.StableVersion, // TODO: prev version?
+			Content: sv,
 			Links: []Link{
 				{
 					Href: fmt.Sprintf("%s/p/%s/", base, v.Page),

@@ -35,11 +35,11 @@ func TestCurated(t *testing.T) {
 		if have, want := status, 200; have != want {
 			t.Fatalf("have %v, want %v", have, want)
 		}
-		contains(t, body,
-			"<title>New feed",
-			"<h1>New Feed",
-			"Glasgow Haskell Compiler",
-			"Glasgow_Haskell_Compiler",
+		with(t, body,
+			mustcontain("<title>New feed"),
+			mustcontain("<h1>New Feed"),
+			mustcontain("Glasgow Haskell Compiler"),
+			mustcontain("Glasgow_Haskell_Compiler"),
 		)
 	}
 
@@ -67,8 +67,8 @@ func TestCurated(t *testing.T) {
 		if have, want := status, 200; have != want {
 			t.Fatalf("have %v, want %v", have, want)
 		}
-		contains(t, body,
-			"Debian",
+		with(t, body,
+			mustcontain("Debian"),
 		)
 	}
 
@@ -78,9 +78,9 @@ func TestCurated(t *testing.T) {
 		if have, want := status, 200; have != want {
 			t.Fatalf("have %v, want %v", have, want)
 		}
-		contains(t, body,
-			"Your recent feeds",
-			"Debian",
+		with(t, body,
+			mustcontain("Your recent feeds"),
+			mustcontain("Debian"),
 		)
 	}
 
@@ -89,8 +89,8 @@ func TestCurated(t *testing.T) {
 		if have, want := status, 200; have != want {
 			t.Fatalf("have %v, want %v", have, want)
 		}
-		contains(t, body,
-			"Debian",
+		with(t, body,
+			mustcontain("Debian"),
 		)
 
 		var f web.Feed
@@ -107,8 +107,8 @@ func TestCurated(t *testing.T) {
 		if have, want := status, 200; have != want {
 			t.Fatalf("have %v, want %v", have, want)
 		}
-		contains(t, body,
-			"Debian",
+		with(t, body,
+			mustcontain("Debian"),
 		)
 	}
 }

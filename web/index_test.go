@@ -24,12 +24,12 @@ func TestIndex(t *testing.T) {
 		t.Fatalf("have %v, want %v", have, want)
 	}
 
-	contains(t, body,
-		"<title>VeRSSion",
-		"Debian",
-		"my version",
-		"Glasgow Haskell Compiler", // titleification test
-		"Glasgow_Haskell_Compiler",
-		"a link!",
+	with(t, body,
+		mustcontain("<title>VeRSSion"),
+		mustcontain("Debian"),
+		mustcontain("my version"),
+		mustcontain("Glasgow Haskell Compiler"), // titlefication test
+		mustcontain("Glasgow_Haskell_Compiler"),
+		mustcontain("a link!"),
 	)
 }

@@ -63,15 +63,6 @@ func getRedirect(t *testing.T, s *httptest.Server, url string) string {
 	return r.Header.Get("Location")
 }
 
-func contains(t *testing.T, body string, needles ...string) {
-	t.Helper()
-	for _, need := range needles {
-		if in, want := body, need; !strings.Contains(in, want) {
-			t.Fatalf("no %q found", want)
-		}
-	}
-}
-
 type test func(*testing.T, string)
 
 func mustcontain(need string) test {

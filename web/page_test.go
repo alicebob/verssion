@@ -43,10 +43,10 @@ func TestPages(t *testing.T) {
 	if have, want := status, 200; have != want {
 		t.Fatalf("have %v, want %v", have, want)
 	}
-	contains(t, body,
-		"<title>Pages overview",
-		"Debian",
-		"Glasgow Haskell Compiler",
+	with(t, body,
+		mustcontain("<title>Pages overview"),
+		mustcontain("Debian"),
+		mustcontain("Glasgow Haskell Compiler"),
 	)
 
 	{
@@ -84,9 +84,9 @@ func TestNewPage(t *testing.T) {
 	if have, want := status, 200; have != want {
 		t.Fatalf("have %v, want %v", have, want)
 	}
-	contains(t, body,
-		"<title>Foo",
-		"Version 1",
+	with(t, body,
+		mustcontain("<title>Foo"),
+		mustcontain("Version 1"),
 	)
 }
 
@@ -132,12 +132,12 @@ func TestPage(t *testing.T) {
 	if have, want := status, 200; have != want {
 		t.Fatalf("have %v, want %v", have, want)
 	}
-	contains(t, body,
-		"<title>Glasgow Haskell Compiler",
-		"Glasgow Haskell Compiler",
-		"https://haskell.org",
-		"8.2.1",
-		"8.2.0",
+	with(t, body,
+		mustcontain("<title>Glasgow Haskell Compiler"),
+		mustcontain("Glasgow Haskell Compiler"),
+		mustcontain("https://haskell.org"),
+		mustcontain("8.2.1"),
+		mustcontain("8.2.0"),
 	)
 
 	{
@@ -145,7 +145,9 @@ func TestPage(t *testing.T) {
 		if have, want := status, 404; have != want {
 			t.Fatalf("have %v, want %v", have, want)
 		}
-		contains(t, body, "not found")
+		with(t, body,
+			mustcontain("not found"),
+		)
 	}
 
 	{
@@ -160,9 +162,9 @@ func TestPage(t *testing.T) {
 		if have, want := status, 200; have != want {
 			t.Fatalf("have %v, want %v", have, want)
 		}
-		contains(t, body,
-			"<title>OS/2",
-			"4.52",
+		with(t, body,
+			mustcontain("<title>OS/2"),
+			mustcontain("4.52"),
 		)
 	}
 
@@ -171,9 +173,9 @@ func TestPage(t *testing.T) {
 		if have, want := status, 200; have != want {
 			t.Fatalf("have %v, want %v", have, want)
 		}
-		contains(t, body,
-			"<title>Android",
-			"No version",
+		with(t, body,
+			mustcontain("<title>Android"),
+			mustcontain("No version"),
 		)
 	}
 

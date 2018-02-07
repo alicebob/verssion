@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http/httptest"
-	"strings"
 	"testing"
 	"time"
 
@@ -29,12 +28,10 @@ func TestAdhoc(t *testing.T) {
 	if have, want := status, 200; have != want {
 		t.Fatalf("have %v, want %v", have, want)
 	}
-	if in, want := body, "Glasgow Haskell Compiler"; !strings.Contains(in, want) {
-		t.Fatalf("no %q found", want)
-	}
-	if in, want := body, "<content>8.2.1 "; !strings.Contains(in, want) {
-		t.Fatalf("no %q found", want)
-	}
+	with(t, body,
+		mustcontain("Glasgow Haskell Compiler"),
+		mustcontain("<content>8.2.1"),
+	)
 
 	var f web.Feed
 	if err := xml.Unmarshal([]byte(body), &f); err != nil {
@@ -67,7 +64,11 @@ func TestAdhocNoLink(t *testing.T) {
 	)
 	s := httptest.NewServer(m)
 	defer s.Close()
-	db.Store(core.Page{Page: "Z_shell", StableVersion: "[5.4.2](https://sourceforge.net/projects/zsh/files/zsh/5.4.2/) / August 28, 2017", T: time.Now()})
+	db.Store(core.Page{
+		Page:          "Z_shell",
+		StableVersion: "[5.4.2](https://sourceforge.net/projects/zsh/files/zsh/5.4.2/) / August 28, 2017",
+		T:             time.Now(),
+	})
 
 	status, body := get(t, s, "/adhoc/atom.xml?p=Z_shell")
 	if have, want := status, 200; have != want {

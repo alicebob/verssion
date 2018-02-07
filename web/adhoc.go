@@ -20,6 +20,10 @@ func adhocAtomHandler(base string, db core.DB, spider core.Spider) httprouter.Ha
 		if len(errs) != 0 {
 			log.Printf("adhoc atom runUpdates: %s", errs)
 		}
+		if len(actualPages) == 0 {
+			http.Error(w, http.StatusText(404), 404)
+			return
+		}
 
 		vs, err := db.History(actualPages...)
 		if err != nil {

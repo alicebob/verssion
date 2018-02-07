@@ -42,3 +42,18 @@ func TestAdhoc(t *testing.T) {
 		t.Errorf("have %v, want %v", have, want)
 	}
 }
+
+func TestAdhoc404(t *testing.T) {
+	log.SetOutput(ioutil.Discard)
+	var (
+		db = core.NewMemory()
+		m  = web.Mux("", db, NewFixedSpider(), "")
+	)
+	s := httptest.NewServer(m)
+	defer s.Close()
+
+	status, _ := get(t, s, "/adhoc/atom.xml?p=Foobar")
+	if have, want := status, 404; have != want {
+		t.Fatalf("have %v, want %v", have, want)
+	}
+}

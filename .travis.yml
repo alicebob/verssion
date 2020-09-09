@@ -1,13 +1,9 @@
 language: go
 
-install: go get -t ./...
-
 script: make test testrace db integration
 
-sudo: false
-
 go:
-  - 1.9
+  - 1.15
 
 services:
   - postgresql

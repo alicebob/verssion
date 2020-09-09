@@ -96,7 +96,7 @@ func InterfaceTestDB(t *testing.T, db DB) {
 			t.Fatal(err)
 		}
 		if l != nil {
-			t.Fatal("not a nil: %v", l)
+			t.Fatalf("not a nil: %v", l)
 		}
 	}
 }
@@ -177,12 +177,12 @@ func InterfaceTestCurated(t *testing.T, db DB) {
 	}
 
 	if have, want := db.CuratedSetPages("nosuch", nil), ErrCuratedNotFound; have != want {
-		t.Fatal("have error %v, want error %v", have, want)
+		t.Fatalf("have error %v, want error %v", have, want)
 	}
 	if have, want := db.CuratedSetTitle("nosuch", "foo"), ErrCuratedNotFound; have != want {
-		t.Fatal("have error %v, want error %v", have, want)
+		t.Fatalf("have error %v, want error %v", have, want)
 	}
 	if have, want := db.CuratedSetUsed("nosuch"), ErrCuratedNotFound; have != want {
-		t.Fatal("have error %v, want error %v", have, want)
+		t.Fatalf("have error %v, want error %v", have, want)
 	}
 }

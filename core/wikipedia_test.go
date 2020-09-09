@@ -47,7 +47,7 @@ func TestWikipediaSpider(t *testing.T) {
 			t.Fatal("expected an error")
 		}
 		if _, ok := err.(ErrNoVersion); !ok {
-			t.Fatal("have %T, want ErrNoVersion", err)
+			t.Fatalf("have %T, want ErrNoVersion", err)
 		}
 	}
 
@@ -57,7 +57,7 @@ func TestWikipediaSpider(t *testing.T) {
 			t.Fatal("expected an error")
 		}
 		if _, ok := err.(ErrNotFound); !ok {
-			t.Fatal("have %T, want ErrNotFound", err)
+			t.Fatalf("have %T, want ErrNotFound", err)
 		}
 	}
 
@@ -81,7 +81,7 @@ func TestWikipediaSpider(t *testing.T) {
 		}
 		redir, ok := err.(ErrRedirect)
 		if !ok {
-			t.Fatal("have %T, want ErrNotFound", err)
+			t.Fatalf("have %T, want ErrNotFound", err)
 		}
 		if have, want := redir.Page, "leftpad"; have != want {
 			t.Errorf("have %q, want %q", have, want)

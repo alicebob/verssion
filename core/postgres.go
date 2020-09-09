@@ -1,17 +1,19 @@
 package core
 
 import (
+	"context"
 	"fmt"
 	"strings"
 
 	"github.com/google/uuid"
-	"github.com/jackc/pgx"
+	"github.com/jackc/pgx/v4"
+	"github.com/jackc/pgx/v4/pgxpool"
 )
 
 const DBURL = "postgresql:///w"
 
 type Postgres struct {
-	conn *pgx.ConnPool
+	conn *pgxpool.Pool
 }
 
 var _ DB = &Postgres{}
@@ -20,11 +22,7 @@ func NewPostgres(url string) (*Postgres, error) {
 	if url == "" {
 		url = DBURL
 	}
-	cc, err := pgx.ParseURI(url)
-	if err != nil {
-		return nil, err
-	}
-	conn, err := pgx.NewConnPool(pgx.ConnPoolConfig{ConnConfig: cc})
+	conn, err := pgxpool.Connect(context.Background(), url)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +34,7 @@ func NewPostgres(url string) (*Postgres, error) {
 }
 
 func (p *Postgres) Last(page string) (*Page, error) {
-	row := p.conn.QueryRow(`
+	row := p.conn.QueryRow(context.Background(), `
 		SELECT page, timestamp, stable_version, homepage
 		FROM page
 		WHERE page=$1
@@ -111,7 +109,7 @@ func (p *Postgres) queryUpdates(where string, args ...interface{}) ([]Page, erro
 
 func (p *Postgres) queryPages(table, where string, args ...interface{}) ([]Page, error) {
 	var es []Page
-	rows, err := p.conn.Query(`
+	rows, err := p.conn.Query(context.Background(), `
 		SELECT page, timestamp, stable_version, homepage
 		FROM `+table+where, args...)
 	if err != nil {
@@ -129,7 +127,7 @@ func (p *Postgres) queryPages(table, where string, args ...interface{}) ([]Page,
 }
 
 func (p *Postgres) Store(e Page) error {
-	_, err := p.conn.Exec(`
+	_, err := p.conn.Exec(context.Background(), `
 	INSERT INTO page
 		(page, timestamp, stable_version, homepage)
 	VALUES
@@ -140,7 +138,7 @@ func (p *Postgres) Store(e Page) error {
 
 func (p *Postgres) Known() ([]string, error) {
 	var ps []string
-	rows, err := p.conn.Query(`
+	rows, err := p.conn.Query(context.Background(), `
 		SELECT DISTINCT(page)
 		FROM updates
 		ORDER BY page`)
@@ -163,7 +161,7 @@ func (p *Postgres) CreateCurated() (string, error) {
 		return "", err
 	}
 	cid := id.String()
-	_, err = p.conn.Exec(`
+	_, err = p.conn.Exec(context.Background(), `
 		INSERT INTO curated (id, created, lastused, lastupdated)
 		VALUES ($1, now(), now(), now())`,
 		cid,
@@ -176,7 +174,7 @@ func (p *Postgres) StoreCurated(cur Curated) error {
 }
 
 func (p *Postgres) LoadCurated(id string) (*Curated, error) {
-	row := p.conn.QueryRow(`
+	row := p.conn.QueryRow(context.Background(), `
 		SELECT created, lastused, lastupdated, title
 		FROM curated
 		WHERE id=$1`,
@@ -199,7 +197,7 @@ func (p *Postgres) LoadCurated(id string) (*Curated, error) {
 
 func (p *Postgres) curatedPages(id string) ([]string, error) {
 	var ps []string
-	rows, err := p.conn.Query(`
+	rows, err := p.conn.Query(context.Background(), `
 		SELECT page
 		FROM curated_pages
 		WHERE curated_id=$1
@@ -221,33 +219,33 @@ func (p *Postgres) curatedPages(id string) ([]string, error) {
 
 // pages must be unique
 func (p *Postgres) CuratedSetPages(id string, pages []string) error {
-	tx, err := p.conn.Begin()
+	tx, err := p.conn.Begin(context.Background())
 	if err != nil {
 		return err
 	}
-	defer tx.Rollback()
+	defer tx.Rollback(context.Background())
 
-	if _, err := tx.Exec(`DELETE FROM curated_pages WHERE curated_id=$1`, id); err != nil {
+	if _, err := tx.Exec(context.Background(), `DELETE FROM curated_pages WHERE curated_id=$1`, id); err != nil {
 		return err
 	}
 	for _, p := range pages {
-		if _, err := tx.Exec(`INSERT INTO curated_pages (curated_id, page) VALUES ($1, $2)`, id, p); err != nil {
+		if _, err := tx.Exec(context.Background(), `INSERT INTO curated_pages (curated_id, page) VALUES ($1, $2)`, id, p); err != nil {
 			return err
 		}
 	}
-	res, err := p.conn.Exec(`UPDATE curated SET lastupdated=now() WHERE id=$1`, id)
+	res, err := p.conn.Exec(context.Background(), `UPDATE curated SET lastupdated=now() WHERE id=$1`, id)
 	if err != nil {
 		return err
 	}
 	if res.RowsAffected() == 0 {
-		tx.Rollback()
+		tx.Rollback(context.Background())
 		return ErrCuratedNotFound
 	}
-	return tx.Commit()
+	return tx.Commit(context.Background())
 }
 
 func (p *Postgres) CuratedSetUsed(id string) error {
-	res, err := p.conn.Exec(`UPDATE curated SET lastused=now(), used=used+1 WHERE id=$1`, id)
+	res, err := p.conn.Exec(context.Background(), `UPDATE curated SET lastused=now(), used=used+1 WHERE id=$1`, id)
 	if res.RowsAffected() == 0 {
 		return ErrCuratedNotFound
 	}
@@ -255,7 +253,7 @@ func (p *Postgres) CuratedSetUsed(id string) error {
 }
 
 func (p *Postgres) CuratedSetTitle(id, title string) error {
-	res, err := p.conn.Exec(`UPDATE curated SET title=$2, lastupdated=now() WHERE id=$1`, id, title)
+	res, err := p.conn.Exec(context.Background(), `UPDATE curated SET title=$2, lastupdated=now() WHERE id=$1`, id, title)
 	if res.RowsAffected() == 0 {
 		return ErrCuratedNotFound
 	}

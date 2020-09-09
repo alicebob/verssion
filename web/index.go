@@ -4,20 +4,45 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/julienschmidt/httprouter"
 
 	"github.com/alicebob/verssion/core"
 )
 
+// a global updated by CacheLoop()
+var (
+	current []core.Page
+	mu      sync.Mutex
+)
+
+func CacheLoop(db core.DB) {
+	UpdateCache(db)
+
+	tick := time.NewTicker(123 * time.Second)
+	for range tick.C {
+		UpdateCache(db)
+	}
+}
+
+func UpdateCache(db core.DB) {
+	es, err := db.Current(12, core.SpiderT)
+	if err != nil {
+		log.Printf("current: %s", err)
+		return
+	}
+	mu.Lock()
+	current = es
+	mu.Unlock()
+}
+
 func indexHandler(base string, db core.DB) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-		es, err := db.Current(12, core.SpiderT)
-		if err != nil {
-			log.Printf("current: %s", err)
-			http.Error(w, http.StatusText(500), 500)
-			return
-		}
+		mu.Lock()
+		es := current
+		mu.Unlock()
 
 		curated, err := readCuratedCookies(r, db)
 		if err != nil {

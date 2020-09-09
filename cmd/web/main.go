@@ -32,6 +32,8 @@ func main() {
 		os.Exit(2)
 	}
 
+	go web.CacheLoop(db)
+
 	mux := web.Mux(*baseURL, db, web.WikiSpider(), *static)
 
 	fmt.Printf("listening on %s...\n", *listen)

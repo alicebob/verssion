@@ -3,6 +3,7 @@
 package core
 
 import (
+	"context"
 	"testing"
 )
 
@@ -14,7 +15,7 @@ func initdb(t *testing.T) DB {
 		t.Fatal(err)
 	}
 	for _, table := range tables {
-		if _, err := p.conn.Exec("DELETE FROM " + table); err != nil {
+		if _, err := p.conn.Exec(context.Background(), "DELETE FROM "+table); err != nil {
 			t.Fatal(err)
 		}
 	}

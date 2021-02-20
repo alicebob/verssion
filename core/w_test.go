@@ -73,7 +73,7 @@ func TestStableVersion(t *testing.T) {
 		},
 		{
 			Filename: "python.html",
-			Version:  "3.6.3 / 3 October 2017\n2.7.14 / 16 September 2017",
+			Version:  "3.9.2 / 19 February 2021",
 			Homepage: "[www.python.org](https://www.python.org/)",
 		},
 		{

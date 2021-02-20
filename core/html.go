@@ -113,6 +113,9 @@ node:
 			case "br":
 				res += "\n"
 			case "a":
+				if ignoreTag(c.Data, c.Attr) {
+					continue node
+				}
 				var (
 					href = getAttr("href", c.Attr)
 					name = tString(c)
@@ -148,10 +151,12 @@ node:
 // ignore certain HTML elemens. Specific to wikipedia
 func ignoreTag(tag string, attr []html.Attribute) bool {
 	for _, a := range attr {
-		if a.Key == "class" && strings.Contains(a.Val, "noprint") {
+		switch {
+		case a.Key == "class" && strings.Contains(a.Val, "noprint"):
 			return true
-		}
-		if a.Key == "style" && strings.Contains(a.Val, "display:none") {
+		case a.Key == "style" && strings.Contains(a.Val, "display:none"):
+			return true
+		case a.Key == "title" && strings.Contains(a.Val, "Wikidata"):
 			return true
 		}
 	}

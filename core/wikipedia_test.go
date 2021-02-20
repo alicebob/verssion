@@ -41,7 +41,7 @@ func TestWikipediaSpider(t *testing.T) {
 	defer w.Close()
 	s := NewWikipediaSpider(cb)
 
-	{
+	t.Run("blue", func(t *testing.T) {
 		_, err := s.Spider("blue")
 		if err == nil {
 			t.Fatal("expected an error")
@@ -49,9 +49,9 @@ func TestWikipediaSpider(t *testing.T) {
 		if _, ok := err.(ErrNoVersion); !ok {
 			t.Fatalf("have %T, want ErrNoVersion", err)
 		}
-	}
+	})
 
-	{
+	t.Run("no such", func(t *testing.T) {
 		_, err := s.Spider("no such")
 		if err == nil {
 			t.Fatal("expected an error")
@@ -59,9 +59,9 @@ func TestWikipediaSpider(t *testing.T) {
 		if _, ok := err.(ErrNotFound); !ok {
 			t.Fatalf("have %T, want ErrNotFound", err)
 		}
-	}
+	})
 
-	{
+	t.Run("debian", func(t *testing.T) {
 		debian, err := s.Spider("debian")
 		if err != nil {
 			t.Fatal(err)
@@ -72,9 +72,9 @@ func TestWikipediaSpider(t *testing.T) {
 		if have, want := debian.Homepage, "[debian.org](http://debian.org)"; have != want {
 			t.Errorf("have %q, want %q", have, want)
 		}
-	}
+	})
 
-	{
+	t.Run("leftpad", func(t *testing.T) {
 		_, err := s.Spider("leftpad")
 		if err == nil {
 			t.Fatal("expected an error")
@@ -89,7 +89,7 @@ func TestWikipediaSpider(t *testing.T) {
 		if have, want := redir.To, "Npm_(software)"; have != want {
 			t.Errorf("have %q, want %q", have, want)
 		}
-	}
+	})
 }
 
 // FixedWikiServer is a test helper to have something to spider. It returns a

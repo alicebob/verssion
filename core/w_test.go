@@ -96,6 +96,11 @@ func TestStableVersion(t *testing.T) {
 			Version:  "10.2.11 (November 28, 2017)",
 			Homepage: "[mariadb.org](https://mariadb.org/), [mariadb.com](https://mariadb.com/)",
 		},
+		{
+			Filename: "vim.html",
+			Version:  "8.2 / 12 December 2019",
+			Homepage: "[www.vim.org](https://www.vim.org/)",
+		},
 	}
 
 	for _, c := range cases {

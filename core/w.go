@@ -37,7 +37,10 @@ func StableVersion(n *html.Node) (string, string) {
 			}
 			switch k := r[0]; TextMarkdown(k) {
 			case "Stable release", "Latest release", "Last release":
-				stable = v
+				// vim has multiple projects on the page
+				if stable == "" && v != "" {
+					stable = v
+				}
 			case "Stable release(s)":
 				// Firefox, has a table with versions. The version is in the
 				// next row.

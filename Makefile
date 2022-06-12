@@ -16,3 +16,6 @@ integration:
 
 db:
 	psql verssion < tables.sql
+
+tidy:
+	go mod tidy -compat=1.18

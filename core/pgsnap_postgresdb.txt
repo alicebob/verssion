@@ -2,7 +2,7 @@
 {"Type":"CommandComplete","CommandTag":"DELETE 0"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
 {"Type":"Query","String":"DELETE FROM curated"}
-{"Type":"CommandComplete","CommandTag":"DELETE 2"}
+{"Type":"CommandComplete","CommandTag":"DELETE 1"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
 {"Type":"Query","String":"DELETE FROM curated_pages"}
 {"Type":"CommandComplete","CommandTag":"DELETE 2"}

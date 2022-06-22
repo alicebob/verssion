@@ -1,9 +1,12 @@
 package core
 
 import (
+	"bytes"
 	"reflect"
 	"testing"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 // InterfaceTestDB is used to test DB implementations
@@ -112,6 +115,7 @@ func InterfaceTestCurated(t *testing.T, db DB) {
 			t.Fatal("want nil")
 		}
 	}
+	uuid.SetRand(bytes.NewBufferString("helloworld1231231231231312312331"))
 	id, err := db.CreateCurated()
 	if err != nil {
 		t.Fatal(err)

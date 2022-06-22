@@ -1,16 +1,16 @@
-//go:build integration
-
 package core
 
 import (
 	"context"
 	"testing"
+
+	"github.com/alicebob/pgsnap"
 )
 
 var tables = []string{"page", "curated", "curated_pages"}
 
-func initdb(t *testing.T) DB {
-	p, err := NewPostgres("postgresql:///verssion")
+func initdb(t *testing.T, addr string) DB {
+	p, err := NewPostgres(addr)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23,12 +23,15 @@ func initdb(t *testing.T) DB {
 }
 
 func TestPostgresDB(t *testing.T) {
-	p := initdb(t)
+	addr := pgsnap.RunEnv(t, "postgresql:///verssion")
+
+	p := initdb(t, addr)
 	InterfaceTestDB(t, p)
 }
 
 func TestPostgresCurated(t *testing.T) {
-	p := initdb(t)
+	addr := pgsnap.RunEnv(t, "postgresql:///verssion")
 
+	p := initdb(t, addr)
 	InterfaceTestCurated(t, p)
 }

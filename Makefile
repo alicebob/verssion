@@ -11,8 +11,8 @@ testrace:
 build:
 	$(MAKE) -C cmd/web build
 
-integration:
-	go test -tags integration ./...
+ci:
+	PGREPLAY=1 go test ./...
 
 db:
 	psql verssion < tables.sql

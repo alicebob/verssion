@@ -9,7 +9,7 @@ import (
 // InterfaceTestDB is used to test DB implementations
 func InterfaceTestDB(t *testing.T, db DB) {
 	var (
-		now     = time.Now().UTC().Round(time.Second) // PG timestamps are not very precise
+		now     = time.Date(2020, 2, 20, 20, 20, 20, 0, time.UTC) // PG timestamps are not very precise
 		test1   = "test_1"
 		test1_1 = Page{
 			Page:          test1,

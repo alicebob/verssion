@@ -1,7 +1,8 @@
-.PHONY: test integration
+.PHONY: test replay
 
 test:
+	rm *.txt
 	go test
 
-integration:
-	go test -tags integration ./...
+replay:
+	PGREPLAY=1 go test

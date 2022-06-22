@@ -233,7 +233,8 @@ func (p *Postgres) CuratedSetPages(id string, pages []string) error {
 			return err
 		}
 	}
-	res, err := p.conn.Exec(context.Background(), `UPDATE curated SET lastupdated=now() WHERE id=$1`, id)
+
+	res, err := tx.Exec(context.Background(), `UPDATE curated SET lastupdated=now() WHERE id=$1`, id)
 	if err != nil {
 		return err
 	}

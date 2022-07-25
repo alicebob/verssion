@@ -1,0 +1,24 @@
+{"Type":"Query","String":"DELETE FROM page"}
+{"Type":"CommandComplete","CommandTag":"DELETE 4"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Query","String":"DELETE FROM curated"}
+{"Type":"CommandComplete","CommandTag":"DELETE 0"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Query","String":"DELETE FROM curated_pages"}
+{"Type":"CommandComplete","CommandTag":"DELETE 0"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Parse","Name":"lrupsc_4_0","Query":"\n\t\t\tSELECT\n\t\t\t\tpage\n\t\t\t\t, timestamp\n\t\t\t\t, stable_version\n\t\t\t\t, homepage\n\t\t\tFROM\n\t\t\t\tpage\n\t\t\tWHERE\n\t\t\t\tpage = $1\n\t\t\tORDER BY timestamp DESC\n\t\t\tLIMIT 1\n\t\t","ParameterOIDs":null}
+{"Type":"Describe","ObjectType":"S","Name":"lrupsc_4_0"}
+{"Type":"Sync"}
+{"Type":"ParseComplete"}
+{"Type":"ParameterDescription","ParameterOIDs":[25]}
+{"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898921,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898921,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":0},{"Name":"stable_version","TableOID":3898921,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898921,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_4_0","ParameterFormatCodes":[0],"Parameters":[{"text":"Foobar"}],"ResultFormatCodes":[0,1,0,0]}
+{"Type":"Describe","ObjectType":"P","Name":""}
+{"Type":"Execute","Portal":"","MaxRows":0}
+{"Type":"Sync"}
+{"Type":"BindComplete"}
+{"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898921,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898921,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"stable_version","TableOID":3898921,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898921,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
+{"Type":"CommandComplete","CommandTag":"SELECT 0"}
+{"Type":"ReadyForQuery","TxStatus":"I"}

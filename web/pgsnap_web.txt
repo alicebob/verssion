@@ -1,0 +1,24 @@
+{"Type":"Query","String":"DELETE FROM page"}
+{"Type":"CommandComplete","CommandTag":"DELETE 1"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Query","String":"DELETE FROM curated"}
+{"Type":"CommandComplete","CommandTag":"DELETE 0"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Query","String":"DELETE FROM curated_pages"}
+{"Type":"CommandComplete","CommandTag":"DELETE 0"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Parse","Name":"lrupsc_16_0","Query":"\n\t\t\tINSERT INTO page\n\t\t\t\t(page, timestamp, stable_version, homepage)\n\t\t\tVALUES\n\t\t\t\t($1, $2, $3, $4)\n\t\t","ParameterOIDs":null}
+{"Type":"Describe","ObjectType":"S","Name":"lrupsc_16_0"}
+{"Type":"Sync"}
+{"Type":"ParseComplete"}
+{"Type":"ParameterDescription","ParameterOIDs":[25,1184,25,25]}
+{"Type":"NoData"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_16_0","ParameterFormatCodes":[0,1,0,0],"Parameters":[{"text":"Debian"},{"binary":"ff1fe2ffc59c6000"},{"text":"my version"},{"text":""}],"ResultFormatCodes":[]}
+{"Type":"Describe","ObjectType":"P","Name":""}
+{"Type":"Execute","Portal":"","MaxRows":0}
+{"Type":"Sync"}
+{"Type":"BindComplete"}
+{"Type":"NoData"}
+{"Type":"CommandComplete","CommandTag":"INSERT 0 1"}
+{"Type":"ReadyForQuery","TxStatus":"I"}

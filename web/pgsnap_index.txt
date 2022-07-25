@@ -1,0 +1,58 @@
+{"Type":"Query","String":"DELETE FROM page"}
+{"Type":"CommandComplete","CommandTag":"DELETE 2"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Query","String":"DELETE FROM curated"}
+{"Type":"CommandComplete","CommandTag":"DELETE 1"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Query","String":"DELETE FROM curated_pages"}
+{"Type":"CommandComplete","CommandTag":"DELETE 1"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Parse","Name":"lrupsc_10_0","Query":"\n\t\t\tINSERT INTO page\n\t\t\t\t(page, timestamp, stable_version, homepage)\n\t\t\tVALUES\n\t\t\t\t($1, $2, $3, $4)\n\t\t","ParameterOIDs":null}
+{"Type":"Describe","ObjectType":"S","Name":"lrupsc_10_0"}
+{"Type":"Sync"}
+{"Type":"ParseComplete"}
+{"Type":"ParameterDescription","ParameterOIDs":[25,1184,25,25]}
+{"Type":"NoData"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_10_0","ParameterFormatCodes":[0,1,0,0],"Parameters":[{"text":"Debian"},{"binary":"ff1fe2ffc59c6000"},{"text":"my version"},{"text":""}],"ResultFormatCodes":[]}
+{"Type":"Describe","ObjectType":"P","Name":""}
+{"Type":"Execute","Portal":"","MaxRows":0}
+{"Type":"Sync"}
+{"Type":"BindComplete"}
+{"Type":"NoData"}
+{"Type":"CommandComplete","CommandTag":"INSERT 0 1"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_10_0","ParameterFormatCodes":[0,1,0,0],"Parameters":[{"text":"Glasgow_Haskell_Compiler"},{"binary":"ff1fe2ffc59c6000"},{"text":"8.2.1 / July 22, 2017"},{"text":""}],"ResultFormatCodes":[]}
+{"Type":"Describe","ObjectType":"P","Name":""}
+{"Type":"Execute","Portal":"","MaxRows":0}
+{"Type":"Sync"}
+{"Type":"BindComplete"}
+{"Type":"NoData"}
+{"Type":"CommandComplete","CommandTag":"INSERT 0 1"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_10_0","ParameterFormatCodes":[0,1,0,0],"Parameters":[{"text":"WithLink"},{"binary":"ff1fe2ffc59c6000"},{"text":"a [link](https://link.me)!"},{"text":""}],"ResultFormatCodes":[]}
+{"Type":"Describe","ObjectType":"P","Name":""}
+{"Type":"Execute","Portal":"","MaxRows":0}
+{"Type":"Sync"}
+{"Type":"BindComplete"}
+{"Type":"NoData"}
+{"Type":"CommandComplete","CommandTag":"INSERT 0 1"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Parse","Name":"lrupsc_10_1","Query":"\n\t\t\tSELECT\n\t\t\t\tpage\n\t\t\t\t, timestamp\n\t\t\t\t, stable_version\n\t\t\t\t, homepage\n\t\t\tFROM current ORDER BY timestamp DESC LIMIT 12","ParameterOIDs":null}
+{"Type":"Describe","ObjectType":"S","Name":"lrupsc_10_1"}
+{"Type":"Sync"}
+{"Type":"ParseComplete"}
+{"Type":"ParameterDescription","ParameterOIDs":[]}
+{"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898932,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898932,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":0},{"Name":"stable_version","TableOID":3898932,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898932,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_10_1","ParameterFormatCodes":null,"Parameters":[],"ResultFormatCodes":[0,1,0,0]}
+{"Type":"Describe","ObjectType":"P","Name":""}
+{"Type":"Execute","Portal":"","MaxRows":0}
+{"Type":"Sync"}
+{"Type":"BindComplete"}
+{"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898932,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898932,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"stable_version","TableOID":3898932,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898932,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
+{"Type":"DataRow","Values":[{"text":"Debian"},{"binary":"ff1fe2ffc59c6000"},{"text":"my version"},{"text":""}]}
+{"Type":"DataRow","Values":[{"text":"Glasgow_Haskell_Compiler"},{"binary":"ff1fe2ffc59c6000"},{"text":"8.2.1 / July 22, 2017"},{"text":""}]}
+{"Type":"DataRow","Values":[{"text":"WithLink"},{"binary":"ff1fe2ffc59c6000"},{"text":"a [link](https://link.me)!"},{"text":""}]}
+{"Type":"CommandComplete","CommandTag":"SELECT 3"}
+{"Type":"ReadyForQuery","TxStatus":"I"}

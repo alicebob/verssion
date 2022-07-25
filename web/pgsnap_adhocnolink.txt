@@ -1,0 +1,56 @@
+{"Type":"Query","String":"DELETE FROM page"}
+{"Type":"CommandComplete","CommandTag":"DELETE 0"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Query","String":"DELETE FROM curated"}
+{"Type":"CommandComplete","CommandTag":"DELETE 0"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Query","String":"DELETE FROM curated_pages"}
+{"Type":"CommandComplete","CommandTag":"DELETE 0"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Parse","Name":"lrupsc_6_0","Query":"\n\t\t\tINSERT INTO page\n\t\t\t\t(page, timestamp, stable_version, homepage)\n\t\t\tVALUES\n\t\t\t\t($1, $2, $3, $4)\n\t\t","ParameterOIDs":null}
+{"Type":"Describe","ObjectType":"S","Name":"lrupsc_6_0"}
+{"Type":"Sync"}
+{"Type":"ParseComplete"}
+{"Type":"ParameterDescription","ParameterOIDs":[25,1184,25,25]}
+{"Type":"NoData"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_6_0","ParameterFormatCodes":[0,1,0,0],"Parameters":[{"text":"Z_shell"},{"binary":"000287a3e109a9a7"},{"text":"[5.4.2](https://sourceforge.net/projects/zsh/files/zsh/5.4.2/) / August 28, 2017"},{"text":""}],"ResultFormatCodes":[]}
+{"Type":"Describe","ObjectType":"P","Name":""}
+{"Type":"Execute","Portal":"","MaxRows":0}
+{"Type":"Sync"}
+{"Type":"BindComplete"}
+{"Type":"NoData"}
+{"Type":"CommandComplete","CommandTag":"INSERT 0 1"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Parse","Name":"lrupsc_6_1","Query":"\n\t\t\tSELECT\n\t\t\t\tpage\n\t\t\t\t, timestamp\n\t\t\t\t, stable_version\n\t\t\t\t, homepage\n\t\t\tFROM\n\t\t\t\tpage\n\t\t\tWHERE\n\t\t\t\tpage = $1\n\t\t\tORDER BY timestamp DESC\n\t\t\tLIMIT 1\n\t\t","ParameterOIDs":null}
+{"Type":"Describe","ObjectType":"S","Name":"lrupsc_6_1"}
+{"Type":"Sync"}
+{"Type":"ParseComplete"}
+{"Type":"ParameterDescription","ParameterOIDs":[25]}
+{"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898921,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898921,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":0},{"Name":"stable_version","TableOID":3898921,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898921,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_6_1","ParameterFormatCodes":[0],"Parameters":[{"text":"Z_shell"}],"ResultFormatCodes":[0,1,0,0]}
+{"Type":"Describe","ObjectType":"P","Name":""}
+{"Type":"Execute","Portal":"","MaxRows":0}
+{"Type":"Sync"}
+{"Type":"BindComplete"}
+{"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898921,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898921,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"stable_version","TableOID":3898921,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898921,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
+{"Type":"DataRow","Values":[{"text":"Z_shell"},{"binary":"000287a3e109a9a7"},{"text":"[5.4.2](https://sourceforge.net/projects/zsh/files/zsh/5.4.2/) / August 28, 2017"},{"text":""}]}
+{"Type":"CommandComplete","CommandTag":"SELECT 1"}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Parse","Name":"lrupsc_6_2","Query":"\n\t\t\tSELECT\n\t\t\t\tpage\n\t\t\t\t, timestamp\n\t\t\t\t, stable_version\n\t\t\t\t, homepage\n\t\t\tFROM updates\n\t\t\tWHERE page = ANY($1)\n\t\t\tORDER BY timestamp DESC\n\t\t","ParameterOIDs":null}
+{"Type":"Describe","ObjectType":"S","Name":"lrupsc_6_2"}
+{"Type":"Sync"}
+{"Type":"ParseComplete"}
+{"Type":"ParameterDescription","ParameterOIDs":[1009]}
+{"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898928,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898928,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":0},{"Name":"stable_version","TableOID":3898928,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898928,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
+{"Type":"ReadyForQuery","TxStatus":"I"}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_6_2","ParameterFormatCodes":[1],"Parameters":[{"binary":"0000000100000000000000190000000100000001000000075a5f7368656c6c"}],"ResultFormatCodes":[0,1,0,0]}
+{"Type":"Describe","ObjectType":"P","Name":""}
+{"Type":"Execute","Portal":"","MaxRows":0}
+{"Type":"Sync"}
+{"Type":"BindComplete"}
+{"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898928,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898928,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"stable_version","TableOID":3898928,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898928,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
+{"Type":"DataRow","Values":[{"text":"Z_shell"},{"binary":"000287a3e109a9a7"},{"text":"[5.4.2](https://sourceforge.net/projects/zsh/files/zsh/5.4.2/) / August 28, 2017"},{"text":""}]}
+{"Type":"CommandComplete","CommandTag":"SELECT 1"}
+{"Type":"ReadyForQuery","TxStatus":"I"}

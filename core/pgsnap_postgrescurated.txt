@@ -155,7 +155,7 @@
 {"Type":"Sync"}
 {"Type":"BindComplete"}
 {"Type":"RowDescription","Fields":[{"Name":"created","TableOID":3898936,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"lastused","TableOID":3898936,"TableAttributeNumber":4,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"lastupdated","TableOID":3898936,"TableAttributeNumber":5,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"title","TableOID":3898936,"TableAttributeNumber":6,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
-{"Type":"DataRow","Values":[{"binary":"000287a0d4d85ffa"},{"binary":"000287a0d4d85ffa"},{"binary":"000287a0d4d86d71"},{"text":"My first list"}]}
+{"Type":"DataRow","Values":[{"binary":"000287a3cff78a2f"},{"binary":"000287a3cff78a2f"},{"binary":"000287a3cff796ea"},{"text":"My first list"}]}
 {"Type":"CommandComplete","CommandTag":"SELECT 1"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
 {"Type":"Parse","Name":"lrupsc_4_6","Query":"\n\t\t\tSELECT\n\t\t\t\tpage\n\t\t\tFROM\n\t\t\t\tcurated_pages\n\t\t\tWHERE\n\t\t\t\tcurated_id = $1\n\t\t\tORDER BY page\n\t\t","ParameterOIDs":null}
@@ -196,7 +196,7 @@
 {"Type":"Sync"}
 {"Type":"BindComplete"}
 {"Type":"RowDescription","Fields":[{"Name":"created","TableOID":3898936,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"lastused","TableOID":3898936,"TableAttributeNumber":4,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"lastupdated","TableOID":3898936,"TableAttributeNumber":5,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"title","TableOID":3898936,"TableAttributeNumber":6,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
-{"Type":"DataRow","Values":[{"binary":"000287a0d4d85ffa"},{"binary":"000287a0d4d872ad"},{"binary":"000287a0d4d86d71"},{"text":"My first list"}]}
+{"Type":"DataRow","Values":[{"binary":"000287a3cff78a2f"},{"binary":"000287a3cff79c72"},{"binary":"000287a3cff796ea"},{"text":"My first list"}]}
 {"Type":"CommandComplete","CommandTag":"SELECT 1"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
 {"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_4_6","ParameterFormatCodes":[0],"Parameters":[{"text":"54657374-506f-4374-a772-657343757261"}],"ResultFormatCodes":[0]}

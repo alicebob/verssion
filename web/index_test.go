@@ -5,12 +5,13 @@ import (
 	"testing"
 
 	"github.com/alicebob/verssion/core"
+	"github.com/alicebob/verssion/internal"
 	"github.com/alicebob/verssion/web"
 )
 
 func TestIndex(t *testing.T) {
 	var (
-		db = core.NewMemory()
+		db = core.NewPGX(internal.TestDB(t))
 		m  = web.Mux("/", db, nil, "")
 	)
 	s := httptest.NewServer(m)

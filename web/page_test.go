@@ -9,13 +9,14 @@ import (
 	"time"
 
 	"github.com/alicebob/verssion/core"
+	"github.com/alicebob/verssion/internal"
 	"github.com/alicebob/verssion/web"
 )
 
 func TestPages(t *testing.T) {
 	log.SetOutput(ioutil.Discard)
 	var (
-		db     = core.NewMemory()
+		db     = core.NewPGX(internal.TestDB(t))
 		spider = NewFixedSpider()
 		m      = web.Mux("", db, spider, "")
 	)
@@ -62,7 +63,7 @@ func TestPages(t *testing.T) {
 
 func TestNewPage(t *testing.T) {
 	var (
-		db     = core.NewMemory()
+		db     = core.NewPGX(internal.TestDB(t))
 		spider = NewFixedSpider(core.Page{
 			Page:          "Foo",
 			StableVersion: "Version 1",

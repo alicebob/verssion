@@ -2,40 +2,23 @@ package core
 
 import (
 	"bytes"
-	"context"
 	"testing"
 
-	"github.com/alicebob/pgsnap"
 	"github.com/google/uuid"
+
+	"github.com/alicebob/verssion/internal"
 )
 
-var tables = []string{"page", "curated", "curated_pages"}
-
-func initdb(t *testing.T, addr string) DB {
-	p, err := NewPostgres(addr)
-	if err != nil {
-		t.Fatal(err)
-	}
-	for _, table := range tables {
-		if _, err := p.conn.Exec(context.Background(), "DELETE FROM "+table); err != nil {
-			t.Fatal(err)
-		}
-	}
-	return p
-}
-
 func TestPostgresDB(t *testing.T) {
-	addr := pgsnap.RunEnv(t, "postgresql:///verssion")
-
-	p := initdb(t, addr)
+	c := internal.TestDB(t)
+	p := NewPGX(c)
 	InterfaceTestDB(t, p)
 }
 
 func TestPostgresCurated(t *testing.T) {
-	addr := pgsnap.RunEnv(t, "postgresql:///verssion")
-
 	uuid.SetRand(bytes.NewBufferString("TestPostgresCuratedLongerStringfoobarbaz"))
 
-	p := initdb(t, addr)
+	c := internal.TestDB(t)
+	p := NewPGX(c)
 	InterfaceTestCurated(t, p)
 }

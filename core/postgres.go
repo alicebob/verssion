@@ -32,6 +32,12 @@ func NewPostgres(url string) (*Postgres, error) {
 	return p, nil
 }
 
+func NewPGX(c *pgxpool.Pool) *Postgres {
+	return &Postgres{
+		conn: c,
+	}
+}
+
 func (p *Postgres) Last(page string) (*Page, error) {
 	row := p.conn.QueryRow(context.Background(), `
 			SELECT

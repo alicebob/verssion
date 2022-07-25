@@ -9,12 +9,13 @@ import (
 	"time"
 
 	"github.com/alicebob/verssion/core"
+	"github.com/alicebob/verssion/internal"
 	"github.com/alicebob/verssion/web"
 )
 
 func TestAdhoc(t *testing.T) {
 	var (
-		db = core.NewMemory()
+		db = core.NewPGX(internal.TestDB(t))
 		m  = web.Mux("", db, NewFixedSpider(), "")
 	)
 	s := httptest.NewServer(m)
@@ -45,7 +46,7 @@ func TestAdhoc(t *testing.T) {
 func TestAdhoc404(t *testing.T) {
 	log.SetOutput(ioutil.Discard)
 	var (
-		db = core.NewMemory()
+		db = core.NewPGX(internal.TestDB(t))
 		m  = web.Mux("", db, NewFixedSpider(), "")
 	)
 	s := httptest.NewServer(m)
@@ -59,7 +60,7 @@ func TestAdhoc404(t *testing.T) {
 
 func TestAdhocNoLink(t *testing.T) {
 	var (
-		db = core.NewMemory()
+		db = core.NewPGX(internal.TestDB(t))
 		m  = web.Mux("", db, NewFixedSpider(), "")
 	)
 	s := httptest.NewServer(m)

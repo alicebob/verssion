@@ -1,7 +1,10 @@
 .PHONY: test replay
 
+export PGURL=postgresql:///verssion
+
 test:
-	go test
+	rm -rf pgsnap_*.txt
+	PGPROXY=1 go test
 
 replay:
-	PGREPLAY=1 go test
+	go test

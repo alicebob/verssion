@@ -7,7 +7,7 @@
 {"Type":"Query","String":"DELETE FROM curated_pages"}
 {"Type":"CommandComplete","CommandTag":"DELETE 2"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
-{"Type":"Parse","Name":"lrupsc_2_0","Query":"\n\tINSERT INTO page\n\t\t(page, timestamp, stable_version, homepage)\n\tVALUES\n\t\t($1, $2, $3, $4)\n","ParameterOIDs":null}
+{"Type":"Parse","Name":"lrupsc_2_0","Query":"\n\t\t\tINSERT INTO page\n\t\t\t\t(page, timestamp, stable_version, homepage)\n\t\t\tVALUES\n\t\t\t\t($1, $2, $3, $4)\n\t\t","ParameterOIDs":null}
 {"Type":"Describe","ObjectType":"S","Name":"lrupsc_2_0"}
 {"Type":"Sync"}
 {"Type":"ParseComplete"}
@@ -46,7 +46,7 @@
 {"Type":"NoData"}
 {"Type":"CommandComplete","CommandTag":"INSERT 0 1"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
-{"Type":"Parse","Name":"lrupsc_2_1","Query":"\n\t\tSELECT page, timestamp, stable_version, homepage\n\t\tFROM page\n\t\tWHERE page=$1\n\t\tORDER BY timestamp DESC\n\t\tLIMIT 1\n\t","ParameterOIDs":null}
+{"Type":"Parse","Name":"lrupsc_2_1","Query":"\n\t\t\tSELECT\n\t\t\t\tpage\n\t\t\t\t, timestamp\n\t\t\t\t, stable_version\n\t\t\t\t, homepage\n\t\t\tFROM\n\t\t\t\tpage\n\t\t\tWHERE\n\t\t\t\tpage = $1\n\t\t\tORDER BY timestamp DESC\n\t\t\tLIMIT 1\n\t\t","ParameterOIDs":null}
 {"Type":"Describe","ObjectType":"S","Name":"lrupsc_2_1"}
 {"Type":"Sync"}
 {"Type":"ParseComplete"}
@@ -62,7 +62,7 @@
 {"Type":"DataRow","Values":[{"text":"test_1"},{"binary":"000242066713a900"},{"text":"2.0"},{"text":"https://test1.example.com"}]}
 {"Type":"CommandComplete","CommandTag":"SELECT 1"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
-{"Type":"Parse","Name":"lrupsc_2_2","Query":"\n\t\tSELECT page, timestamp, stable_version, homepage\n\t\tFROM current ORDER BY timestamp DESC","ParameterOIDs":null}
+{"Type":"Parse","Name":"lrupsc_2_2","Query":"\n\t\t\tSELECT\n\t\t\t\tpage\n\t\t\t\t, timestamp\n\t\t\t\t, stable_version\n\t\t\t\t, homepage\n\t\t\tFROM current ORDER BY timestamp DESC","ParameterOIDs":null}
 {"Type":"Describe","ObjectType":"S","Name":"lrupsc_2_2"}
 {"Type":"Sync"}
 {"Type":"ParseComplete"}
@@ -79,14 +79,14 @@
 {"Type":"DataRow","Values":[{"text":"test_1"},{"binary":"0002420663802200"},{"text":"2.0"},{"text":"https://test1.example.com"}]}
 {"Type":"CommandComplete","CommandTag":"SELECT 2"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
-{"Type":"Parse","Name":"lrupsc_2_3","Query":"\n\t\tSELECT page, timestamp, stable_version, homepage\n\t\tFROM current\n\t\tWHERE page IN ($1)\n\t\tORDER BY timestamp DESC\n    ","ParameterOIDs":null}
+{"Type":"Parse","Name":"lrupsc_2_3","Query":"\n\t\t\tSELECT\n\t\t\t\tpage\n\t\t\t\t, timestamp\n\t\t\t\t, stable_version\n\t\t\t\t, homepage\n\t\t\tFROM current\n\t\t\tWHERE page = ANY($1)\n\t\t\tORDER BY timestamp DESC\n    \t","ParameterOIDs":null}
 {"Type":"Describe","ObjectType":"S","Name":"lrupsc_2_3"}
 {"Type":"Sync"}
 {"Type":"ParseComplete"}
-{"Type":"ParameterDescription","ParameterOIDs":[25]}
+{"Type":"ParameterDescription","ParameterOIDs":[1009]}
 {"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898932,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898932,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":0},{"Name":"stable_version","TableOID":3898932,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898932,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
 {"Type":"ReadyForQuery","TxStatus":"I"}
-{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_2_3","ParameterFormatCodes":[0],"Parameters":[{"text":"test_1"}],"ResultFormatCodes":[0,1,0,0]}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_2_3","ParameterFormatCodes":[1],"Parameters":[{"binary":"000000010000000000000019000000010000000100000006746573745f31"}],"ResultFormatCodes":[0,1,0,0]}
 {"Type":"Describe","ObjectType":"P","Name":""}
 {"Type":"Execute","Portal":"","MaxRows":0}
 {"Type":"Sync"}

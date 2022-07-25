@@ -3,7 +3,6 @@ package core
 import (
 	"context"
 	"fmt"
-	"strings"
 
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v4"
@@ -35,12 +34,18 @@ func NewPostgres(url string) (*Postgres, error) {
 
 func (p *Postgres) Last(page string) (*Page, error) {
 	row := p.conn.QueryRow(context.Background(), `
-		SELECT page, timestamp, stable_version, homepage
-		FROM page
-		WHERE page=$1
-		ORDER BY timestamp DESC
-		LIMIT 1
-	`,
+			SELECT
+				page
+				, timestamp
+				, stable_version
+				, homepage
+			FROM
+				page
+			WHERE
+				page = $1
+			ORDER BY timestamp DESC
+			LIMIT 1
+		`,
 		page,
 	)
 	res := Page{}
@@ -66,18 +71,13 @@ func (p *Postgres) CurrentIn(pages ...string) ([]Page, error) {
 	if len(pages) == 0 {
 		return nil, nil
 	}
-	var (
-		in   []string
-		args []interface{}
-	)
-	for i, p := range pages {
-		in = append(in, fmt.Sprintf("$%d", i+1))
-		args = append(args, p)
-	}
+
 	return p.queryCurrent(`
-		WHERE page IN (`+strings.Join(in, ",")+`)
-		ORDER BY timestamp DESC
-    `, args...)
+			WHERE page = ANY($1)
+			ORDER BY timestamp DESC
+    	`,
+		pages,
+	)
 }
 
 // History of a list of page. Newest first.
@@ -85,18 +85,13 @@ func (p *Postgres) History(pages ...string) ([]Page, error) {
 	if len(pages) == 0 {
 		return nil, nil
 	}
-	var (
-		in   []string
-		args []interface{}
-	)
-	for i, p := range pages {
-		in = append(in, fmt.Sprintf("$%d", i+1))
-		args = append(args, p)
-	}
+
 	return p.queryUpdates(`
-		WHERE page IN (`+strings.Join(in, ",")+`)
-		ORDER BY timestamp DESC
-    `, args...)
+			WHERE page = ANY($1)
+			ORDER BY timestamp DESC
+		`,
+		pages,
+	)
 }
 
 func (p *Postgres) queryCurrent(where string, args ...interface{}) ([]Page, error) {
@@ -108,13 +103,21 @@ func (p *Postgres) queryUpdates(where string, args ...interface{}) ([]Page, erro
 }
 
 func (p *Postgres) queryPages(table, where string, args ...interface{}) ([]Page, error) {
-	var es []Page
 	rows, err := p.conn.Query(context.Background(), `
-		SELECT page, timestamp, stable_version, homepage
-		FROM `+table+where, args...)
+			SELECT
+				page
+				, timestamp
+				, stable_version
+				, homepage
+			FROM `+table+where,
+		args...,
+	)
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
+
+	var es []Page
 	for rows.Next() {
 		var e Page
 		if err := rows.Scan(&e.Page, &e.T, &e.StableVersion, &e.Homepage); err != nil {
@@ -128,23 +131,31 @@ func (p *Postgres) queryPages(table, where string, args ...interface{}) ([]Page,
 
 func (p *Postgres) Store(e Page) error {
 	_, err := p.conn.Exec(context.Background(), `
-	INSERT INTO page
-		(page, timestamp, stable_version, homepage)
-	VALUES
-		($1, $2, $3, $4)
-`, e.Page, e.T, e.StableVersion, e.Homepage)
+			INSERT INTO page
+				(page, timestamp, stable_version, homepage)
+			VALUES
+				($1, $2, $3, $4)
+		`,
+		e.Page,
+		e.T,
+		e.StableVersion,
+		e.Homepage,
+	)
 	return err
 }
 
 func (p *Postgres) Known() ([]string, error) {
-	var ps []string
 	rows, err := p.conn.Query(context.Background(), `
-		SELECT DISTINCT(page)
-		FROM updates
-		ORDER BY page`)
+			SELECT DISTINCT(page)
+			FROM updates
+			ORDER BY page`,
+	)
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
+
+	var ps []string
 	for rows.Next() {
 		var p string
 		if err := rows.Scan(&p); err != nil {
@@ -158,30 +169,50 @@ func (p *Postgres) Known() ([]string, error) {
 func (p *Postgres) CreateCurated() (string, error) {
 	id, err := uuid.NewRandom()
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("uuid: %w", err)
 	}
 	cid := id.String()
+
 	_, err = p.conn.Exec(context.Background(), `
-		INSERT INTO curated (id, created, lastused, lastupdated)
-		VALUES ($1, now(), now(), now())`,
+			INSERT INTO curated
+				( id
+				, created
+				, lastused
+				, lastupdated
+				)
+			VALUES
+				( $1
+				, NOW()
+				, NOW()
+				, NOW()
+				)
+		`,
 		cid,
 	)
 	return cid, err
 }
 
-func (p *Postgres) StoreCurated(cur Curated) error {
-	return nil
-}
-
 func (p *Postgres) LoadCurated(id string) (*Curated, error) {
 	row := p.conn.QueryRow(context.Background(), `
-		SELECT created, lastused, lastupdated, title
-		FROM curated
-		WHERE id=$1`,
+			SELECT
+				created
+				, lastused
+				, lastupdated
+				, title
+			FROM
+				curated
+			WHERE
+				id = $1
+		`,
 		id,
 	)
 	cur := Curated{}
-	if err := row.Scan(&cur.Created, &cur.LastUsed, &cur.LastUpdated, &cur.CustomTitle); err != nil {
+	if err := row.Scan(
+		&cur.Created,
+		&cur.LastUsed,
+		&cur.LastUpdated,
+		&cur.CustomTitle,
+	); err != nil {
 		if err == pgx.ErrNoRows {
 			return nil, nil
 		}
@@ -196,17 +227,23 @@ func (p *Postgres) LoadCurated(id string) (*Curated, error) {
 }
 
 func (p *Postgres) curatedPages(id string) ([]string, error) {
-	var ps []string
 	rows, err := p.conn.Query(context.Background(), `
-		SELECT page
-		FROM curated_pages
-		WHERE curated_id=$1
-		ORDER BY page`,
+			SELECT
+				page
+			FROM
+				curated_pages
+			WHERE
+				curated_id = $1
+			ORDER BY page
+		`,
 		id,
 	)
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
+
+	var ps []string
 	for rows.Next() {
 		var p string
 		if err := rows.Scan(&p); err != nil {
@@ -219,34 +256,75 @@ func (p *Postgres) curatedPages(id string) ([]string, error) {
 
 // pages must be unique
 func (p *Postgres) CuratedSetPages(id string, pages []string) error {
-	tx, err := p.conn.Begin(context.Background())
+	ctx := context.Background()
+
+	tx, err := p.conn.Begin(ctx)
 	if err != nil {
 		return err
 	}
-	defer tx.Rollback(context.Background())
+	defer tx.Rollback(ctx)
 
-	if _, err := tx.Exec(context.Background(), `DELETE FROM curated_pages WHERE curated_id=$1`, id); err != nil {
+	if _, err := tx.Exec(ctx, `
+			DELETE
+			FROM curated_pages
+			WHERE
+				curated_id = $1
+		`,
+		id,
+	); err != nil {
 		return err
 	}
 	for _, p := range pages {
-		if _, err := tx.Exec(context.Background(), `INSERT INTO curated_pages (curated_id, page) VALUES ($1, $2)`, id, p); err != nil {
+		if _, err := tx.Exec(ctx, `
+				INSERT
+				INTO curated_pages
+					( curated_id
+					, page
+					)
+				VALUES
+					( $1
+					, $2
+					)
+			`,
+			id,
+			p,
+		); err != nil {
 			return err
 		}
 	}
 
-	res, err := tx.Exec(context.Background(), `UPDATE curated SET lastupdated=now() WHERE id=$1`, id)
+	res, err := tx.Exec(ctx, `
+			UPDATE
+				curated
+			SET
+				lastupdated = NOW()
+			WHERE
+				id = $1
+		`,
+		id,
+	)
 	if err != nil {
 		return err
 	}
 	if res.RowsAffected() == 0 {
-		tx.Rollback(context.Background())
+		// tx.Rollback(ctx)
 		return ErrCuratedNotFound
 	}
-	return tx.Commit(context.Background())
+	return tx.Commit(ctx)
 }
 
 func (p *Postgres) CuratedSetUsed(id string) error {
-	res, err := p.conn.Exec(context.Background(), `UPDATE curated SET lastused=now(), used=used+1 WHERE id=$1`, id)
+	res, err := p.conn.Exec(context.Background(), `
+			UPDATE
+				curated
+			SET
+				lastused = NOW()
+				, used = used+1
+			WHERE
+				id = $1
+		`,
+		id,
+	)
 	if res.RowsAffected() == 0 {
 		return ErrCuratedNotFound
 	}
@@ -254,7 +332,18 @@ func (p *Postgres) CuratedSetUsed(id string) error {
 }
 
 func (p *Postgres) CuratedSetTitle(id, title string) error {
-	res, err := p.conn.Exec(context.Background(), `UPDATE curated SET title=$2, lastupdated=now() WHERE id=$1`, id, title)
+	res, err := p.conn.Exec(context.Background(), `
+			UPDATE
+				curated
+			SET
+				title = $2
+				, lastupdated = NOW()
+			WHERE
+				id = $1
+		`,
+		id,
+		title,
+	)
 	if res.RowsAffected() == 0 {
 		return ErrCuratedNotFound
 	}

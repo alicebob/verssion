@@ -1,10 +1,12 @@
 package core
 
 import (
+	"bytes"
 	"context"
 	"testing"
 
 	"github.com/alicebob/pgsnap"
+	"github.com/google/uuid"
 )
 
 var tables = []string{"page", "curated", "curated_pages"}
@@ -31,6 +33,8 @@ func TestPostgresDB(t *testing.T) {
 
 func TestPostgresCurated(t *testing.T) {
 	addr := pgsnap.RunEnv(t, "postgresql:///verssion")
+
+	uuid.SetRand(bytes.NewBufferString("TestPostgresCuratedLongerStringfoobarbaz"))
 
 	p := initdb(t, addr)
 	InterfaceTestCurated(t, p)

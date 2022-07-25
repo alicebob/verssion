@@ -1,6 +1,7 @@
 package core
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 	"time"
@@ -112,6 +113,7 @@ func InterfaceTestCurated(t *testing.T, db DB) {
 			t.Fatal("want nil")
 		}
 	}
+
 	id, err := db.CreateCurated()
 	if err != nil {
 		t.Fatal(err)

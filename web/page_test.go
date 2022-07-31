@@ -15,6 +15,8 @@ import (
 
 func TestPages(t *testing.T) {
 	log.SetOutput(ioutil.Discard)
+	core.CacheOK = 42 * 365 * 24 * time.Hour // a while
+
 	var (
 		db     = core.NewPGX(internal.TestDB(t))
 		spider = NewFixedSpider()
@@ -93,7 +95,7 @@ func TestNewPage(t *testing.T) {
 
 func TestPage(t *testing.T) {
 	var (
-		db     = core.NewMemory()
+		db     = core.NewPGX(internal.TestDB(t))
 		spider = NewFixedSpider()
 		m      = web.Mux("", db, spider, "")
 	)

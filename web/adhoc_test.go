@@ -14,16 +14,18 @@ import (
 )
 
 func TestAdhoc(t *testing.T) {
+	core.CacheOK = 42 * 365 * 24 * time.Hour // a while
 	var (
-		db = core.NewPGX(internal.TestDB(t))
-		m  = web.Mux("", db, NewFixedSpider(), "")
+		db  = core.NewPGX(internal.TestDB(t))
+		m   = web.Mux("", db, NewFixedSpider(), "")
+		now = time.Date(2017, 3, 14, 15, 14, 0, 0, time.UTC)
 	)
 	s := httptest.NewServer(m)
 	defer s.Close()
 	db.Store(core.Page{Page: "Debian", StableVersion: "my version"})
-	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.1.0 / July 20, 2015", T: time.Now()})
-	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.0 / July 21, 2016", T: time.Now()})
-	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.1 / July 22, 2017", T: time.Now()})
+	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.1.0 / July 20, 2015", T: now})
+	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.0 / July 21, 2016", T: now.Add(time.Second)})
+	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.1 / July 22, 2017", T: now.Add(2 * time.Second)})
 
 	status, body := get(t, s, "/adhoc/atom.xml?p=Glasgow_Haskell_Compiler")
 	if have, want := status, 200; have != want {

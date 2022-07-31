@@ -14,7 +14,7 @@
 {"Type":"ParameterDescription","ParameterOIDs":[25,1184,25,25]}
 {"Type":"NoData"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
-{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_12_0","ParameterFormatCodes":[0,1,0,0],"Parameters":[{"text":"Debian"},{"binary":"000287a3e10a5e41"},{"text":"my version"},{"text":""}],"ResultFormatCodes":[]}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_12_0","ParameterFormatCodes":[0,1,0,0],"Parameters":[{"text":"Debian"},{"binary":"0002881ae2e948aa"},{"text":"my version"},{"text":""}],"ResultFormatCodes":[]}
 {"Type":"Describe","ObjectType":"P","Name":""}
 {"Type":"Execute","Portal":"","MaxRows":0}
 {"Type":"Sync"}
@@ -22,7 +22,7 @@
 {"Type":"NoData"}
 {"Type":"CommandComplete","CommandTag":"INSERT 0 1"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
-{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_12_0","ParameterFormatCodes":[0,1,0,0],"Parameters":[{"text":"Glasgow_Haskell_Compiler"},{"binary":"000287a3e49de7dd"},{"text":"8.2.1 / July 22, 2017"},{"text":""}],"ResultFormatCodes":[]}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_12_0","ParameterFormatCodes":[0,1,0,0],"Parameters":[{"text":"Glasgow_Haskell_Compiler"},{"binary":"0002881ae67cd1d9"},{"text":"8.2.1 / July 22, 2017"},{"text":""}],"ResultFormatCodes":[]}
 {"Type":"Describe","ObjectType":"P","Name":""}
 {"Type":"Execute","Portal":"","MaxRows":0}
 {"Type":"Sync"}
@@ -43,8 +43,8 @@
 {"Type":"Sync"}
 {"Type":"BindComplete"}
 {"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898932,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898932,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"stable_version","TableOID":3898932,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898932,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
-{"Type":"DataRow","Values":[{"text":"Debian"},{"binary":"000287a3e10a5e41"},{"text":"my version"},{"text":""}]}
-{"Type":"DataRow","Values":[{"text":"Glasgow_Haskell_Compiler"},{"binary":"000287a3e49de7dd"},{"text":"8.2.1 / July 22, 2017"},{"text":""}]}
+{"Type":"DataRow","Values":[{"text":"Debian"},{"binary":"0002881ae2e948aa"},{"text":"my version"},{"text":""}]}
+{"Type":"DataRow","Values":[{"text":"Glasgow_Haskell_Compiler"},{"binary":"0002881ae67cd1d9"},{"text":"8.2.1 / July 22, 2017"},{"text":""}]}
 {"Type":"CommandComplete","CommandTag":"SELECT 2"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
 {"Type":"Parse","Name":"lrupsc_12_2","Query":"\n\t\t\tSELECT\n\t\t\t\tpage\n\t\t\t\t, timestamp\n\t\t\t\t, stable_version\n\t\t\t\t, homepage\n\t\t\tFROM current ORDER BY timestamp DESC","ParameterOIDs":null}
@@ -60,7 +60,7 @@
 {"Type":"Sync"}
 {"Type":"BindComplete"}
 {"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898932,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898932,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"stable_version","TableOID":3898932,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898932,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
-{"Type":"DataRow","Values":[{"text":"Glasgow_Haskell_Compiler"},{"binary":"000287a3e49de7dd"},{"text":"8.2.1 / July 22, 2017"},{"text":""}]}
-{"Type":"DataRow","Values":[{"text":"Debian"},{"binary":"000287a3e10a5e41"},{"text":"my version"},{"text":""}]}
+{"Type":"DataRow","Values":[{"text":"Glasgow_Haskell_Compiler"},{"binary":"0002881ae67cd1d9"},{"text":"8.2.1 / July 22, 2017"},{"text":""}]}
+{"Type":"DataRow","Values":[{"text":"Debian"},{"binary":"0002881ae2e948aa"},{"text":"my version"},{"text":""}]}
 {"Type":"CommandComplete","CommandTag":"SELECT 2"}
 {"Type":"ReadyForQuery","TxStatus":"I"}

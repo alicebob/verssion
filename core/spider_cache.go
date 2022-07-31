@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-const (
+var (
 	cacheErr = 30 * time.Second
 	CacheOK  = 6 * time.Hour
 )

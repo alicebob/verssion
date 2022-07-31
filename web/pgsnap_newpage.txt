@@ -29,7 +29,7 @@
 {"Type":"ParameterDescription","ParameterOIDs":[25,1184,25,25]}
 {"Type":"NoData"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
-{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_14_1","ParameterFormatCodes":[0,1,0,0],"Parameters":[{"text":"Foo"},{"binary":"000287a3e10a982d"},{"text":"Version 1"},{"text":""}],"ResultFormatCodes":[]}
+{"Type":"Bind","DestinationPortal":"","PreparedStatement":"lrupsc_14_1","ParameterFormatCodes":[0,1,0,0],"Parameters":[{"text":"Foo"},{"binary":"0002881ae2e98350"},{"text":"Version 1"},{"text":""}],"ResultFormatCodes":[]}
 {"Type":"Describe","ObjectType":"P","Name":""}
 {"Type":"Execute","Portal":"","MaxRows":0}
 {"Type":"Sync"}
@@ -50,6 +50,6 @@
 {"Type":"Sync"}
 {"Type":"BindComplete"}
 {"Type":"RowDescription","Fields":[{"Name":"page","TableOID":3898928,"TableAttributeNumber":1,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"timestamp","TableOID":3898928,"TableAttributeNumber":2,"DataTypeOID":1184,"DataTypeSize":8,"TypeModifier":-1,"Format":1},{"Name":"stable_version","TableOID":3898928,"TableAttributeNumber":3,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0},{"Name":"homepage","TableOID":3898928,"TableAttributeNumber":4,"DataTypeOID":25,"DataTypeSize":-1,"TypeModifier":-1,"Format":0}]}
-{"Type":"DataRow","Values":[{"text":"Foo"},{"binary":"000287a3e10a982d"},{"text":"Version 1"},{"text":""}]}
+{"Type":"DataRow","Values":[{"text":"Foo"},{"binary":"0002881ae2e98350"},{"text":"Version 1"},{"text":""}]}
 {"Type":"CommandComplete","CommandTag":"SELECT 1"}
 {"Type":"ReadyForQuery","TxStatus":"I"}

@@ -1,11 +1,11 @@
 {"Type":"Query","String":"DELETE FROM page"}
-{"Type":"CommandComplete","CommandTag":"DELETE 0"}
+{"Type":"CommandComplete","CommandTag":"DELETE 1"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
 {"Type":"Query","String":"DELETE FROM curated"}
-{"Type":"CommandComplete","CommandTag":"DELETE 2"}
+{"Type":"CommandComplete","CommandTag":"DELETE 0"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
 {"Type":"Query","String":"DELETE FROM curated_pages"}
-{"Type":"CommandComplete","CommandTag":"DELETE 2"}
+{"Type":"CommandComplete","CommandTag":"DELETE 0"}
 {"Type":"ReadyForQuery","TxStatus":"I"}
 {"Type":"Parse","Name":"lrupsc_2_0","Query":"\n\t\t\tINSERT INTO page\n\t\t\t\t(page, timestamp, stable_version, homepage)\n\t\t\tVALUES\n\t\t\t\t($1, $2, $3, $4)\n\t\t","ParameterOIDs":null}
 {"Type":"Describe","ObjectType":"S","Name":"lrupsc_2_0"}

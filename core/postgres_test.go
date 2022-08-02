@@ -2,36 +2,37 @@ package core
 
 import (
 	"context"
+	"os"
 	"testing"
 
-	"github.com/alicebob/pgsnap"
+	"github.com/alicebob/minipg"
 )
 
-var tables = []string{"page", "curated", "curated_pages"}
-
 func initdb(t *testing.T, addr string) DB {
+	f, err := os.ReadFile("../tables.sql")
+	if err != nil {
+		t.Fatal(err)
+	}
 	p, err := NewPostgres(addr)
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, table := range tables {
-		if _, err := p.conn.Exec(context.Background(), "DELETE FROM "+table); err != nil {
-			t.Fatal(err)
-		}
+
+	if _, err := p.conn.Exec(context.Background(), string(f)); err != nil {
+		t.Fatal(err)
 	}
+
 	return p
 }
 
 func TestPostgresDB(t *testing.T) {
-	addr := pgsnap.RunEnv(t, "postgresql:///verssion")
-
-	p := initdb(t, addr)
+	db := minipg.RunT(t)
+	p := initdb(t, db.URL())
 	InterfaceTestDB(t, p)
 }
 
 func TestPostgresCurated(t *testing.T) {
-	addr := pgsnap.RunEnv(t, "postgresql:///verssion")
-
-	p := initdb(t, addr)
+	db := minipg.RunT(t)
+	p := initdb(t, db.URL())
 	InterfaceTestCurated(t, p)
 }

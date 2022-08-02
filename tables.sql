@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS curated;
-DROP TABLE IF EXISTS curated_pages;
-DROP TABLE IF EXISTS page CASCADE;
+-- DROP TABLE IF EXISTS curated;
+-- DROP TABLE IF EXISTS curated_pages;
+-- DROP TABLE IF EXISTS page CASCADE;
 
 CREATE TABLE page
     ( page text NOT NULL

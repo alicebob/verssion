@@ -24,4 +24,4 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 )
 
-replace github.com/alicebob/minipg@main => ../minipg
+replace github.com/alicebob/minipg => ../minipg

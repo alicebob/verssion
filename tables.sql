@@ -10,6 +10,7 @@ CREATE TABLE page
     );
 CREATE INDEX page_page ON page (page, timestamp);
 
+/*
 CREATE VIEW updates
 AS SELECT page, timestamp, stable_version, homepage
     FROM (
@@ -29,6 +30,7 @@ AS SELECT page, timestamp, stable_version, homepage
         FROM updates
     ) sub
     WHERE rank=1;
+*/
 
 CREATE TABLE curated
     ( id text NOT NULL UNIQUE

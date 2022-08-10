@@ -123,13 +123,13 @@ func InterfaceTestCurated(t *testing.T, db DB) {
 	if have, want := len(id), 36; have != want {
 		t.Fatalf("have %v, want %v", have, want)
 	}
-	if db.CuratedSetPages(id, []string{"page1", "page2"}); err != nil {
+	if err := db.CuratedSetPages(id, []string{"page1", "page2"}); err != nil {
 		t.Fatal(err)
 	}
-	if db.CuratedSetPages(id, []string{"page3", "page2"}); err != nil {
+	if err := db.CuratedSetPages(id, []string{"page3", "page2"}); err != nil {
 		t.Fatal(err)
 	}
-	if db.CuratedSetTitle(id, "My first list"); err != nil {
+	if err := db.CuratedSetTitle(id, "My first list"); err != nil {
 		t.Fatal(err)
 	}
 

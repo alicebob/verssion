@@ -18,4 +18,4 @@ db:
 	psql verssion < tables.sql
 
 tidy:
-	go mod tidy -compat=1.18
+	GOPRIVATE=github.com/alicebob/minipg go mod tidy -compat=1.18

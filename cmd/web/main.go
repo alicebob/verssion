@@ -37,7 +37,6 @@ func main() {
 		os.Exit(2)
 	}
 
-	go web.CacheLoop(db)
 	go func() {
 		for {
 			if err := db.UpdateViews(ctx); err != nil {

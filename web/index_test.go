@@ -19,7 +19,6 @@ func TestIndex(t *testing.T) {
 	db.Store(core.Page{Page: "Glasgow_Haskell_Compiler", StableVersion: "8.2.1 / July 22, 2017"})
 	db.Store(core.Page{Page: "WithLink", StableVersion: "a [link](https://link.me)!"})
 
-	web.UpdateCache(db)
 	status, body := get(t, s, "")
 	if have, want := status, 200; have != want {
 		t.Fatalf("have %v, want %v", have, want)

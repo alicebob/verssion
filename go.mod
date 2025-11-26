@@ -20,6 +20,6 @@ require (
 	github.com/jackc/puddle v1.3.0 // indirect
 	github.com/lib/pq v1.10.4 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	golang.org/x/crypto v0.44.0 // indirect
+	golang.org/x/crypto v0.45.0 // indirect
 	golang.org/x/text v0.31.0 // indirect
 )

@@ -3,7 +3,6 @@ package core
 import (
 	"context"
 	"fmt"
-	"strings"
 
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v4"
@@ -66,37 +65,21 @@ func (p *Postgres) CurrentIn(pages ...string) ([]Page, error) {
 	if len(pages) == 0 {
 		return nil, nil
 	}
-	var (
-		in   []string
-		args []interface{}
-	)
-	for i, p := range pages {
-		in = append(in, fmt.Sprintf("$%d", i+1))
-		args = append(args, p)
-	}
 	return p.queryCurrent(`
-		WHERE page IN (`+strings.Join(in, ",")+`)
+		WHERE page = ANY($1)
 		ORDER BY timestamp DESC
-    `, args...)
+    `, pages)
 }
 
-// History of a list of page. Newest first.
+// History of a list of pages. Newest first.
 func (p *Postgres) History(pages ...string) ([]Page, error) {
 	if len(pages) == 0 {
 		return nil, nil
 	}
-	var (
-		in   []string
-		args []interface{}
-	)
-	for i, p := range pages {
-		in = append(in, fmt.Sprintf("$%d", i+1))
-		args = append(args, p)
-	}
 	return p.queryUpdates(`
-		WHERE page IN (`+strings.Join(in, ",")+`)
+		WHERE page = ANY($1)
 		ORDER BY timestamp DESC
-    `, args...)
+    `, pages)
 }
 
 func (p *Postgres) queryCurrent(where string, args ...interface{}) ([]Page, error) {

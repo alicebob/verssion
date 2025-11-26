@@ -1,4 +1,4 @@
-.PHONY: all test testrace build integration db
+.PHONY: all test testrace build release ci db tidy
 
 all: test build
 

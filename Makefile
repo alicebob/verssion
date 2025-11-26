@@ -11,6 +11,9 @@ testrace:
 build:
 	$(MAKE) -C cmd/web build
 
+release:
+	GOARG=x86-64 GOOS=openbsd $(MAKE) -C cmd/web build
+
 ci:
 	PGREPLAY=1 go test ./...
 

@@ -243,3 +243,11 @@ func (p *Postgres) CuratedSetTitle(id, title string) error {
 	}
 	return err
 }
+
+func (p *Postgres) UpdateViews(ctx context.Context) error {
+	if _, err := p.conn.Exec(ctx, `REFRESH MATERIALIZED VIEW CONCURRENTLY current`); err != nil {
+		return err
+	}
+
+	return nil
+}

@@ -20,7 +20,7 @@ AS SELECT page, timestamp, stable_version, homepage
     ) sub
     WHERE prev IS NULL OR stable_version <> prev;
 
-CREATE VIEW current
+CREATE MATERIALIZED VIEW current
 AS SELECT page, timestamp, stable_version, homepage
     FROM (
         SELECT *, rank() OVER (
@@ -29,6 +29,9 @@ AS SELECT page, timestamp, stable_version, homepage
         FROM updates
     ) sub
     WHERE rank=1;
+CREATE UNIQUE INDEX current_page ON current (page);
+REFRESH MATERIALIZED VIEW CONCURRENTLY current;
+
 
 CREATE TABLE curated
     ( id text NOT NULL UNIQUE

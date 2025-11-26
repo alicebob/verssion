@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/alicebob/verssion/core"
 	"github.com/alicebob/verssion/web"
@@ -19,6 +21,9 @@ var (
 )
 
 func main() {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
 	flag.Parse()
 	pages := flag.Args()
 	if len(pages) != 0 {
@@ -33,6 +38,18 @@ func main() {
 	}
 
 	go web.CacheLoop(db)
+	go func() {
+		for {
+			if err := db.UpdateViews(ctx); err != nil {
+				fmt.Printf("update views failed: %s\n", err)
+			}
+			select {
+			case <-ctx.Done():
+				break
+			case <-time.After(7 * time.Minute):
+			}
+		}
+	}()
 
 	mux := web.Mux(*baseURL, db, web.WikiSpider(), *static)
 

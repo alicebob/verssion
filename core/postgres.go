@@ -123,7 +123,7 @@ func (p *Postgres) Known() ([]string, error) {
 	var ps []string
 	rows, err := p.conn.Query(context.Background(), `
 		SELECT DISTINCT(page)
-		FROM updates
+		FROM current
 		ORDER BY page`)
 	if err != nil {
 		return nil, err

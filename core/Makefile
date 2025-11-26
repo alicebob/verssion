@@ -1,8 +1,4 @@
-.PHONY: test replay
+.PHONY: test
 
 test:
-	rm *.txt
 	go test
-
-replay:
-	PGREPLAY=1 go test

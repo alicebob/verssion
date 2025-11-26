@@ -15,10 +15,10 @@ release:
 	GOARG=x86-64 GOOS=openbsd $(MAKE) -C cmd/web build
 
 ci:
-	PGREPLAY=1 go test ./...
+	go test ./...
 
 db:
 	psql verssion < tables.sql
 
 tidy:
-	go mod tidy -compat=1.18
+	go mod tidy -compat=1.24

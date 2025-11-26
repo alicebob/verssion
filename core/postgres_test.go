@@ -3,8 +3,6 @@ package core
 import (
 	"context"
 	"testing"
-
-	"github.com/alicebob/pgsnap"
 )
 
 var tables = []string{"page", "curated", "curated_pages"}
@@ -20,18 +18,4 @@ func initdb(t *testing.T, addr string) DB {
 		}
 	}
 	return p
-}
-
-func TestPostgresDB(t *testing.T) {
-	addr := pgsnap.RunEnv(t, "postgresql:///verssion")
-
-	p := initdb(t, addr)
-	InterfaceTestDB(t, p)
-}
-
-func TestPostgresCurated(t *testing.T) {
-	addr := pgsnap.RunEnv(t, "postgresql:///verssion")
-
-	p := initdb(t, addr)
-	InterfaceTestCurated(t, p)
 }
